@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  frontend-organization-site:
+    build:
+      context: .
+      dockerfile: ./docker/frontend/dev/organization-site/Dockerfile
+    ports:
+      - "3002:3000"
+    env_file:
+      - ./frontend/organization-site/.env.local
+    volumes:
+      - ./frontend/organization-site:/app/frontend/organization-site/
+
+  backend-api-service:
+    build:
+      context: .
+      dockerfile: ./docker/backend/dev/api-service/Dockerfile
+    ports:
+      - "8002:8000"
+    env_file:
+      - ./backend/api_service/.env
+    volumes:
+      - ./backend/api_service:/app/backend/api_service
+    depends_on:
+      - db
+    restart: always
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  backups:
+  static:
+  pgdata:
