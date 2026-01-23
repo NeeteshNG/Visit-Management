@@ -37,20 +37,27 @@ def send_otp_to_user(to, text):
 
 def generate_sms_text(otp):
     return (
-        f"Welcome to Epass! Thank you for registering. "
+        f"Welcome to NGtry! Thank you for registering. "
         f"Your verification code is: {otp}. "
         f"This code is valid for the next 10 minutes. "
-        f"Enjoy using Epass!"
+        f"Enjoy using NGtry!"
     )
 
 
 def send_email(message, subject, recipient_list):
-    from_email = 'noreply.epassnepal@gmail.com'
-
+    from_email = os.getenv('EMAIL_FROM', 'noreply@ngtry.com')
     send_mail(subject, message, from_email, [recipient_list])
 
 
 def validate_mobile_number(mobile_number):
-    mobile_number_regex = "^(984|986|980|981|985|988|974|976)\\d{7}$"
-    if not re.match(mobile_number_regex, mobile_number):
-        raise ValidationError({'mobile_number': "Invalid Nepali mobile number"})
+    """
+    Global phone number validation.
+    Accepts phone numbers from multiple countries.
+    Basic validation: 7-15 digits.
+    """
+    cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
+    if cleaned_number.startswith('00'):
+        cleaned_number = cleaned_number[2:]
+
+    if not re.match(r'^\d{7,15}$', cleaned_number):
+        raise ValidationError({'mobile_number': "Invalid mobile number. Please enter 7-15 digits."})

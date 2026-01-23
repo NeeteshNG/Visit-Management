@@ -1,11 +1,14 @@
 "use client";
 
+
+import {
+  LuUploadIcon,
+  MdArrowDropDownIcon,
+} from "@/modules/icons/SvgIcons";
 import { useUserData } from "@/modules/hooks/useUserData";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { LuUpload } from "react-icons/lu";
 import { useAtom } from "jotai";
-import { MdArrowDropDown } from "react-icons/md";
 import {
   notificationAudiences,
   notificationTypes,
@@ -135,7 +138,7 @@ const MannualEntry = () => {
                   ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <MdArrowDropDown />
+                  <MdArrowDropDownIcon />
                 </div>
 
                 {errors.notification_type && (
@@ -174,7 +177,7 @@ const MannualEntry = () => {
                     errors.target_audience ? "-top-6" : ""
                   } flex items-center px-2 text-gray-700`}
                 >
-                  <MdArrowDropDown />
+                  <MdArrowDropDownIcon />
                 </div>
 
                 {errors.target_audience && (
@@ -254,7 +257,7 @@ const MannualEntry = () => {
               fileInputRef={fileInputRef}
               selectedImage={selectedImage}
               handleImageClick={handleImageClick}
-              LuUpload={LuUpload}
+              LuUpload={LuUploadIcon}
             />
           </div>
         </div>

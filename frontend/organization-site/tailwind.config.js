@@ -21,14 +21,21 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        epassblue: "#197ABE",
-        primaryblue:"#0F75BC",
-        neutralBlack:"#090A0A",
-        primarysky:"#25AAE1",
-        lightneutra:"#FFFFFF",
-        greyneutral:"#A3A3A3",
-        textfromgray:"#F4F4F4",
-        greyScale:"#111827"
+        // NGtry Brand Colors (Mossy Hollow)
+        ngtryprimary: "#636B2F",  // Primary Dark - buttons, headers
+        ngtrydeep: "#3D4127",     // Deep Green - dark accents, gradients
+        ngtrysage: "#BAC095",     // Sage - light accents, hover states
+        ngtrylime: "#D4DE95",     // Lime - highlights, success states
+        // Legacy aliases (for gradual migration)
+        epassblue: "#636B2F",     // maps to ngtryprimary
+        primaryblue: "#3D4127",   // maps to ngtrydeep
+        primarysky: "#BAC095",    // maps to ngtrysage
+        // Neutral colors
+        neutralBlack: "#090A0A",
+        lightneutra: "#FFFFFF",
+        greyneutral: "#A3A3A3",
+        textfromgray: "#F4F4F4",
+        greyScale: "#111827"
       },
     },
   },

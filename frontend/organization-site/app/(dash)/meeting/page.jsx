@@ -1,21 +1,25 @@
 "use client"
 
+
+import {
+  CiMailIcon,
+  FaMobileAltIcon,
+  FiMessageSquareIcon,
+  IoLocationOutlineIcon,
+  IoPersonOutlineIcon,
+  LuUploadIcon,
+  MdArrowDropDownIcon,
+  MdOutlineGroupIcon,
+  MdOutlineLocationOnIcon,
+  RiEBike2FillIcon,
+  RiRectangleLineIcon,
+} from "@/modules/icons/SvgIcons";
 import { useUserData } from '@/modules/hooks/useUserData';
 import { useForm, Controller } from 'react-hook-form';
 import { useRouter } from 'next/navigation'
-import { IoPersonOutline } from "react-icons/io5";
-import { IoLocationOutline } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { LuUpload } from "react-icons/lu";
 
-import { FiMessageSquare } from "react-icons/fi";
 import { useAtom } from 'jotai';
-import { CiMail } from "react-icons/ci";
-import { MdArrowDropDown, MdOutlineLocationOn } from "react-icons/md";
-import { MdOutlineGroup } from "react-icons/md";
 import { idTypes, meetingtypes, organizationTypes, purpose } from '@/modules/data/organization_types_nature';
-import { RiRectangleLine } from "react-icons/ri";
-import { RiEBike2Fill } from "react-icons/ri";
 import DefaultButton from '@/modules/core-ui/Button';
 import {  meetingappoinmentdata } from '@/jotai/dash-atoms';
 import Image from 'next/image';
@@ -99,7 +103,7 @@ const Meetingappoinment = () => {
                 Full Name
               </label>
               <div className='mt-[8px] relative'>
-                <IoPersonOutline className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <IoPersonOutlineIcon className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -123,7 +127,7 @@ const Meetingappoinment = () => {
                 Meeting Title
               </label>
               <div className='mt-[8px] relative'>
-                <IoLocationOutline className={`absolute text-2xl left-4 ${errors.meetingtitle ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <IoLocationOutlineIcon className={`absolute text-2xl left-4 ${errors.meetingtitle ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -147,7 +151,7 @@ const Meetingappoinment = () => {
                 Mobile Number
               </label>
               <div className='mt-2.5 relative'>
-                <FaMobileAlt className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <FaMobileAltIcon className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -179,7 +183,7 @@ const Meetingappoinment = () => {
                 Meeting Agenda
               </label>
               <div className='mt-[8px] relative'>
-                <CiMail className={`absolute text-2xl left-4 ${errors.agenda ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <CiMailIcon className={`absolute text-2xl left-4 ${errors.agenda ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='agenda'
@@ -203,7 +207,7 @@ const Meetingappoinment = () => {
                 Location
               </label>
               <div className='mt-[8px] relative'>
-                <IoLocationOutline className={`absolute text-2xl left-4 ${errors.location ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <IoLocationOutlineIcon className={`absolute text-2xl left-4 ${errors.location ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -245,9 +249,9 @@ const Meetingappoinment = () => {
                     ))}
                   </select>
                   <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.meetingtype ? "-top-6" : ""} items-center px-2 text-gray-700`}>
-                    <MdArrowDropDown />
+                    <MdArrowDropDownIcon />
                   </div>
-                  <FiMessageSquare className={`absolute text-2xl left-4 ${errors.meetingtype ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                  <FiMessageSquareIcon className={`absolute text-2xl left-4 ${errors.meetingtype ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                   {errors.meetingtype && (
                     <span className='text-red-500'>

@@ -1,16 +1,19 @@
 "use client";
 
+
+import {
+  CiMailIcon,
+  FaMobileAltIcon,
+  FiMessageSquareIcon,
+  IoLocationOutlineIcon,
+  IoPersonOutlineIcon,
+  RiRectangleLineIcon,
+} from "@/modules/icons/SvgIcons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-import { CiMail } from "react-icons/ci";
-import { RiRectangleLine } from "react-icons/ri";
-import { IoPersonOutline } from "react-icons/io5";
-import { IoLocationOutline } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { FiMessageSquare } from "react-icons/fi";
 
 import { useAtom } from "jotai";
 import { mannualdataAtom } from "@/jotai/dash-atoms";
@@ -101,7 +104,7 @@ const VisitForm = () => {
               Full Name
             </label>
             <div className="mt-[8px] relative">
-              <IoPersonOutline
+              <IoPersonOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.full_name ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -131,7 +134,7 @@ const VisitForm = () => {
               Mobile Number
             </label>
             <div className="mt-[8px] relative">
-              <FaMobileAlt
+              <FaMobileAltIcon
                 className={`absolute text-2xl left-4 ${
                   errors.address ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -160,7 +163,7 @@ const VisitForm = () => {
               Email address
             </label>
             <div className="mt-[8px] relative">
-              <CiMail
+              <CiMailIcon
                 className={`absolute text-2xl left-4 ${
                   errors.email ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -190,7 +193,7 @@ const VisitForm = () => {
               Type of ID
             </label>
             <div className="mt-[8px] relative">
-              <CiMail
+              <CiMailIcon
                 className={`absolute text-2xl left-4 ${
                   errors.typeid ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -220,7 +223,7 @@ const VisitForm = () => {
               ID Number
             </label>
             <div className="mt-2.5 relative">
-              <RiRectangleLine
+              <RiRectangleLineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.id_number ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -250,7 +253,7 @@ const VisitForm = () => {
               Company Name
             </label>
             <div className="mt-[8px] relative">
-              <IoPersonOutline
+              <IoPersonOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.company_name ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -280,7 +283,7 @@ const VisitForm = () => {
               Country
             </label>
             <div className="mt-[8px] relative">
-              <IoLocationOutline
+              <IoLocationOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.country ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -310,7 +313,7 @@ const VisitForm = () => {
               State
             </label>
             <div className="mt-[8px] relative">
-              <IoLocationOutline
+              <IoLocationOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.state ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -340,7 +343,7 @@ const VisitForm = () => {
               City
             </label>
             <div className="mt-[8px] relative">
-              <IoLocationOutline
+              <IoLocationOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.city ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -370,7 +373,7 @@ const VisitForm = () => {
               Additional Requirements
             </label>
             <div className="mt-[8px] relative">
-              <FiMessageSquare
+              <FiMessageSquareIcon
                 className={`absolute text-2xl left-4 ${
                   errors.additional_requirements ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -398,7 +401,7 @@ const VisitForm = () => {
       <div className="flex gap-3">
         <button
           type="submit"
-          className="w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+          className="w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent focus:outline-none hover:opacity-90"
           onClick={() => {
             if (isLoading === false) {
               onSubmit();

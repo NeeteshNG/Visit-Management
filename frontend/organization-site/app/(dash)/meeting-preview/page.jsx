@@ -1,20 +1,24 @@
 "use client"
 
+
+import {
+  CiMailIcon,
+  FaMobileAltIcon,
+  FiMessageSquareIcon,
+  IoLocationOutlineIcon,
+  IoPersonOutlineIcon,
+  MdArrowDropDownIcon,
+  MdOutlineGroupIcon,
+  MdOutlineLocationOnIcon,
+  RiEBike2FillIcon,
+  RiRectangleLineIcon,
+} from "@/modules/icons/SvgIcons";
 import axiosInstance from '@/modules/axios';
 import { useUserData } from '@/modules/hooks/useUserData';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from "react-toastify"
 import { useRouter } from 'next/navigation'
-import { IoPersonOutline } from "react-icons/io5";
-import { IoLocationOutline } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { FiMessageSquare } from "react-icons/fi";
 
-import { CiMail } from "react-icons/ci";
-import { MdArrowDropDown, MdOutlineLocationOn } from "react-icons/md";
-import { MdOutlineGroup } from "react-icons/md";
-import { RiRectangleLine } from "react-icons/ri";
-import { RiEBike2Fill } from "react-icons/ri";
 import { useAtom } from 'jotai';
 import {  meetingappoinmentdata } from '@/jotai/dash-atoms';
 import Image from 'next/image';
@@ -88,7 +92,7 @@ router.push("/success");
                       Full name
                     </label>
                     <div className='mt-[8px] relative'>
-                      <IoPersonOutline className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <IoPersonOutlineIcon className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -114,7 +118,7 @@ router.push("/success");
                 Meeting Title
               </label>
               <div className='mt-[8px] relative'>
-                <IoLocationOutline className={`absolute text-2xl left-4 ${errors.meetingtitle ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <IoLocationOutlineIcon className={`absolute text-2xl left-4 ${errors.meetingtitle ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -140,7 +144,7 @@ router.push("/success");
                 Mobile Number
               </label>
               <div className='mt-2.5 relative'>
-                <FaMobileAlt className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <FaMobileAltIcon className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -174,7 +178,7 @@ router.push("/success");
                 Meeting Agenda
               </label>
               <div className='mt-[8px] relative'>
-                <CiMail className={`absolute text-2xl left-4 ${errors.agenda ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <CiMailIcon className={`absolute text-2xl left-4 ${errors.agenda ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='agenda'
@@ -200,7 +204,7 @@ router.push("/success");
                 Location
               </label>
               <div className='mt-[8px] relative'>
-                <IoLocationOutline className={`absolute text-2xl left-4 ${errors.location ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <IoLocationOutlineIcon className={`absolute text-2xl left-4 ${errors.location ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
@@ -229,7 +233,7 @@ router.push("/success");
                       Meeting Type
                     </label>
                     <div className='mt-[8px] relative'>
-                      <FiMessageSquare className={`absolute text-2xl left-4 ${errors.purpose ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <FiMessageSquareIcon className={`absolute text-2xl left-4 ${errors.purpose ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -276,7 +280,7 @@ alt="Selected" className='object-contain h-[100px]' />
                 <div className='flex gap-3'>
             <button
                 type='submit'
-                className='w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700'
+                className='w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent focus:outline-none hover:opacity-90'
                 onClick={()=>{
                   if(isLoading===false){
                     onSubmit();

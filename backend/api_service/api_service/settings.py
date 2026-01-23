@@ -156,6 +156,10 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     "http://localhost:3000",
 ])
 
+# Allow all origins in development
+CORS_ALLOW_ALL_ORIGINS = env.bool('DEBUG', default=False)
+CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     "http://localhost:3000",
     "http://localhost:3002",
@@ -169,16 +173,16 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 JAZZMIN_SETTINGS = {
     "theme": "darkly",
-    "site_title": "Epass Admin",
-    "site_header": "Epass",
-    "site_brand": "Epass",
-    "site_logo": "epasslogo.png",
-    "login_logo": "epasslogo.png",
+    "site_title": "NGtry Admin",
+    "site_header": "NGtry",
+    "site_brand": "NGtry",
+    "site_logo": "ngtrylogo.png",
+    "login_logo": "ngtrylogo.png",
     "login_logo_dark": None,
     "site_logo_classes": "p-0 shadow-none",
-    "site_icon": "epasslogo.png",
-    "welcome_sign": "Welcome to Epass",
-    "copyright": "Epass Ltd",
+    "site_icon": "ngtrylogo.png",
+    "welcome_sign": "Welcome to NGtry",
+    "copyright": "NGtry",
     "user_avatar": None,
     "topmenu_links": [
         {"name": "Home", "url": "admin:index"}

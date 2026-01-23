@@ -29,9 +29,13 @@ services:
     tty: true
 
   db:
-    image: postgres:latest
+    image: postgres:16
     ports:
       - "5433:5432"
+    environment:
+      POSTGRES_DB: ngtrydb
+      POSTGRES_USER: ngtry
+      POSTGRES_PASSWORD: ngtry
     volumes:
       - pgdata:/var/lib/postgresql/data
 

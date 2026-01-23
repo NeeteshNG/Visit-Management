@@ -32,6 +32,22 @@ export default function Dash() {
     router.push(endpoint);
   };
 
+  if (isUserLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-lg">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-lg">Please log in to continue</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex items-start justify-between gap-5">
@@ -43,8 +59,8 @@ export default function Dash() {
                 className="w-[213px] h-[150px] cursor-pointer font-inter rounded-lg bg-white shadow-3xl p-6"
                 onClick={() => handleFeatureClick(item.endpoint)}
               >
-                <div className="bg-blue-100 p-2 rounded-full flex items-center justify-center h-[56px] w-[56px]">
-                  <item.icon className="text-primaryblue text-4xl" />
+                <div className="bg-[#E8EDD8] p-2 rounded-full flex items-center justify-center h-[56px] w-[56px]">
+                  <item.icon className="text-ngtryprimary text-4xl" />
                 </div>
                 <div className="flex justify-between mt-3 items-center">
                   <p
@@ -54,12 +70,12 @@ export default function Dash() {
                   >
                     {item.name}
                   </p>
-                  <ArrowRightIcon className="text-xl text-primaryblue" />
+                  <ArrowRightIcon className="text-xl text-ngtryprimary" />
                 </div>
               </div>
             ))}
           </div>
-          {user ? !user.is_kyc_verified && <KycSection /> : null}
+          {!user.is_kyc_verified && <KycSection />}
           <MannualEntry />
           <div className="mt-10 flex justify-between w-full">
             <RecentVisitor />
@@ -79,9 +95,9 @@ export default function Dash() {
           <AdsComponent />
         </section>
       </div>
-      <div className="mt-20 bg-primaryblue h-[46px] w-full -mb-4 flex justify-center items-center">
+      <div className="mt-20 bg-ngtryprimary h-[46px] w-full -mb-4 flex justify-center items-center">
         <p className="font-inter text-base font-medium text-white">
-          © 2024 ePass. All Rights Reserved.
+          © 2024 NGtry. All Rights Reserved.
         </p>
       </div>
     </div>

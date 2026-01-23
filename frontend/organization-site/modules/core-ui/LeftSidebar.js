@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ import { showLeftSidebarAtom } from "@/jotai/ui-atoms";
 import { toast } from "react-toastify";
 
 import { NextIcon, LogoutIcon, SettingIcon } from "@/public/icons/icons";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 import PreminumPlan from "../organization/PreminumPlan";
 import ErrorDialog from "./ErrorDialog";
@@ -21,6 +21,8 @@ const LeftSidebar = () => {
   const [showLeftSidebar] = useAtom(showLeftSidebarAtom);
   const router = useRouter();
   const [isSubMenuOpen, setIsSubMenuOpen] = useState({});
+  const [prefetchedRoutes, setPrefetchedRoutes] = useState(new Set());
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -32,12 +34,19 @@ const LeftSidebar = () => {
     }));
   };
 
+  const handlePrefetch = useCallback((path) => {
+    if (!prefetchedRoutes.has(path)) {
+      router.prefetch(path);
+      setPrefetchedRoutes((prev) => new Set([...prev, path]));
+    }
+  }, [router, prefetchedRoutes]);
+
   return (
     <AnimatePresence>
       {showLeftSidebar && (
         <motion.section
           id="container"
-          className="min-w-[256px] h-full  w-[256px] pt-6  flex  overflow-y-auto pb-3 flex-col items-start justify-start  bg-white text-black fixed left-0 top-0 z-10 "
+          className="min-w-[256px] h-screen w-[256px] flex overflow-y-auto flex-col bg-gradient-to-b from-ngtrydeep to-ngtryprimary text-white fixed left-0 top-0 z-10 shadow-xl"
           initial={{ opacity: 0, x: "-100%" }}
           animate={{ opacity: 1, x: "0%" }}
           exit={{ opacity: 0, x: "-100%" }}
@@ -49,81 +58,98 @@ const LeftSidebar = () => {
             open={open}
             text={"logout?"}
           />
-          <div className="flex justify-between">
-            <section className="flex items-center justify-center px-4">
-              <Link href="/dash">
-                <EpassLogo />
-              </Link>
-            </section>
+
+          {/* Logo Section - Full width white header */}
+          <div className="bg-white py-4 px-5 flex items-center justify-center">
+            <Link href="/dash" prefetch={true} className="block">
+              <NGtryLogo width={150} height={55} />
+            </Link>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="flex flex-col w-full px-4">
+
+          {/* Navigation Menu */}
+          <nav className="flex-1 px-3 overflow-y-auto">
+            <ul className="space-y-1">
               {leftSideBarMenus.map((menuItem) => (
-                <React.Fragment key={menuItem.id}>
+                <li key={menuItem.id}>
                   {menuItem.subMenus ? (
-                    <div
-                      className="px-2 py-4 flex cursor-pointer items-center gap-3 h-[40px] rounded-xl w-full "
-                      onClick={() => handleSubMenuToggle(menuItem.id)}
-                    >
-                      <menuItem.icon className="text-2xl" />
-                      <p className="font-inter font-bold text-sm">
-                        {menuItem.menu}
-                      </p>
-                      <span>{isSubMenuOpen[menuItem.id] ? "▲" : "▼"}</span>
-                    </div>
-                  ) : (
-                    <div
-                      className="px-2 py-4 flex cursor-pointer items-center gap-3 h-[40px] rounded-xl w-full "
-                      onClick={() => router.push(menuItem.path)}
-                    >
-                      <menuItem.icon className="text-2xl" />
-                      <p className="font-inter font-bold text-sm">
-                        {menuItem.menu}
-                      </p>
-                    </div>
-                  )}
-                  {isSubMenuOpen[menuItem.id] && menuItem.subMenus && (
-                    <div className="flex flex-col pl-8 -mt-2 space-y-2">
-                      {menuItem.subMenus.map((subMenuItem) => (
-                        <div
-                          key={subMenuItem.id}
-                          className="flex gap-3 items-center justify-between text-neutralBlack"
-                          onClick={() => router.push(subMenuItem.path)}
-                        >
-                          <p className="text-xs font-bold font-inter text-neutralBlack cursor-pointer">
-                            {subMenuItem.menu}
-                          </p>
-                          <NextIcon className="text-neutralBlack text-xl" />
+                    <>
+                      <button
+                        className="w-full px-3 py-3 flex items-center justify-between rounded-lg hover:bg-ngtrysage/20 transition-colors"
+                        onClick={() => handleSubMenuToggle(menuItem.id)}
+                        onMouseEnter={() => {
+                          menuItem.subMenus.forEach((sub) => handlePrefetch(sub.path));
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <menuItem.icon className="w-5 h-5 text-ngtrylime" />
+                          <span className="font-inter font-semibold text-sm text-white">
+                            {menuItem.menu}
+                          </span>
                         </div>
-                      ))}
-                    </div>
+                        <span className="text-ngtrysage text-xs">
+                          {isSubMenuOpen[menuItem.id] ? "▲" : "▼"}
+                        </span>
+                      </button>
+                      {isSubMenuOpen[menuItem.id] && (
+                        <ul className="ml-4 mt-1 space-y-1 border-l-2 border-ngtrysage/30">
+                          {menuItem.subMenus.map((subMenuItem) => (
+                            <li key={subMenuItem.id}>
+                              <Link
+                                href={subMenuItem.path}
+                                prefetch={true}
+                                className="flex items-center gap-2 pl-4 pr-3 py-2 text-white/80 hover:text-ngtrylime hover:bg-ngtrysage/10 rounded-r-lg transition-colors"
+                                onMouseEnter={() => handlePrefetch(subMenuItem.path)}
+                              >
+                                <NextIcon className="w-3 h-3 text-ngtrysage" />
+                                <span className="text-xs font-medium font-inter">
+                                  {subMenuItem.menu}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={menuItem.path}
+                      prefetch={true}
+                      className="w-full px-3 py-3 flex items-center gap-3 rounded-lg hover:bg-ngtrysage/20 transition-colors"
+                      onMouseEnter={() => handlePrefetch(menuItem.path)}
+                    >
+                      <menuItem.icon className="w-5 h-5 text-ngtrylime" />
+                      <span className="font-inter font-semibold text-sm text-white">
+                        {menuItem.menu}
+                      </span>
+                    </Link>
                   )}
-                </React.Fragment>
+                </li>
               ))}
-            </div>
-            <div className="h-[1px] w-full bg-[#A3A3A3] my-4"></div>
-            <div className="flex items-center w-full h-[21px] px-6 justify-between">
-              <div
-                className="flex gap-3 items-center text-neutralBlack cursor-pointer"
-                onClick={() => {
-                  router.push("/settings");
-                }}
+            </ul>
+          </nav>
+
+          {/* Bottom Section */}
+          <div className="mt-auto border-t border-ngtrysage/30">
+            <div className="px-3 py-4 space-y-1">
+              <Link
+                href="/settings"
+                prefetch={true}
+                className="w-full px-3 py-3 flex items-center gap-3 rounded-lg hover:bg-ngtrysage/20 transition-colors"
+                onMouseEnter={() => handlePrefetch("/settings")}
               >
-                <SettingIcon className="text-xl" />
-                <p className="text-sm font-bold font-inter ">Settings</p>
-              </div>
-            </div>
-            <div className="flex items-center w-full h-[21px] px-6 mt-6 justify-between">
-              <div
-                className="flex gap-3 items-center text-neutralBlack cursor-pointer"
+                <SettingIcon className="w-5 h-5 text-ngtrylime" />
+                <span className="text-sm font-semibold font-inter text-white">Settings</span>
+              </Link>
+              <button
+                className="w-full px-3 py-3 flex items-center gap-3 rounded-lg hover:bg-ngtrysage/20 transition-colors"
                 onClick={() => setOpen(true)}
               >
-                <LogoutIcon className="text-xl" />
-                <p className="text-sm font-bold font-inter ">Logout</p>
-              </div>
+                <LogoutIcon className="w-5 h-5 text-ngtrylime" />
+                <span className="text-sm font-semibold font-inter text-white">Logout</span>
+              </button>
             </div>
+            <PreminumPlan />
           </div>
-          <PreminumPlan />
         </motion.section>
       )}
     </AnimatePresence>

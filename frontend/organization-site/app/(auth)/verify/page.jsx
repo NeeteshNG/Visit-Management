@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
 import AuthSlider from "@/modules/auth-component/AuthSlider";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 function VerifyOTP() {
   const router = useRouter();
@@ -92,7 +92,7 @@ function VerifyOTP() {
           className="xl:w-full xl:max-w-[460px] 2xl:max-w-[540px]"
           style={{ width: "74%" }}
         >
-          <EpassLogo style={{ width: '100px', height: '100px' }} />
+          <NGtryLogo style={{ width: '100px', height: '100px' }} />
 
           <h2 className="text-2xl font-bold leading-tight text-black sm:text-4xl mt-10">
             Verification
@@ -119,7 +119,7 @@ function VerifyOTP() {
                         maxLength="1"
                         value={value}
                         onChange={(e) => handleOTPChange(e.target.value, index)}
-                        className="w-12 h-12 mx-1 text-2xl text-center border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                        className="w-12 h-12 mx-1 text-2xl text-center border border-gray-300 rounded-lg focus:outline-none focus:border-ngtryprimary"
                       />
                     ))}
                     <button

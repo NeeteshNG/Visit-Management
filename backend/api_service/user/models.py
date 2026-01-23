@@ -66,17 +66,25 @@ ORGANIZATION_NATURE_TYPES = [
     ("other", "Other"),
 ]
 
-# def validate_mobile_number(mobile_number):
-#     mobile_number_regex = "^(984|986|980|981|985|988|974|976)\\d{7}$"
-#     if not re.match(mobile_number_regex, mobile_number):
-#         raise ValueError("Invalid Nepali mobile number")
 from rest_framework import serializers
 
 
 def validate_mobile_number(mobile_number):
-    mobile_number_regex = "^(984|986|980|981|985|988|974|976)\\d{7}$"
-    if not re.match(mobile_number_regex, mobile_number):
-        raise serializers.ValidationError("Invalid Nepali mobile number")
+    """
+    Global phone number validation.
+    Accepts phone numbers from multiple countries.
+    Basic validation: 7-15 digits, allows common prefixes.
+    """
+    # Remove any spaces, dashes, or country code prefix
+    cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
+
+    # Remove common country code prefixes for validation
+    if cleaned_number.startswith('00'):
+        cleaned_number = cleaned_number[2:]
+
+    # Basic international phone validation (7-15 digits)
+    if not re.match(r'^\d{7,15}$', cleaned_number):
+        raise serializers.ValidationError("Invalid mobile number. Please enter 7-15 digits.")
 
 
 class CustomUserManager(BaseUserManager):
@@ -114,10 +122,13 @@ class CustomUserManager(BaseUserManager):
             organization_name=None,
             **extra_fields,
     ):
-        mobile_number_regex = "^(984|986|980|981|985|988|974|987|976)\\d{7}$"
+        # Global phone validation - accepts 7-15 digits
+        cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
+        if cleaned_number.startswith('00'):
+            cleaned_number = cleaned_number[2:]
 
-        if not re.match(mobile_number_regex, mobile_number):
-            raise ValidationError("Invalid Nepali mobile number")
+        if not re.match(r'^\d{7,15}$', cleaned_number):
+            raise ValidationError("Invalid mobile number. Please enter 7-15 digits.")
 
         if not organization_name or not organization_type:
             raise ValidationError("Organization name and type are required")

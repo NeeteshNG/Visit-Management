@@ -1,11 +1,15 @@
 "use client";
 
+
+import {
+  IoMdArrowDropdownIcon,
+  MdArrowDropDownIcon,
+  MdOutlinePersonIcon,
+} from "@/modules/icons/SvgIcons";
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNotifications } from "@/modules/hooks/useNotificationData";
 import { useRouter } from "next/navigation";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { MdArrowDropDown, MdOutlinePerson } from "react-icons/md";
 import "./../notiscroll.css";
 import NotificationDetails from "@/modules/notification-component/NotificationDetails";
 import Image from "next/image";
@@ -104,7 +108,7 @@ const Page = () => {
                 ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <MdArrowDropDown />
+                <MdArrowDropDownIcon />
               </div>
             </div>
           </div>
@@ -178,7 +182,7 @@ const Page = () => {
                       }}
                     >
                       <div className="h-[48px] w-[48px] rounded-xl my-2 relative bg-[#E5F3FE] flex items-center justify-center">
-                        <MdOutlinePerson className="text-primaryblue text-2xl" />
+                        <MdOutlinePersonIcon className="text-primaryblue text-2xl" />
                         {e.is_seen === false ? (
                           <div className="absolute -top-0 right-0 h-[8px] w-[8px] rounded-full bg-[#FFAB1E]"></div>
                         ) : (

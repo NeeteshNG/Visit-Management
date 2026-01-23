@@ -7,7 +7,7 @@ export default function KycSection() {
   const { data: user } = useUserData();
 
   return (
-    <div className="flex relative justify-between shadow-3xl lg:w-full w-[958px] h-[185px] rounded-xl  mt-10 font-inter text-white bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC]">
+    <div className="flex relative justify-between shadow-3xl lg:w-full w-[958px] h-[185px] rounded-xl  mt-10 font-inter text-white bg-gradient-to-b from-ngtryprimary to-ngtrydeep">
       <div className="p-7">
         <p className="text-2xl font-bold">KYC </p>
         <p className="leading-6 font-normal text-base w-[540px]">

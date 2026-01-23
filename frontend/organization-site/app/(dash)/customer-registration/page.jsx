@@ -1,13 +1,16 @@
 "use client";
 
+
+import {
+  CiMailIcon,
+  FaMobileAltIcon,
+  IoPersonOutlineIcon,
+  MdArrowDropDownIcon,
+  RiRectangleLineIcon,
+} from "@/modules/icons/SvgIcons";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import { MdArrowDropDown } from "react-icons/md";
-import { IoPersonOutline } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
-import { RiRectangleLine } from "react-icons/ri";
 
 import { idTypes } from "@/modules/data/organization_types_nature";
 import DefaultButton from "@/modules/core-ui/Button";
@@ -44,7 +47,7 @@ const VisitForm = () => {
                 Full Name
               </label>
               <div className="mt-[8px] relative">
-                <IoPersonOutline
+                <IoPersonOutlineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.full_name ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -72,7 +75,7 @@ const VisitForm = () => {
                 Mobile Number
               </label>
               <div className="mt-2.5 relative">
-                <FaMobileAlt
+                <FaMobileAltIcon
                   className={`absolute text-2xl left-4 ${
                     errors.mobile_number ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -123,7 +126,7 @@ const VisitForm = () => {
                 Email address(optional)
               </label>
               <div className="mt-[8px] relative">
-                <CiMail
+                <CiMailIcon
                   className={`absolute text-2xl left-4 ${
                     errors.email ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -172,9 +175,9 @@ const VisitForm = () => {
                     ))}
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <MdArrowDropDown />
+                    <MdArrowDropDownIcon />
                   </div>
-                  <RiRectangleLine
+                  <RiRectangleLineIcon
                     className={`absolute text-2xl left-4 ${
                       errors.typeid ? "top-1/3" : "top-1/2"
                     }  transform -translate-y-1/2 text-gray-400`}
@@ -196,7 +199,7 @@ const VisitForm = () => {
                   ID Number
                 </label>
                 <div className="mt-2.5 relative">
-                  <RiRectangleLine
+                  <RiRectangleLineIcon
                     className={`absolute text-2xl left-4 ${
                       errors.id_number ? "top-1/3" : "top-1/2"
                     }  transform -translate-y-1/2 text-gray-400`}
@@ -225,7 +228,7 @@ const VisitForm = () => {
                 Company Name(optional)
               </label>
               <div className="mt-[8px] relative">
-                <CiMail
+                <CiMailIcon
                   className={`absolute text-2xl left-4 ${
                     errors.company_name ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}

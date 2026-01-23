@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 
-function toastify (message = 'Welcome to epass') {
+function toastify (message = 'Welcome to NGtry') {
   return toast.custom(t => (
     <div
       key={t.id}

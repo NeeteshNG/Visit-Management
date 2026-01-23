@@ -23,3 +23,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* NGtry Form Styles - Global focus states */
+@layer components {
+  /* Input, Select, Textarea focus styles */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none !important;
+    border-color: #636B2F !important; /* ngtryprimary */
+    box-shadow: 0 0 0 2px rgba(99, 107, 47, 0.2) !important;
+  }
+
+  /* Override Tailwind blue focus utilities */
+  .focus\:border-blue-500:focus,
+  .focus\:border-blue-600:focus {
+    border-color: #636B2F !important;
+  }
+
+  .focus\:ring-blue-500:focus,
+  .focus\:ring-blue-600:focus {
+    --tw-ring-color: rgba(99, 107, 47, 0.5) !important;
+  }
+
+  /* Checkbox and Radio styles */
+  input[type="checkbox"]:checked,
+  input[type="radio"]:checked {
+    background-color: #636B2F !important;
+    border-color: #636B2F !important;
+  }
+
+  input[type="checkbox"]:focus,
+  input[type="radio"]:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(99, 107, 47, 0.3) !important;
+  }
+
+  /* Range/Slider inputs */
+  input[type="range"]::-webkit-slider-thumb {
+    background-color: #636B2F !important;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background-color: #636B2F !important;
+  }
+
+  /* Selection highlight */
+  ::selection {
+    background-color: rgba(212, 222, 149, 0.4); /* ngtrylime with opacity */
+    color: #3D4127; /* ngtrydeep */
+  }
+
+  /* MUI-style components override */
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #636B2F !important;
+  }
+
+  .MuiInputLabel-root.Mui-focused {
+    color: #636B2F !important;
+  }
+
+  .MuiCheckbox-root.Mui-checked {
+    color: #636B2F !important;
+  }
+
+  .MuiRadio-root.Mui-checked {
+    color: #636B2F !important;
+  }
+
+  .MuiSwitch-switchBase.Mui-checked {
+    color: #636B2F !important;
+  }
+
+  .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    background-color: #BAC095 !important;
+  }
+}

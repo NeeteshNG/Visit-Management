@@ -1,14 +1,18 @@
 "use client";
 
+
+import {
+  GoDownloadIcon,
+  IoSearchSharpIcon,
+  MdArrowDropDownIcon,
+  MdKeyboardArrowLeftIcon,
+  MdKeyboardArrowRightIcon,
+  MdOutlineDeleteIcon,
+  MdOutlineFilterAltIcon,
+  MdOutlineVisibilityIcon,
+} from "@/modules/icons/SvgIcons";
 import React, { useEffect, useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
-import { MdArrowDropDown, MdOutlineVisibility } from "react-icons/md";
-import { MdOutlineFilterAlt } from "react-icons/md";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { GoDownload } from "react-icons/go";
 import { toast } from "react-toastify";
-import { MdOutlineDelete } from "react-icons/md";
 
 import { saveAs } from "file-saver";
 import Link from "next/link";
@@ -171,7 +175,7 @@ export default function BranchList() {
                 handleSearch(e.target.value);
               }}
             />
-            <IoSearchSharp className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
+            <IoSearchSharpIcon className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
           </div>
           <div
             className="flex gap-2 cursor-pointer w-[84px] items-center justify-center rounded-xl h-[34px] border-2 border-black  "
@@ -180,7 +184,7 @@ export default function BranchList() {
             }}
           >
             <p className="font-bold font-inter text-xs ">Filter</p>
-            <MdOutlineFilterAlt className="text-sm" />
+            <MdOutlineFilterAltIcon className="text-sm" />
           </div>
           <div
             className="flex gap-2 cursor-pointer w-[141px] items-center justify-center rounded-xl h-[34px] border-2 border-black  "
@@ -191,7 +195,7 @@ export default function BranchList() {
             }}
           >
             <p className="font-bold font-inter text-xs ">Download PDF</p>
-            <GoDownload className="text-sm" />
+            <GoDownloadIcon className="text-sm" />
           </div>
         </div>
       </div>
@@ -337,7 +341,7 @@ export default function BranchList() {
                           }}
                         >
                           <div className="rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center border border-[#898989]">
-                            <MdOutlineVisibility className="text-[#898989] text-2xl" />
+                            <MdOutlineVisibilityIcon className="text-[#898989] text-2xl" />
                           </div>
                         </Link>
                         <div
@@ -347,7 +351,7 @@ export default function BranchList() {
                             setOpen(true);
                           }}
                         >
-                          <MdOutlineDelete className="text-[#FF3A3A] text-2xl" />
+                          <MdOutlineDeleteIcon className="text-[#FF3A3A] text-2xl" />
                         </div>
                       </div>
                     </td>
@@ -383,7 +387,7 @@ export default function BranchList() {
                 </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <MdArrowDropDown />
+                <MdArrowDropDownIcon />
               </div>
             </div>
             <p className="font-normal text-xs mt-3">entries</p>
@@ -399,7 +403,7 @@ export default function BranchList() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowLeft className="text-2xl" />
+                <MdKeyboardArrowLeftIcon className="text-2xl" />
               </button>
             )}
 
@@ -427,7 +431,7 @@ export default function BranchList() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowRight className="text-2xl" />
+                <MdKeyboardArrowRightIcon className="text-2xl" />
               </button>
             )}
           </div>

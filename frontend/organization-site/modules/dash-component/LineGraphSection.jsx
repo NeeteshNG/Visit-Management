@@ -6,10 +6,24 @@ import { Chart as ChartJS, defaults } from "chart.js/auto";
 
 import { filterreportgraph } from "../data/dash_service";
 
+function convertDateFormat(inputDateString) {
+  const originalDate = new Date(inputDateString);
+  const year = originalDate.getFullYear();
+  const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = originalDate.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export default function LineGraphSection({ userId }) {
-  const today = convertDateFormat(new Date());
-  const [selectedDate, setSelectedDate] = useState(today);
-  const [endselecteddate, setEndSelectedDate] = useState(today);
+  const today = new Date();
+  const weekAgo = new Date(today);
+  weekAgo.setDate(today.getDate() - 6); // 7 days including today
+
+  const todayFormatted = convertDateFormat(today);
+  const weekAgoFormatted = convertDateFormat(weekAgo);
+
+  const [selectedDate, setSelectedDate] = useState(weekAgoFormatted);
+  const [endselecteddate, setEndSelectedDate] = useState(todayFormatted);
   const [linedata, setData] = useState(null);
 
   useEffect(() => {
@@ -17,8 +31,8 @@ export default function LineGraphSection({ userId }) {
       toast: toast,
       id: userId,
       setdata: setData,
-      startdate: "",
-      enddate: "",
+      startdate: weekAgoFormatted,
+      enddate: todayFormatted,
     });
   }, []);
 
@@ -44,14 +58,6 @@ export default function LineGraphSection({ userId }) {
     });
   };
 
-  function convertDateFormat(inputDateString) {
-    const originalDate = new Date(inputDateString);
-    const year = originalDate.getFullYear();
-    const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = originalDate.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
-
   return (
     <div className="lg:w-full w-[958px] mt-10 shadow-3xl justify-between bg-white p-6">
       <h1 className="font-bold text-2xl leading-9 mb-3">Visitor Report</h1>
@@ -69,7 +75,7 @@ export default function LineGraphSection({ userId }) {
             value={selectedDate}
             pattern="\d{4}-\d{2}-\d{2}"
             onChange={handleStartDateChange}
-            className="p-2 border w-[150px] rounded focus:outline-none focus:border-blue-500"
+            className="p-2 border w-[150px] rounded focus:outline-none focus:border-ngtryprimary"
           />
         </div>
         <div>
@@ -85,7 +91,7 @@ export default function LineGraphSection({ userId }) {
             value={endselecteddate}
             pattern="\d{4}-\d{2}-\d{2}"
             onChange={handleEndDateChange}
-            className="p-2 border w-[150px] rounded focus:outline-none focus:border-blue-500"
+            className="p-2 border w-[150px] rounded focus:outline-none focus:border-ngtryprimary"
           />
         </div>
       </div>
@@ -103,8 +109,8 @@ export default function LineGraphSection({ userId }) {
                   {
                     label: "Check In",
                     data: linedata.map((data) => data.check_in),
-                    backgroundColor: "#0FBC88",
-                    borderColor: "#0FBC88",
+                    backgroundColor: "#636B2F",
+                    borderColor: "#636B2F",
                   },
                   {
                     label: "Check Out",
@@ -115,8 +121,8 @@ export default function LineGraphSection({ userId }) {
                   {
                     label: "Total",
                     data: linedata.map((data) => data.totalvisit),
-                    backgroundColor: "#0F75BC",
-                    borderColor: "#0F75BC",
+                    backgroundColor: "#D4DE95",
+                    borderColor: "#BAC095",
                   },
                 ],
               }}

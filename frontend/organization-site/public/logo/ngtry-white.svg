@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 50" width="180" height="50">
+  <!-- Logo mark - stylized leaf/check shape with white background -->
+  <circle cx="25" cy="25" r="20" fill="#D4DE95"/>
+  <path d="M18 25 L23 30 L33 18" stroke="#3D4127" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- NGtry text in white -->
+  <text x="55" y="34"
+        font-family="Inter, Arial, sans-serif"
+        font-size="28"
+        font-weight="700"
+        fill="#FFFFFF">
+    NGtry
+  </text>
+</svg>

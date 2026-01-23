@@ -16,10 +16,10 @@ export default function CircularDays({ days }) {
           strokeLinecap: "butt",
           textSize: "16px",
           pathTransitionDuration: 0.5,
-          pathColor: `#FF3A3A`,
-          textColor: "#F1F9FF",
-          trailColor: "#F1F9FF",
-          backgroundColor: "#3e98c7",
+          pathColor: `#D4DE95`,
+          textColor: "#FFFFFF",
+          trailColor: "rgba(186, 192, 149, 0.3)",
+          backgroundColor: "#636B2F",
         })}
       >
         {" "}

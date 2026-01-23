@@ -1,6 +1,22 @@
 version: '3.9'
 
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ngtrydb
+      POSTGRES_USER: ngtry
+      POSTGRES_PASSWORD: ngtry
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ngtry -d ngtrydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   nginx:
     build:
       context: .
@@ -33,8 +49,12 @@ services:
       - ./backend/api_service/.env
     volumes:
       - ./backend/api_service:/app/backend/api_service
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
+  postgres_data:
   backups:
   static:
   media:

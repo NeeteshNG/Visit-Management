@@ -21,7 +21,7 @@ import {
 
 import axiosInstance from "@/modules/axios";
 import { organizationTypes } from "@/modules/data/organization_types_nature";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 const AuthSlider = dynamic(
   () => import("@/modules/auth-component/AuthSlider"),
@@ -82,14 +82,14 @@ export default function Register() {
         <div className="flex items-center justify-start px-4 py-10 bg-white md:px-0 mr-4">
           <div className="xl:max-w-[568px] 2xl:max-w-[568px]">
             <div className="text-center text-black flex justify-between items-center">
-              <EpassLogo style={{ width: "100px", height: "100px" }} />
+              <NGtryLogo style={{ width: "100px", height: "100px" }} />
               <p>
                 Already have an account?{" "}
                 <span>
                   <Link
                     href="/login"
-                    title="Create free account at epass"
-                    className="ml-1 font-medium text-[#0F75BC] transition-all duration-200 hover:text-[#0F75BC] hover:underline focus:text-blue-700"
+                    title="Login to your NGtry account"
+                    className="ml-1 font-medium text-[#636B2F] transition-all duration-200 hover:text-[#3D4127] hover:underline focus:text-ngtrydeep"
                   >
                     Login
                   </Link>
@@ -100,7 +100,7 @@ export default function Register() {
               Register
             </h2>
             <p className="mt-2 text-sm text-[#090A0A] font-normal font-inter">
-              Get started with Epass by filling in all the necessary details.
+              Get started with NGtry by filling in all the necessary details.
             </p>
             <form onSubmit={handleSubmit(onRegisterSubmit)} className="mt-6">
               <div className="space-y-5">
@@ -347,7 +347,7 @@ export default function Register() {
                   </label>
                   <button
                     type="submit"
-                    className="inline-flex items-center mt-4 bg-gradient-to-r from-[#25AAE1] to-[#0F75BC] justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+                    className="inline-flex items-center mt-4 bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md focus:outline-none hover:opacity-90"
                   >
                     Register
                   </button>

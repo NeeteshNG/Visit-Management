@@ -2,13 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 
-import { IoSearchSharp } from "react-icons/io5";
-import { MdArrowDropDown, MdOutlineVisibility } from "react-icons/md";
-import { MdOutlineFilterAlt } from "react-icons/md";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { GoDownload } from "react-icons/go";
-import { MdOutlineDelete } from "react-icons/md";
+import {
+  IoSearchSharpIcon,
+  MdArrowDropDownIcon,
+  MdOutlineVisibilityIcon,
+  MdOutlineFilterAltIcon,
+  MdKeyboardArrowRightIcon,
+  MdKeyboardArrowLeftIcon,
+  GoDownloadIcon,
+  MdOutlineDeleteIcon,
+} from "@/modules/icons/SvgIcons";
 
 import { toast } from "react-toastify";
 import { deletevisitor, getVisitors } from "@/modules/data/dash_service";
@@ -43,7 +46,7 @@ export default function Visitorlist() {
     getVisitors({
       toast: toast,
       searchtext: e,
-      setvisitor: handleSetVisitors,
+      setVisitors: handleSetVisitors,
       enddate: endSelectedDate,
       startdate: selectedDate,
       page: currentPage,
@@ -131,7 +134,7 @@ export default function Visitorlist() {
   const endEntries = Math.min(currentPage * visitorsPerPage, totalVisitors);
 
   return (
-    <div className="lg:w-full w-[1367px]  mt-10 rounded-xl p-7 shadow-lg bg-white font-inter">
+    <div className="lg:w-full w-[1367px]  mt-10 rounded-xl p-7 shadow-lg bg-white font-inter border border-ngtrysage/20">
       <ErrorDialog
         handleClose={handleClose}
         onclick={handleDeleteVisitor}
@@ -140,29 +143,29 @@ export default function Visitorlist() {
       />
 
       <div className="flex justify-between">
-        <h1 className="font-bold text-2xl leading-9 ">Visitor List</h1>
+        <h1 className="font-bold text-2xl leading-9 text-ngtrydeep">Visitor List</h1>
         <div className="flex gap-2 items-center">
           {/* Search Input */}
           <div className="relative">
             <input
               type="text"
-              className="border border-[#898989] p-4 rounded-xl h-[45px] w-[333px]  focus:outline-none pl-10"
+              className="border border-ngtrysage/50 p-4 rounded-xl h-[45px] w-[333px] focus:outline-none focus:border-ngtryprimary pl-10 transition-colors"
               placeholder="Search here..."
               onChange={(e) => handleSearch(e.target.value)}
             />
-            <IoSearchSharp className="absolute text-xl left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <IoSearchSharpIcon className="absolute text-xl left-3 top-1/2 transform -translate-y-1/2 text-ngtrysage" />
           </div>
 
           <div
-            className="flex gap-2 cursor-pointer w-[84px] items-center justify-center rounded-xl h-[34px] border-2 border-black  "
+            className="flex gap-2 cursor-pointer w-[84px] items-center justify-center rounded-xl h-[34px] border-2 border-ngtryprimary text-ngtryprimary hover:bg-ngtryprimary hover:text-white transition-colors"
             onClick={handleFilterToggle}
           >
-            <p className="font-bold font-inter text-xs ">Filter</p>
-            <MdOutlineFilterAlt className="text-sm" />
+            <p className="font-bold font-inter text-xs">Filter</p>
+            <MdOutlineFilterAltIcon className="text-sm" />
           </div>
 
           <div
-            className="flex gap-2 cursor-pointer w-[141px] items-center justify-center rounded-xl h-[34px] border-2 border-black  "
+            className="flex gap-2 cursor-pointer w-[141px] items-center justify-center rounded-xl h-[34px] border-2 border-ngtryprimary text-ngtryprimary hover:bg-ngtryprimary hover:text-white transition-colors"
             onClick={() => {
               saveAs(
                 `${baseurl}/organization/${user.id}/visitor-history/download`,
@@ -170,8 +173,8 @@ export default function Visitorlist() {
               );
             }}
           >
-            <p className="font-bold font-inter text-xs ">Download PDF</p>
-            <GoDownload className="text-sm" />
+            <p className="font-bold font-inter text-xs">Download PDF</p>
+            <GoDownloadIcon className="text-sm" />
           </div>
         </div>
       </div>
@@ -230,7 +233,7 @@ export default function Visitorlist() {
                   </option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <MdArrowDropDown />
+                  <MdArrowDropDownIcon />
                 </div>
               </div>
             </div>
@@ -251,32 +254,32 @@ export default function Visitorlist() {
 
       {newVisitors && (
         <>
-          <table className="min-w-full divide-y divide-gray-300 mt-8">
+          <table className="min-w-full divide-y divide-ngtrysage/30 mt-8">
             <thead>
               <tr>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   SN
                 </th>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   Date/Time
                 </th>
-                <th className="py-3 px-2 pl-4 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 pl-4 text-start font-bold text-xs font-inter text-ngtrysage">
                   Name
                 </th>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   Address
                 </th>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   Mobile No.
                 </th>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   Email address
                 </th>
 
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                   Purpose
                 </th>
-                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]"></th>
+                <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage"></th>
               </tr>
             </thead>
             <tbody className="py-20">
@@ -285,23 +288,23 @@ export default function Visitorlist() {
                   <td className="py-2 px-2  text-xs font-inter font-bold">
                     {index + 1}
                   </td>
-                  <td className="py-2 px-2 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrydeep">
                     {convertDate(row.visited_at)}
                   </td>
-                  <td className="py-2 px-2 pl-4 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 pl-4 font-normal text-xs font-inter text-ngtrydeep">
                     {row.full_name}
                   </td>
-                  <td className="py-2 px-2 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrydeep">
                     {row?.visiting_from}
                   </td>
-                  <td className="py-2 px-2 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrydeep">
                     {row?.mobile_number}
                   </td>
-                  <td className="py-2 px-2 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrydeep">
                     <div className="flex gap-4 items-center">{row?.email}</div>
                   </td>
 
-                  <td className="py-2 px-2 font-normal text-xs font-inter text-[#111827]">
+                  <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrydeep">
                     {row.purpose}
                   </td>
                   <td>
@@ -316,8 +319,8 @@ export default function Visitorlist() {
                         }}
                       >
                         {" "}
-                        <div className="rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center border border-[#898989]">
-                          <MdOutlineVisibility className="text-[#898989] text-2xl" />
+                        <div className="rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center border border-ngtrysage/50 hover:border-ngtryprimary transition-colors">
+                          <MdOutlineVisibilityIcon className="text-ngtrysage text-2xl" />
                         </div>
                       </Link>
                       <div
@@ -327,7 +330,7 @@ export default function Visitorlist() {
                           setOpen(true);
                         }}
                       >
-                        <MdOutlineDelete className="text-[#FF3A3A] text-2xl" />
+                        <MdOutlineDeleteIcon className="text-[#FF3A3A] text-2xl" />
                       </div>
                     </div>
                   </td>
@@ -361,7 +364,7 @@ export default function Visitorlist() {
                 </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <MdArrowDropDown />
+                <MdArrowDropDownIcon />
               </div>
             </div>
             <p className="font-normal text-xs mt-3">entries</p>
@@ -379,7 +382,7 @@ export default function Visitorlist() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowLeft className="text-2xl" />
+                <MdKeyboardArrowLeftIcon className="text-2xl" />
               </button>
             )}
 
@@ -389,7 +392,7 @@ export default function Visitorlist() {
                   key={page}
                   className={`w-[24px] h-[24px] flex items-center justify-center rounded-md text-xs font-inter font-normal ${
                     currentPage === page
-                      ? "bg-primaryblue text-white"
+                      ? "bg-ngtryprimary text-white"
                       : "text-[#A3A3A3] text-xs font-normal font-inter"
                   }`}
                   onClick={() => handlePageChange(page)}
@@ -408,7 +411,7 @@ export default function Visitorlist() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowRight className="text-2xl" />
+                <MdKeyboardArrowRightIcon className="text-2xl" />
               </button>
             )}
           </div>

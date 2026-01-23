@@ -15,8 +15,8 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  title: 'ePass | Visitor Check-In System | Nepal',
-  description: 'Epass Office Application'
+  title: 'NGtry | Visitor Check-In System',
+  description: 'NGtry Visitor Management System'
 }
 
 export default function RootLayout ({ children }) {

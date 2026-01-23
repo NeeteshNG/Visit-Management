@@ -11,7 +11,7 @@ import { phonenumberdataAtom } from "@/jotai/dash-atoms";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
 import AuthSlider from "@/modules/auth-component/AuthSlider";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 function ResetPassword() {
   const router = useRouter();
@@ -47,7 +47,7 @@ function ResetPassword() {
             className="xl:w-full xl:max-w-[460px] 2xl:max-w-[540px]"
             style={{ width: "80%" }}
           >
-            <EpassLogo style={{ width: '100px', height: '100px' }} />
+            <NGtryLogo style={{ width: '100px', height: '100px' }} />
             <h2 className="mt-6 text-2xl font-bold text-black sm:text-4xl">
               Reset Password
             </h2>

@@ -1,15 +1,21 @@
 "use client"
 
+
+import {
+  CiLockIcon,
+  CiMailIcon,
+  FaMobileAltIcon,
+  IoLocationOutlineIcon,
+  IoPersonOutlineIcon,
+  MdOutlineVisibilityIcon,
+  MdOutlineVisibilityOffIcon,
+} from "@/modules/icons/SvgIcons";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
 import { useUserData } from "@/modules/hooks/useUserData";
 import RadioButton from "@/modules/kyc-component/RadioButton";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CiLock, CiMail } from "react-icons/ci";
-import { FaMobileAlt } from "react-icons/fa";
-import { IoLocationOutline, IoPersonOutline } from "react-icons/io5"
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 export default function Subadmin() {
@@ -98,7 +104,7 @@ toast.error("Please add some roles")
                       Full Name
                     </label>
                     <div className='mt-[8px] relative'>
-                      <IoPersonOutline className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <IoPersonOutlineIcon className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -123,7 +129,7 @@ toast.error("Please add some roles")
                       Mobile Number
                     </label>
                     <div className='mt-[8px] relative'>
-                      <FaMobileAlt className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <FaMobileAltIcon className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -147,7 +153,7 @@ toast.error("Please add some roles")
                       Email address
                     </label>
                     <div className='mt-[8px] relative'>
-                      <CiMail className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <CiMailIcon className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='email'
@@ -171,7 +177,7 @@ toast.error("Please add some roles")
                        Address
                     </label>
                     <div className='mt-[8px] relative'>
-                      <IoLocationOutline className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <IoLocationOutlineIcon className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -198,12 +204,12 @@ toast.error("Please add some roles")
                    
                   </div>
                   <div className='mt-2.5 relative w-[600px] '>
-                  <CiLock  className={`absolute text-2xl left-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                  <CiLockIcon  className={`absolute text-2xl left-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
                   <div onClick={()=>{
                     setisvisiable(!isvisiable)
                   }} className='cursor-pointer'>
-                  {isvisiable===false?<MdOutlineVisibility  className={`absolute text-2xl right-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`}/>:
-                <MdOutlineVisibilityOff  className={`absolute text-2xl right-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                  {isvisiable===false?<MdOutlineVisibilityIcon  className={`absolute text-2xl right-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`}/>:
+                <MdOutlineVisibilityOffIcon  className={`absolute text-2xl right-4 ${errors.password?"top-1/3":"top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
                 }  
                   </div>
                 
@@ -238,9 +244,6 @@ toast.error("Please add some roles")
 <RadioButton title={"Notification"} onclickfunction={()=>{
   if(allitems){}
   additem({item:"Notification"});
-}}/>
-<RadioButton title={"Create Sub Admin"} onclickfunction={()=>{
-  additem({item:"Create Sub Admin"});
 }}/>
 <RadioButton title={"Create Sub Admin"} onclickfunction={()=>{
   additem({item:"Create Sub Admin"});

@@ -1,4 +1,27 @@
 'use client'
+
+import {
+  CgOrganisationIcon,
+  CiCalendarIcon,
+  CiFlag1Icon,
+  CiMailIcon,
+  FaFacebookIcon,
+  FaPlusIcon,
+  FaWhatsappIcon,
+  FaWordpressIcon,
+  IoIosPhonePortraitIcon,
+  IoPersonOutlineIcon,
+  LuUploadIcon,
+  MdArrowDropDownIcon,
+  MdLocationOnIcon,
+  MdLocationSearchingIcon,
+  MdOutlineLocalPhoneIcon,
+  MdPanoramaWideAngleIcon,
+  MdShareLocationIcon,
+  TbArrowBigRightIcon,
+  TbLayoutDashboardIcon,
+  TiLocationArrowOutlineIcon,
+} from "@/modules/icons/SvgIcons";
 import React, { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { redirect } from 'next/navigation'
@@ -8,29 +31,9 @@ import { useUserData } from '@/modules/hooks/useUserData'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import LoadingComponent from '@/modules/core-ui/LoadingComponent'
-import { CgOrganisation } from "react-icons/cg";
-import { CiCalendar } from "react-icons/ci";
-import { TbLayoutDashboard } from "react-icons/tb";
-import { MdArrowDropDown, MdPanoramaWideAngle } from "react-icons/md";
 import { countries, organizationTypes } from '@/modules/data/organization_types_nature'
-import { PiBagSimpleBold } from 'react-icons/pi'
-import { MdLocationSearching } from "react-icons/md";
-import { CiFlag1 } from "react-icons/ci";
-import { TiLocationArrowOutline } from "react-icons/ti";
-import { IoPersonOutline } from "react-icons/io5";
-import { MdOutlineLocalPhone } from "react-icons/md";
-import { IoIosPhonePortrait } from "react-icons/io";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdShareLocation } from "react-icons/md";
-import { MdLocationOn } from "react-icons/md";
 
-import { CiMail } from "react-icons/ci";
-import { FaWordpress } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
 
-import { TbArrowBigRight } from "react-icons/tb";
-import { FaPlus } from "react-icons/fa6";
-import { LuUpload } from "react-icons/lu";
 import DefaultButton from '@/modules/core-ui/Button'
 import Imagepicker from '@/modules/kyc-component/Imagepicker'
 import { districts, municipalites, province } from '@/modules/data/address'
@@ -281,7 +284,7 @@ toast.error("Please Select the images");
                       Office Name
                     </label>
                     <div className='mt-2.5 relative'>
-                      <CgOrganisation className={`absolute text-2xl left-4 ${errors.organization_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <CgOrganisationIcon className={`absolute text-2xl left-4 ${errors.organization_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -306,7 +309,7 @@ toast.error("Please Select the images");
                         Establishment Year
                       </label>
                       <div className='mt-2.5 relative'>
-                        <CiCalendar className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiCalendarIcon className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -330,7 +333,7 @@ toast.error("Please Select the images");
                         Registration Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TbLayoutDashboard className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TbLayoutDashboardIcon className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -356,7 +359,7 @@ toast.error("Please Select the images");
                         PAN / VAT Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdPanoramaWideAngle className={`absolute text-2xl left-4 ${errors.pan_vat_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdPanoramaWideAngleIcon className={`absolute text-2xl left-4 ${errors.pan_vat_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -396,7 +399,7 @@ toast.error("Please Select the images");
                           </select>
                           <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.organization_type ? "-top-6" : ""} items-center px-2 text-gray-700`}>
                             {/* Adjust the positioning of the dropdown button here */}
-                            <MdArrowDropDown />
+                            <MdArrowDropDownIcon />
                           </div>
                           {/* Adjust the positioning of the dropdown button here */}
                           <PiBagSimpleBold className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
@@ -457,9 +460,9 @@ toast.error("Please Select the images");
                           ))}
                         </select>
                         <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.country ? "-top-6" : ""} items-center px-2 text-gray-700`}>
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <CiFlag1 className={`absolute text-2xl left-4 ${errors.country ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiFlag1Icon className={`absolute text-2xl left-4 ${errors.country ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.country && (
                           <span className='text-red-500'>
@@ -503,9 +506,9 @@ toast.error("Please Select the images");
         </select>
 
                         <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.province ? "-top-6" : ""} items-center px-2 text-gray-700`}>
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdLocationSearching className={`absolute text-2xl left-4 ${errors.province ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdLocationSearchingIcon className={`absolute text-2xl left-4 ${errors.province ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.province && (
                           <span className='text-red-500'>
@@ -546,9 +549,9 @@ toast.error("Please Select the images");
                           ))}
                         </select>
                         <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.district ? "-top-6" : ""} items-center px-2 text-gray-700`}>
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdShareLocation className={`absolute text-2xl left-4 ${errors.district ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdShareLocationIcon className={`absolute text-2xl left-4 ${errors.district ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.district && (
                           <span className='text-red-500'>
@@ -581,9 +584,9 @@ toast.error("Please Select the images");
                           ))}
                         </select>
                         <div className={`pointer-events-none absolute inset-y-0 right-0 flex ${errors.municipality ? "-top-6" : ""} items-center px-2 text-gray-700`}>
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdLocationOn className={`absolute text-2xl left-4 ${errors.municipality ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdLocationOnIcon className={`absolute text-2xl left-4 ${errors.municipality ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.municipality && (
                           <span className='text-red-500'>
@@ -602,7 +605,7 @@ toast.error("Please Select the images");
                         Ward No.
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TbArrowBigRight className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TbArrowBigRightIcon className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -626,7 +629,7 @@ toast.error("Please Select the images");
                         City / Tole / Area
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TiLocationArrowOutline className={`absolute text-2xl left-4 ${errors.city ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TiLocationArrowOutlineIcon className={`absolute text-2xl left-4 ${errors.city ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -655,7 +658,7 @@ toast.error("Please Select the images");
                       Contact Person Full Name
                     </label>
                     <div className='mt-2.5 relative'>
-                      <IoPersonOutline className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <IoPersonOutlineIcon className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -680,7 +683,7 @@ toast.error("Please Select the images");
                         Telephone number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdOutlineLocalPhone className={`absolute text-2xl left-4 ${errors.telephone_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdOutlineLocalPhoneIcon className={`absolute text-2xl left-4 ${errors.telephone_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -705,7 +708,7 @@ toast.error("Please Select the images");
             Mobile Number
           </label>
           <div className='mt-2.5 relative'>
-            <IoIosPhonePortrait className={`absolute text-2xl left-4 ${errors.mobilenumber ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+            <IoIosPhonePortraitIcon className={`absolute text-2xl left-4 ${errors.mobilenumber ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
             <input
               type='text'
@@ -737,7 +740,7 @@ toast.error("Please Select the images");
                         Whatsapp / Viber Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <FaWhatsapp className={`absolute text-2xl left-4 ${errors.whatsapp_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <FaWhatsappIcon className={`absolute text-2xl left-4 ${errors.whatsapp_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -761,7 +764,7 @@ toast.error("Please Select the images");
                         Alternative Contact Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdOutlineLocalPhone className={`absolute text-2xl left-4 ${errors.contact_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdOutlineLocalPhoneIcon className={`absolute text-2xl left-4 ${errors.contact_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -789,7 +792,7 @@ toast.error("Please Select the images");
                         Email address
                       </label>
                       <div className='mt-2.5 relative'>
-                        <CiMail className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiMailIcon className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='email'
@@ -813,7 +816,7 @@ toast.error("Please Select the images");
                         Website
                       </label>
                       <div className='mt-2.5 relative'>
-                        <FaWordpress className={`absolute text-2xl left-4 ${errors.website ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <FaWordpressIcon className={`absolute text-2xl left-4 ${errors.website ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -839,7 +842,7 @@ toast.error("Please Select the images");
                       Social Media Link
                     </label>
                     <div className='mt-2.5 relative'>
-                      <FaFacebook className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <FaFacebookIcon className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -862,7 +865,7 @@ toast.error("Please Select the images");
        </label>
        <div className='mt-2.5 relative'>
          {/* You can customize the icon based on the social media platform */}
-         <FaFacebook className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+         <FaFacebookIcon className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
          <input
            type='text'
@@ -881,7 +884,7 @@ toast.error("Please Select the images");
                   }}>
                  <p className='text-primaryblue font-bold text-sm leading-5 '>
                       Add another link</p>
-                    <FaPlus className="text-sm text-primaryblue" />
+                    <FaPlusIcon className="text-sm text-primaryblue" />
 
                   </div>
                 </div>
@@ -913,7 +916,7 @@ toast.error("Please Select the images");
               />
                   </div>:<>
                   <div className='w-[619px] h-[140px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
-                  <LuUpload className="text-base text-[#A3A3A3]"/>
+                  <LuUploadIcon className="text-base text-[#A3A3A3]"/>
                   <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-primaryblue cursor-pointer' onClick={()=>{
                     handleImagesClick(index)
                     console.log(selectedImages);
@@ -929,7 +932,7 @@ toast.error("Please Select the images");
         //     Upload Image {index + 1}
         //   </label>
         //   <div className='mt-2.5 relative'>
-        //     <FaFacebook className={`absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 text-gray-400`} />
+        //     <FaFacebookIcon className={`absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 text-gray-400`} />
 
         //     <input
         //       type='file'
@@ -964,7 +967,7 @@ toast.error("Please Select the images");
                     <div className='flex gap-3 mt-6 items-center cursor-pointer' onClick={()=>{
                       setnumberofdocument(numberofdocument+1);
                     }}>
-                    <FaPlus className="text-sm text-primaryblue" />
+                    <FaPlusIcon className="text-sm text-primaryblue" />
                 <p className='text-primaryblue font-bold text-sm leading-5 '>
                       Add file upload</p>
                     
@@ -983,7 +986,7 @@ toast.error("Please Select the images");
                  
                 <button
                   type='submit'
-                  className='w-[320px] h-[56px] mb-12 mt-10 flex items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700'
+                  className='w-[320px] h-[56px] mb-12 mt-10 flex items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md focus:outline-none hover:opacity-90'
                 >
                 Continue
                 </button>

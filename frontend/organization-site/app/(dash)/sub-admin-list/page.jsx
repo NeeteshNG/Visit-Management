@@ -1,9 +1,13 @@
 'use client'
 
+
+import {
+  IoSearchSharpIcon,
+  MdOutlineDeleteIcon,
+  MdOutlineVisibilityIcon,
+} from "@/modules/icons/SvgIcons";
 import SwitchButton from "@/modules/kyc-component/SwitchButton";
 import { useEffect, useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
-import { MdOutlineDelete, MdOutlineVisibility } from "react-icons/md"
 import { toast } from "react-toastify";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
 import Image from "next/image";
@@ -54,14 +58,14 @@ export default function SubAdminList() {
             <input type="text" className='border  border-[#898989] p-4 rounded-xl h-[45px] w-[333px]  focus:outline-none pl-10' placeholder='Type here...' onChange={(e) => {
               handlesearch(e.target.value)
             }} />
-            <IoSearchSharp className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
+            <IoSearchSharpIcon className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
           </div>
          
         </div>
         </div>
       </div>
      
-      {allsubadmin === null ? <></> : <>
+      {!allsubadmin || !Array.isArray(allsubadmin) ? <></> : <>
         <table className="min-w-full divide-y divide-gray-300 mt-8">
           <thead>
             <tr>
@@ -105,7 +109,7 @@ export default function SubAdminList() {
           query: {
             id: row.id
           }}}>   <div className='rounded-lg cursor-pointer my-2 h-[32px] w-[32px] flex flex-col justify-center items-center border border-[#898989]'>
-                    <MdOutlineVisibility className="text-[#898989] text-2xl" />
+                    <MdOutlineVisibilityIcon className="text-[#898989] text-2xl" />
 
                   </div></Link>
                   <div className='rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center bg-[#FFE4E4] cursor-pointer' onClick={()=>{
@@ -113,7 +117,7 @@ export default function SubAdminList() {
                     setindex(index);
                     setopen(true);
                   }}>
-                    <MdOutlineDelete className="text-[#FF3A3A] text-2xl" />
+                    <MdOutlineDeleteIcon className="text-[#FF3A3A] text-2xl" />
 
                   </div>
                 </div></td>

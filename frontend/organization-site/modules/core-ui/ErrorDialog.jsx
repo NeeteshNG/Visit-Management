@@ -27,7 +27,7 @@ export default function ErrorDialog({ handleClose, open, onClick, text }) {
           <button
             onClick={onClick}
             type="submit"
-            className="inline-flex h-[53px] w-[152px] items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-xl bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+            className="inline-flex h-[53px] w-[152px] items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-xl focus:outline-none hover:opacity-90"
           >
             Yes
           </button>

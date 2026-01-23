@@ -1,28 +1,33 @@
 "use client";
 
-import LineComponent from "@/modules/kyc-component/LineComponent";
+
 import {
-  MdLocationOn,
-  MdLocationSearching,
-  MdOutlinePerson,
-  MdShareLocation,
-} from "react-icons/md";
-import { CiCalendar, CiFlag1, CiShare2 } from "react-icons/ci";
-import { FaMobileScreen } from "react-icons/fa6";
-import { CiMail } from "react-icons/ci";
-import { TbArrowBigRight, TbLocation, TbTopologyStar } from "react-icons/tb";
-import { GoDownload } from "react-icons/go";
+  BsPersonIcon,
+  CiCalendarIcon,
+  CiFlag1Icon,
+  CiMailIcon,
+  CiShare2Icon,
+  FaMobileScreenIcon,
+  GoDownloadIcon,
+  MdLocationOnIcon,
+  MdLocationSearchingIcon,
+  MdOutlinePersonIcon,
+  MdShareLocationIcon,
+  TbArrowBigRightIcon,
+  TbLocationIcon,
+  TbTopologyStarIcon,
+} from "@/modules/icons/SvgIcons";
+import LineComponent from "@/modules/kyc-component/LineComponent";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getorgbranchdetails } from "@/modules/data/branch_service";
 import { toast } from "react-toastify";
-import { BsPerson } from "react-icons/bs";
 import { baseurl } from "@/modules/apiurl";
 import { saveAs } from "file-saver";
 import { downloadImage } from "@/modules/data/dash_service";
 import ShareDialog from "@/modules/organization/ShareDialog";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 export default function BranchDetails() {
   const data = useSearchParams();
@@ -95,7 +100,7 @@ export default function BranchDetails() {
 
                 <div className=" ">
                   <div className="flex gap-2 items-center">
-                    <CiMail className="text-xl text-[#898989] " />
+                    <CiMailIcon className="text-xl text-[#898989] " />
                     <p className="font-bold text-base font-inter text-[#898989] w-[120px]">
                       Email Address:
                     </p>
@@ -122,7 +127,7 @@ export default function BranchDetails() {
                   text="District"
                 />
                 <div className="flex gap-2 items-center">
-                  <MdLocationOn className="text-xl text-[#898989] " />
+                  <MdLocationOnIcon className="text-xl text-[#898989] " />
                   <p className="font-bold text-base font-inter text-[#898989] w-[270px]">
                     Municipality / Rural Municipality:
                   </p>
@@ -147,8 +152,8 @@ export default function BranchDetails() {
 
           <div className="lg:w-[28%]">
             <div className=" w-full shadow-lg bg-white rounded-lg h-[599px] flex items-center justify-center flex-col p-4">
-              <EpassLogo style={{ width: "100px", height: "100px" }} />
-              <div className=" text-center   border-[#197abe] w-[240px] mt-9 h-[302px] border-[8px] rounded-2xl p-4  ">
+              <NGtryLogo style={{ width: "100px", height: "100px" }} />
+              <div className=" text-center   border-ngtryprimary w-[240px] mt-9 h-[302px] border-[8px] rounded-2xl p-4  ">
                 <p className=" font-bold  text-black text-2xl font-inter">
                   Scan the QR
                 </p>
@@ -185,7 +190,7 @@ export default function BranchDetails() {
                     downloadImage(`${baseurl}${getbranchdetail.qr_image}`);
                   }}
                 >
-                  Download QR <GoDownload className="text-2xl" />
+                  Download QR <GoDownloadIcon className="text-2xl" />
                 </button>
                 <button
                   className="bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[148px] h-[48px] text-primaryblue"
@@ -194,7 +199,7 @@ export default function BranchDetails() {
                   }}
                   //   onClick={()=>{downloadImage({imageUrl:`https://api.epass.com.np${user?.qr}`})}}
                 >
-                  Share QR <CiShare2 className="text-2xl" />
+                  Share QR <CiShare2Icon className="text-2xl" />
                 </button>
               </div>
             </div>

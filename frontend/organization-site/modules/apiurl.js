@@ -1,4 +1,4 @@
-export const baseurl = "http://localhost:8002";
+export const baseurl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8002";
 
 export const allorgbranchesurl = "/organization/branches/";
 export const getVisitorUrl = "/visitor";

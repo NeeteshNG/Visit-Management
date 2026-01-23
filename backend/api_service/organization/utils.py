@@ -64,11 +64,13 @@ def send_notification(user, notification_data):
             )
 
     try:
+        import os
         recipient_email = user.email
+        from_email = os.getenv('EMAIL_FROM', 'noreply@ngtry.com')
         send_mail(
             notification_data["title"],
             notification_data["message"],
-            "noreply.epassnepal@gmail.com",
+            from_email,
             [recipient_email],
             fail_silently=False,
         )

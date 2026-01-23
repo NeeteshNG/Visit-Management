@@ -1,1015 +1,628 @@
+/**
+ * Global Address Data Structure
+ * Supports multiple countries with their administrative divisions
+ *
+ * Structure: Country → State/Province → District/County → City/Municipality
+ */
+
+// ============================================
+// STATES/PROVINCES BY COUNTRY
+// ============================================
+
+export const states = {
+  // INDIA - 28 States + 8 Union Territories
+  'india': [
+    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+    'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
+    'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
+    'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
+    'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
+    'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+    // Union Territories
+    'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu',
+    'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'
+  ],
+
+  // NEPAL - 7 Provinces
+  'nepal': [
+    'Province 1', 'Province 2', 'Bagmati', 'Gandaki', 'Lumbini', 'Karnali', 'Sudur Paschim'
+  ],
+
+  // UNITED STATES - 50 States + DC
+  'united_states': [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
+    'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
+    'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
+    'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+    'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+    'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
+    'Wisconsin', 'Wyoming', 'District of Columbia'
+  ],
+
+  // UNITED KINGDOM - 4 Countries
+  'united_kingdom': [
+    'England', 'Scotland', 'Wales', 'Northern Ireland'
+  ],
+
+  // CANADA - 13 Provinces and Territories
+  'canada': [
+    'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador',
+    'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island',
+    'Quebec', 'Saskatchewan', 'Yukon'
+  ],
+
+  // AUSTRALIA - 6 States + 2 Territories
+  'australia': [
+    'New South Wales', 'Victoria', 'Queensland', 'Western Australia', 'South Australia',
+    'Tasmania', 'Australian Capital Territory', 'Northern Territory'
+  ],
+
+  // UAE - 7 Emirates
+  'uae': [
+    'Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'Umm Al Quwain', 'Ras Al Khaimah', 'Fujairah'
+  ],
+
+  // SINGAPORE - Planning Areas
+  'singapore': [
+    'Central Region', 'East Region', 'North Region', 'North-East Region', 'West Region'
+  ],
+
+  // BANGLADESH - 8 Divisions
+  'bangladesh': [
+    'Barishal', 'Chattogram', 'Dhaka', 'Khulna', 'Mymensingh', 'Rajshahi', 'Rangpur', 'Sylhet'
+  ],
+
+  // PAKISTAN - 4 Provinces + Territories
+  'pakistan': [
+    'Balochistan', 'Khyber Pakhtunkhwa', 'Punjab', 'Sindh',
+    'Azad Kashmir', 'Gilgit-Baltistan', 'Islamabad Capital Territory'
+  ],
+
+  // SRI LANKA - 9 Provinces
+  'sri_lanka': [
+    'Central', 'Eastern', 'North Central', 'Northern', 'North Western',
+    'Sabaragamuwa', 'Southern', 'Uva', 'Western'
+  ],
+
+  // GERMANY - 16 States
+  'germany': [
+    'Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hesse',
+    'Lower Saxony', 'Mecklenburg-Vorpommern', 'North Rhine-Westphalia', 'Rhineland-Palatinate',
+    'Saarland', 'Saxony', 'Saxony-Anhalt', 'Schleswig-Holstein', 'Thuringia'
+  ],
+
+  // FRANCE - 18 Regions
+  'france': [
+    'Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté', 'Brittany', 'Centre-Val de Loire',
+    'Corsica', 'Grand Est', 'Hauts-de-France', 'Île-de-France', 'Normandy',
+    'Nouvelle-Aquitaine', 'Occitanie', 'Pays de la Loire', 'Provence-Alpes-Côte d\'Azur'
+  ],
+
+  // JAPAN - 47 Prefectures (Major Regions)
+  'japan': [
+    'Hokkaido', 'Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima',
+    'Ibaraki', 'Tochigi', 'Gunma', 'Saitama', 'Chiba', 'Tokyo', 'Kanagawa',
+    'Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', 'Gifu',
+    'Shizuoka', 'Aichi', 'Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyogo', 'Nara',
+    'Wakayama', 'Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi',
+    'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka', 'Saga', 'Nagasaki',
+    'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa'
+  ],
+
+  // CHINA - 23 Provinces + 5 Autonomous Regions + 4 Municipalities
+  'china': [
+    'Anhui', 'Beijing', 'Chongqing', 'Fujian', 'Gansu', 'Guangdong', 'Guangxi',
+    'Guizhou', 'Hainan', 'Hebei', 'Heilongjiang', 'Henan', 'Hubei', 'Hunan',
+    'Inner Mongolia', 'Jiangsu', 'Jiangxi', 'Jilin', 'Liaoning', 'Ningxia',
+    'Qinghai', 'Shaanxi', 'Shandong', 'Shanghai', 'Shanxi', 'Sichuan', 'Tianjin',
+    'Tibet', 'Xinjiang', 'Yunnan', 'Zhejiang'
+  ],
+
+  // SOUTH AFRICA - 9 Provinces
+  'south_africa': [
+    'Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo',
+    'Mpumalanga', 'North West', 'Northern Cape', 'Western Cape'
+  ],
+
+  // BRAZIL - 26 States + 1 Federal District
+  'brazil': [
+    'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal',
+    'Espírito Santo', 'Goiás', 'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul',
+    'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí',
+    'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia',
+    'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
+  ],
+
+  // MEXICO - 32 States
+  'mexico': [
+    'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas',
+    'Chihuahua', 'Ciudad de México', 'Coahuila', 'Colima', 'Durango', 'Guanajuato',
+    'Guerrero', 'Hidalgo', 'Jalisco', 'México', 'Michoacán', 'Morelos', 'Nayarit',
+    'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí',
+    'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+  ],
+
+  // RUSSIA - Federal Districts (simplified)
+  'russia': [
+    'Central Federal District', 'Northwestern Federal District', 'Southern Federal District',
+    'North Caucasian Federal District', 'Volga Federal District', 'Ural Federal District',
+    'Siberian Federal District', 'Far Eastern Federal District'
+  ],
+
+  // SAUDI ARABIA - 13 Regions
+  'saudi_arabia': [
+    'Riyadh', 'Makkah', 'Madinah', 'Eastern Province', 'Asir', 'Tabuk', 'Hail',
+    'Northern Borders', 'Jazan', 'Najran', 'Al Bahah', 'Al Jawf', 'Qassim'
+  ],
+
+  // MALAYSIA - 13 States + 3 Federal Territories
+  'malaysia': [
+    'Johor', 'Kedah', 'Kelantan', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Perak',
+    'Perlis', 'Penang', 'Sabah', 'Sarawak', 'Selangor', 'Terengganu',
+    'Kuala Lumpur', 'Labuan', 'Putrajaya'
+  ],
+
+  // THAILAND - 77 Provinces (Major regions)
+  'thailand': [
+    'Bangkok', 'Central Thailand', 'Eastern Thailand', 'Northern Thailand',
+    'Northeastern Thailand', 'Southern Thailand', 'Western Thailand'
+  ],
+
+  // INDONESIA - 34 Provinces
+  'indonesia': [
+    'Aceh', 'Bali', 'Banten', 'Bengkulu', 'Central Java', 'Central Kalimantan',
+    'Central Sulawesi', 'East Java', 'East Kalimantan', 'East Nusa Tenggara',
+    'Gorontalo', 'Jakarta', 'Jambi', 'Lampung', 'Maluku', 'North Kalimantan',
+    'North Maluku', 'North Sulawesi', 'North Sumatra', 'Papua', 'Riau',
+    'Riau Islands', 'South Kalimantan', 'South Sulawesi', 'South Sumatra',
+    'Southeast Sulawesi', 'West Java', 'West Kalimantan', 'West Nusa Tenggara',
+    'West Papua', 'West Sulawesi', 'West Sumatra', 'Yogyakarta'
+  ],
+
+  // PHILIPPINES - 17 Regions
+  'philippines': [
+    'Ilocos Region', 'Cagayan Valley', 'Central Luzon', 'CALABARZON', 'MIMAROPA',
+    'Bicol Region', 'Western Visayas', 'Central Visayas', 'Eastern Visayas',
+    'Zamboanga Peninsula', 'Northern Mindanao', 'Davao Region', 'SOCCSKSARGEN',
+    'Caraga', 'NCR', 'CAR', 'BARMM'
+  ],
+
+  // NIGERIA - 36 States + FCT
+  'nigeria': [
+    'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue', 'Borno',
+    'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT Abuja', 'Gombe',
+    'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi', 'Kwara', 'Lagos',
+    'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo', 'Plateau', 'Rivers', 'Sokoto',
+    'Taraba', 'Yobe', 'Zamfara'
+  ],
+
+  // EGYPT - 27 Governorates
+  'egypt': [
+    'Alexandria', 'Aswan', 'Asyut', 'Beheira', 'Beni Suef', 'Cairo', 'Dakahlia',
+    'Damietta', 'Faiyum', 'Gharbia', 'Giza', 'Ismailia', 'Kafr El Sheikh', 'Luxor',
+    'Matruh', 'Minya', 'Monufia', 'New Valley', 'North Sinai', 'Port Said', 'Qalyubia',
+    'Qena', 'Red Sea', 'Sharqia', 'Sohag', 'South Sinai', 'Suez'
+  ],
+
+  // TURKEY - 81 Provinces (Major regions)
+  'turkey': [
+    'Marmara Region', 'Central Anatolia', 'Aegean Region', 'Mediterranean Region',
+    'Black Sea Region', 'Eastern Anatolia', 'Southeastern Anatolia'
+  ],
+
+  // SOUTH KOREA - 17 Divisions
+  'south_korea': [
+    'Seoul', 'Busan', 'Incheon', 'Daegu', 'Daejeon', 'Gwangju', 'Ulsan', 'Sejong',
+    'Gyeonggi', 'Gangwon', 'North Chungcheong', 'South Chungcheong', 'North Jeolla',
+    'South Jeolla', 'North Gyeongsang', 'South Gyeongsang', 'Jeju'
+  ],
+
+  // ITALY - 20 Regions
+  'italy': [
+    'Abruzzo', 'Aosta Valley', 'Apulia', 'Basilicata', 'Calabria', 'Campania',
+    'Emilia-Romagna', 'Friuli Venezia Giulia', 'Lazio', 'Liguria', 'Lombardy',
+    'Marche', 'Molise', 'Piedmont', 'Sardinia', 'Sicily', 'Trentino-South Tyrol',
+    'Tuscany', 'Umbria', 'Veneto'
+  ],
+
+  // SPAIN - 17 Autonomous Communities
+  'spain': [
+    'Andalusia', 'Aragon', 'Asturias', 'Balearic Islands', 'Basque Country',
+    'Canary Islands', 'Cantabria', 'Castile and León', 'Castilla-La Mancha',
+    'Catalonia', 'Extremadura', 'Galicia', 'La Rioja', 'Madrid', 'Murcia',
+    'Navarre', 'Valencian Community'
+  ],
+
+  // NETHERLANDS - 12 Provinces
+  'netherlands': [
+    'Drenthe', 'Flevoland', 'Friesland', 'Gelderland', 'Groningen', 'Limburg',
+    'North Brabant', 'North Holland', 'Overijssel', 'South Holland', 'Utrecht', 'Zeeland'
+  ],
+
+  // SWITZERLAND - 26 Cantons
+  'switzerland': [
+    'Aargau', 'Appenzell Ausserrhoden', 'Appenzell Innerrhoden', 'Basel-Landschaft',
+    'Basel-Stadt', 'Bern', 'Fribourg', 'Geneva', 'Glarus', 'Graubünden', 'Jura',
+    'Lucerne', 'Neuchâtel', 'Nidwalden', 'Obwalden', 'Schaffhausen', 'Schwyz',
+    'Solothurn', 'St. Gallen', 'Thurgau', 'Ticino', 'Uri', 'Valais', 'Vaud',
+    'Zug', 'Zürich'
+  ],
+
+  // VIETNAM - 63 Provinces
+  'vietnam': [
+    'An Giang', 'Ba Ria-Vung Tau', 'Bac Giang', 'Bac Kan', 'Bac Lieu', 'Bac Ninh',
+    'Ben Tre', 'Binh Dinh', 'Binh Duong', 'Binh Phuoc', 'Binh Thuan', 'Ca Mau',
+    'Can Tho', 'Cao Bang', 'Da Nang', 'Dak Lak', 'Dak Nong', 'Dien Bien', 'Dong Nai',
+    'Dong Thap', 'Gia Lai', 'Ha Giang', 'Ha Nam', 'Ha Noi', 'Ha Tinh', 'Hai Duong',
+    'Hai Phong', 'Hau Giang', 'Ho Chi Minh City', 'Hoa Binh', 'Hung Yen', 'Khanh Hoa',
+    'Kien Giang', 'Kon Tum', 'Lai Chau', 'Lam Dong', 'Lang Son', 'Lao Cai', 'Long An',
+    'Nam Dinh', 'Nghe An', 'Ninh Binh', 'Ninh Thuan', 'Phu Tho', 'Phu Yen', 'Quang Binh',
+    'Quang Nam', 'Quang Ngai', 'Quang Ninh', 'Quang Tri', 'Soc Trang', 'Son La',
+    'Tay Ninh', 'Thai Binh', 'Thai Nguyen', 'Thanh Hoa', 'Thua Thien Hue', 'Tien Giang',
+    'Tra Vinh', 'Tuyen Quang', 'Vinh Long', 'Vinh Phuc', 'Yen Bai'
+  ],
+
+  // KENYA - 47 Counties
+  'kenya': [
+    'Baringo', 'Bomet', 'Bungoma', 'Busia', 'Elgeyo-Marakwet', 'Embu', 'Garissa',
+    'Homa Bay', 'Isiolo', 'Kajiado', 'Kakamega', 'Kericho', 'Kiambu', 'Kilifi',
+    'Kirinyaga', 'Kisii', 'Kisumu', 'Kitui', 'Kwale', 'Laikipia', 'Lamu', 'Machakos',
+    'Makueni', 'Mandera', 'Marsabit', 'Meru', 'Migori', 'Mombasa', 'Murang\'a',
+    'Nairobi', 'Nakuru', 'Nandi', 'Narok', 'Nyamira', 'Nyandarua', 'Nyeri', 'Samburu',
+    'Siaya', 'Taita-Taveta', 'Tana River', 'Tharaka-Nithi', 'Trans Nzoia', 'Turkana',
+    'Uasin Gishu', 'Vihiga', 'Wajir', 'West Pokot'
+  ],
+};
+
+// ============================================
+// DISTRICTS BY STATE (Major Countries)
+// ============================================
+
+export const districts = {
+  // INDIA - Districts by State
+  // Maharashtra
+  'Maharashtra': [
+    'Mumbai City', 'Mumbai Suburban', 'Thane', 'Palghar', 'Raigad', 'Ratnagiri', 'Sindhudurg',
+    'Nashik', 'Dhule', 'Nandurbar', 'Jalgaon', 'Ahmednagar', 'Pune', 'Solapur', 'Satara',
+    'Sangli', 'Kolhapur', 'Aurangabad', 'Jalna', 'Beed', 'Latur', 'Osmanabad', 'Nanded',
+    'Parbhani', 'Hingoli', 'Akola', 'Washim', 'Amravati', 'Buldhana', 'Yavatmal', 'Nagpur',
+    'Wardha', 'Bhandara', 'Gondia', 'Chandrapur', 'Gadchiroli'
+  ],
+
+  // Karnataka
+  'Karnataka': [
+    'Bagalkot', 'Ballari', 'Belagavi', 'Bengaluru Rural', 'Bengaluru Urban', 'Bidar',
+    'Chamarajanagar', 'Chikkaballapur', 'Chikkamagaluru', 'Chitradurga', 'Dakshina Kannada',
+    'Davanagere', 'Dharwad', 'Gadag', 'Hassan', 'Haveri', 'Kalaburagi', 'Kodagu', 'Kolar',
+    'Koppal', 'Mandya', 'Mysuru', 'Raichur', 'Ramanagara', 'Shivamogga', 'Tumakuru',
+    'Udupi', 'Uttara Kannada', 'Vijayapura', 'Yadgir'
+  ],
+
+  // Tamil Nadu
+  'Tamil Nadu': [
+    'Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore', 'Dharmapuri', 'Dindigul',
+    'Erode', 'Kallakurichi', 'Kanchipuram', 'Kanyakumari', 'Karur', 'Krishnagiri', 'Madurai',
+    'Mayiladuthurai', 'Nagapattinam', 'Namakkal', 'Nilgiris', 'Perambalur', 'Pudukkottai',
+    'Ramanathapuram', 'Ranipet', 'Salem', 'Sivaganga', 'Tenkasi', 'Thanjavur', 'Theni',
+    'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupathur', 'Tiruppur', 'Tiruvallur',
+    'Tiruvannamalai', 'Tiruvarur', 'Vellore', 'Viluppuram', 'Virudhunagar'
+  ],
+
+  // Gujarat
+  'Gujarat': [
+    'Ahmedabad', 'Amreli', 'Anand', 'Aravalli', 'Banaskantha', 'Bharuch', 'Bhavnagar',
+    'Botad', 'Chhota Udaipur', 'Dahod', 'Dang', 'Devbhoomi Dwarka', 'Gandhinagar', 'Gir Somnath',
+    'Jamnagar', 'Junagadh', 'Kheda', 'Kutch', 'Mahisagar', 'Mehsana', 'Morbi', 'Narmada',
+    'Navsari', 'Panchmahal', 'Patan', 'Porbandar', 'Rajkot', 'Sabarkantha', 'Surat',
+    'Surendranagar', 'Tapi', 'Vadodara', 'Valsad'
+  ],
+
+  // Rajasthan
+  'Rajasthan': [
+    'Ajmer', 'Alwar', 'Banswara', 'Baran', 'Barmer', 'Bharatpur', 'Bhilwara', 'Bikaner',
+    'Bundi', 'Chittorgarh', 'Churu', 'Dausa', 'Dholpur', 'Dungarpur', 'Hanumangarh', 'Jaipur',
+    'Jaisalmer', 'Jalore', 'Jhalawar', 'Jhunjhunu', 'Jodhpur', 'Karauli', 'Kota', 'Nagaur',
+    'Pali', 'Pratapgarh', 'Rajsamand', 'Sawai Madhopur', 'Sikar', 'Sirohi', 'Sri Ganganagar',
+    'Tonk', 'Udaipur'
+  ],
+
+  // Kerala
+  'Kerala': [
+    'Alappuzha', 'Ernakulam', 'Idukki', 'Kannur', 'Kasaragod', 'Kollam', 'Kottayam',
+    'Kozhikode', 'Malappuram', 'Palakkad', 'Pathanamthitta', 'Thiruvananthapuram',
+    'Thrissur', 'Wayanad'
+  ],
+
+  // Delhi
+  'Delhi': [
+    'Central Delhi', 'East Delhi', 'New Delhi', 'North Delhi', 'North East Delhi',
+    'North West Delhi', 'Shahdara', 'South Delhi', 'South East Delhi', 'South West Delhi', 'West Delhi'
+  ],
+
+  // Uttar Pradesh
+  'Uttar Pradesh': [
+    'Agra', 'Aligarh', 'Allahabad', 'Ambedkar Nagar', 'Amethi', 'Amroha', 'Auraiya',
+    'Azamgarh', 'Baghpat', 'Bahraich', 'Ballia', 'Balrampur', 'Banda', 'Barabanki',
+    'Bareilly', 'Basti', 'Bhadohi', 'Bijnor', 'Budaun', 'Bulandshahr', 'Chandauli',
+    'Chitrakoot', 'Deoria', 'Etah', 'Etawah', 'Faizabad', 'Farrukhabad', 'Fatehpur',
+    'Firozabad', 'Gautam Buddha Nagar', 'Ghaziabad', 'Ghazipur', 'Gonda', 'Gorakhpur',
+    'Hamirpur', 'Hapur', 'Hardoi', 'Hathras', 'Jalaun', 'Jaunpur', 'Jhansi', 'Kannauj',
+    'Kanpur Dehat', 'Kanpur Nagar', 'Kasganj', 'Kaushambi', 'Kushinagar', 'Lakhimpur Kheri',
+    'Lalitpur', 'Lucknow', 'Maharajganj', 'Mahoba', 'Mainpuri', 'Mathura', 'Mau',
+    'Meerut', 'Mirzapur', 'Moradabad', 'Muzaffarnagar', 'Pilibhit', 'Pratapgarh',
+    'Rae Bareli', 'Rampur', 'Saharanpur', 'Sambhal', 'Sant Kabir Nagar', 'Shahjahanpur',
+    'Shamli', 'Shravasti', 'Siddharthnagar', 'Sitapur', 'Sonbhadra', 'Sultanpur',
+    'Unnao', 'Varanasi'
+  ],
+
+  // West Bengal
+  'West Bengal': [
+    'Alipurduar', 'Bankura', 'Birbhum', 'Cooch Behar', 'Dakshin Dinajpur', 'Darjeeling',
+    'Hooghly', 'Howrah', 'Jalpaiguri', 'Jhargram', 'Kalimpong', 'Kolkata', 'Malda',
+    'Murshidabad', 'Nadia', 'North 24 Parganas', 'Paschim Bardhaman', 'Paschim Medinipur',
+    'Purba Bardhaman', 'Purba Medinipur', 'Purulia', 'South 24 Parganas', 'Uttar Dinajpur'
+  ],
+
+  // Telangana
+  'Telangana': [
+    'Adilabad', 'Bhadradri Kothagudem', 'Hyderabad', 'Jagtial', 'Jangaon', 'Jayashankar Bhupalpally',
+    'Jogulamba Gadwal', 'Kamareddy', 'Karimnagar', 'Khammam', 'Komaram Bheem', 'Mahabubabad',
+    'Mahabubnagar', 'Mancherial', 'Medak', 'Medchal-Malkajgiri', 'Mulugu', 'Nagarkurnool',
+    'Nalgonda', 'Narayanpet', 'Nirmal', 'Nizamabad', 'Peddapalli', 'Rajanna Sircilla',
+    'Rangareddy', 'Sangareddy', 'Siddipet', 'Suryapet', 'Vikarabad', 'Wanaparthy',
+    'Warangal Rural', 'Warangal Urban', 'Yadadri Bhuvanagiri'
+  ],
+
+  // Andhra Pradesh
+  'Andhra Pradesh': [
+    'Anantapur', 'Chittoor', 'East Godavari', 'Guntur', 'Kadapa', 'Krishna', 'Kurnool',
+    'Nellore', 'Prakasam', 'Srikakulam', 'Visakhapatnam', 'Vizianagaram', 'West Godavari'
+  ],
+
+  // Bihar
+  'Bihar': [
+    'Araria', 'Arwal', 'Aurangabad', 'Banka', 'Begusarai', 'Bhagalpur', 'Bhojpur', 'Buxar',
+    'Darbhanga', 'East Champaran', 'Gaya', 'Gopalganj', 'Jamui', 'Jehanabad', 'Kaimur',
+    'Katihar', 'Khagaria', 'Kishanganj', 'Lakhisarai', 'Madhepura', 'Madhubani', 'Munger',
+    'Muzaffarpur', 'Nalanda', 'Nawada', 'Patna', 'Purnia', 'Rohtas', 'Saharsa', 'Samastipur',
+    'Saran', 'Sheikhpura', 'Sheohar', 'Sitamarhi', 'Siwan', 'Supaul', 'Vaishali', 'West Champaran'
+  ],
+
+  // Madhya Pradesh
+  'Madhya Pradesh': [
+    'Agar Malwa', 'Alirajpur', 'Anuppur', 'Ashoknagar', 'Balaghat', 'Barwani', 'Betul',
+    'Bhind', 'Bhopal', 'Burhanpur', 'Chhatarpur', 'Chhindwara', 'Damoh', 'Datia', 'Dewas',
+    'Dhar', 'Dindori', 'Guna', 'Gwalior', 'Harda', 'Hoshangabad', 'Indore', 'Jabalpur',
+    'Jhabua', 'Katni', 'Khandwa', 'Khargone', 'Mandla', 'Mandsaur', 'Morena', 'Narsinghpur',
+    'Neemuch', 'Panna', 'Raisen', 'Rajgarh', 'Ratlam', 'Rewa', 'Sagar', 'Satna', 'Sehore',
+    'Seoni', 'Shahdol', 'Shajapur', 'Sheopur', 'Shivpuri', 'Sidhi', 'Singrauli', 'Tikamgarh',
+    'Ujjain', 'Umaria', 'Vidisha'
+  ],
+
+  // Punjab
+  'Punjab': [
+    'Amritsar', 'Barnala', 'Bathinda', 'Faridkot', 'Fatehgarh Sahib', 'Fazilka', 'Ferozepur',
+    'Gurdaspur', 'Hoshiarpur', 'Jalandhar', 'Kapurthala', 'Ludhiana', 'Mansa', 'Moga',
+    'Pathankot', 'Patiala', 'Rupnagar', 'Sangrur', 'SAS Nagar', 'SBS Nagar', 'Sri Muktsar Sahib', 'Tarn Taran'
+  ],
+
+  // Haryana
+  'Haryana': [
+    'Ambala', 'Bhiwani', 'Charkhi Dadri', 'Faridabad', 'Fatehabad', 'Gurugram', 'Hisar',
+    'Jhajjar', 'Jind', 'Kaithal', 'Karnal', 'Kurukshetra', 'Mahendragarh', 'Nuh', 'Palwal',
+    'Panchkula', 'Panipat', 'Rewari', 'Rohtak', 'Sirsa', 'Sonipat', 'Yamunanagar'
+  ],
+
+  // NEPAL - Districts by Province
+  'Province 1': [
+    'Bhojpur', 'Dhankuta', 'Ilam', 'Jhapa', 'Khotang', 'Morang', 'Okhaldhunga',
+    'Panchthar', 'Sankhuwasabha', 'Solukhumbu', 'Sunsari', 'Taplejung', 'Terhathum', 'Udayapur'
+  ],
+  'Province 2': [
+    'Bara', 'Dhanusa', 'Mahottari', 'Parsa', 'Rautahat', 'Saptari', 'Sarlahi', 'Siraha'
+  ],
+  'Bagmati': [
+    'Bhaktapur', 'Chitwan', 'Dhading', 'Dolakha', 'Kathmandu', 'Kavrepalanchok', 'Lalitpur',
+    'Makawanpur', 'Nuwakot', 'Ramechhap', 'Rasuwa', 'Sindhuli', 'Sindhupalchok'
+  ],
+  'Gandaki': [
+    'Baglung', 'Gorkha', 'Kaski', 'Lamjung', 'Manang', 'Mustang', 'Myagdi',
+    'Nawalparasi East', 'Parbat', 'Syangja', 'Tanahu'
+  ],
+  'Lumbini': [
+    'Arghakhanchi', 'Banke', 'Bardiya', 'Dang', 'Gulmi', 'Kapilvastu', 'Nawalparasi West',
+    'Palpa', 'Pyuthan', 'Rolpa', 'Rukum East', 'Rupandehi'
+  ],
+  'Karnali': [
+    'Dailekh', 'Dolpa', 'Humla', 'Jajarkot', 'Jumla', 'Kalikot', 'Mugu', 'Rukum West', 'Salyan', 'Surkhet'
+  ],
+  'Sudur Paschim': [
+    'Achham', 'Baitadi', 'Bajhang', 'Bajura', 'Dadeldhura', 'Darchula', 'Doti', 'Kailali', 'Kanchanpur'
+  ],
+
+  // UK - Counties/Areas by Country
+  'England': [
+    'Greater London', 'West Midlands', 'Greater Manchester', 'West Yorkshire', 'Merseyside',
+    'South Yorkshire', 'Tyne and Wear', 'Hampshire', 'Kent', 'Essex', 'Lancashire',
+    'Surrey', 'Hertfordshire', 'Norfolk', 'Devon', 'Oxfordshire', 'Cambridgeshire',
+    'Suffolk', 'Somerset', 'Nottinghamshire', 'Derbyshire', 'Leicestershire', 'Warwickshire'
+  ],
+  'Scotland': [
+    'Glasgow', 'Edinburgh', 'Aberdeen', 'Dundee', 'Highlands', 'Fife', 'South Lanarkshire',
+    'North Lanarkshire', 'Aberdeenshire', 'Perth and Kinross'
+  ],
+  'Wales': [
+    'Cardiff', 'Swansea', 'Newport', 'Rhondda Cynon Taf', 'Caerphilly', 'Flintshire',
+    'Carmarthenshire', 'Gwynedd', 'Pembrokeshire', 'Wrexham'
+  ],
+  'Northern Ireland': [
+    'Belfast', 'Derry and Strabane', 'Armagh', 'Newry', 'Lisburn', 'Antrim', 'Down', 'Tyrone', 'Fermanagh'
+  ],
+
+  // UAE - Areas by Emirate
+  'Dubai': [
+    'Bur Dubai', 'Deira', 'Downtown Dubai', 'Dubai Marina', 'Jumeirah', 'Business Bay',
+    'Palm Jumeirah', 'Dubai Silicon Oasis', 'Al Barsha', 'Jebel Ali', 'Al Quoz'
+  ],
+  'Abu Dhabi': [
+    'Abu Dhabi City', 'Al Ain', 'Al Dhafra', 'Yas Island', 'Saadiyat Island', 'Reem Island',
+    'Khalifa City', 'Mohammed Bin Zayed City', 'Masdar City'
+  ],
+  'Sharjah': [
+    'Sharjah City', 'Al Majaz', 'Al Nahda', 'Al Qasimia', 'Al Khan', 'Muwaileh'
+  ],
+
+  // Singapore - Towns by Region
+  'Central Region': [
+    'Bishan', 'Bukit Merah', 'Bukit Timah', 'Downtown Core', 'Geylang', 'Kallang',
+    'Marina East', 'Marina South', 'Marine Parade', 'Museum', 'Newton', 'Novena',
+    'Orchard', 'Outram', 'Queenstown', 'River Valley', 'Rochor', 'Singapore River',
+    'Southern Islands', 'Tanglin', 'Toa Payoh'
+  ],
+  'East Region': [
+    'Bedok', 'Changi', 'Changi Bay', 'Pasir Ris', 'Paya Lebar', 'Tampines'
+  ],
+  'North Region': [
+    'Central Water Catchment', 'Lim Chu Kang', 'Mandai', 'Sembawang', 'Simpang',
+    'Sungei Kadut', 'Woodlands', 'Yishun'
+  ],
+  'North-East Region': [
+    'Ang Mo Kio', 'Hougang', 'North-Eastern Islands', 'Punggol', 'Seletar', 'Sengkang', 'Serangoon'
+  ],
+  'West Region': [
+    'Boon Lay', 'Bukit Batok', 'Bukit Panjang', 'Choa Chu Kang', 'Clementi', 'Jurong East',
+    'Jurong West', 'Pioneer', 'Tengah', 'Tuas', 'Western Islands', 'Western Water Catchment'
+  ],
+};
+
+// ============================================
+// CITIES BY DISTRICT (Major Cities)
+// ============================================
+
+export const cities = {
+  // India - Maharashtra
+  'Mumbai City': ['Colaba', 'Fort', 'Marine Lines', 'Churchgate', 'Nariman Point', 'Cuffe Parade'],
+  'Mumbai Suburban': ['Andheri', 'Bandra', 'Borivali', 'Goregaon', 'Kandivali', 'Malad', 'Mulund', 'Powai', 'Vikhroli'],
+  'Thane': ['Thane City', 'Kalyan', 'Dombivli', 'Ulhasnagar', 'Bhiwandi', 'Mira-Bhayandar', 'Ambernath'],
+  'Pune': ['Pune City', 'Pimpri-Chinchwad', 'Hadapsar', 'Kothrud', 'Wakad', 'Hinjewadi', 'Baner', 'Viman Nagar'],
+  'Nagpur': ['Nagpur City', 'Kamptee', 'Hingna', 'Koradi', 'Butibori'],
+
+  // India - Karnataka
+  'Bengaluru Urban': ['Whitefield', 'Electronic City', 'Koramangala', 'Indiranagar', 'Jayanagar', 'BTM Layout', 'HSR Layout', 'Marathahalli', 'Yelahanka', 'Bannerghatta'],
+  'Mysuru': ['Mysuru City', 'Nanjangud', 'Hunsur', 'Periyapatna'],
+
+  // India - Tamil Nadu
+  'Chennai': ['T. Nagar', 'Adyar', 'Anna Nagar', 'Velachery', 'OMR', 'Porur', 'Guindy', 'Tambaram', 'Ambattur'],
+  'Coimbatore': ['Coimbatore City', 'Gandhipuram', 'RS Puram', 'Peelamedu', 'Saibaba Colony'],
+
+  // India - Gujarat
+  'Ahmedabad': ['Ahmedabad City', 'Maninagar', 'Satellite', 'Vastrapur', 'Navrangpura', 'Bodakdev', 'SG Highway'],
+  'Surat': ['Surat City', 'Adajan', 'Vesu', 'Athwa', 'Varachha'],
+
+  // India - Delhi
+  'Central Delhi': ['Connaught Place', 'Karol Bagh', 'Paharganj', 'Chandni Chowk'],
+  'South Delhi': ['Greater Kailash', 'Saket', 'Hauz Khas', 'Vasant Kunj', 'Mehrauli'],
+  'New Delhi': ['NDMC Area', 'Chanakyapuri', 'Lodhi Colony'],
+
+  // Nepal - Bagmati
+  'Kathmandu': ['Kathmandu Metropolitan City', 'Kirtipur', 'Budhanilkantha', 'Tokha', 'Chandragiri', 'Dakshinkali', 'Nagarjun', 'Kageshwori Manohara', 'Gokarneshwor', 'Shankharapur', 'Tarakeshwor'],
+  'Lalitpur': ['Lalitpur Metropolitan City', 'Godawari', 'Mahalaxmi', 'Konjyosom', 'Bagmati'],
+  'Bhaktapur': ['Bhaktapur Municipality', 'Madhyapur Thimi', 'Suryabinayak', 'Changunarayan'],
+};
+
+// ============================================
+// LEGACY SUPPORT - Province/Municipality mappings
+// ============================================
+
+// For backward compatibility with existing code that uses 'province' for states
 export const province = {
-    'Nepal': [
-      'Province 1',
-      'Province 2',
-      'Bagmati',
-      'Gandaki',
-      'Lumbini',
-      'Karnali',
-      'Sudur Paschim',
-    ]
+  'Nepal': states['nepal'],
+  'India': states['india'],
+  // Add other country mappings as needed
+};
+
+// For backward compatibility
+export const municipalites = cities;
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+
+/**
+ * Get states/provinces for a country
+ */
+export const getStatesForCountry = (countryValue) => {
+  const normalizedCountry = countryValue?.toLowerCase().replace(/\s+/g, '_');
+  return states[normalizedCountry] || [];
+};
+
+/**
+ * Get districts for a state
+ */
+export const getDistrictsForState = (stateName) => {
+  return districts[stateName] || [];
+};
+
+/**
+ * Get cities for a district
+ */
+export const getCitiesForDistrict = (districtName) => {
+  return cities[districtName] || [];
+};
+
+/**
+ * Get address hierarchy labels for a country
+ */
+export const getAddressLabels = (countryValue) => {
+  const normalizedCountry = countryValue?.toLowerCase().replace(/\s+/g, '_');
+
+  const labelMappings = {
+    india: { level1: 'State', level2: 'District', level3: 'City/Town', level4: 'Area/Locality' },
+    nepal: { level1: 'Province', level2: 'District', level3: 'Municipality', level4: 'Ward No.' },
+    united_states: { level1: 'State', level2: 'County', level3: 'City', level4: 'ZIP Code' },
+    united_kingdom: { level1: 'Country', level2: 'County/Region', level3: 'City/Town', level4: 'Postcode' },
+    canada: { level1: 'Province/Territory', level2: 'Region', level3: 'City', level4: 'Postal Code' },
+    australia: { level1: 'State/Territory', level2: 'Region', level3: 'Suburb/City', level4: 'Postcode' },
+    uae: { level1: 'Emirate', level2: 'Area', level3: 'District', level4: 'Building/Street' },
+    singapore: { level1: 'Region', level2: 'Planning Area', level3: 'Town', level4: 'Postal Code' },
+    germany: { level1: 'State (Bundesland)', level2: 'District (Kreis)', level3: 'City/Town', level4: 'Postal Code' },
+    france: { level1: 'Region', level2: 'Department', level3: 'City/Commune', level4: 'Postal Code' },
+    japan: { level1: 'Prefecture', level2: 'City/District', level3: 'Ward/Town', level4: 'Postal Code' },
+    china: { level1: 'Province', level2: 'Prefecture/City', level3: 'District/County', level4: 'Street' },
+    brazil: { level1: 'State', level2: 'Municipality', level3: 'District', level4: 'CEP' },
+    south_africa: { level1: 'Province', level2: 'District', level3: 'Municipality', level4: 'Postal Code' },
+    bangladesh: { level1: 'Division', level2: 'District', level3: 'Upazila', level4: 'Union' },
+    pakistan: { level1: 'Province', level2: 'District', level3: 'Tehsil', level4: 'Union Council' },
+    sri_lanka: { level1: 'Province', level2: 'District', level3: 'Divisional Secretariat', level4: 'Grama Niladhari' },
+    malaysia: { level1: 'State', level2: 'District', level3: 'Mukim', level4: 'Town' },
+    thailand: { level1: 'Province', level2: 'District', level3: 'Sub-district', level4: 'Village' },
+    indonesia: { level1: 'Province', level2: 'Regency/City', level3: 'District', level4: 'Village' },
+    philippines: { level1: 'Region', level2: 'Province', level3: 'City/Municipality', level4: 'Barangay' },
+    vietnam: { level1: 'Province', level2: 'District', level3: 'Commune', level4: 'Village' },
+    south_korea: { level1: 'Province/City', level2: 'District', level3: 'Neighborhood', level4: 'Postal Code' },
+    nigeria: { level1: 'State', level2: 'Local Government', level3: 'Town', level4: 'Street' },
+    egypt: { level1: 'Governorate', level2: 'Markaz', level3: 'City/Village', level4: 'Street' },
+    kenya: { level1: 'County', level2: 'Sub-County', level3: 'Ward', level4: 'Location' },
+    saudi_arabia: { level1: 'Region', level2: 'Governorate', level3: 'City', level4: 'District' },
+    turkey: { level1: 'Region', level2: 'Province', level3: 'District', level4: 'Neighborhood' },
+    russia: { level1: 'Federal District', level2: 'Oblast/Republic', level3: 'City/District', level4: 'Street' },
+    mexico: { level1: 'State', level2: 'Municipality', level3: 'Locality', level4: 'Postal Code' },
+    italy: { level1: 'Region', level2: 'Province', level3: 'Municipality', level4: 'Postal Code' },
+    spain: { level1: 'Autonomous Community', level2: 'Province', level3: 'Municipality', level4: 'Postal Code' },
+    netherlands: { level1: 'Province', level2: 'Municipality', level3: 'City/Town', level4: 'Postal Code' },
+    switzerland: { level1: 'Canton', level2: 'District', level3: 'Municipality', level4: 'Postal Code' },
   };
 
- export const districts= {
-    'Province 1': [
-      'Bhojpur',
-      'Dhankuta',
-      'Ilam',
-      'Jhapa',
-      'Khotang',
-      'Morang',
-      'Okhaldhunga',
-      'Panchthar',
-      'Sankhuwasabha',
-      'Solukhumbu',
-      'Sunsari',
-      'Taplejung',
-      'Terhathum',
-      'Udayapur',
-    ],
-    'Province 2': [
-      'Bara',
-      'Dhanusa',
-      'Mahottari',
-      'Parsa',
-      'Rautahat',
-      'Saptari',
-      'Sarlahi',
-      'Siraha',
-    ],
-    'Bagmati': [
-      'Bhaktapur',
-      'Chitwan',
-      'Dhading',
-      'Dolakha',
-      'Kathmandu',
-      'Kavrepalanchok',
-      'Lalitpur',
-      'Makawanpur',
-      'Nuwakot',
-      'Ramechhap',
-      'Rasuwa',
-      'Sindhuli',
-      'Sindhupalchok',
-    ],
-    'Gandaki': [
-      'Baglung',
-      'Gorkha',
-      'Kaski',
-      'Lamjung',
-      'Manang',
-      'Mustang',
-      'Myagdi',
-      'Nawalparasi (Bardaghat Susta Purba)',
-      'Parbat',
-      'Syangja',
-      'Tanahu',
-    ],
-    'Lumbini': [
-      'Arghakhanchi',
-      'Banke',
-      'Bardiya',
-      'Dang',
-      'Gulmi',
-      'Kapilvastu',
-      'Nawalparasi (Bardaghat Susta Paschim)',
-      'Palpa',
-      'Pyuthan',
-      'Rolpa',
-      'Rukum (Purba)',
-      'Rupandehi',
-    ],
-    'Karnali': [
-      'Dailekh',
-      'Dolpa',
-      'Humla',
-      'Jajarkot',
-      'Jumla',
-      'Kalikot',
-      'Mugu',
-      'Rukum (Paschim)',
-      'Salyan',
-      'Surkhet',
-    ],
-    'Sudur Paschim': [
-      'Achham',
-      'Baitadi',
-      'Bajhang',
-      'Bajura',
-      'Dadeldhura',
-      'Darchula',
-      'Doti',
-      'Kailali',
-      'Kanchanpur',
-    ]
-  }
+  return labelMappings[normalizedCountry] || { level1: 'State/Province', level2: 'District/County', level3: 'City/Town', level4: 'Postal Code' };
+};
 
- export const municipalites = {
-    'Bhojpur': [
-      'Arun Rural Municipality',
-      'Aamchowk Rural Municipality',
-      'Hatuwagadhi Rural Municipality',
-      'Pauwadungma Rural Municipality',
-      'Temkemaiyung Rural Municipality',
-      'Salpasilichho Rural Municipality',
-      'Ramprasad Rai Rural Municipality',
-      'Shadananda Municipality',
-      'Bhojpur Municipality',
-    ],
-    'Dhankuta': [
-      'Chaubise Rural Municipality',
-      'Shahidbhumi Rural Municipality',
-      'Sangurigadhi Rural Municipality',
-      'Chhathar Jorpati Rural Municipality',
-      'Pakhribas Municipality',
-      'Mahalaxmi Municipality',
-      'Dhankuta Municipality',
-    ],
-    'Ilam': [
-      'Rong Rural Municipality',
-      'Mangsebung Rural Municipality',
-      'Chulachuli Rural Municipality',
-      'Sandakpur Rural Municipality',
-      'Fakphokthum Rural Municipality',
-      'Maijogmai Rural Municipality',
-      'Illam Municipality',
-      'Mai Municipality',
-      'Deumai Municipality',
-      'Suryodaya Municipality',
-    ],
-    'Jhapa': [
-      'Kamal Rural Municipality',
-      'Jhapa Rural Municipality',
-      'Kachankawal Rural Municipality',
-      'Gauriganj Rural Municipality',
-      'Barhadashi Rural Municipality',
-      'Haldibari Rural Municipality',
-      'Buddhashanti Rural Municipality',
-      'Shivasataxi Municipality',
-      'Bhadrapur Municipality',
-      'Kankai Municipality',
-      'Birtamod Municipality',
-      'Mechinagar Municipality',
-      'Damak Municipality',
-      'Arjundhara Municipality',
-      'Gauradhaha Municipality',
-    ],
-    'Khotang': [
-      'Sakela Rural Municipality',
-      'Khotehang Rural Municipality',
-      'Barahapokhari Rural Municipality',
-      'Ainselukhark Rural Municipality',
-      'Rawa Besi Rural Municipality',
-      'Kepilasagadhi Rural Municipality',
-      'Jantedhunga Rural Municipality',
-      'Diprung Chuichumma Rural Municipality',
-      'Halesi Tuwachung Municipality',
-      'Diktel Rupakot Majhuwagadhi Municipality',
-    ],
-    'Morang': [
-      'Jahada Rural Municipality',
-      'Katahari Rural Municipality',
-      'Gramthan Rural Municipality',
-      'Dhanpalthan Rural Municipality',
-      'Kerabari Rural Municipality',
-      'Budhiganga Rural Municipality',
-      'Kanepokhari Rural Municipality',
-      'Miklajung Rural Municipality',
-      'Letang Municipality',
-      'Sunwarshi Municipality',
-      'Rangeli Municipality',
-      'Patahrishanishchare Municipality',
-      'Biratnagar Metropolitian City',
-      'Uralabari Municipality',
-      'Belbari Municipality',
-      'Sundarharaicha Municipality',
-      'Ratuwamai Municipality',
-    ],
-    'Okhaldhunga': [
-      'Likhu Rural Municipality',
-      'Molung Rural Municipality',
-      'Sunkoshi Rural Municipality',
-      'Champadevi Rural Municipality',
-      'Chisankhugadhi Rural Municipality',
-      'Khijidemba Rural Municipality',
-      'Manebhanjyang Rural Municipality',
-      'Siddhicharan Municipality',
-    ],
-    'Panchthar': [
-      'Yangwarak Rural Municipality',
-      'Hilihang Rural Municipality',
-      'Falelung Rural Municipality',
-      'Tumbewa Rural Municipality',
-      'Kummayak Rural Municipality',
-      'Miklajung Rural Municipality',
-      'Falgunanda Rural Municipality',
-      'Phidim Municipality',
-    ],
-    'Sankhuwasabha': [
-      'Makalu Rural Municipality',
-      'Chichila Rural Municipality',
-      'Silichong Rural Municipality',
-      'Bhotkhola Rural Municipality',
-      'Sabhapokhari Rural Municipality',
-      'Dharmadevi Municipality',
-      'Madi Municipality',
-      'Panchakhapan Municipality',
-      'Chainpur Municipality',
-      'Khandbari Municipality',
-    ],
-    'Solukhumbu': [
-      'Sotang Rural Municipality',
-      'Mahakulung Rural Municipality',
-      'Likhupike Rural Municipality',
-      'Nechasalyan Rural Municipality',
-      'Thulung Dudhkoshi Rural Municipality',
-      'Maapya Dudhkoshi Rural Municipality',
-      'Khumbupasanglahmu Rural Municipality',
-      'Solududhakunda Municipality',
-    ],
-    'Sunsari': [
-      'Gadhi Rural Municipality',
-      'Koshi Rural Municipality',
-      'Barju Rural Municipality',
-      'Harinagar Rural Municipality',
-      'Dewanganj Rural Municipality',
-      'Bhokraha Narsing Rural Municipality',
-      'Ramdhuni Municipality',
-      'Barahchhetra Municipality',
-      'Duhabi Municipality',
-      'Inaruwa Municipality',
-      'Dharan Sub-Metropolitian City',
-      'Itahari Sub-Metropolitian City',
-    ],
-    'Taplejung': [
-      'Sidingba Rural Municipality',
-      'Meringden Rural Municipality',
-      'Maiwakhola Rural Municipality',
-      'Phaktanglung Rural Municipality',
-      'Sirijangha Rural Municipality',
-      'Mikwakhola Rural Municipality',
-      'Aathrai Tribeni Rural Municipality',
-      'Pathivara Yangwarak Rural Municipality',
-      'Phungling Municipality',
-    ],
-    'Terhathum': [
-      'Chhathar Rural Municipality',
-      'Phedap Rural Municipality',
-      'Aathrai Rural Municipality',
-      'Menchayam Rural Municipality',
-      'Laligurans Municipality',
-      'Myanglung Municipality',
-    ],
-    'Udayapur': [
-      'Tapli Rural Municipality',
-      'Rautamai Rural Municipality',
-      'Udayapurgadhi Rural Municipality',
-      'Limchungbung Rural Municipality',
-      'Chaudandigadhi Municipality',
-      'Triyuga Municipality',
-      'Katari Municipality',
-      'Belaka Municipality',
-    ],
-    'Bara': [
-      'Pheta Rural Municipality',
-      'Devtal Rural Municipality',
-      'Prasauni Rural Municipality',
-      'Suwarna Rural Municipality',
-      'Baragadhi Rural Municipality',
-      'Karaiyamai Rural Municipality',
-      'Parwanipur Rural Municipality',
-      'Bishrampur Rural Municipality',
-      'Adarshkotwal Rural Municipality',
-      'Jitpur Simara Sub-Metropolitian City',
-      'Kalaiya Sub-Metropolitian City',
-      'Pacharauta Municipality',
-      'Nijgadh Municipality',
-      'Simraungadh Municipality',
-      'Mahagadhimai Municipality',
-      'Kolhabi Municipality',
-    ],
-    'Dhanusa': [
-      'Aaurahi Rural Municipality',
-      'Dhanauji Rural Municipality',
-      'Bateshwor Rural Municipality',
-      'Janaknandani Rural Municipality',
-      'Lakshminiya Rural Municipality',
-      'Mukhiyapatti Musarmiya Rural Municipality',
-      'Mithila Bihari Municipality',
-      'Kamala Municipality',
-      'Nagarain Municipality',
-      'Ganeshman Charnath Municipality',
-      'Mithila Municipality',
-      'Dhanusadham Municipality',
-      'Bideha Municipality',
-      'Sabaila Municipality',
-      'Hansapur Municipality',
-      'Janakpurdham Sub-Metropolitian City',
-      'Sahidnagar Municipality',
-      'Chhireshwornath Municipality',
-    ],
-    'Mahottari': [
-      'Pipra Rural Municipality',
-      'Sonama Rural Municipality',
-      'Samsi Rural Municipality',
-      'Ekdanra Rural Municipality',
-      'Mahottari Rural Municipality',
-      'Gaushala Municipality',
-      'Ramgopalpur Municipality',
-      'Aurahi Municipality',
-      'Bardibas Municipality',
-      'Bhangaha Municipality',
-      'Jaleswor Municipality',
-      'Balwa Municipality',
-      'Manra Siswa Municipality',
-      'Matihani Municipality',
-      'Loharpatti Municipality',
-    ],
-    'Parsa': [
-      'Thori Rural Municipality',
-      'Dhobini Rural Municipality',
-      'Chhipaharmai Rural Municipality',
-      'Jirabhawani Rural Municipality',
-      'Jagarnathpur Rural Municipality',
-      'Kalikamai Rural Municipality',
-      'Bindabasini Rural Municipality',
-      'Pakahamainpur Rural Municipality',
-      'SakhuwaPrasauni Rural Municipality',
-      'Paterwasugauli Rural Municipality',
-      'Birgunj Metropolitian City	Metropolitian City',
-      'Bahudaramai Municipality',
-      'Pokhariya Municipality',
-      'Parsagadhi Municipality',
-    ],
-    'Rautahat': [
-      'Yemunamai Rural Municipality',
-      'Durga Bhagwati Rural Municipality',
-      'Katahariya Municipality',
-      'Maulapur Municipality',
-      'Madhav Narayan Municipality',
-      'Gaur Municipality',
-      'Gujara Municipality',
-      'Garuda Municipality',
-      'Ishanath Municipality',
-      'Chandrapur Municipality',
-      'Dewahhi Gonahi Municipality',
-      'Brindaban Municipality',
-      'Rajpur Municipality',
-      'Rajdevi Municipality',
-      'Gadhimai Municipality',
-      'Phatuwa Bijayapur Municipality',
-      'Baudhimai Municipality',
-      'Paroha Municipality',
-    ],
-    'Saptari': [
-      'Rajgadh Rural Municipality',
-      'Rupani Rural Municipality',
-      'Tirahut Rural Municipality',
-      'Mahadeva Rural Municipality',
-      'Bishnupur Rural Municipality',
-      'Chhinnamasta Rural Municipality',
-      'Balan Bihul Rural Municipality',
-      'Tilathi Koiladi Rural Municipality',
-      'Agnisair Krishna Savaran Rural Municipality',
-      'Hanumannagar Kankalini Municipality',
-      'Kanchanrup Municipality',
-      'Rajbiraj Municipality',
-      'Khadak Municipality',
-      'Dakneshwori Municipality',
-      'Saptakoshi Rural Municipality',
-      'Surunga Municipality',
-      'Shambhunath Municipality',
-      'Bode Barsain Municipality',
-    ],
-    'Sarlahi': [
-      'Dhankaul Rural Municipality',
-      'Parsa Rural Municipality',
-      'Bishnu Rural Municipality',
-      'Ramnagar Rural Municipality',
-      'Kaudena Rural Municipality',
-      'Basbariya Rural Municipality',
-      'Chandranagar Rural Municipality',
-      'Chakraghatta Rural Municipality',
-      'Bramhapuri Rural Municipality',
-      'Barahathawa Municipality',
-      'Haripur Municipality',
-      'Ishworpur Municipality',
-      'Lalbandi Municipality',
-      'Malangawa Municipality',
-      'Kabilasi Municipality',
-      'Bagmati Municipality',
-      'Hariwan Municipality',
-      'Balara Municipality',
-      'Haripurwa Municipality',
-      'Godaita Municipality',
-    ],
-    'Siraha': [
-      'Aurahi Rural Municipality',
-      'Naraha Rural Municipality',
-      'Arnama Rural Municipality',
-      'Bhagawanpur Rural Municipality',
-      'Nawarajpur Rural Municipality',
-      'Bishnupur Rural Municipality',
-      'Bariyarpatti Rural Municipality',
-      'Laxmipur Patari Rural Municipality',
-      'Sakhuwanankarkatti Rural Municipality',
-      'Mirchaiya Municipality',
-      'Lahan Municipality',
-      'Siraha Municipality',
-      'Dhangadhimai Municipality',
-      'Kalyanpur Municipality',
-      'Karjanha Municipality',
-      'Golbazar Municipality',
-      'Sukhipur Municipality',
-    ],
-    'Bhaktapur': [
-      'Changunarayan Municipality',
-      'Suryabinayak Municipality',
-      'Bhaktapur Municipality',
-      'Madhyapur Thimi Municipality',
-    ],
-    'Chitwan': [
-      'Bharatpur Metropolitian City',
-      'Ichchhyakamana Rural Municipality',
-      'Kalika Municipality',
-      'Khairahani Municipality',
-      'Madi Municipality',
-      'Rapti Municipality',
-      'Ratnanagar Municipality',
-    ],
-    'Dhading': [
-      'Gajuri Rural Municipality',
-      'Galchi Rural Municipality',
-      'Thakre Rural Municipality',
-      'Siddhalek Rural Municipality',
-      'Khaniyabash Rural Municipality',
-      'Jwalamukhi Rural Municipality',
-      'Gangajamuna Rural Municipality',
-      'Rubi Valley Rural Municipality',
-      'Tripura Sundari Rural Municipality',
-      'Netrawati Dabjong Rural Municipality',
-      'Benighat Rorang Rural Municipality',
-      'Nilakantha Municipality',
-      'Dhunibesi Municipality',
-    ],
-    'Dolakha': [
-      'Bigu Rural Municipality',
-      'Sailung Rural Municipality',
-      'Melung Rural Municipality',
-      'Baiteshwor Rural Municipality',
-      'Tamakoshi Rural Municipality',
-      'Gaurishankar Rural Municipality',
-      'Kalinchok Rural Municipality',
-      'Jiri Municipality',
-      'Bhimeshwor Municipality',
-    ],
-    'Kathmandu': [
-      'Kirtipur Municipality',
-      'Shankharapur Municipality',
-      'Nagarjun Municipality',
-      'Kageshwori Manahora Municipality',
-      'Dakshinkali Municipality',
-      'Budhanilakantha Municipality',
-      'Tarakeshwor Municipality',
-      'Kathmandu Metropolitian City',
-      'Tokha Municipality',
-      'Chandragiri Municipality',
-      'Gokarneshwor Municipality',
-    ],
-    'Kavrepalanchok': [
-      'Roshi Rural Municipality',
-      'Temal Rural Municipality',
-      'Bhumlu Rural Municipality',
-      'Mahabharat Rural Municipality',
-      'Bethanchowk Rural Municipality',
-      'Khanikhola Rural Municipality',
-      'Chaurideurali Rural Municipality',
-      'Banepa Municipality',
-      'Mandandeupur Municipality',
-      'Dhulikhel Municipality',
-      'Panauti Municipality',
-      'Namobuddha Municipality',
-      'Panchkhal Municipality',
-    ],
-    'Lalitpur': [
-      'Bagmati Rural Municipality',
-      'Mahankal Rural Municipality',
-      'Konjyosom Rural Municipality',
-      'Lalitpur Metropolitian City',
-      'Mahalaxmi Municipality',
-      'Godawari Municipality',
-    ],
-    'Makawanpur': [
-      'Bakaiya Rural Municipality',
-      'Kailash Rural Municipality',
-      'Manahari Rural Municipality',
-      'Bhimphedi Rural Municipality',
-      'Bagmati Rural Municipality',
-      'Raksirang Rural Municipality',
-      'Makawanpurgadhi Rural Municipality',
-      'Indrasarowar Rural Municipality',
-      'Hetauda Sub-Metropolitian City',
-      'Thaha Municipality',
-    ],
-    'Nuwakot': [
-      'Kakani Rural Municipality',
-      'Tadi Rural Municipality',
-      'Likhu Rural Municipality',
-      'Myagang Rural Municipality',
-      'Shivapuri Rural Municipality',
-      'Kispang Rural Municipality',
-      'Suryagadhi Rural Municipality',
-      'Tarkeshwar Rural Municipality',
-      'Panchakanya Rural Municipality',
-      'Dupcheshwar Rural Municipality',
-      'Belkotgadhi Municipality',
-      'Bidur Municipality',
-    ],
-    'Ramechhap': [
-      'Sunapati Rural Municipality',
-      'Doramba Rural Municipality',
-      'Umakunda Rural Municipality',
-      'Khadadevi Rural Municipality',
-      'Gokulganga Rural Municipality',
-      'Likhu Tamakoshi Rural Municipality',
-      'Manthali Municipality',
-      'Ramechhap Municipality',
-    ],
-    'Rasuwa': [
-      'Kalika Rural Municipality',
-      'Naukunda Rural Municipality',
-      'Uttargaya Rural Municipality',
-      'Gosaikunda Rural Municipality',
-      'Amachodingmo Rural Municipality',
-    ],
-    'Sindhuli': [
-      'Marin Rural Municipality',
-      'Phikkal Rural Municipality',
-      'Tinpatan Rural Municipality',
-      'Sunkoshi Rural Municipality',
-      'Golanjor Rural Municipality',
-      'Ghanglekh Rural Municipality',
-      'Hariharpurgadhi Rural Municipality',
-      'Dudhouli Municipality',
-      'Kamalamai Municipality',
-    ],
-    'Sindhupalchok': [
-      'Jugal Rural Municipality',
-      'Balefi Rural Municipality',
-      'Sunkoshi Rural Municipality',
-      'Helambu Rural Municipality',
-      'Bhotekoshi Rural Municipality',
-      'Lisangkhu Pakhar Rural Municipality',
-      'Indrawati Rural Municipality',
-      'Tripurasundari Rural Municipality',
-      'Panchpokhari Thangpal Rural Municipality',
-      'Chautara SangachokGadhi Municipality',
-      'Barhabise Municipality',
-      'Melamchi Municipality',
-    ],
-    'Baglung': [
-      'Bareng Rural Municipality',
-      'Badigad Rural Municipality',
-      'Nisikhola Rural Municipality',
-      'Kanthekhola Rural Municipality',
-      'Tara Khola Rural Municipality',
-      'Taman Khola Rural Municipality',
-      'Jaimuni Municipality',
-      'Baglung Municipality',
-      'Galkot Municipality',
-      'Dhorpatan Municipality',
-    ],
-    'Gorkha': [
-      'Gandaki Rural Municipality',
-      'Dharche Rural Municipality',
-      'Aarughat Rural Municipality',
-      'Ajirkot Rural Municipality',
-      'Sahid Lakhan Rural Municipality',
-      'Siranchok Rural Municipality',
-      'Bhimsenthapa Rural Municipality',
-      'Chum Nubri Rural Municipality',
-      'Barpak Sulikot Rural Municipality',
-      'Palungtar Municipality',
-      'Gorkha Municipality',
-    ],
-    'Kaski': [
-      'Rupa Rural Municipality',
-      'Madi Rural Municipality',
-      'Annapurna Rural Municipality',
-      'Machhapuchchhre Rural Municipality',
-      'Pokhara Metropolitian City',
-    ],
-    'Lamjung': [
-      'Dordi Rural Municipality',
-      'Dudhpokhari Rural Municipality',
-      'Marsyangdi Rural Municipality',
-      'Kwholasothar Rural Municipality',
-      'Sundarbazar Municipality',
-      'Besishahar Municipality',
-      'Rainas Municipality',
-      'MadhyaNepal Municipality',
-    ],
-    'Manang': [
-      'Chame Rural Municipality',
-      'Narshon Rural Municipality',
-      'Narpa Bhumi Rural Municipality',
-      'Manang Ingshyang Rural Municipality',
-    ],
-    'Mustang': [
-      'Thasang Rural Municipality',
-      'Gharapjhong Rural Municipality',
-      'Lomanthang Rural Municipality',
-      'Lo-Ghekar Damodarkunda Rural Municipality',
-      'Waragung Muktikhsetra Rural Municipality',
-    ],
-    'Myagdi': [
-      'Mangala Rural Municipality',
-      'Malika Rural Municipality',
-      'Raghuganga Rural Municipality',
-      'Dhaulagiri Rural Municipality',
-      'Annapurna Rural Municipality',
-      'Beni Municipality',
-    ],
-    'Nawalparasi (Bardaghat Susta Purba)': [
-      'Baudeekali Rural Municipality',
-      'Bulingtar Rural Municipality',
-      'Hupsekot Rural Municipality',
-      'Binayee Tribeni Rural Municipality',
-      'Madhyabindu Municipality',
-      'Devchuli Municipality',
-      'Gaidakot Municipality',
-      'Kawasoti Municipality',
-    ],
-    'Parbat': [
-      'Modi Rural Municipality',
-      'Painyu Rural Municipality',
-      'Jaljala Rural Municipality',
-      'Bihadi Rural Municipality',
-      'Mahashila Rural Municipality',
-      'Kushma Municipality',
-      'Phalebas Municipality',
-    ],
-    'Syangja': [
-      'Harinas Rural Municipality',
-      'Biruwa Rural Municipality',
-      'Aandhikhola Rural Municipality',
-      'Phedikhola Rural Municipality',
-      'Kaligandagi Rural Municipality',
-      'Arjunchaupari Rural Municipality',
-      'Putalibazar Municipality',
-      'Bhirkot Municipality',
-      'Galyang Municipality',
-      'Chapakot Municipality',
-      'Waling Municipality',
-    ],
-    'Tanahu': [
-      'Ghiring Rural Municipality',
-      'Devghat Rural Municipality',
-      'Rhishing Rural Municipality',
-      'Myagde Rural Municipality',
-      'Bandipur Rural Municipality',
-      'Anbukhaireni Rural Municipality',
-      'Byas Municipality',
-      'Shuklagandaki Municipality',
-      'Bhimad Municipality',
-      'Bhanu Municipality',
-    ],
-    'Arghakhanchi': [
-      'Panini Rural Municipality',
-      'Chhatradev Rural Municipality',
-      'Malarani Rural Municipality',
-      'Bhumekasthan Municipality',
-      'Sitganga Municipality',
-      'Sandhikharka Municipality',
-    ],
-    'Banke': [
-      'Khajura Rural Municipality',
-      'Janki Rural Municipality',
-      'Baijanath Rural Municipality',
-      'Duduwa Rural Municipality',
-      'Narainapur Rural Municipality',
-      'Rapti Sonari Rural Municipality',
-      'Kohalpur Municipality',
-      'Nepalgunj Sub-Metropolitian City',
-    ],
-    'Bardiya': [
-      'Geruwa Rural Municipality',
-      'Badhaiyatal Rural Municipality',
-      'Thakurbaba Municipality',
-      'Bansagadhi Municipality',
-      'Barbardiya Municipality',
-      'Rajapur Municipality',
-      'Madhuwan Municipality',
-      'Gulariya Municipality',
-    ],
-    'Dang': [
-      'Babai Rural Municipality',
-      'Gadhawa Rural Municipality',
-      'Rapti Rural Municipality',
-      'Rajpur Rural Municipality',
-      'Dangisharan Rural Municipality',
-      'Shantinagar Rural Municipality',
-      'Banglachuli Rural Municipality',
-      'Tulsipur Sub-Metropolitian City',
-      'Ghorahi Sub-Metropolitian City',
-      'Lamahi Municipality',
-    ],
-    'Gulmi': [
-      'Ruru Rural Municipality',
-      'Isma Rural Municipality',
-      'Madane Rural Municipality',
-      'Malika Rural Municipality',
-      'Chatrakot Rural Municipality',
-      'Dhurkot Rural Municipality',
-      'Satyawati Rural Municipality',
-      'Chandrakot Rural Municipality',
-      'Kaligandaki Rural Municipality',
-      'Gulmidarbar Rural Municipality',
-      'Resunga Municipality',
-      'Musikot Municipality',
-    ],
-    'Kapilvastu': [
-      'Yashodhara Rural Municipality',
-      'Bijayanagar Rural Municipality',
-      'Mayadevi Rural Municipality',
-      'Suddhodhan Rural Municipality',
-      'Shivaraj Municipality',
-      'Kapilbastu Municipality',
-      'Buddhabhumi Municipality',
-      'Maharajgunj Municipality',
-      'Banganga Municipality',
-      'Krishnanagar Municipality',
-    ],
-    'Nawalparasi (Bardaghat Susta Paschim)': [
-      'Sarawal Rural Municipality',
-      'Susta Rural Municipality',
-      'Pratappur Rural Municipality',
-      'Palhi Nandan Rural Municipality',
-      'Bardaghat Municipality',
-      'Sunwal Municipality',
-      'Ramgram Municipality',
-    ],
-    'Palpa': [
-      'Rambha Rural Municipality',
-      'Tinau Rural Municipality',
-      'Nisdi Rural Municipality',
-      'Mathagadhi Rural Municipality',
-      'Ribdikot Rural Municipality',
-      'Purbakhola Rural Municipality',
-      'Bagnaskali Rural Municipality',
-      'Rainadevi Chhahara Rural Municipality',
-      'Tansen Municipality',
-      'Rampur Municipality',
-    ],
-    'Pyuthan': [
-      'Ayirabati Rural Municipality',
-      'Gaumukhi Rural Municipality',
-      'Jhimruk Rural Municipality',
-      'Naubahini Rural Municipality',
-      'Mandavi Rural Municipality',
-      'Mallarani Rural Municipality',
-      'Sarumarani Rural Municipality',
-      'Pyuthan Municipality',
-      'Sworgadwary Municipality',
-    ],
-    'Rolpa': [
-      'Madi Rural Municipality',
-      'Thawang Rural Municipality',
-      'Sunchhahari Rural Municipality',
-      'Lungri Rural Municipality',
-      'Gangadev Rural Municipality',
-      'Tribeni Rural Municipality',
-      'Pariwartan Rural Municipality',
-      'Runtigadi Rural Municipality',
-      'Sunil Smriti Rural Municipality',
-      'Rolpa Municipality',
-    ],
-    'Rukum (Purba)': [
-      'Bhume Rural Municipality',
-      'Sisne Rural Municipality',
-      'Putha Uttarganga Rural Municipality',
-    ],
-    'Rupandehi': [
-      'Kanchan Rural Municipality',
-      'Siyari Rural Municipality',
-      'Rohini Rural Municipality',
-      'Gaidahawa Rural Municipality',
-      'Omsatiya Rural Municipality',
-      'Sudhdhodhan Rural Municipality',
-      'Mayadevi Rural Municipality',
-      'Marchawari Rural Municipality',
-      'Kotahimai Rural Municipality',
-      'Sammarimai Rural Municipality',
-      'Butwal Sub-Metropolitian City',
-      'Lumbini Sanskritik Municipality',
-      'Devdaha Municipality',
-      'Sainamaina Municipality',
-      'Siddharthanagar Municipality',
-      'Tillotama Municipality',
-    ],
-    'Dailekh': [
-      'Bhairabi Rural Municipality',
-      'Mahabu Rural Municipality',
-      'Gurans Rural Municipality',
-      'Naumule Rural Municipality',
-      'Bhagawatimai Rural Municipality',
-      'Thantikandh Rural Municipality',
-      'Dungeshwor Rural Municipality',
-      'Aathabis Municipality',
-      'Dullu Municipality',
-      'Chamunda Bindrasaini Municipality',
-      'Narayan Municipality',
-    ],
-    'Dolpa': [
-      'Kaike Rural Municipality',
-      'Jagadulla Rural Municipality',
-      'Mudkechula Rural Municipality',
-      'Dolpo Buddha Rural Municipality',
-      'Shey Phoksundo Rural Municipality',
-      'Chharka Tangsong Rural Municipality',
-      'Tripurasundari Municipality',
-      'Thuli Bheri Municipality',
-    ],
-    'Humla': [
-      'Simkot Rural Municipality',
-      'Namkha Rural Municipality',
-      'Chankheli Rural Municipality',
-      'Tanjakot Rural Municipality',
-      'Sarkegad Rural Municipality',
-      'Adanchuli Rural Municipality',
-      'Kharpunath Rural Municipality',
-    ],
-    'Jajarkot': [
-      'Kuse Rural Municipality',
-      'Shiwalaya Rural Municipality',
-      'Barekot Rural Municipality',
-      'Junichande Rural Municipality',
-      'Nalagad Municipality',
-      'Bheri Municipality',
-      'Chhedagad Municipality',
-    ],
-    'Jumla': [
-      'Hima Rural Municipality',
-      'Tila Rural Municipality',
-      'Sinja Rural Municipality',
-      'Guthichaur Rural Municipality',
-      'Tatopani Rural Municipality',
-      'Patrasi Rural Municipality',
-      'Kanakasundari Rural Municipality',
-      'Chandannath Municipality',
-    ],
-    'Kalikot': [
-      'Mahawai Rural Municipality',
-      'Palata Rural Municipality',
-      'Naraharinath Rural Municipality',
-      'Pachaljharana Rural Municipality',
-      'Subha Kalika Rural Municipality',
-      'Sanni Tribeni Rural Municipality',
-      'Khandachakra Municipality',
-      'Raskot Municipality',
-      'Tilagufa Municipality',
-    ],
-    'Mugu': [
-      'Soru Rural Municipality',
-      'Khatyad Rural Municipality',
-      'Mugum Karmarong Rural Municipality',
-      'Chhayanath Rara Municipality',
-    ],
-    'Rukum (Paschim)': [
-      'Tribeni Rural Municipality',
-      'Sani Bheri Rural Municipality',
-      'Banfikot Rural Municipality',
-      'Aathbiskot Municipality',
-      'Chaurjahari Municipality',
-      'Musikot Municipality',
-    ],
-    'Salyan': [
-      'Kumakh Rural Municipality',
-      'Darma Rural Municipality',
-      'Kapurkot Rural Municipality',
-      'Kalimati Rural Municipality',
-      'Tribeni Rural Municipality',
-      'Chhatreshwori Rural Municipality',
-      'Siddha Kumakh Rural Municipality',
-      'Sharada Municipality',
-      'Bangad Kupinde Municipality',
-      'Bagchaur Municipality',
-    ],
-    'Surkhet': [
-      'Chaukune Rural Municipality',
-      'Simta Rural Municipality',
-      'Chingad Rural Municipality',
-      'Barahtal Rural Municipality',
-      'Gurbhakot Municipality',
-      'Panchpuri Municipality',
-      'Bheriganga Municipality',
-      'Lekbeshi Municipality',
-      'Birendranagar Municipality',
-    ],
-    'Achham': [
-      'Dhakari Rural Municipality',
-      'Mellekh Rural Municipality',
-      'Chaurpati Rural Municipality',
-      'Ramaroshan Rural Municipality',
-      'Turmakhad Rural Municipality',
-      'Bannigadhi Jayagadh Rural Municipality',
-      'Sanphebagar Municipality',
-      'Mangalsen Municipality',
-      'Kamalbazar Municipality',
-      'Panchadewal Binayak Municipality',
-    ],
-    'Baitadi': [
-      'Sigas Rural Municipality',
-      'Shivanath Rural Municipality',
-      'Surnaya Rural Municipality',
-      'Dilasaini Rural Municipality',
-      'Pancheshwar Rural Municipality',
-      'Dogadakedar Rural Municipality',
-      'Melauli Municipality',
-      'Dasharathchanda Municipality',
-      'Purchaudi Municipality',
-      'Patan Municipality',
-    ],
-    'Bajhang': [
-      'Masta Rural Municipality',
-      'Thalara Rural Municipality',
-      'Talkot Rural Municipality',
-      'Surma Rural Municipality',
-      'SaiPaal Rural Municipality',
-      'Durgathali Rural Municipality',
-      'Bithadchir Rural Municipality',
-      'Kedarseu Rural Municipality',
-      'Khaptadchhanna Rural Municipality',
-      'Chabispathivera Rural Municipality',
-      'JayaPrithivi Municipality',
-      'Bungal Municipality',
-    ],
-    'Bajura': [
-      'Gaumul Rural Municipality',
-      'Himali Rural Municipality',
-      'Jagannath Rural Municipality',
-      'Khaptad Chhededaha Rural Municipality',
-      'Swami Kartik Khaapar Rural Municipality',
-      'Badimalika Municipality',
-      'Tribeni Municipality',
-      'Budhiganga Municipality',
-      'Budhinanda Municipality',
-    ],
-    'Dadeldhura': [
-      'Alital Rural Municipality',
-      'Ajaymeru Rural Municipality',
-      'Bhageshwar Rural Municipality',
-      'Nawadurga Rural Municipality',
-      'Ganayapdhura Rural Municipality',
-      'Amargadhi Municipality',
-      'Parashuram Municipality',
-    ],
-    'Darchula': [
-      'Lekam Rural Municipality',
-      'Naugad Rural Municipality',
-      'Byas Rural Municipality',
-      'Dunhu Rural Municipality',
-      'Marma Rural Municipality',
-      'Apihimal Rural Municipality',
-      'Malikaarjun Rural Municipality',
-      'Mahakali Municipality',
-      'Shailyashikhar Municipality',
-    ],
-    'Doti': [
-      'Sayal Rural Municipality',
-      'Adharsha Rural Municipality',
-      'Jorayal Rural Municipality',
-      'Badikedar Rural Municipality',
-      'Purbichauki Rural Municipality',
-      'K I Singh Rural Municipality',
-      'Bogtan Foodsil Rural Municipality',
-      'Dipayal Silgadi Municipality',
-      'Shikhar Municipality',
-    ],
-    'Kailali': [
-      'Chure Rural Municipality',
-      'Janaki Rural Municipality',
-      'Kailari Rural Municipality',
-      'Joshipur Rural Municipality',
-      'Mohanyal Rural Municipality',
-      'Bardagoriya Rural Municipality',
-      'Tikapur Municipality',
-      'Ghodaghodi Municipality',
-      'Bhajani Municipality',
-      'Dhangadhi Sub-Metropolitian City',
-      'Gauriganga Municipality',
-      'Godawari Municipality',
-      'Lamkichuha Municipality',
-    ],
-    'Kanchanpur': [
-      'Beldandi Rural Municipality',
-      'Laljhadi Rural Municipality',
-      'Punarbas Municipality',
-      'Krishnapur Municipality',
-      'Mahakali Municipality',
-      'Bedkot Municipality',
-      'Belauri Municipality',
-      'Bhimdatta Municipality',
-      'Shuklaphanta Municipality',
-    ]
-  };
+/**
+ * Check if a country uses ward numbers
+ */
+export const countryUsesWardNumber = (countryValue) => {
+  const countriesWithWard = ['nepal', 'japan', 'south_korea', 'kenya'];
+  return countriesWithWard.includes(countryValue?.toLowerCase().replace(/\s+/g, '_'));
+};
+
+export default { states, districts, cities, province, municipalites, getStatesForCountry, getDistrictsForState, getCitiesForDistrict, getAddressLabels, countryUsesWardNumber };

@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React from "react";
 
-import { getSubscriptionInfo } from "../data/dash_service";
+import { useSubscriptionInfo } from "../hooks/useSubscriptionInfo";
 import CircularDays from "../dash-component/CircularDays";
 
 export default function PreminumPlan() {
-  const [subscriptionInfo, setSubscriptionInfo] = useState(null);
-  useEffect(() => {
-    getSubscriptionInfo({ toast: toast, setSub: setSubscriptionInfo });
-  }, []);
+  const { data: subscriptionInfo } = useSubscriptionInfo();
 
   const formatDate = (dateString) => {
     const dateObject = new Date(dateString);
     const options = { year: "numeric", month: "short", day: "numeric" };
     return dateObject.toLocaleString("en-US", options);
   };
+
   const calculateDaysDifference = (dateString1, dateString2) => {
     const today = new Date();
     const date1 = formatDate(today);
@@ -34,18 +31,18 @@ export default function PreminumPlan() {
 
   return (
     <>
-      {subscriptionInfo === null ? (
+      {!subscriptionInfo ? (
         <></>
       ) : (
         <>
           <div className="flex flex-col gap-4 px-5 mt-[10%] w-full">
-            <p className="text-primaryblue font-bold font-inter text-sm">
+            <p className="text-ngtrylime font-bold font-inter text-sm">
               Subscription Plan
             </p>
             {subscriptionInfo.length <= 0 ? (
               <></>
             ) : (
-              <div className="flex items-center flex-col p-5 w-full rounded-xl bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC]">
+              <div className="flex items-center flex-col p-5 w-full rounded-xl bg-ngtrysage/20 border border-ngtrysage/30">
                 <CircularDays
                   days={calculateDaysDifference(
                     subscriptionInfo[0].start_subscription,
@@ -58,7 +55,7 @@ export default function PreminumPlan() {
                 <p className="text-white text-xs font-normal">
                   Expiry Date:{formatDate(subscriptionInfo[0].end_subscription)}
                 </p>
-                <button className="bg-white text-black font-bold text-xs  rounded-xl  w-full mt-2 h-[35px]">
+                <button className="bg-ngtrylime text-ngtrydeep font-bold text-xs rounded-xl w-full mt-2 h-[35px] hover:bg-ngtrysage transition-colors">
                   Renew Now
                 </button>
               </div>

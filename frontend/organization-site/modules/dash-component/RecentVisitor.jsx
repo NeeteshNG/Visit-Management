@@ -29,14 +29,14 @@ export default function RecentVisitor() {
   };
 
   return (
-    <div className="lg:w-[30%] w-[275px] h-[428px] p-6 shadow-3xl rounded-xl bg-white font-inter">
-      <h1 className="font-bold text-2xl leading-9 ">Recent Visitor</h1>
+    <div className="lg:w-[30%] w-[275px] h-[428px] p-6 shadow-3xl rounded-xl bg-white font-inter border border-ngtrysage/20">
+      <h1 className="font-bold text-2xl leading-9 text-ngtrydeep">Recent Visitor</h1>
       {recentVisitors === null ? (
         <div></div>
       ) : (
         <>
           {recentVisitors.results.length <= 0 ? (
-            <div className="flex flex-col h-full font-bold text-sm leading-5  items-center justify-center">
+            <div className="flex flex-col h-full font-bold text-sm leading-5 items-center justify-center text-ngtrysage">
               <p>No Visitors</p>
             </div>
           ) : (
@@ -49,17 +49,17 @@ export default function RecentVisitor() {
                   .slice(0, 4)
                   .map((profile, i) => {
                     return (
-                      <div key={i} className="flex gap-3 mt-5 items-center">
+                      <div key={i} className="flex gap-3 mt-5 items-center hover:bg-ngtrylime/10 p-2 rounded-lg transition-colors cursor-pointer">
                         <img
                           src={"/user-avatar.png"}
                           alt="Organization Logo"
-                          className="h-[40px] w-[40px] rounded-full object-cover"
+                          className="h-[40px] w-[40px] rounded-full object-cover ring-2 ring-ngtrysage/30"
                         />
                         <div className="flex flex-col">
-                          <p className="font-bold text-sm leading-5 ">
+                          <p className="font-bold text-sm leading-5 text-ngtrydeep">
                             {profile.full_name}
                           </p>
-                          <p className="text-xs font-normal ">
+                          <p className="text-xs font-normal text-ngtrysage">
                             {formatDateString(profile.visited_at)}
                           </p>
                         </div>
@@ -70,16 +70,16 @@ export default function RecentVisitor() {
               {recentVisitors.results.length <= 3 ? (
                 <></>
               ) : (
-                <div className="flex gap-3 mt-10 items-center">
+                <div className="flex gap-3 mt-10 items-center cursor-pointer group">
                   <p
-                    className="text-primaryblue font-bold text-sm leading-5 "
+                    className="text-ngtryprimary font-bold text-sm leading-5 group-hover:text-ngtrydeep transition-colors"
                     onClick={() => {
                       router.push("/visitor-list");
                     }}
                   >
                     Show All{" "}
                   </p>
-                  <ArrowRightIcon className="text-sm text-primaryblue" />
+                  <ArrowRightIcon className="text-sm text-ngtryprimary group-hover:text-ngtrydeep transition-colors" />
                 </div>
               )}
             </>

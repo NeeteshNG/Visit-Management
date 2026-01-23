@@ -1,14 +1,17 @@
 'use client'
 
+
+import {
+  CiCalendarIcon,
+  CiMailIcon,
+  CiShare2Icon,
+  FaMobileScreenIcon,
+  GoDownloadIcon,
+  MdOutlinePersonIcon,
+  MdOutlineRectangleIcon,
+  TbLocationIcon,
+} from "@/modules/icons/SvgIcons";
 import LineComponent from "@/modules/kyc-component/LineComponent"
-import { MdOutlinePerson } from "react-icons/md";
-import { CiCalendar } from "react-icons/ci";
-import { FaMobileScreen } from "react-icons/fa6";
-import { CiMail } from "react-icons/ci";
-import { TbLocation } from "react-icons/tb";
-import { MdOutlineRectangle } from "react-icons/md";
-import { GoDownload } from "react-icons/go";
-import { CiShare2 } from "react-icons/ci";
 import AdsComponent from "@/modules/dash-component/AdsComponent";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -74,12 +77,12 @@ export default function VisitorDetails() {
 <button className='bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[211px] h-[48px] text-primaryblue'
          
           >
-            Download Details <GoDownload className="text-2xl"/>
+            Download Details <GoDownloadIcon className="text-2xl"/>
           </button>
           <button className='bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[182px] h-[48px] text-primaryblue'
          
           >
-            Share Details <CiShare2 className="text-2xl"/>
+            Share Details <CiShare2Icon className="text-2xl"/>
           </button>
 </div>
 </section>

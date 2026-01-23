@@ -1,3 +1,4 @@
+import os
 from common.usecases import BaseUseCase
 from notification.models import NotificationData
 import firebase_admin.messaging as messaging
@@ -9,6 +10,9 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import requests
 from django.conf import settings
+
+# Get email from environment or use default
+EMAIL_FROM = os.getenv('EMAIL_FROM', 'noreply@ngtry.com')
 
 
 def send_sms(to, text):
@@ -82,7 +86,7 @@ class CreateNotificationUseCase(BaseUseCase):
                     msg = EmailMessage(
                         self._data["title"],
                         self._data["message"],
-                        "noreply.epassnepal@gmail.com",
+                        "EMAIL_FROM",
                         [email],
                     )
                     msg.content_subtype = "html"
@@ -104,7 +108,7 @@ class CreateNotificationUseCase(BaseUseCase):
                     send_mail(
                         self._data["title"],
                         self._data["message"],
-                        "noreply.epassnepal@gmail.com",
+                        "EMAIL_FROM",
                         [email],
                         fail_silently=False,
                         html_message=html_message,

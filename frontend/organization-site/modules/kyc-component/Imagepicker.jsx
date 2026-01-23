@@ -35,7 +35,7 @@ export default function Imagepicker({
             <p className="text-base font-normal leading-6 text-[#A3A3A3]">
               Drag & drop file or{" "}
               <span
-                className="text-primaryblue cursor-pointer"
+                className="text-ngtryprimary cursor-pointer hover:underline"
                 onClick={handleImageClick}
               >
                 Browse

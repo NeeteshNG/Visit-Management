@@ -1,19 +1,20 @@
 "use client";
 
+
+import {
+  CiMailIcon,
+  FaMobileAltIcon,
+  IoPersonOutlineIcon,
+  MdArrowDropDownIcon,
+  MdOutlineGroupIcon,
+  MdOutlineLocationOnIcon,
+  RiRectangleLineIcon,
+} from "@/modules/icons/SvgIcons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-import {
-  MdArrowDropDown,
-  MdOutlineLocationOn,
-  MdOutlineGroup,
-} from "react-icons/md";
-import { IoPersonOutline } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
-import { RiRectangleLine } from "react-icons/ri";
 
 import axiosInstance from "@/modules/axios";
 import { useUserData } from "@/modules/hooks/useUserData";
@@ -38,34 +39,62 @@ const VisitForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     setIsLoading(true);
-    if (!isUserLoading) {
-      const formData = new FormData();
-      Object.entries(value).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
+    if (!isUserLoading && user?.id) {
+      try {
+        const formData = new FormData();
+        formData.append("full_name", value.full_name || "");
+        formData.append("mobile_number", value.mobile_number || "");
+        formData.append("email", value.email || "");
+        formData.append("numAdultguest", value.adultguest || "0");
+        formData.append("numChildguest", value.childguest || "0");
+        formData.append("numofroom", value.numofroom || "0");
+        formData.append("type_of_id", value.typeid || "");
+        formData.append("id_number", value.id_number || "");
+        formData.append("advancedPayment", value.advancedPayment || "0");
+        formData.append("remainingPayment", value.remainingPayment || "0");
+        formData.append("paymentmethod", value.paymentmethod || "");
+        formData.append("checkout_date", value.checkout_date || new Date().toISOString().split('T')[0]);
 
-      const res = await axiosInstance.post(
-        "/organization/guestcreate/",
-        formData,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage?.getItem("access") || ""}`,
-          },
+        const res = await axiosInstance.post(
+          "/organization/guestcreate/",
+          formData,
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage?.getItem("access") || ""}`,
+            },
+          }
+        );
+
+        if (res.status === 200 || res.status === 201) {
+          toast.success(`Guest ${value.full_name} checked in successfully`);
+          router.push("/guest-list");
+          setValue({});
+        } else {
+          toast.error("Failed to check in guest");
         }
-      );
-
-      if (res.status === 200 || res.status === 201) {
-        toast.success(`Manual Entry For ${value.full_name} Successful`);
-        router.push("/success");
-        setValue({});
+      } catch (error) {
+        console.error("Guest check-in error:", error);
+        if (error?.response?.data) {
+          const errorData = error.response.data;
+          if (typeof errorData === 'object') {
+            Object.values(errorData).forEach((msg) => {
+              toast.error(Array.isArray(msg) ? msg[0] : msg);
+            });
+          } else {
+            toast.error(errorData);
+          }
+        } else {
+          toast.error("Failed to check in guest. Please try again.");
+        }
+      } finally {
         setIsLoading(false);
       }
     } else {
       setIsLoading(false);
-      toast.error("Something went wrong!");
+      toast.error("User data not loaded. Please try again.");
     }
   };
 
@@ -83,7 +112,7 @@ const VisitForm = () => {
               Full Name
             </label>
             <div className="mt-[8px] relative">
-              <IoPersonOutline
+              <IoPersonOutlineIcon
                 className={`absolute text-2xl left-4 ${
                   errors.full_name ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -94,7 +123,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.full_name}
                 placeholder="Input full name"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.full_name ? "border-red-500" : ""
                 }`}
                 {...register("full_name", { required: true })}
@@ -113,7 +142,7 @@ const VisitForm = () => {
               Mobile Number
             </label>
             <div className="mt-[8px] relative">
-              <FaMobileAlt
+              <FaMobileAltIcon
                 className={`absolute text-2xl left-4 ${
                   errors.mobile_number ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -124,7 +153,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.mobile_number}
                 placeholder="Input Mobile number"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.mobile_number ? "border-red-500" : ""
                 }`}
                 {...register("mobile_number", { required: true })}
@@ -142,7 +171,7 @@ const VisitForm = () => {
               Email address
             </label>
             <div className="mt-[8px] relative">
-              <CiMail
+              <CiMailIcon
                 className={`absolute text-2xl left-4 ${
                   errors.email ? "top-1/3" : "top-1/2"
                 }  transform -translate-y-1/2 text-gray-400`}
@@ -153,7 +182,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.email}
                 placeholder="Input Email address"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.email ? "border-red-500" : ""
                 }`}
                 {...register("email", { required: true })}
@@ -172,7 +201,7 @@ const VisitForm = () => {
                 Number of Adult guest
               </label>
               <div className="mt-2.5 relative">
-                <MdOutlineLocationOn
+                <MdOutlineLocationOnIcon
                   className={`absolute text-2xl left-4 ${
                     errors.adultguest ? "top-1/2" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -183,7 +212,7 @@ const VisitForm = () => {
                   placeholder="Input visiting from"
                   value={value.adultguest}
                   readOnly={true}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.visiting ? "border-red-500" : ""
                   }`}
                   {...register("adultguest", { required: true })}
@@ -201,7 +230,7 @@ const VisitForm = () => {
                 Number of child guest
               </label>
               <div className="mt-2.5 relative">
-                <MdOutlineGroup
+                <MdOutlineGroupIcon
                   className={`absolute text-2xl left-4 ${
                     errors.numvisitor ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -211,7 +240,7 @@ const VisitForm = () => {
                   type="text"
                   placeholder="Input number of child visitor"
                   value={value.childguest}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.numvisitor ? "border-red-500" : ""
                   }`}
                   {...register("numvisitor", { required: true })}
@@ -234,7 +263,7 @@ const VisitForm = () => {
                 Number of rooms
               </label>
               <div className="mt-2.5 relative">
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.numofroom ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -245,7 +274,7 @@ const VisitForm = () => {
                   placeholder="Input number of visitor"
                   readOnly={true}
                   value={value.numofroom}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.id_number ? "border-red-500" : ""
                   }`}
                   {...register("numofroom", { required: true })}
@@ -269,7 +298,7 @@ const VisitForm = () => {
                 <select
                   readOnly={true}
                   value={value.typeid}
-                  className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                  className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                   {...register("typeid", { required: true })}
                 >
                   <option value="" className="text-[#A3A3A3] ">
@@ -277,9 +306,9 @@ const VisitForm = () => {
                   </option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <MdArrowDropDown />
+                  <MdArrowDropDownIcon />
                 </div>
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.typeid ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -301,7 +330,7 @@ const VisitForm = () => {
                 ID Number
               </label>
               <div className="mt-2.5 relative">
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.id_number ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -312,7 +341,7 @@ const VisitForm = () => {
                   placeholder="Input number of visitor"
                   value={value.id_number}
                   readOnly={true}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.id_number ? "border-red-500" : ""
                   }`}
                   {...register("id_number", { required: true })}
@@ -330,7 +359,7 @@ const VisitForm = () => {
                 Advanced payment
               </label>
               <div className="mt-2.5 relative">
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.advancedPayment ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -341,7 +370,7 @@ const VisitForm = () => {
                   placeholder="Input number of visitor"
                   value={value.advancedPayment}
                   readOnly={true}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.id_number ? "border-red-500" : ""
                   }`}
                   {...register("advancedPayment", { required: true })}
@@ -361,10 +390,10 @@ const VisitForm = () => {
                 htmlFor="organization_name"
                 className="text-sm font-semibold text-[#333333] "
               >
-                Remaning Payment
+                Remaining Payment
               </label>
               <div className="mt-2.5 relative">
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.remainingPayment ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -375,7 +404,7 @@ const VisitForm = () => {
                   placeholder="Input number of visitor"
                   value={value.remainingPayment}
                   readOnly={true}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.id_number ? "border-red-500" : ""
                   }`}
                   {...register("remainingPayment", { required: true })}
@@ -395,7 +424,7 @@ const VisitForm = () => {
                 Payment method
               </label>
               <div className="mt-2.5 relative">
-                <RiRectangleLine
+                <RiRectangleLineIcon
                   className={`absolute text-2xl left-4 ${
                     errors.paymentmethod ? "top-1/3" : "top-1/2"
                   }  transform -translate-y-1/2 text-gray-400`}
@@ -406,7 +435,7 @@ const VisitForm = () => {
                   placeholder="Input number of visitor"
                   value={value.paymentmethod}
                   readOnly={true}
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.id_number ? "border-red-500" : ""
                   }`}
                   {...register("paymentmethod", { required: true })}
@@ -424,7 +453,7 @@ const VisitForm = () => {
       <div className="flex gap-3">
         <button
           type="submit"
-          className="w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+          className="w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent focus:outline-none hover:opacity-90"
           onClick={() => {
             if (isLoading === false) {
               onSubmit();

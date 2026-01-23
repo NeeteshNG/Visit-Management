@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import { useAtom } from "jotai";
 import { phonenumberdataAtom } from "@/jotai/dash-atoms";
 import axiosInstance from "@/modules/axios";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 const AuthSlider = dynamic(
   () => import("@/modules/auth-component/AuthSlider"),
@@ -59,7 +59,7 @@ function ForgotPassword() {
           className="xl:w-full xl:max-w-[460px] 2xl:max-w-[540px]"
           style={{ width: "80%" }}
         >
-          <EpassLogo style={{ width: '100px', height: '100px' }} />
+          <NGtryLogo style={{ width: '100px', height: '100px' }} />
           <h2 className="text-2xl font-bold leading-tight text-black sm:text-4xl mt-10">
             Forgot Password
           </h2>
@@ -99,7 +99,7 @@ function ForgotPassword() {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex items-center mt-10 bg-gradient-to-r from-[#25AAE1] to-[#0F75BC] justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+                  className="inline-flex items-center mt-10 bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md focus:outline-none hover:opacity-90"
                 >
                   Continue
                 </button>

@@ -39,9 +39,56 @@ const organizationTypes = [
   // { id: 21, title: "Religious", value: "religious" },
   { id: 22, title: "Other", value: "other" },
 ];
+// Import comprehensive country list from countries.js
+// For backward compatibility, we keep a simplified list here
+// Use countries.js for full features (phone validation, etc.)
 const countries = [
-  { id: 1, title: "Nepal", value: "nepal" },
-  { id: 2, title: "India", value: "india" },
+  // South Asia
+  { id: 1, code: "IN", title: "India", value: "india" },
+  { id: 2, code: "NP", title: "Nepal", value: "nepal" },
+  { id: 3, code: "BD", title: "Bangladesh", value: "bangladesh" },
+  { id: 4, code: "PK", title: "Pakistan", value: "pakistan" },
+  { id: 5, code: "LK", title: "Sri Lanka", value: "sri_lanka" },
+  // Southeast Asia
+  { id: 6, code: "SG", title: "Singapore", value: "singapore" },
+  { id: 7, code: "MY", title: "Malaysia", value: "malaysia" },
+  { id: 8, code: "TH", title: "Thailand", value: "thailand" },
+  { id: 9, code: "ID", title: "Indonesia", value: "indonesia" },
+  { id: 10, code: "PH", title: "Philippines", value: "philippines" },
+  { id: 11, code: "VN", title: "Vietnam", value: "vietnam" },
+  // Middle East
+  { id: 12, code: "AE", title: "United Arab Emirates", value: "uae" },
+  { id: 13, code: "SA", title: "Saudi Arabia", value: "saudi_arabia" },
+  { id: 14, code: "QA", title: "Qatar", value: "qatar" },
+  { id: 15, code: "KW", title: "Kuwait", value: "kuwait" },
+  // East Asia
+  { id: 16, code: "CN", title: "China", value: "china" },
+  { id: 17, code: "JP", title: "Japan", value: "japan" },
+  { id: 18, code: "KR", title: "South Korea", value: "south_korea" },
+  // Europe
+  { id: 19, code: "GB", title: "United Kingdom", value: "united_kingdom" },
+  { id: 20, code: "DE", title: "Germany", value: "germany" },
+  { id: 21, code: "FR", title: "France", value: "france" },
+  { id: 22, code: "IT", title: "Italy", value: "italy" },
+  { id: 23, code: "ES", title: "Spain", value: "spain" },
+  { id: 24, code: "NL", title: "Netherlands", value: "netherlands" },
+  { id: 25, code: "CH", title: "Switzerland", value: "switzerland" },
+  // Americas
+  { id: 26, code: "US", title: "United States", value: "united_states" },
+  { id: 27, code: "CA", title: "Canada", value: "canada" },
+  { id: 28, code: "MX", title: "Mexico", value: "mexico" },
+  { id: 29, code: "BR", title: "Brazil", value: "brazil" },
+  // Oceania
+  { id: 30, code: "AU", title: "Australia", value: "australia" },
+  { id: 31, code: "NZ", title: "New Zealand", value: "new_zealand" },
+  // Africa
+  { id: 32, code: "ZA", title: "South Africa", value: "south_africa" },
+  { id: 33, code: "NG", title: "Nigeria", value: "nigeria" },
+  { id: 34, code: "EG", title: "Egypt", value: "egypt" },
+  { id: 35, code: "KE", title: "Kenya", value: "kenya" },
+  // Russia & Turkey
+  { id: 36, code: "RU", title: "Russia", value: "russia" },
+  { id: 37, code: "TR", title: "Turkey", value: "turkey" },
 ];
 const purpose = [
   { id: 1, title: "Administrative Work", value: "Administrative Work" },
@@ -74,12 +121,32 @@ const notificationfilter = [
   { id: 4, title: "Year", value: "year" },
   { id: 5, title: "All", value: "" },
 ];
+// Global ID Types - Universal + Common regional types
 const idTypes = [
-  { id: 1, title: "Citizenship", value: "Citizenship" },
-  { id: 2, title: "Driving License", value: "License" },
-  { id: 3, title: "Passport", value: "Passport" },
-  { id: 4, title: "National ID Card", value: "National ID Card" },
-  { id: 5, title: "Pan Card", value: "Pan Card" },
+  // Universal
+  { id: 1, title: "Passport", value: "Passport" },
+  { id: 2, title: "Driving License", value: "Driving License" },
+  { id: 3, title: "National ID Card", value: "National ID Card" },
+  // India
+  { id: 4, title: "Aadhaar Card", value: "Aadhaar Card" },
+  { id: 5, title: "PAN Card", value: "PAN Card" },
+  { id: 6, title: "Voter ID", value: "Voter ID" },
+  // Nepal
+  { id: 7, title: "Citizenship", value: "Citizenship" },
+  // UAE/Gulf
+  { id: 8, title: "Emirates ID", value: "Emirates ID" },
+  { id: 9, title: "Iqama", value: "Iqama" },
+  // Singapore/Malaysia
+  { id: 10, title: "NRIC", value: "NRIC" },
+  { id: 11, title: "MyKad", value: "MyKad" },
+  // US/Canada
+  { id: 12, title: "Social Security Card", value: "Social Security Card" },
+  { id: 13, title: "State/Provincial ID", value: "State ID" },
+  // Europe
+  { id: 14, title: "Residence Permit", value: "Residence Permit" },
+  // Other
+  { id: 15, title: "Work Permit", value: "Work Permit" },
+  { id: 16, title: "Other Government ID", value: "Other Government ID" },
 ];
 const organizationNatureTypes = [
   { id: 1, title: "Service Based", value: "service-based" },
@@ -168,6 +235,9 @@ const urlCategories = [
   { urls: ["/sub-admin-list", "/sub-admin-list/details"], title: "Sub Admin" },
   { urls: ["/branch-list", "/branch-list/details"], title: "Branch" },
   { urls: ["/visitor-list"], title: "Visitor List" },
+  { urls: ["/customer-list"], title: "Customer List" },
+  { urls: ["/guest-list"], title: "Guest List" },
+  { urls: ["/meeting-list"], title: "Meeting List" },
   { urls: ["/"], title: "Dashboard" },
 ];
 

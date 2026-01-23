@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import finalimage from "../../assets/On the way.png";
 import AuthSlider from "@/modules/auth-component/AuthSlider";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 export default function Final() {
   const router = useRouter();
@@ -16,11 +16,11 @@ export default function Final() {
       <div className="flex items-center justify-start px-4  bg-white md:px-0 ">
         <div className="xl:w-full xl:max-w-[80%] 2xl:max-w-[80%] mt-12 items-center flex flex-col justify-center">
           <div className="flex flex-row items-start justify-start w-full">
-            <EpassLogo style={{ width: "100px", height: "100px" }} />
+            <NGtryLogo style={{ width: "100px", height: "100px" }} />
           </div>
           <Image src={finalimage} width={340} alt="something" />
           <p className="text-3xl text-center font-bold">
-            Congratulation! <br /> Welcome to Epass
+            Congratulation! <br /> Welcome to NGtry
           </p>
           <p className="text-sm font-normal text-center mt-4 w-[85%]">
             We are happy to have you. It’s time to scan and track the visitor
@@ -28,7 +28,7 @@ export default function Final() {
           </p>
           <button
             type="submit"
-            className="inline-flex mt-7 w-[560px] items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+            className="inline-flex mt-7 w-[560px] items-center bg-gradient-to-r from-[#BAC095]  to-[#636B2F] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-ngtryprimary focus:outline-none hover:bg-ngtrydeep focus:bg-ngtrydeep"
             onClick={() => {
               router.push("/login");
             }}

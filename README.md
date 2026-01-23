@@ -1,69 +1,136 @@
-# EPASS MANAGEMENT SYSTEM
+# Epass - Visitor Management System
 
-Epass QR Based Entry Management System
+A comprehensive QR-based visitor management system for organizations, hotels, and apartments. Built with Django REST Framework backend and React frontend, fully containerized with Docker.
 
 ## Table of Contents
 
 - [Overview](#overview)
-  - [What is Epass?](#what-is-epass)
-  - [Features](#features)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
 - [Usage](#usage)
-  - [Running the Project](#running-the-project)
-  - [Running a Specific Container](#running-a-specific-container)
-  - [Accessing the Applications](#accessing-the-applications)
 - [API Documentation](#api-documentation)
-- [License](#license)
+- [Author](#author)
 
 ## Overview
 
-Epass is a QR-based entry management system that allows users to easily and securely enter and exit a premises. It is a cloud-based system that can be accessed from anywhere with an internet connection.
+Epass is a QR-based entry management system that allows users to easily and securely enter and exit premises. It is a cloud-based system that can be accessed from anywhere with an internet connection.
 
-### What is Epass?
+The system issues digital passes containing QR codes that are scanned at entrances. The reader verifies the authenticity of the pass and allows the user to enter, providing complete audit trails and visitor management capabilities.
 
-Epass is a digital pass that is issued to users. The pass contains a QR code that is scanned by a reader at the entrance of the premises. The reader verifies the authenticity of the pass and allows the user to enter.
+## Features
 
-### Features
+### Visitor Management
+- QR code-based check-in/check-out
+- Visitor registration with KYC verification
+- Visit history tracking with search and filtering
+- Identity document upload and verification
 
-Epass offers a number of features, including:
+### Organization Features
+- Multi-organization support
+- Staff management with role-based access
+- Visitor approval workflow
+- Real-time visit status updates
 
-- Secure entry and exit: Epass uses a secure QR code system to verify the authenticity of each pass. This helps to prevent unauthorized access to the premises.
-- Easy to use: Epass is easy to use for both users and administrators. Users can simply scan their pass at the entrance to enter the premises. Administrators can manage users and passes from a web dashboard.
-- Scalable: Epass is scalable and can be used to manage large numbers of users and passes.
+### Reporting & Export
+- Export visitor data to CSV
+- Generate PDF reports with custom styling
+- Date range filtering
+- Search across visitor name, purpose, mobile, vehicle number
+
+### Notifications
+- Firebase Cloud Messaging (FCM) integration
+- Push notifications for visitor arrivals
+- Real-time updates
+
+## Tech Stack
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| Django 4.2 | Web framework |
+| Django REST Framework | RESTful API |
+| SimpleJWT | JWT authentication |
+| PostgreSQL | Database |
+| Gunicorn | WSGI server |
+| drf-yasg | Swagger/OpenAPI docs |
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| React | UI library |
+| Next.js | React framework |
+
+### DevOps & Infrastructure
+| Technology | Purpose |
+|------------|---------|
+| Docker | Containerization |
+| Docker Compose | Multi-container orchestration |
+| Nginx | Reverse proxy & load balancing |
+| WhiteNoise | Static file serving |
+
+### Additional Libraries
+- **qrcode / pyzbar** - QR code generation & scanning
+- **xhtml2pdf / reportlab** - PDF generation
+- **Pillow** - Image processing
+- **pandas** - Data manipulation for reports
+- **Firebase Admin** - Push notifications
+- **CKEditor** - Rich text editor
+
+## Project Structure
+
+```
+Visit-Management/
+├── backend/
+│   └── api_service/
+│       ├── api_service/      # Django settings & URLs
+│       ├── user/             # User authentication
+│       ├── organization/     # Organization management
+│       ├── visitor/          # Visitor & KYC management
+│       ├── staff_of_org/     # Staff management
+│       ├── notification/     # Push notifications
+│       ├── common/           # Shared utilities
+│       └── requirements.txt  # Python dependencies
+├── frontend/
+│   └── organization-site/    # React/Next.js frontend
+├── docker/
+│   ├── backend/              # Backend Dockerfiles
+│   ├── frontend/             # Frontend Dockerfiles
+│   └── nginx/                # Nginx Dockerfile
+├── nginx/
+│   └── nginx.conf            # Nginx configuration
+├── compose.yml               # Production compose
+└── compose-dev.yml           # Development compose
+```
 
 ## Getting Started
 
 ### Prerequisites
-
-To get started with Epass, you will need the following prerequisites:
 
 - Docker
 - Docker Compose
 
 ### Installation
 
-1. Clone this repository to your local machine:
+1. Clone this repository:
 
-   SSH: `git clone git@gitlab.com:societyfintech/epass-codebase.git`
-   HTTPS: `git clone https://gitlab.com:societyfintech/epass-codebase.git`
+```bash
+git clone https://github.com/NeeteshNG/Visit-Management.git
+cd Visit-Management
+```
 
-   ```bash
-   cd epass-codebase
-   ```
+2. Build the Docker containers:
 
-2. Build the Docker containers using the following command:
-
-   ```bash
-   docker-compose -f compose-dev.yml build
-   ```
+```bash
+docker-compose -f compose-dev.yml build
+```
 
 ## Usage
 
 ### Running the Project
 
-To run the entire project, including all containers and services, use the following command:
+To run the entire project, including all containers and services:
 
 ```bash
 docker-compose -f compose-dev.yml up
@@ -71,54 +138,66 @@ docker-compose -f compose-dev.yml up
 
 ### Running a Specific Container
 
-If you want to run only a specific container and access its shell, use the following command as an example:
+Access a container's shell:
 
 ```bash
 docker-compose -f compose-dev.yml exec backend-api-service bash
 ```
 
-Here's what each part of the command means:
+### Django Management Commands
 
-- `docker-compose`: This command is used to manage multi-container Docker applications using a `docker-compose.yml` file.
-- `-f compose-dev.yml`: This specifies the Docker Compose file you want to use (in this case, `compose-dev.yml`).
-- `exec`: This command is used to execute a command in a running container.
-- `backend-api-service`: This is the name of the container you want to run the command in. Replace it with the actual container name.
-- `bash`: This is the command you want to execute inside the container. In this example, we're running a Bash shell inside the container.
+```bash
+# Run migrations
+docker-compose -f compose-dev.yml exec backend-api-service python manage.py migrate
 
-Remember to replace `backend-api-service` with the name of the container you want to run.
+# Create superuser
+docker-compose -f compose-dev.yml exec backend-api-service python manage.py createsuperuser
+
+# Collect static files
+docker-compose -f compose-dev.yml exec backend-api-service python manage.py collectstatic
+```
 
 ### Accessing the Applications
 
-Once the project is running, you can access the applications using the following URLs:
+**Frontend Sites:**
+| Site | URL |
+|------|-----|
+| Main Site | http://localhost:3000 |
+| Admin Site | http://localhost:3001 |
+| Organization Site | http://localhost:3002 |
+| Visitor Site | http://localhost:3003 |
 
-- Frontend Main Site: [http://localhost:3000](http://localhost:3000)
-- Frontend Admin Site: [http://localhost:3001](http://localhost:3001)
-- Frontend Organization Site: [http://localhost:3002](http://localhost:3002)
-- Frontend Visitor Site: [http://localhost:3003](http://localhost:3003)
-
-Access the backend services using their respective ports:
-
-- Backend Visitor Service: [http://localhost:8001](http://localhost:8001)
-- Backend Organization Service: [http://localhost:8002](http://localhost:8002)
-- Backend User Service: [http://localhost:8003](http://localhost:8003)
-- Backend Admin Service: [http://localhost:8004](http://localhost:8004)
+**Backend Services:**
+| Service | URL |
+|---------|-----|
+| Visitor Service | http://localhost:8001 |
+| Organization Service | http://localhost:8002 |
+| User Service | http://localhost:8003 |
+| Admin Service | http://localhost:8004 |
 
 ## API Documentation
 
-You can access the API documentation for all backend endpoints using the following routes:
+Access API documentation at:
 
-- JSON format: [http://localhost/api-docs/schema-json](http://localhost/api-docs/schema-json)
-- Swagger UI: [http://localhost/api-docs/schema-swagger-ui](http://localhost/api-docs/schema-swagger-ui)
-- ReDoc: [http://localhost/redoc/schema-redoc](http://localhost/redoc/schema-redoc)
+| Format | URL |
+|--------|-----|
+| Swagger UI | http://localhost/api-docs/schema-swagger-ui |
+| ReDoc | http://localhost/redoc/schema-redoc |
+| JSON Schema | http://localhost/api-docs/schema-json |
+
+## Author
+
+**Neetesh Gupta**
+
+- GitHub: [@NeeteshNG](https://github.com/NeeteshNG)
+- LinkedIn: [neetesh-gupta](https://linkedin.com/in/neetesh-gupta)
 
 ## License
 
 Epass Private License
+
 ---
 
-For downloading Docker and Docker Compose:
-
-- Download Docker: [Docker](https://www.docker.com/get-started)
-- Download Docker Compose: [Docker Compose](https://docs.docker.com/compose/install/)
-```
-
+**Resources:**
+- [Download Docker](https://www.docker.com/get-started)
+- [Download Docker Compose](https://docs.docker.com/compose/install/)

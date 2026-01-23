@@ -1,18 +1,22 @@
 "use client";
 
+
+import {
+  CiLockIcon,
+  FaMobileScreenIcon,
+  IoMdLaptopIcon,
+  MdOutlineGroupsIcon,
+  MdOutlineVisibilityIcon,
+  MdOutlineVisibilityOffIcon,
+} from "@/modules/icons/SvgIcons";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
 import LoadingComponent from "@/modules/core-ui/LoadingComponent";
 import { useUserData } from "@/modules/hooks/useUserData";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { CiLock } from "react-icons/ci";
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { toast } from "react-toastify";
-import { FaMobileScreen } from "react-icons/fa6";
-import { IoMdLaptop } from "react-icons/io";
 import { getLogDevices } from "@/modules/data/notification_service";
-import { MdOutlineGroups } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
@@ -25,9 +29,12 @@ const Page = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors,
   } = useForm();
   const [password, setPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [isClicked, setIsClicked] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -87,6 +94,14 @@ const Page = () => {
   };
 
   const onSubmit = () => {
+    if (password !== confirmPassword) {
+      setError("confirmPassword", {
+        type: "manual",
+        message: "Passwords do not match",
+      });
+      return;
+    }
+    clearErrors("confirmPassword");
     handlePasswordChange({
       old_password: oldPassword,
       new_password: password,
@@ -118,14 +133,14 @@ const Page = () => {
               <h1
                 className={`${
                   isClicked === index
-                    ? "font-bold text-primaryblue"
+                    ? "font-bold text-ngtryprimary"
                     : "font-normal"
                 } font-inter text-base transition duration-1000 ease-in`}
               >
                 {tab}
               </h1>
               {isClicked === index && (
-                <div className="bg-primaryblue h-[2px] mt-2 w-full"></div>
+                <div className="bg-ngtryprimary h-[2px] mt-2 w-full"></div>
               )}
             </div>
           )
@@ -136,30 +151,42 @@ const Page = () => {
       {isClicked === 0 && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex gap-10 mt-8 mb-4"
+          className="mt-8 mb-4"
         >
-          <PasswordInput
-            label="Old Password"
-            register={register}
-            name="oldPassword"
-            value={oldPassword}
-            setValue={setOldPassword}
-            errors={errors}
-            isVisible={isVisible}
-            setIsVisible={setIsVisible}
-          />
-          <PasswordInput
-            label="New Password"
-            register={register}
-            name="password"
-            value={password}
-            setValue={setPassword}
-            errors={errors}
-            isVisible={isVisible}
-            setIsVisible={setIsVisible}
-          />
-          <div className="w-[320px] mt-10">
-            <DefaultButton text="Change" />
+          <div className="flex flex-wrap gap-6">
+            <PasswordInput
+              label="Old Password"
+              register={register}
+              name="oldPassword"
+              value={oldPassword}
+              setValue={setOldPassword}
+              errors={errors}
+              isVisible={isVisible}
+              setIsVisible={setIsVisible}
+            />
+            <PasswordInput
+              label="New Password"
+              register={register}
+              name="password"
+              value={password}
+              setValue={setPassword}
+              errors={errors}
+              isVisible={isVisible}
+              setIsVisible={setIsVisible}
+            />
+            <PasswordInput
+              label="Confirm Password"
+              register={register}
+              name="confirmPassword"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
+              errors={errors}
+              isVisible={isVisible}
+              setIsVisible={setIsVisible}
+            />
+          </div>
+          <div className="w-[320px] mt-8">
+            <DefaultButton text="Change Password" />
           </div>
         </form>
       )}
@@ -191,14 +218,14 @@ const Page = () => {
         <div className="flex flex-col mt-9 h-[170px]">
           <div className="flex w-[532px] justify-between items-center">
             <div className="flex gap-5 items-center">
-              <MdOutlineGroups className="text-2xl text-primaryblue" />
+              <MdOutlineGroupsIcon className="text-2xl text-ngtryprimary" />
               <p className="font-semibold text-base">Visitors Allowed</p>
             </div>
             <div>
               <p className="font-semibold text-sm pb-1">off/on</p>
               <div
                 className={`w-10 h-5 rounded-2xl flex items-center relative cursor-pointer ${
-                  approveVisitorBeforeAccess ? "bg-primaryblue" : "bg-green-500"
+                  approveVisitorBeforeAccess ? "bg-ngtryprimary" : "bg-ngtrysage"
                 }`}
                 onClick={handleToggleSetting}
               >
@@ -254,20 +281,20 @@ const PasswordInput = ({
       </label>
     </div>
     <div className="mt-2.5 relative">
-      <CiLock
+      <CiLockIcon
         className={`absolute text-2xl left-4 ${
           errors[name] ? "top-1/3" : "top-1/2"
         } transform -translate-y-1/2 text-gray-400`}
       />
       <div onClick={() => setIsVisible(!isVisible)} className="cursor-pointer">
         {isVisible ? (
-          <MdOutlineVisibilityOff
+          <MdOutlineVisibilityOffIcon
             className={`absolute text-2xl right-4 ${
               errors[name] ? "top-1/3" : "top-1/2"
             } transform -translate-y-1/2 text-gray-400`}
           />
         ) : (
-          <MdOutlineVisibility
+          <MdOutlineVisibilityIcon
             className={`absolute text-2xl right-4 ${
               errors[name] ? "top-1/3" : "top-1/2"
             } transform -translate-y-1/2 text-gray-400`}
@@ -282,7 +309,7 @@ const PasswordInput = ({
           required: `${label} is required`,
         })}
         placeholder={`Input your ${label.toLowerCase()}`}
-        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-xl focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-xl focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
           errors[name] ? "border-red-500" : ""
         }`}
       />
@@ -324,11 +351,11 @@ const DeviceLog = ({ device }) => {
   return (
     <div className="flex justify-between py-2 items-center">
       <div className="flex gap-2 items-center">
-        <div className="h-[48px] w-[48px] rounded-xl bg-[#E5F3FE] flex items-center justify-center">
+        <div className="h-[48px] w-[48px] rounded-xl bg-ngtrylime/30 flex items-center justify-center">
           {getDeviceOS(device.device_type) === "Android" ? (
-            <FaMobileScreen className="text-2xl text-primaryblue" />
+            <FaMobileScreenIcon className="text-2xl text-ngtryprimary" />
           ) : (
-            <IoMdLaptop className="text-2xl text-primaryblue" />
+            <IoMdLaptopIcon className="text-2xl text-ngtryprimary" />
           )}
         </div>
         <div className="flex flex-col">

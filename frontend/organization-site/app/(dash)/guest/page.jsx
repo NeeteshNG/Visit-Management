@@ -62,7 +62,7 @@ const VisitForm = () => {
                 <input
                   type="text"
                   placeholder="Input full name"
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.full_name ? "border-red-500" : ""
                   }`}
                   {...register("full_name", { required: true })}
@@ -90,7 +90,7 @@ const VisitForm = () => {
                 <input
                   type="text"
                   placeholder="Input Mobile Number"
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.mobile_number ? "border-red-500" : ""
                   }`}
                   {...register("mobile_number", {
@@ -141,7 +141,7 @@ const VisitForm = () => {
                 <input
                   type="email"
                   placeholder="Input Email address"
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.email ? "border-red-500" : ""
                   }`}
                   {...register("email")}
@@ -172,7 +172,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Number of Adult Guest"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.visiting ? "border-red-500" : ""
                     }`}
                     {...register("adultguest", { required: true })}
@@ -201,7 +201,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Number of Child Guest"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.numvisitor ? "border-red-500" : ""
                     }`}
                     {...register("childguest", { required: true })}
@@ -233,7 +233,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Number of Rooms"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.id_number ? "border-red-500" : ""
                     }`}
                     {...register("numofroom", { required: true })}
@@ -254,7 +254,7 @@ const VisitForm = () => {
                 </label>
                 <div className="mt-2.5 relative">
                   <select
-                    className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                    className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                     {...register("typeid")}
                   >
                     <option value="" className="text-[#A3A3A3] ">
@@ -306,7 +306,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input ID Number"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.id_number ? "border-red-500" : ""
                     }`}
                     {...register("id_number", { required: true })}
@@ -333,7 +333,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Advance Payment"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.id_number ? "border-red-500" : ""
                     }`}
                     {...register("advancedPayment", { required: true })}
@@ -353,7 +353,7 @@ const VisitForm = () => {
                   htmlFor="organization_name"
                   className="text-sm font-semibold text-[#333333] "
                 >
-                  Remaning Payment
+                  Remaining Payment
                 </label>
                 <div className="mt-2.5 relative">
                   <MoneyIcon
@@ -365,7 +365,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Remaining Payment"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.id_number ? "border-red-500" : ""
                     }`}
                     {...register("remainingPayment", { required: true })}
@@ -394,7 +394,7 @@ const VisitForm = () => {
                   <input
                     type="text"
                     placeholder="Input Payment Method"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.id_number ? "border-red-500" : ""
                     }`}
                     {...register("paymentmethod", { required: true })}

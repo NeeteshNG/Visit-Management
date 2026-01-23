@@ -16,7 +16,7 @@
     cursor: pointer;
   }
 #container1::-webkit-scrollbar-thumb {
-    background: #0F75BC;
+    background: #636B2F;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -24,12 +24,12 @@
 
 
 #container1::-webkit-scrollbar-thumb:active {
-    background: #0F75BC;
+    background: #636B2F;
     cursor: pointer;
 }
 
 
 #container1::-webkit-scrollbar-thumb:active {
 cursor: pointer;
-    background: #0F75BC; /* Change the color when actively scrolled */
+    background: #636B2F; /* Change the color when actively scrolled */
 }

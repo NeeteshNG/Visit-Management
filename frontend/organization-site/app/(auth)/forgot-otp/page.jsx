@@ -13,7 +13,7 @@ import Image from "next/image";
 
 import DefaultButton from "@/modules/core-ui/Button";
 import AuthSlider from "@/modules/auth-component/AuthSlider";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 function VerifyOTP() {
   const router = useRouter();
   const [userData, setUserData] = useAtom(userDataAtom);
@@ -70,7 +70,7 @@ function VerifyOTP() {
     <div className="grid px-5 py-2 mx-auto font-inter xl:px-32 md:grid-cols-2 max-w-9xl">
       <div className="flex items-center justify-start px-4 py-10 bg-white md:px-0 ">
         <div className="xl:w-full xl:max-w-[460px] 2xl:max-w-[540px]">
-          <EpassLogo style={{ width: "100px", height: "100px" }} />
+          <NGtryLogo style={{ width: "100px", height: "100px" }} />
 
           <h2 className="text-2xl font-bold leading-tight text-black sm:text-4xl mt-10">
             Verification
@@ -99,7 +99,7 @@ function VerifyOTP() {
                         onChange={(e1) =>
                           handleOTPChange(e1.target.value, index)
                         }
-                        className="w-12 h-12 mx-1 text-2xl text-center border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                        className="w-12 h-12 mx-1 text-2xl text-center border border-gray-300 rounded-lg focus:outline-none focus:border-ngtryprimary"
                         // {...register('otp', { required: true })}
                       />
                     ))}
@@ -134,7 +134,7 @@ function VerifyOTP() {
           </form>
         </div>
       </div>
-      <div className="h-full w-[50%] lg:flex text-white hidden overflow-hidden  flex-col items-center   justify-center pt-8 bg-primary fixed right-0 top-0 z-10 px-4 py-10 bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] border-l sm:py-16 lg:py-24">
+      <div className="h-full w-[50%] lg:flex text-white hidden overflow-hidden  flex-col items-center   justify-center pt-8 bg-primary fixed right-0 top-0 z-10 px-4 py-10 bg-gradient-to-b from-ngtrydeep to-ngtryprimary border-l sm:py-16 lg:py-24">
         <Image
           width={300}
           src={dots}

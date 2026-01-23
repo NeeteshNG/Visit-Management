@@ -1,29 +1,32 @@
 'use client'
+
+import {
+  CgOrganisationIcon,
+  CiCalendarIcon,
+  CiFlag1Icon,
+  CiMailIcon,
+  FaFacebookIcon,
+  FaPlusIcon,
+  FaWhatsappIcon,
+  FaWordpressIcon,
+  IoIosPhonePortraitIcon,
+  IoPersonOutlineIcon,
+  MdArrowDropDownIcon,
+  MdLocationOnIcon,
+  MdLocationSearchingIcon,
+  MdOutlineLocalPhoneIcon,
+  MdPanoramaWideAngleIcon,
+  MdShareLocationIcon,
+  TbArrowBigRightIcon,
+  TbLayoutDashboardIcon,
+  TiLocationArrowOutlineIcon,
+} from "@/modules/icons/SvgIcons";
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useUserData } from '@/modules/hooks/useUserData'
-import { CgOrganisation } from "react-icons/cg";
-import { CiCalendar } from "react-icons/ci";
-import { TbLayoutDashboard } from "react-icons/tb";
-import { MdArrowDropDown, MdPanoramaWideAngle } from "react-icons/md";
-import { PiBagSimpleBold } from 'react-icons/pi'
-import { MdLocationSearching } from "react-icons/md";
-import { CiFlag1 } from "react-icons/ci";
-import { TiLocationArrowOutline } from "react-icons/ti";
-import { IoPersonOutline } from "react-icons/io5";
-import { MdOutlineLocalPhone } from "react-icons/md";
-import { IoIosPhonePortrait } from "react-icons/io";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdShareLocation } from "react-icons/md";
-import { MdLocationOn } from "react-icons/md";
 
-import { CiMail } from "react-icons/ci";
-import { FaWordpress } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
 
-import { TbArrowBigRight } from "react-icons/tb";
-import { FaPlus } from "react-icons/fa6";
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 
@@ -276,7 +279,7 @@ const [alldocuments, setalldocuments] = useState([])
                       Office Name
                     </label>
                     <div className='mt-2.5 relative'>
-                      <CgOrganisation className={`absolute text-2xl left-4 ${errors.organization_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <CgOrganisationIcon className={`absolute text-2xl left-4 ${errors.organization_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -303,7 +306,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Establishment Year
                       </label>
                       <div className='mt-2.5 relative'>
-                        <CiCalendar className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiCalendarIcon className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -329,7 +332,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Registration Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TbLayoutDashboard className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TbLayoutDashboardIcon className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -357,7 +360,7 @@ const [alldocuments, setalldocuments] = useState([])
                         PAN / VAT Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdPanoramaWideAngle className={`absolute text-2xl left-4 ${errors.pan_vat_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdPanoramaWideAngleIcon className={`absolute text-2xl left-4 ${errors.pan_vat_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -396,7 +399,7 @@ const [alldocuments, setalldocuments] = useState([])
                           </select>
                           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                             {/* Adjust the positioning of the dropdown button here */}
-                            <MdArrowDropDown />
+                            <MdArrowDropDownIcon />
                           </div>
                           {/* Adjust the positioning of the dropdown button here */}
                           <PiBagSimpleBold className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
@@ -442,9 +445,9 @@ const [alldocuments, setalldocuments] = useState([])
                           
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <CiFlag1 className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiFlag1Icon className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.country && (
                           <span className='text-red-500'>
@@ -479,9 +482,9 @@ const [alldocuments, setalldocuments] = useState([])
                         </select>
 
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdLocationSearching className={`absolute text-2xl left-4 ${errors.province ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdLocationSearchingIcon className={`absolute text-2xl left-4 ${errors.province ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.province && (
                           <span className='text-red-500'>
@@ -520,9 +523,9 @@ const [alldocuments, setalldocuments] = useState([])
                           ))} */}
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdShareLocation className={`absolute text-2xl left-4 ${errors.district ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdShareLocationIcon className={`absolute text-2xl left-4 ${errors.district ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.district && (
                           <span className='text-red-500'>
@@ -552,9 +555,9 @@ const [alldocuments, setalldocuments] = useState([])
                           
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                          <MdArrowDropDown />
+                          <MdArrowDropDownIcon />
                         </div>
-                        <MdLocationOn className={`absolute text-2xl left-4 ${errors.municipality ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdLocationOnIcon className={`absolute text-2xl left-4 ${errors.municipality ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         {errors.municipality && (
                           <span className='text-red-500'>
@@ -573,7 +576,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Ward No.
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TbArrowBigRight className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TbArrowBigRightIcon className={`absolute text-2xl left-4 ${errors.establishment_year ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                         readOnly={true}
@@ -599,7 +602,7 @@ const [alldocuments, setalldocuments] = useState([])
                         City / Tole / Area
                       </label>
                       <div className='mt-2.5 relative'>
-                        <TiLocationArrowOutline className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <TiLocationArrowOutlineIcon className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -630,7 +633,7 @@ const [alldocuments, setalldocuments] = useState([])
                       Contact Person Full Name
                     </label>
                     <div className='mt-2.5 relative'>
-                      <IoPersonOutline className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <IoPersonOutlineIcon className={`absolute text-2xl left-4 ${errors.full_name ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -656,7 +659,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Telephone number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdOutlineLocalPhone className={`absolute text-2xl left-4 ${errors.telephone_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdOutlineLocalPhoneIcon className={`absolute text-2xl left-4 ${errors.telephone_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                         readOnly={true}
@@ -682,7 +685,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Mobile Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <IoIosPhonePortrait className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <IoIosPhonePortraitIcon className={`absolute text-2xl left-4 ${errors.registration_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                         readOnly={true}
@@ -710,7 +713,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Whatsapp / Viber Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <FaWhatsapp className={`absolute text-2xl left-4 ${errors.whatsapp_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <FaWhatsappIcon className={`absolute text-2xl left-4 ${errors.whatsapp_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -736,7 +739,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Alternative Contact Number
                       </label>
                       <div className='mt-2.5 relative'>
-                        <MdOutlineLocalPhone className={`absolute text-2xl left-4 ${errors.contact_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <MdOutlineLocalPhoneIcon className={`absolute text-2xl left-4 ${errors.contact_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -764,7 +767,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Email address
                       </label>
                       <div className='mt-2.5 relative'>
-                        <CiMail className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <CiMailIcon className={`absolute text-2xl left-4 ${errors.email ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='email'
@@ -790,7 +793,7 @@ const [alldocuments, setalldocuments] = useState([])
                         Website
                       </label>
                       <div className='mt-2.5 relative'>
-                        <FaWordpress className={`absolute text-2xl left-4 ${errors.website ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                        <FaWordpressIcon className={`absolute text-2xl left-4 ${errors.website ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
@@ -818,7 +821,7 @@ const [alldocuments, setalldocuments] = useState([])
                       Socail Media Link
                     </label>
                     <div className='mt-2.5 relative'>
-                      <FaFacebook className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <FaFacebookIcon className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -843,7 +846,7 @@ const [alldocuments, setalldocuments] = useState([])
        </label>
        <div className='mt-2.5 relative'>
          {/* You can customize the icon based on the social media platform */}
-         <FaFacebook className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+         <FaFacebookIcon className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
          <input
            type='text'
@@ -865,7 +868,7 @@ const [alldocuments, setalldocuments] = useState([])
                       Another Link
                     </label>
                     <div className='mt-2.5 relative'>
-                      <FaFacebook className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                      <FaFacebookIcon className={`absolute text-2xl left-4 ${errors.link ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                       <input
                         type='text'
@@ -887,7 +890,7 @@ const [alldocuments, setalldocuments] = useState([])
                   {/* <div className='flex gap-3 mt-6 items-center'>
                     <p className='text-primaryblue font-bold text-sm leading-5 '>
                       Add another link</p>
-                    <FaPlus className="text-sm text-primaryblue" />
+                    <FaPlusIcon className="text-sm text-primaryblue" />
 
                   </div> */}
                 </div>
@@ -924,7 +927,7 @@ alt="Selected" className='object-contain h-[100px]' />
               />
                   </div>:<>
                   {/* <div className='w-[619px] h-[140px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
-                  <LuUpload className="text-base text-[#A3A3A3]"/>
+                  <LuUploadIcon className="text-base text-[#A3A3A3]"/>
                   <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-primaryblue cursor-pointer' onClick={()=>{
                   
                   }}>Browse</span></p>
@@ -939,7 +942,7 @@ alt="Selected" className='object-contain h-[100px]' />
 
 
                     {/* <div className='flex gap-3 mt-6 items-center'>
-                      <FaPlus className="text-sm text-primaryblue" />
+                      <FaPlusIcon className="text-sm text-primaryblue" />
                       <p className='text-primaryblue font-bold text-sm leading-5 '>
                         Add file upload</p>
 
@@ -959,7 +962,7 @@ alt="Selected" className='object-contain h-[100px]' />
             <div className='flex gap-3'>
             <button
                 type='submit'
-                className='w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] justify-center  px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700'
+                className='w-[320px] h-[56px] mb-12 rounded-xl mt-10 flex items-center bg-gradient-to-b from-ngtryprimary to-ngtrydeep justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent focus:outline-none hover:opacity-90'
                 onClick={()=>{
                   onSubmit()
                 }}

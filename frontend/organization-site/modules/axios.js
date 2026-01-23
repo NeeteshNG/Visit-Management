@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { redirect } from 'next/router'
-//https://api.epass.com.np
+
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8002',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8002',
   headers: {
     'Content-Type': 'application/json'
   }

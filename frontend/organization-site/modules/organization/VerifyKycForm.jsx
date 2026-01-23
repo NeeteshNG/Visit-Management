@@ -84,7 +84,7 @@ function VerifyKycForm() {
               type='number'
               id='establishment_year'
               {...register('establishment_year', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.establishment_year && (
               <span className='text-red-500'>
@@ -104,7 +104,7 @@ function VerifyKycForm() {
               type='text'
               id='vat_number'
               {...register('vat_number', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.vat_number && (
               <span className='text-red-500'>VAT number is required</span>
@@ -122,7 +122,7 @@ function VerifyKycForm() {
               type='text'
               id='pan_number'
               {...register('pan_number', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.pan_number && (
               <span className='text-red-500'>PAN number is required</span>
@@ -140,7 +140,7 @@ function VerifyKycForm() {
               type='text'
               id='registration_number'
               {...register('registration_number', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.registration_number && (
               <span className='text-red-500'>
@@ -160,7 +160,7 @@ function VerifyKycForm() {
               type='text'
               id='country'
               {...register('country', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.country && (
               <span className='text-red-500'>Country is required</span>
@@ -175,7 +175,7 @@ function VerifyKycForm() {
               type='text'
               id='state'
               {...register('state', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.state && (
               <span className='text-red-500'>State is required</span>
@@ -193,7 +193,7 @@ function VerifyKycForm() {
               type='text'
               id='district'
               {...register('district', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.district && (
               <span className='text-red-500'>District is required</span>
@@ -211,7 +211,7 @@ function VerifyKycForm() {
               type='text'
               id='municipality'
               {...register('municipality', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.municipality && (
               <span className='text-red-500'>Municipality is required</span>
@@ -229,7 +229,7 @@ function VerifyKycForm() {
               type='text'
               id='city_village_area'
               {...register('city_village_area', { required: false })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.city_village_area && (
               <span className='text-red-500'>
@@ -249,7 +249,7 @@ function VerifyKycForm() {
               type='text'
               id='ward_no'
               {...register('ward_no')}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
           </div>
 
@@ -263,7 +263,7 @@ function VerifyKycForm() {
             <textarea
               id='organization_summary'
               {...register('organization_summary', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.organization_summary && (
               <span className='text-red-500'>
@@ -283,7 +283,7 @@ function VerifyKycForm() {
               type='text'
               id='whatsapp_viber_number'
               {...register('whatsapp_viber_number', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.whatsapp_viber_number && (
               <span className='text-red-500'>
@@ -303,7 +303,7 @@ function VerifyKycForm() {
               type='text'
               id='secondary_number'
               {...register('secondary_number', { required: false })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.secondary_number && (
               <span className='text-red-500'>Secondary number is required</span>
@@ -321,7 +321,7 @@ function VerifyKycForm() {
               type='text'
               id='telephone_number'
               {...register('telephone_number')}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
           </div>
 
@@ -336,7 +336,7 @@ function VerifyKycForm() {
               type='url'
               id='website'
               {...register('website', { required: false })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.website && (
               <span className='text-red-500'>Website is required</span>
@@ -351,14 +351,14 @@ function VerifyKycForm() {
               type='file'
               id='logo'
               {...register('logo')}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
           </div>
 
           <div className='col-span-3 mb-4'>
             <button
               type='submit'
-              className='w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none'
+              className='w-full px-4 py-2 text-white bg-ngtryprimary rounded-md hover:bg-ngtrydeep focus:outline-none'
             >
               Submit KYC
             </button>

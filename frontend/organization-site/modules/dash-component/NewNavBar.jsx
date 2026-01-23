@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { useAtom } from "jotai";
 import { showLeftSidebarAtom } from "@/jotai/ui-atoms";
 
 import { MenuIcon, NotificationIcon, SearchIcon } from "@/public/icons/icons";
 import { baseurl } from "../apiurl";
 import { allPagePaths, urlCategories } from "../data/organization_types_nature";
-import { getKycOrgProfile, getNotificationsCount } from "../data/dash_service";
+import { useKycOrgProfile } from "../hooks/useKycOrgProfile";
+import { useNotificationCount } from "../hooks/useNotificationCount";
 
 const NewNavBar = ({ user }) => {
   const router = useRouter();
@@ -17,23 +17,13 @@ const NewNavBar = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [objects] = useState(allPagePaths);
 
-  const [notificationCount, setNotificationCount] = useState(null);
+  // Use React Query hooks for caching
+  const { data: kycorg } = useKycOrgProfile(user?.id);
+  const { data: notificationCount } = useNotificationCount(user?.id);
+
   const filteredObjects = objects.filter((obj) =>
     obj.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const [kycorg, setkycorg] = useState(null);
-
-  useEffect(() => {
-    if (user === null) {
-    } else {
-      getKycOrgProfile({ toast: toast, setKycOrg: setkycorg, id: user.id });
-      getNotificationsCount({
-        toast: toast,
-        id: user.id,
-        setnotificationscount: setNotificationCount,
-      });
-    }
-  }, [user]);
 
   const getCategoryTitle = (url) => {
     for (const category of urlCategories) {
@@ -47,19 +37,19 @@ const NewNavBar = ({ user }) => {
   const pageTitle = getCategoryTitle(pageFullUrl);
 
   return (
-    <div className="flex lg:w-full w-[1367px] mt-4 sm:p-7 p-4 md:pr-9 pr-0 justify-between">
+    <div className="flex lg:w-full w-[1367px] mt-4 sm:p-7 p-4 md:pr-9 pr-0 justify-between bg-white border-b border-ngtrysage/20">
       <div className="flex gap-4 items-center">
         <MenuIcon
-          className="text-3xl cursor-pointer"
+          className="text-3xl cursor-pointer text-ngtryprimary hover:text-ngtrydeep transition-colors"
           onClick={() => {
             setShowLeftSidebar(!showLeftSidebar);
           }}
         />
         <div className="flex flex-col">
-          <p className="text-[#A0AEC0] font-inter text-xs font-normal">
-            Page / <span className="text-[#2D3748] ">{pageTitle}</span>
+          <p className="text-ngtrysage font-inter text-xs font-normal">
+            Page / <span className="text-ngtryprimary">{pageTitle}</span>
           </p>
-          <p className="font-bold text-base font-inter mt-1">{pageTitle}</p>
+          <p className="font-bold text-base font-inter mt-1 text-ngtrydeep">{pageTitle}</p>
         </div>
       </div>
       <div className="flex items-center md:gap-6 gap-0 relative">
@@ -68,22 +58,22 @@ const NewNavBar = ({ user }) => {
             <input
               type="search"
               autoComplete="new-password"
-              className="border  border-[#898989] p-4 rounded-xl h-[45px] w-[333px]   focus:outline-none pl-10"
+              className="border border-ngtrysage/50 p-4 rounded-xl h-[45px] w-[333px] focus:outline-none focus:border-ngtryprimary pl-10 transition-colors"
               placeholder="Search here..."
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </form>
-          <SearchIcon className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2" />
+          <SearchIcon className="absolute text-xl left-3 top-1/2 transform -translate-y-1/2 text-ngtrysage" />
           <div
             className={`${
               searchTerm === "" ? "hidden" : "absolute"
-            } z-50 p-7 bg-white shadow-3xl rounded-lg h-max w-[333px] mt-2`}
+            } z-50 p-7 bg-white shadow-3xl rounded-lg h-max w-[333px] mt-2 border border-ngtrysage/20`}
           >
             {filteredObjects.map((e, i) => {
               return (
                 <p
                   key={i}
-                  className="font-inter font-normal text-sm py-2 cursor-pointer"
+                  className="font-inter font-normal text-sm py-2 cursor-pointer hover:text-ngtryprimary transition-colors"
                   onClick={() => {
                     router.push(e.path);
                     setSearchTerm("");
@@ -103,9 +93,9 @@ const NewNavBar = ({ user }) => {
           }}
         >
           <div className="relative">
-            <NotificationIcon className="text-3xl" />
-            <div className="h-3 w-3 absolute top-1 right-1 flex items-center justify-center rounded-full bg-red-500 text-white">
-              <span style={{ fontSize: "10px" }}>
+            <NotificationIcon className="text-3xl text-ngtryprimary hover:text-ngtrydeep transition-colors" />
+            <div className="h-4 w-4 absolute -top-1 -right-1 flex items-center justify-center rounded-full bg-ngtrylime text-ngtrydeep border-2 border-white">
+              <span style={{ fontSize: "10px" }} className="font-bold">
                 {notificationCount ? notificationCount?.count : 0}
               </span>
             </div>
@@ -117,11 +107,11 @@ const NewNavBar = ({ user }) => {
             router.push("/profile");
           }}
         >
-          <p className="font-bold font-inter text-base">{user?.full_name}</p>
-          <div className="h-[40px] w-[40px] rounded-full">
+          <p className="font-bold font-inter text-base text-ngtrydeep">{user?.full_name}</p>
+          <div className="h-[40px] w-[40px] rounded-full ring-2 ring-ngtryprimary ring-offset-2">
             <img
               src={
-                kycorg === null || kycorg.results.length === 0
+                !kycorg || !kycorg.results || kycorg.results.length === 0 || !kycorg.results[0].logo
                   ? "/user-avatar.png"
                   : `${baseurl}${kycorg.results[0].logo}`
               }

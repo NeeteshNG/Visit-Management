@@ -25,9 +25,19 @@ User = get_user_model()
 
 
 def validate_mobile_number(mobile_number):
-    mobile_number_regex = "^(984|986|980|981|985|988|974|976)\\d{7}$"
-    if not re.match(mobile_number_regex, mobile_number):
-        raise ValueError("Invalid Nepali mobile number")
+    """
+    Global phone number validation.
+    Accepts phone numbers from multiple countries.
+    Basic validation: 7-15 digits, allows common prefixes.
+    """
+    # Remove any spaces, dashes, or country code prefix
+    cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
+    if cleaned_number.startswith('00'):
+        cleaned_number = cleaned_number[2:]
+
+    # Basic international phone validation (7-15 digits)
+    if not re.match(r'^\d{7,15}$', cleaned_number):
+        raise ValueError("Invalid mobile number. Please enter 7-15 digits.")
 
 
 class OrganizationKYCSocialMediaLink(BaseModel):

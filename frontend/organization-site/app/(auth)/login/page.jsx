@@ -17,7 +17,7 @@ const AuthSlider = dynamic(
 );
 import axiosInstance from "@/modules/axios";
 import { generateToken } from "./firebase";
-import { EpassLogo } from "@/public/logo/logos";
+import { NGtryLogo } from "@/public/logo/logos";
 
 const Page = () => {
   const router = useRouter();
@@ -35,7 +35,7 @@ const Page = () => {
     localStorage.setItem("access", response.data.access);
     localStorage.setItem("refresh", response.data.refresh);
     toast.success("Logged in Successfully");
-    router.push("/dash");
+    router.replace("/dash");
   };
 
   const onLoginSubmit = async (data) => {
@@ -46,14 +46,19 @@ const Page = () => {
         ? "email"
         : "mobile";
 
-      const fcmToken = await generateToken();
-      localStorage.setItem("fcmToken", fcmToken);
+      let fcmToken = null;
+      try {
+        fcmToken = await generateToken();
+        localStorage.setItem("fcmToken", fcmToken);
+      } catch (fcmError) {
+        console.log("FCM token generation failed, continuing without it");
+      }
 
       const requestData = {
         username: data.mobile_number,
         password: data.password,
         login_type: login_type,
-        fcm_token: fcmToken,
+        ...(fcmToken && { fcm_token: fcmToken }),
       };
 
       const response = await axiosInstance.post("/user/login/", requestData);
@@ -66,7 +71,7 @@ const Page = () => {
       }
     } catch (error) {
       setIsLoading(false);
-      if (error.response.status === 500 || error.response.status === 404) {
+      if (error?.response?.status === 500 || error?.response?.status === 404) {
         toast.error("Login Failed, Try Again");
       } else {
         if (error && Object.values(error?.response?.data || []).length >= 1) {
@@ -89,14 +94,14 @@ const Page = () => {
           style={{ width: "96%" }}
         >
           <div className="text-center text-black flex justify-between items-center">
-            <EpassLogo style={{ width: '100px', height: '100px' }} />
+            <NGtryLogo style={{ width: '150px', height: '45px' }} />
             <p>
               Dont have an account?{" "}
               <span className="">
                 <Link
                   href="/register"
-                  title="Create free account at epass"
-                  className="ml-1 font-medium text-[#0F75BC] transition-all duration-200 hover:text-[#0F75BC] hover:underline focus:text-blue-700"
+                  title="Create free account at NGtry"
+                  className="ml-1 font-medium text-[#636B2F] transition-all duration-200 hover:text-[#3D4127] hover:underline focus:text-ngtrydeep"
                 >
                   Register
                 </Link>
@@ -134,7 +139,7 @@ const Page = () => {
                       required: "Mobile number is required",
                     })}
                     placeholder="Input your mobile number or email"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.mobile_number ? "border-red-500" : ""
                     }`}
                   />
@@ -186,7 +191,7 @@ const Page = () => {
                       required: "Password is required",
                     })}
                     placeholder="Enter your password"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.password ? "border-red-500" : ""
                     }`}
                   />
@@ -217,7 +222,7 @@ const Page = () => {
                 <Link
                   href="/forgot"
                   title="forgot password"
-                  className="text-sm font-medium text-[#0F75BC] hover:underline hover:text-blue-700 focus:text-blue-700"
+                  className="text-sm font-medium text-[#636B2F] hover:underline hover:text-[#3D4127] focus:text-[#3D4127]"
                 >
                   Forgot password?
                 </Link>
@@ -225,7 +230,7 @@ const Page = () => {
               <div className="z-20">
                 <button
                   type="submit"
-                  className="inline-flex items-center bg-gradient-to-r from-[#25AAE1] to-[#0F75BC] justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-epassblue focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+                  className="inline-flex items-center bg-gradient-to-r from-[#636B2F] to-[#3D4127] justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md focus:outline-none hover:from-[#3D4127] hover:to-[#2a2d1b] focus:from-[#3D4127] focus:to-[#2a2d1b]"
                 >
                   {isLoading === false ? "Log in" : "Loading"}
                 </button>

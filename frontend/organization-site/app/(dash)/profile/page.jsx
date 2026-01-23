@@ -1,39 +1,40 @@
 "use client";
 
+
+import {
+  CgOrganisationIcon,
+  CiCalendarIcon,
+  CiFlag1Icon,
+  CiMailIcon,
+  FaFacebookIcon,
+  FaWhatsappIcon,
+  FaWordpressIcon,
+  IoLocationOutlineIcon,
+  MdAppRegistrationIcon,
+  MdEditIcon,
+  MdLocationOnIcon,
+  MdLocationSearchingIcon,
+  MdOutlineLocalPhoneIcon,
+  MdOutlinePersonIcon,
+  MdPanoramaWideAngleIcon,
+  MdPhoneAndroidIcon,
+  MdShareLocationIcon,
+  PiBagLightIcon,
+  RxCross2Icon,
+  TbArrowBigRightIcon,
+  TiLocationArrowOutlineIcon,
+} from "@/modules/icons/SvgIcons";
 import AdsComponent from "@/modules/dash-component/AdsComponent";
 import QrComponent from "@/modules/dash-component/QrComponent";
-import { CiCalendar } from "react-icons/ci";
-import { IoLocationOutline } from "react-icons/io5";
-import {
-  MdLocationOn,
-  MdLocationSearching,
-  MdOutlineLocalPhone,
-  MdPanoramaWideAngle,
-  MdShareLocation,
-} from "react-icons/md";
-import { CiMail } from "react-icons/ci";
-import { MdEdit } from "react-icons/md";
-import { useEffect, useState } from "react";
-import { RxCross2 } from "react-icons/rx";
-import { CgOrganisation } from "react-icons/cg";
+import { useState } from "react";
 import LineComponent from "@/modules/kyc-component/LineComponent";
-import { MdAppRegistration } from "react-icons/md";
-import { PiBagLight } from "react-icons/pi";
-import { CiFlag1 } from "react-icons/ci";
-import { TbArrowBigRight } from "react-icons/tb";
-import { TiLocationArrowOutline } from "react-icons/ti";
 import Image from "next/image";
 import { useUserData } from "@/modules/hooks/useUserData";
-import { toast } from "react-toastify";
 import { baseurl } from "@/modules/apiurl";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdOutlinePerson } from "react-icons/md";
-import { MdPhoneAndroid } from "react-icons/md";
-import { FaWordpress } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
 
 import { useRouter } from "next/navigation";
-import { getKycOrgProfile } from "@/modules/data/dash_service";
+import { useKycOrgProfile } from "@/modules/hooks/useKycOrgProfile";
+
 export default function Profile() {
   const router = useRouter();
   const [viewkyc, setviewkyc] = useState(false);
@@ -42,13 +43,9 @@ export default function Profile() {
     isLoading: isUserLoading,
     isError: isUserError,
   } = useUserData();
-  const [kycorg, setkycorg] = useState(null);
-  useEffect(() => {
-    if (user === null || isUserLoading) {
-    } else {
-      getKycOrgProfile({ toast: toast, setKycOrg: setkycorg, id: user.id });
-    }
-  }, [user]);
+
+  // Use React Query hook for caching
+  const { data: kycorg } = useKycOrgProfile(user?.id);
 
   const convertDate = (dateString) => {
     const date = new Date(dateString);
@@ -72,13 +69,13 @@ export default function Profile() {
         <div className="flex justify-between">
           <section className="lg:w-[73%] w-[948px] ">
             <div className=" w-full rounded-xl bg-white shadow-lg mt-3 pb-10">
-              <div className="bg-gradient-to-r from-[#25AAE1]  to-[#0F75BC] h-[90px] w-full rounded-t-xl"></div>
+              <div className="bg-gradient-to-r from-[#636B2F] to-[#3D4127] h-[90px] w-full rounded-t-xl"></div>
               <div className="flex    justify-between px-10">
                 <div className="flex  gap-6">
                   <div className="w-[181px] h-[181px] flex items-center justify-center rounded-xl bg-[#F1FBFF] -mt-10">
                     <Image
                       src={
-                        kycorg === null || kycorg.results.length === 0
+                        kycorg === null || kycorg.results.length === 0 || !kycorg.results[0].logo
                           ? "/user-avatar.png"
                           : `${baseurl}${kycorg.results[0].logo}`
                       }
@@ -106,25 +103,25 @@ export default function Profile() {
                       )}
                     </div>
                     <div className="flex gap-2">
-                      <CiCalendar className="text-[#A3A3A3]" />
+                      <CiCalendarIcon className="text-[#A3A3A3]" />
                       <p className="text-sm font-normal text-[#898989] font-inter">
                         {convertDate(user?.otp_created_at)}
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <IoLocationOutline className="text-[#A3A3A3]" />
+                      <IoLocationOutlineIcon className="text-[#A3A3A3]" />
                       <p className="text-sm font-normal text-[#898989] font-inter">
                         {user?.address === null ? "" : user?.address}
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <MdOutlineLocalPhone className="text-[#A3A3A3]" />
+                      <MdOutlineLocalPhoneIcon className="text-[#A3A3A3]" />
                       <p className="text-sm font-normal text-[#898989] font-inter">
                         {user?.mobile_number}
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <CiMail className="text-[#A3A3A3]" />
+                      <CiMailIcon className="text-[#A3A3A3]" />
                       <p className="text-sm font-normal text-[#898989] font-inter">
                         {user?.email}
                       </p>
@@ -138,7 +135,7 @@ export default function Profile() {
                       router.push("/edit-profile");
                     }}
                   >
-                    <MdEdit className="text-lg" />
+                    <MdEditIcon className="text-lg" />
                     <p className="font-normal font-inter text-base">
                       Edit Profile
                     </p>
@@ -173,7 +170,7 @@ export default function Profile() {
                         setviewkyc(false);
                       }}
                     >
-                      <RxCross2 className="text-[15px]" />
+                      <RxCross2Icon className="text-[15px]" />
                       <p className="font-normal text-sm">Hide kyc</p>
                     </div>
                   </div>
@@ -229,7 +226,7 @@ export default function Profile() {
                           text="District"
                         />
                         <div className="flex gap-0 items-center">
-                          <MdLocationOn className="text-xl text-[#898989]" />
+                          <MdLocationOnIcon className="text-xl text-[#898989]" />
                           <p className="font-bold text-base font-inter text-[#898989]">
                             Municipality / Rural Municipality:
                           </p>
@@ -302,13 +299,19 @@ export default function Profile() {
                       <p className="font-bold text-2xl font-inter">Document</p>
 
                       <div className="flex flex-col">
-                        <Image
-                          src={`${baseurl}${kycorg.results[0].registration_certificate}`}
-                          width={150}
-                          height={150}
-                          alt=""
-                          className="object-contain my-2 h-[150px]"
-                        />
+                        {kycorg.results[0].registration_certificate ? (
+                          <Image
+                            src={`${baseurl}${kycorg.results[0].registration_certificate}`}
+                            width={150}
+                            height={150}
+                            alt=""
+                            className="object-contain my-2 h-[150px]"
+                          />
+                        ) : (
+                          <div className="w-[150px] h-[150px] bg-gray-200 flex items-center justify-center my-2 rounded">
+                            <span className="text-gray-500 text-sm">No document</span>
+                          </div>
+                        )}
                         <p className="font-bold text-sm text-[#898989]">
                           Registration Certificate
                         </p>

@@ -37,16 +37,16 @@ export default function BranchSection({ userId }) {
             isExpanded === false
               ? "h-[323.09px]"
               : "h-[65.94px]  justify-center"
-          } p-2 rounded-xl bg-[#0FBC88] mt-10`}
+          } p-2 rounded-xl bg-ngtryprimary mt-10 shadow-lg`}
         >
           <div className="flex text-white justify-between w-full items-center p-5">
             <div className="flex gap-3 items-center ">
-              <BranchIcon className="text-2xl" />
+              <BranchIcon className="text-2xl text-ngtrylime" />
 
               <p className="font-medium text-base font-inter">
                 Total Branches{" "}
               </p>
-              <p className="font-bold text-2xl leading-8">
+              <p className="font-bold text-2xl leading-8 text-ngtrylime">
                 {allBranches.count}
               </p>
             </div>
@@ -56,9 +56,9 @@ export default function BranchSection({ userId }) {
               }}
             >
               {isExpanded === false ? (
-                <MinusIcon className="text-2xl cursor-pointer" />
+                <MinusIcon className="text-2xl cursor-pointer text-ngtrylime hover:text-white transition-colors" />
               ) : (
-                <PlusIcon className="text-2xl cursor-pointer" />
+                <PlusIcon className="text-2xl cursor-pointer text-ngtrylime hover:text-white transition-colors" />
               )}
             </div>
           </div>
@@ -68,35 +68,35 @@ export default function BranchSection({ userId }) {
             } bg-white p-2 flex flex-col justify-between rounded-xl`}
           >
             {allBranches.results.length <= 0 ? (
-              <div className="flex flex-col h-full font-bold text-sm leading-5  items-center justify-center">
+              <div className="flex flex-col h-full font-bold text-sm leading-5 items-center justify-center text-ngtrysage">
                 <p>No Branches</p>
               </div>
             ) : (
               <>
-                <table className="min-w-full divide-y divide-gray-300 ">
+                <table className="min-w-full divide-y divide-ngtrysage/30">
                   <thead>
                     <tr>
-                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                         Branch Name
                       </th>
-                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                         Branch No.
                       </th>
-                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-[#A3A3A3]">
+                      <th className="py-3 px-2 text-start font-bold text-xs font-inter text-ngtrysage">
                         Address
                       </th>
                     </tr>
                   </thead>
                   <tbody className="py-20">
                     {allBranches.results.slice(0, 4).map((row, index) => (
-                      <tr key={index}>
-                        <td className="py-2 px-2 font-bold text-xs font-inter">
+                      <tr key={index} className="hover:bg-ngtrylime/10 transition-colors">
+                        <td className="py-2 px-2 font-bold text-xs font-inter text-ngtrydeep">
                           {row.name}
                         </td>
-                        <td className="py-2 px-2 font-bold text-xs font-inter">
+                        <td className="py-2 px-2 font-bold text-xs font-inter text-ngtryprimary">
                           {row.branch_no}
                         </td>
-                        <td className="py-2 px-2 font-normal text-xs font-inter">
+                        <td className="py-2 px-2 font-normal text-xs font-inter text-ngtrysage">
                           {row.district}
                         </td>
                         <td className="py-2 px-2 "></td>
@@ -105,15 +105,15 @@ export default function BranchSection({ userId }) {
                   </tbody>
                 </table>
                 <div
-                  className="flex gap-3 p-2 pt-3 items-center cursor-pointer"
+                  className="flex gap-3 p-2 pt-3 items-center cursor-pointer group"
                   onClick={() => {
                     router.push("/branch-list");
                   }}
                 >
-                  <p className="text-primaryblue font-bold text-sm leading-5 ">
+                  <p className="text-ngtryprimary font-bold text-sm leading-5 group-hover:text-ngtrydeep transition-colors">
                     Show All{" "}
                   </p>
-                  <ArrowRightIcon className="text-sm text-primaryblue" />
+                  <ArrowRightIcon className="text-sm text-ngtryprimary group-hover:text-ngtrydeep transition-colors" />
                 </div>
               </>
             )}

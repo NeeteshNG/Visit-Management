@@ -1,21 +1,22 @@
 "use client";
 
+
+import {
+  HiOutlineDocumentTextIcon,
+  IoSearchSharpIcon,
+  MdArrowDropDownIcon,
+  MdKeyboardArrowLeftIcon,
+  MdKeyboardArrowRightIcon,
+  MdOutlineDeleteIcon,
+  MdOutlineFilterAltIcon,
+  MdOutlinePictureAsPdfIcon,
+  MdOutlineVisibilityIcon,
+} from "@/modules/icons/SvgIcons";
 import "../visitor.css";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
-import { IoSearchSharp } from "react-icons/io5";
-import { HiOutlineDocumentText } from "react-icons/hi2";
-import {
-  MdOutlineFilterAlt,
-  MdKeyboardArrowRight,
-  MdKeyboardArrowLeft,
-  MdOutlinePictureAsPdf,
-  MdOutlineDelete,
-  MdArrowDropDown,
-  MdOutlineVisibility,
-} from "react-icons/md";
 
 import DefaultButton from "@/modules/core-ui/Button";
 import ErrorDialog from "@/modules/core-ui/ErrorDialog";
@@ -42,7 +43,7 @@ export default function VisitorReport() {
     getVisitors({
       toast: toast,
       searchtext: e,
-      setvisitor: handleSetVisitors,
+      setVisitors: handleSetVisitors,
       enddate: endSelectedDate,
       startdate: selectedDate,
       page: currentPage,
@@ -169,7 +170,7 @@ export default function VisitorReport() {
                 handlesearch(e.target.value);
               }}
             />
-            <IoSearchSharp className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
+            <IoSearchSharpIcon className="absolute text-xl left-3 top-1/2  transform -translate-y-1/2 text-gray-400" />
           </div>
           <div
             className="flex gap-2 cursor-pointer w-[84px] items-center justify-center rounded-xl h-[34px] border-2 border-black  "
@@ -178,7 +179,7 @@ export default function VisitorReport() {
             }}
           >
             <p className="font-bold font-inter text-xs ">Filter</p>
-            <MdOutlineFilterAlt className="text-sm" />
+            <MdOutlineFilterAltIcon className="text-sm" />
           </div>
           <div
             className="flex gap-2 cursor-pointer w-[100px] relative items-center justify-center rounded-xl h-[34px] border-2 border-black  "
@@ -191,7 +192,7 @@ export default function VisitorReport() {
               }}
             >
               <p className="font-bold font-inter text-xs">Export</p>
-              <MdArrowDropDown className="text-sm" />
+              <MdArrowDropDownIcon className="text-sm" />
             </div>
             {isexpanded ? (
               <div className="absolute w-[93px] h-[81.15px] flex flex-col items-center justify-center gap-3 -bottom-[90px] shadow-3xl rounded-xl bg-white">
@@ -199,14 +200,14 @@ export default function VisitorReport() {
                   className="flex gap-2 items-center justify-center"
                   onClick={handleDownloadPdf}
                 >
-                  <MdOutlinePictureAsPdf className="text-xl" />
+                  <MdOutlinePictureAsPdfIcon className="text-xl" />
                   <p className="font-normal font-inter text-base">PDF</p>
                 </div>
                 <div
                   className="flex gap-2 items-center justify-center"
                   onClick={handleDownloadCsv}
                 >
-                  <HiOutlineDocumentText className="text-xl" />
+                  <HiOutlineDocumentTextIcon className="text-xl" />
                   <p className="font-normal font-inter text-base">Excel</p>
                 </div>
               </div>
@@ -270,7 +271,7 @@ export default function VisitorReport() {
                   </option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <MdArrowDropDown />
+                  <MdArrowDropDownIcon />
                 </div>
               </div>
             </div>
@@ -385,7 +386,7 @@ export default function VisitorReport() {
                       >
                         {" "}
                         <div className="rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center border border-[#898989]">
-                          <MdOutlineVisibility className="text-[#898989] text-2xl" />
+                          <MdOutlineVisibilityIcon className="text-[#898989] text-2xl" />
                         </div>
                       </Link>
                       <div
@@ -394,7 +395,7 @@ export default function VisitorReport() {
                           setopen(true);
                         }}
                       >
-                        <MdOutlineDelete className="text-[#FF3A3A] text-2xl" />
+                        <MdOutlineDeleteIcon className="text-[#FF3A3A] text-2xl" />
                       </div>
                     </div>
                   </td>
@@ -428,7 +429,7 @@ export default function VisitorReport() {
                 </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <MdArrowDropDown />
+                <MdArrowDropDownIcon />
               </div>
             </div>
             <p className="font-normal text-xs mt-3">entries</p>
@@ -446,7 +447,7 @@ export default function VisitorReport() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowLeft className="text-2xl" />
+                <MdKeyboardArrowLeftIcon className="text-2xl" />
               </button>
             )}
 
@@ -475,7 +476,7 @@ export default function VisitorReport() {
                     : "cursor-pointer"
                 }`}
               >
-                <MdKeyboardArrowRight className="text-2xl" />
+                <MdKeyboardArrowRightIcon className="text-2xl" />
               </button>
             )}
           </div>

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { AiOutlineAlignLeft } from 'react-icons/ai'
-import { AiOutlineAlignRight } from 'react-icons/ai'
+import { AiOutlineAlignLeftIcon, AiOutlineAlignRightIcon } from '@/modules/icons/SvgIcons'
 import { useAtom } from 'jotai'
 import { showLeftSidebarAtom, showRightSidebarAtom } from '@/jotai/ui-atoms'
 import { useRouter } from 'next/navigation'
@@ -32,13 +31,13 @@ export default function MainNavbar () {
     <div>
       <nav className='flex items-center justify-between h-12 px-5 border-b sm:px-10 md:px-16'>
         <section className='flex items-center'>
-          <AiOutlineAlignLeft
+          <AiOutlineAlignLeftIcon
             size='20'
             className='cursor-pointer text-epassblue'
             onClick={handleLeftSidebarExpandBTN}
           />
           <Link href={'/dash'} className='pl-3 font-bold'>
-            Epass
+            NGtry
           </Link>
         </section>
         <section className='relative grid grid-flow-col gap-5'>
@@ -60,7 +59,7 @@ export default function MainNavbar () {
             <div className='relative z-10 pr-3'>
               <button onClick={handleSignout}>Signout</button>
             </div>
-            <AiOutlineAlignRight
+            <AiOutlineAlignRightIcon
               size='20'
               className='cursor-pointer text-epassblue '
               onClick={handleRightSidebarExpandBTN}
