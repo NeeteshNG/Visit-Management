@@ -1,12 +1,27 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import axiosInstance from '../axios'
 import { useUserData } from '../hooks/useUserData'
 import { useRouter } from 'next/navigation'
+import { countries } from '../data/countries'
+import { getStatesForCountry, getAddressLabels, countryUsesWardNumber } from '../data/address'
 
 function VerifyKycForm() {
   const router = useRouter()
+  const [selectedCountry, setSelectedCountry] = useState('india')
+  const [statesList, setStatesList] = useState(getStatesForCountry('india'))
+  const [addressLabels, setAddressLabels] = useState(getAddressLabels('india'))
+  const [showWardField, setShowWardField] = useState(true)
+
+  const handleCountryChange = (e) => {
+    const countryValue = e.target.value
+    setSelectedCountry(countryValue)
+    setStatesList(getStatesForCountry(countryValue))
+    setAddressLabels(getAddressLabels(countryValue))
+    setShowWardField(countryUsesWardNumber(countryValue))
+  }
+
   const {
     register,
     handleSubmit,
@@ -64,7 +79,7 @@ function VerifyKycForm() {
   return (
     <div className='w-full bg-gray-50'>
       <div className='p-6 mx-auto rounded-md bg-gray-50 max-w-7xl'>
-        <h2 className='text-epassblue'>
+        <h2 className='text-ngtryprimary'>
           Please Verify Your Organization KYC to continue.
         </h2>
         <h2 className='mb-4 text-2xl font-semibold'>Organization KYC Form</h2>
@@ -156,12 +171,19 @@ function VerifyKycForm() {
             >
               Country
             </label>
-            <input
-              type='text'
+            <select
               id='country'
               {...register('country', { required: true })}
+              onChange={handleCountryChange}
               className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
-            />
+            >
+              <option value="">Select country</option>
+              {countries.map((country) => (
+                <option key={country.id} value={country.value}>
+                  {country.title}
+                </option>
+              ))}
+            </select>
             {errors.country && (
               <span className='text-red-500'>Country is required</span>
             )}
@@ -169,16 +191,32 @@ function VerifyKycForm() {
 
           <div className='col-span-1 mb-4'>
             <label htmlFor='state' className='block font-medium text-gray-700'>
-              State
+              {addressLabels.state}
             </label>
-            <input
-              type='text'
-              id='state'
-              {...register('state', { required: true })}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
-            />
+            {statesList.length > 0 ? (
+              <select
+                id='state'
+                {...register('state', { required: true })}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              >
+                <option value="">Select {addressLabels.state.toLowerCase()}</option>
+                {statesList.map((state, index) => (
+                  <option key={index} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type='text'
+                id='state'
+                {...register('state', { required: true })}
+                placeholder={`Enter ${addressLabels.state.toLowerCase()}`}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              />
+            )}
             {errors.state && (
-              <span className='text-red-500'>State is required</span>
+              <span className='text-red-500'>{addressLabels.state} is required</span>
             )}
           </div>
 
@@ -187,16 +225,17 @@ function VerifyKycForm() {
               htmlFor='district'
               className='block font-medium text-gray-700'
             >
-              District
+              {addressLabels.district}
             </label>
             <input
               type='text'
               id='district'
               {...register('district', { required: true })}
+              placeholder={`Enter ${addressLabels.district.toLowerCase()}`}
               className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.district && (
-              <span className='text-red-500'>District is required</span>
+              <span className='text-red-500'>{addressLabels.district} is required</span>
             )}
           </div>
 
@@ -205,16 +244,17 @@ function VerifyKycForm() {
               htmlFor='municipality'
               className='block font-medium text-gray-700'
             >
-              Municipality
+              {addressLabels.municipality}
             </label>
             <input
               type='text'
               id='municipality'
-              {...register('municipality', { required: true })}
+              {...register('municipality', { required: false })}
+              placeholder={`Enter ${addressLabels.municipality.toLowerCase()}`}
               className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.municipality && (
-              <span className='text-red-500'>Municipality is required</span>
+              <span className='text-red-500'>{addressLabels.municipality} is required</span>
             )}
           </div>
 
@@ -223,35 +263,38 @@ function VerifyKycForm() {
               htmlFor='city_village_area'
               className='block font-medium text-gray-700'
             >
-              City/Village/Area
+              {addressLabels.city}
             </label>
             <input
               type='text'
               id='city_village_area'
               {...register('city_village_area', { required: false })}
+              placeholder={`Enter ${addressLabels.city.toLowerCase()}`}
               className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
             />
             {errors.city_village_area && (
               <span className='text-red-500'>
-                City/Village/Area is required
+                {addressLabels.city} is required
               </span>
             )}
           </div>
 
-          <div className='col-span-1 mb-4'>
-            <label
-              htmlFor='ward_no'
-              className='block font-medium text-gray-700'
-            >
-              Ward No
-            </label>
-            <input
-              type='text'
-              id='ward_no'
-              {...register('ward_no')}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
-            />
-          </div>
+          {showWardField && (
+            <div className='col-span-1 mb-4'>
+              <label
+                htmlFor='ward_no'
+                className='block font-medium text-gray-700'
+              >
+                Ward No
+              </label>
+              <input
+                type='text'
+                id='ward_no'
+                {...register('ward_no')}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              />
+            </div>
+          )}
 
           <div className='col-span-3 mb-4'>
             <label

@@ -18,8 +18,8 @@ import {
 } from "@/modules/icons/SvgIcons";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
-import { districts, municipalites, province } from "@/modules/data/address";
-import { countries } from "@/modules/data/organization_types_nature";
+import { districts, municipalites, province, getAddressLabels, countryUsesWardNumber } from "@/modules/data/address";
+import { countries } from "@/modules/data/countries";
 import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -29,6 +29,9 @@ export default function CreateBranch() {
     const [allprovince, setallprovince] = useState([]);
   const [alldistrict, setalldistrict] = useState([])
   const [allmunicipality, setallmunicipality] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [addressLabels, setAddressLabels] = useState(getAddressLabels("india"));
+  const [showWardField, setShowWardField] = useState(true);
     const {register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
      try {
@@ -270,6 +273,9 @@ router.push("/success");
                             onChange: (e) => {
                               const selectedValue = e.target.value;
                               console.log("Selected Value:", selectedValue);
+                              setSelectedCountry(selectedValue);
+                              setAddressLabels(getAddressLabels(selectedValue));
+                              setShowWardField(countryUsesWardNumber(selectedValue));
                               if(selectedValue !== ""){
                                 console.log(province[selectedValue]);
                                 setallprovince(province[selectedValue] || []);
@@ -285,14 +291,10 @@ router.push("/success");
                           <option value="" className='text-[#A3A3A3] '>
                             Select country
                           </option>
-                          {countries.map(org => (
-                         
-                            <option key={org.id} onClick={()=>{
-                              
-                            }} value={org.title} className='text-sm  font-semibold text-[#333333]' >
-                             {org.title}
+                          {countries.map(country => (
+                            <option key={country.id} value={country.value} className='text-sm  font-semibold text-[#333333]' >
+                             {country.title} ({country.phoneCode})
                             </option>
-                            
                           ))}
                         </select>
                         <div className={`pointer-events-none absolute inset-y-0 right-0 ${errors.country ? "-top-6" : ""} flex items-center px-2 text-gray-700`}>
@@ -315,7 +317,7 @@ router.push("/success");
                         htmlFor='organization_name'
                         className='text-sm font-semibold text-[#333333] '
                       >
-                        State / Province
+                        {addressLabels.state}
                       </label>
                       <div className='mt-2.5 relative'>
                       <select
@@ -333,7 +335,7 @@ router.push("/success");
           })}
         >
           <option value="" className='text-[#A3A3A3] '>
-            Select state / province
+            Select {addressLabels.state.toLowerCase()}
           </option>
           {allprovince.map((org, i) => (
             <option key={i} value={org} className='text-sm font-semibold text-[#333333]'>
@@ -349,7 +351,7 @@ router.push("/success");
 
                         {errors.province && (
                           <span className='text-red-500'>
-                            Please select province
+                            Please select {addressLabels.state.toLowerCase()}
                           </span>
                         )}
                       </div>
@@ -363,7 +365,7 @@ router.push("/success");
                         htmlFor='organization_name'
                         className='text-sm font-semibold text-[#333333] '
                       >
-                        District
+                        {addressLabels.district}
                       </label>
                       <div className='mt-2.5 relative'>
                         <select
@@ -379,7 +381,7 @@ router.push("/success");
                           })}
                         >
                           <option value="" className='text-[#A3A3A3] '>
-                            Select district
+                            Select {addressLabels.district.toLowerCase()}
                           </option>
                           {alldistrict.map((org,i) => (
                             <option key={i} value={org} className='text-sm  font-semibold text-[#333333]'>
@@ -394,7 +396,7 @@ router.push("/success");
 
                         {errors.district && (
                           <span className='text-red-500'>
-                            Please select District
+                            Please select {addressLabels.district.toLowerCase()}
                           </span>
                         )}
                       </div>
@@ -406,15 +408,15 @@ router.push("/success");
                         htmlFor='district'
                         className='text-sm font-semibold text-[#333333] '
                       >
-                        Municipality / Rural Municipality
+                        {addressLabels.municipality}
                       </label>
                       <div className='mt-2.5 relative'>
                         <select
                           className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
-                          {...register('municipality', { required: true })}
+                          {...register('municipality', { required: allmunicipality.length > 0 })}
                         >
                           <option value="" className='text-[#A3A3A3] '>
-                            Select municipality
+                            Select {addressLabels.municipality.toLowerCase()}
                           </option>
                           {allmunicipality.map((org,i) => (
                             <option key={i} value={org} className='text-sm  font-semibold text-[#333333]'>
@@ -429,57 +431,59 @@ router.push("/success");
 
                         {errors.municipality && (
                           <span className='text-red-500'>
-                            Please select municipality
+                            Please select {addressLabels.municipality.toLowerCase()}
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
                   <div className='grid grid-cols-1 gap-4 xl:grid-cols-2 mt-2'>
-                    <div className='w-[600px]  mt-2'>
-                      <label
-                        htmlFor='organization_name'
-                        className='text-sm font-semibold text-[#333333] '
-                      >
-                        Ward No.
-                      </label>
-                      <div className='mt-2.5 relative'>
-                        <TbArrowBigRightIcon className={`absolute text-2xl left-4 ${errors.ward ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                    {showWardField && (
+                      <div className='w-[600px]  mt-2'>
+                        <label
+                          htmlFor='organization_name'
+                          className='text-sm font-semibold text-[#333333] '
+                        >
+                          Ward No.
+                        </label>
+                        <div className='mt-2.5 relative'>
+                          <TbArrowBigRightIcon className={`absolute text-2xl left-4 ${errors.ward ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
-                        <input
-                          type='text'
-                          placeholder='Input ward no.'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.ward ? 'border-red-500' : ''
-                            }`}
-                          {...register('ward', { required: true })}
-                        />
-                        {errors.ward && (
-                          <span className='text-red-500'>
-                            ward is required
-                          </span>
-                        )}
+                          <input
+                            type='text'
+                            placeholder='Input ward no.'
+                            className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.ward ? 'border-red-500' : ''
+                              }`}
+                            {...register('ward', { required: showWardField })}
+                          />
+                          {errors.ward && (
+                            <span className='text-red-500'>
+                              Ward is required
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className='w-[600px]  mt-2'>
                       <label
                         htmlFor='city'
                         className='text-sm font-semibold text-[#333333] '
                       >
-                        City / Tole / Area
+                        {addressLabels.city}
                       </label>
                       <div className='mt-2.5 relative'>
                         <TiLocationArrowOutlineIcon className={`absolute text-2xl left-4 ${errors.city ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                         <input
                           type='text'
-                          placeholder='Input City / Tole / Area'
+                          placeholder={`Input ${addressLabels.city.toLowerCase()}`}
                           className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.city ? 'border-red-500' : ''
                             }`}
                           {...register('city', { required: true })}
                         />
                         {errors.city && (
                           <span className='text-red-500'>
-                            City / Tole / Area is required
+                            {addressLabels.city} is required
                           </span>
                         )}
                       </div>

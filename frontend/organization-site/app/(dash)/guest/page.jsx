@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
@@ -15,10 +16,11 @@ import {
   RoomIcon,
   AdvPaymentIcon,
   MoneyIcon,
-  PayMethodIcon
+  PayMethodIcon,
 } from "@/public/icons/icons";
 
-import { idTypes } from "@/modules/data/organization_types_nature";
+import { countries, validatePhoneNumber, getPhonePlaceholder } from "@/modules/data/countries";
+import { getIdTypesForCountry } from "@/modules/data/idTypes";
 import DefaultButton from "@/modules/core-ui/Button";
 
 import { useAtom } from "jotai";
@@ -26,15 +28,31 @@ import { mannualdataAtom } from "@/jotai/dash-atoms";
 
 const VisitForm = () => {
   const [value, setValue] = useAtom(mannualdataAtom);
+  const [selectedCountry, setSelectedCountry] = useState(value.country || "india");
+  const [idTypesList, setIdTypesList] = useState(getIdTypesForCountry(value.country || "india"));
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: value });
+    setError,
+    clearErrors,
+  } = useForm({ defaultValues: { ...value, country: value.country || "india" } });
+
+  const handleCountryChange = (e) => {
+    const countryValue = e.target.value;
+    setSelectedCountry(countryValue);
+    setIdTypesList(getIdTypesForCountry(countryValue));
+  };
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    setValue(data);
+    // Validate phone number based on selected country
+    const phoneValidation = validatePhoneNumber(data.mobile_number, selectedCountry);
+    if (!phoneValidation.valid) {
+      setError("mobile_number", { type: "custom", message: phoneValidation.message });
+      return;
+    }
+    setValue({ ...data, country: selectedCountry });
     router.push("/guest-preview");
   };
 
@@ -45,6 +63,37 @@ const VisitForm = () => {
           <h1 className="mb-4 text-2xl font-semibold">HOTEL GUEST CHECK-IN</h1>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {/* Country Selection */}
+            <div className="w-[600px]">
+              <label
+                htmlFor="country"
+                className="text-sm font-semibold text-[#333333]"
+              >
+                Country
+              </label>
+              <div className="mt-2.5 relative">
+                <select
+                  className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
+                  {...register("country")}
+                  onChange={handleCountryChange}
+                >
+                  {countries.map((country) => (
+                    <option
+                      key={country.id}
+                      value={country.value}
+                      className="text-sm font-semibold text-[#333333]"
+                    >
+                      {country.title} ({country.phoneCode})
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <DropDownIcon />
+                </div>
+                <LocationIcon className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </div>
+            </div>
+
             <div className="w-[600px] ">
               <label
                 htmlFor="full_name"
@@ -89,36 +138,18 @@ const VisitForm = () => {
 
                 <input
                   type="text"
-                  placeholder="Input Mobile Number"
+                  placeholder={getPhonePlaceholder(selectedCountry)}
                   className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.mobile_number ? "border-red-500" : ""
                   }`}
                   {...register("mobile_number", {
-                    required: true,
-                    maxLength: 10,
-                    minLength: 10,
+                    required: "Mobile Number is required",
+                    onChange: () => clearErrors("mobile_number"),
                   })}
                 />
                 {errors.mobile_number && (
                   <span className="text-red-500">
-                    {errors.mobile_number &&
-                      errors.mobile_number.type === "required" && (
-                        <span className="text-red-500">
-                          Mobile Number is required
-                        </span>
-                      )}
-                    {errors.mobile_number &&
-                      errors.mobile_number.type === "minLength" && (
-                        <span className="text-red-500">
-                          Number should be at least 10 digits
-                        </span>
-                      )}
-                    {errors.mobile_number &&
-                      errors.mobile_number.type === "maxLength" && (
-                        <span className="text-red-500">
-                          Number shouldn&apos;t be more than 10 digits
-                        </span>
-                      )}
+                    {errors.mobile_number.message || "Mobile Number is required"}
                   </span>
                 )}
               </div>
@@ -260,13 +291,13 @@ const VisitForm = () => {
                     <option value="" className="text-[#A3A3A3] ">
                       Select Type of ID
                     </option>
-                    {idTypes.map((org) => (
+                    {idTypesList.map((idType) => (
                       <option
-                        key={org.id}
-                        value={org.value}
+                        key={idType.id}
+                        value={idType.value}
                         className="text-sm  font-semibold text-[#333333]"
                       >
-                        {org.title}
+                        {idType.title}
                       </option>
                     ))}
                   </select>
