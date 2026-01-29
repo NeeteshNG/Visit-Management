@@ -109,7 +109,7 @@ toast.error("Please add some roles")
                       <input
                         type='text'
                         placeholder='Input full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.full_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.full_name ? 'border-red-500' : ''
                           }`}
                         {...register('full_name', { required: true })}
                       />
@@ -134,7 +134,7 @@ toast.error("Please add some roles")
                       <input
                         type='text'
                         placeholder='Input Mobile number'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.number ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.number ? 'border-red-500' : ''
                           }`}
                         {...register('number', { required: true })}
                       />
@@ -158,7 +158,7 @@ toast.error("Please add some roles")
                       <input
                         type='email'
                         placeholder='Input Email address'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.email ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.email ? 'border-red-500' : ''
                           }`}
                         {...register('email', { required: true })}
                       />
@@ -182,7 +182,7 @@ toast.error("Please add some roles")
                       <input
                         type='text'
                         placeholder='Input Address'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.email ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.email ? 'border-red-500' : ''
                           }`}
                         {...register('address', { required: true })}
                       />
@@ -221,7 +221,7 @@ toast.error("Please add some roles")
                         required: 'Password is required'
                       })}
                       placeholder='Enter your password'
-                      className={`block w-[600px]  p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg  focus:outline-none focus:border-blue-600 focus:bg-white  ${errors.password ? 'border-red-500' : ''
+                      className={`block w-[600px]  p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg  focus:outline-none focus:border-ngtryprimary focus:bg-white  ${errors.password ? 'border-red-500' : ''
                         }`}
                     />
                     {errors.password && (

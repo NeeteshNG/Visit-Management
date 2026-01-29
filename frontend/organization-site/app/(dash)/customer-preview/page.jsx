@@ -115,7 +115,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.full_name}
                 placeholder="Input full name"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.full_name ? "border-red-500" : ""
                 }`}
                 {...register("full_name", { required: true })}
@@ -145,7 +145,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.mobile_number}
                 placeholder="Input Mobile Number"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.mobile_number ? "border-red-500" : ""
                 }`}
                 {...register("mobile_number", { required: true })}
@@ -174,7 +174,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.email}
                 placeholder="Input Email address"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.email ? "border-red-500" : ""
                 }`}
                 {...register("email", { required: true })}
@@ -204,7 +204,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.typeid}
                 placeholder="Input Type of ID"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.typeid ? "border-red-500" : ""
                 }`}
                 {...register("typeid", { required: true })}
@@ -234,7 +234,7 @@ const VisitForm = () => {
                 placeholder="Input mobile_number of visitor"
                 value={value.id_number}
                 readOnly={true}
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.id_number ? "border-red-500" : ""
                 }`}
                 {...register("id_number", { required: true })}
@@ -264,7 +264,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.company_name}
                 placeholder="Input Company Name"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.company_name ? "border-red-500" : ""
                 }`}
                 {...register("company_name", { required: true })}
@@ -294,7 +294,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.country}
                 placeholder="Input Country"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.country ? "border-red-500" : ""
                 }`}
                 {...register("country", { required: true })}
@@ -324,7 +324,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.state}
                 placeholder="Input State"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.state ? "border-red-500" : ""
                 }`}
                 {...register("state", { required: true })}
@@ -354,7 +354,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.city}
                 placeholder="Input City"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.city ? "border-red-500" : ""
                 }`}
                 {...register("city", { required: true })}
@@ -384,7 +384,7 @@ const VisitForm = () => {
                 readOnly={true}
                 value={value.additional_requirements}
                 placeholder="Input Additional Requirements"
-                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                   errors.additional_requirements ? "border-red-500" : ""
                 }`}
                 {...register("additional_requirements", { required: true })}

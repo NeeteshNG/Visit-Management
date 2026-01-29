@@ -223,7 +223,7 @@ export default function Visitorlist() {
                 Visitor Type
               </label>
               <div className=" relative mt-1">
-                <select className="block w-full p-4 text-[#A3A3A3]  placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none">
+                <select className="block w-full p-4 text-[#A3A3A3]  placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none">
                   <option value="" className="text-[#A3A3A3] ">
                     Visitor Type
                   </option>
@@ -345,7 +345,7 @@ export default function Visitorlist() {
             <div className="mt-2.5 relative">
               <select
                 onChange={handleVisitorsPerPageChange}
-                className="block h-[40px] w-[48px] px-2 text-[#A3A3A3]  placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                className="block h-[40px] w-[48px] px-2 text-[#A3A3A3]  placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
               >
                 <option value="10" className="text-[#A3A3A3] ">
                   10

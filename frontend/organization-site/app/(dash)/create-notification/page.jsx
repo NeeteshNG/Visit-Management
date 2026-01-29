@@ -121,7 +121,7 @@ const MannualEntry = () => {
               </label>
               <div className="mt-[8px] relative">
                 <select
-                  className="block w-full p-4 text-[#A3A3A3] pl-5 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                  className="block w-full p-4 text-[#A3A3A3] pl-5 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                   {...register("notification_type", { required: true })}
                 >
                   <option value="" className="text-[#A3A3A3]">
@@ -155,7 +155,7 @@ const MannualEntry = () => {
               </label>
               <div className="mt-[8px] relative">
                 <select
-                  className="block w-full p-4 text-[#A3A3A3] pl-5 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                  className="block w-full p-4 text-[#A3A3A3] pl-5 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                   {...register("target_audience", { required: true })}
                   onChange={handleAudienceChange}
                 >
@@ -219,7 +219,7 @@ const MannualEntry = () => {
                 <input
                   type="text"
                   placeholder="Input title"
-                  className={`block w-full p-4 pl-5 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-5 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.title ? "border-red-500" : ""
                   }`}
                   {...register("title", { required: true })}
@@ -240,7 +240,7 @@ const MannualEntry = () => {
                 <input
                   type="text"
                   placeholder="Input message"
-                  className={`block w-full p-4 pl-5 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                  className={`block w-full p-4 pl-5 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                     errors.message ? "border-red-500" : ""
                   }`}
                   {...register("message", { required: true })}

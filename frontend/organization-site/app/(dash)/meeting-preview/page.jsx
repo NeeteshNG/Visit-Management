@@ -99,7 +99,7 @@ router.push("/success");
                         readOnly={true}
                         value={value.full_name}
                         placeholder='Input full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.full_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.full_name ? 'border-red-500' : ''
                           }`}
                         {...register('full_name', { required: true })}
                       />
@@ -125,7 +125,7 @@ router.push("/success");
                   readOnly={true}
                   value={value.meetingtitle}
                   placeholder='Input your meeting title'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.meetingtitle ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.meetingtitle ? 'border-red-500' : ''
                     }`}
                   {...register('meetingtitle', { required: true })}
                 />
@@ -151,7 +151,7 @@ router.push("/success");
                   readOnly={true}
                   value={value.number}
                   placeholder='Input Mobile Number'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.number ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.number ? 'border-red-500' : ''
                     }`}
                   {...register('number', { required: true, maxLength: 10, minLength: 10 })}
                 />
@@ -185,7 +185,7 @@ router.push("/success");
                   readOnly={true}
                   value={value.agenda}
                   placeholder='Input Meeting Agenda'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.agenda ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.agenda ? 'border-red-500' : ''
                     }`}
                   {...register('agenda',)}
                 />
@@ -211,7 +211,7 @@ router.push("/success");
                   readOnly={true}
                   value={value.location}
                   placeholder='Input your location'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.location ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.location ? 'border-red-500' : ''
                     }`}
                   {...register('location', { required: true })}
                 />
@@ -240,7 +240,7 @@ router.push("/success");
                         readOnly={true}
                           value={value.meetingtype}
                         placeholder='Input purpose'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.purpose ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.purpose ? 'border-red-500' : ''
                           }`}
                         {...register('purpose', { required: true })}
                       />

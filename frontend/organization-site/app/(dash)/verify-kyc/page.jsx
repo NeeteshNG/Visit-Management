@@ -289,7 +289,7 @@ toast.error("Please Select the images");
                       <input
                         type='text'
                         placeholder='Input your office full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-gray-200 ${errors.organization_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-gray-200 ${errors.organization_name ? 'border-red-500' : ''
                           }`}
                         {...register('organization_name', { required: true })}
                       />
@@ -314,7 +314,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input establishment year'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.establishment_year ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.establishment_year ? 'border-red-500' : ''
                             }`}
                           {...register('establishment_year', { required: true })}
                         />
@@ -338,7 +338,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input registration number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.registration_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.registration_number ? 'border-red-500' : ''
                             }`}
                           {...register('registration_number', { required: true })}
                         />
@@ -364,7 +364,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input PAN / VAT number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.pan_vat_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.pan_vat_number ? 'border-red-500' : ''
                             }`}
                           {...register('pan_vat_number', { required: true })}
                         />
@@ -385,7 +385,7 @@ toast.error("Please Select the images");
                         </label>
                         <div className='mt-2.5 relative'>
                           <select
-                            className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                            className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                             {...register('organization_type', { required: true })}
                           >
                             <option value="" className='text-[#A3A3A3] '>
@@ -430,7 +430,7 @@ toast.error("Please Select the images");
                       </label>
                       <div className='mt-2.5 relative'>
                         <select
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('country', { required: true })} 
                           onChange={(e) => {
                             const selectedValue = e.target.value;
@@ -483,7 +483,7 @@ toast.error("Please Select the images");
                       </label>
                       <div className='mt-2.5 relative'>
                       <select
-          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
           {...register('province', { required: true })}
           onChange={(e) => {
             const selectedValue = e.target.value;
@@ -530,7 +530,7 @@ toast.error("Please Select the images");
                       </label>
                       <div className='mt-2.5 relative'>
                         <select
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('district', { required: true })}
                           onChange={(e) => {
                             const selectedValue = e.target.value;
@@ -571,7 +571,7 @@ toast.error("Please Select the images");
                       </label>
                       <div className='mt-2.5 relative'>
                         <select
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('municipality', { required: true })}
                         >
                           <option value="" className='text-[#A3A3A3] '>
@@ -610,7 +610,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input ward no.'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.ward ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.ward ? 'border-red-500' : ''
                             }`}
                           {...register('ward', { required: true })}
                         />
@@ -634,7 +634,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input City / Tole / Area'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.city ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.city ? 'border-red-500' : ''
                             }`}
                           {...register('city', { required: true })}
                         />
@@ -663,7 +663,7 @@ toast.error("Please Select the images");
                       <input
                         type='text'
                         placeholder='Input contact person full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.full_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.full_name ? 'border-red-500' : ''
                           }`}
                         {...register('full_name', { required: true })}
                       />
@@ -688,7 +688,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input  Telephone number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.telephone_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.telephone_number ? 'border-red-500' : ''
                             }`}
                           {...register('telephone_number', { required: true })}
                         />
@@ -713,7 +713,7 @@ toast.error("Please Select the images");
             <input
               type='text'
               placeholder='Input Mobile Number'
-              className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.mobilenumber ? 'border-red-500' : ''
+              className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.mobilenumber ? 'border-red-500' : ''
                 }`}
               {...register('mobilenumber', { required: true,maxLength:10,minLength:10 })}
             />
@@ -745,7 +745,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input Whatsapp / Viber Number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.whatsapp_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.whatsapp_number ? 'border-red-500' : ''
                             }`}
                           {...register('whatsapp_number', { required: true })}
                         />
@@ -769,7 +769,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input alternate number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.contact_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.contact_number ? 'border-red-500' : ''
                             }`}
                           {...register('contact_number', { required: true,minLength:10,maxLength:10 })}
                         />
@@ -797,7 +797,7 @@ toast.error("Please Select the images");
                         <input
                           type='email'
                           placeholder='Input email address'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.email ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.email ? 'border-red-500' : ''
                             }`}
                           {...register('email', { required: true })}
                         />
@@ -821,7 +821,7 @@ toast.error("Please Select the images");
                         <input
                           type='text'
                           placeholder='Input website'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.website ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.website ? 'border-red-500' : ''
                             }`}
                           {...register('website', { required: true })}
                         />
@@ -847,7 +847,7 @@ toast.error("Please Select the images");
                       <input
                         type='text'
                         placeholder='Input social media link'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.link ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.link ? 'border-red-500' : ''
                           }`}
                         {...register('link', { required: true })}
                       />
@@ -871,7 +871,7 @@ toast.error("Please Select the images");
            type='text'
            id={`link-${index}`}
            placeholder='Input social media link'
-           className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.link ? 'border-red-500' : ''}`}
+           className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.link ? 'border-red-500' : ''}`}
            value={inputValues[index]}
            onChange={(e) => handleInputChange(index, e.target.value)}
          />

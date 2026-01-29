@@ -64,7 +64,7 @@ export default function VisitorThisWeek ({ currentWeekData }) {
 }, [currentWeekData]);
 
   return (
-    <section className='p-2 text-black h-[20rem] bg-sky-50 shadow'>
+    <section className='p-2 text-black h-[20rem] bg-[#f5f6ee] shadow'>
       <h1 className='py-3 font-semibold text-center text-gray-700'>
         Visit This Week
       </h1>
@@ -75,7 +75,7 @@ export default function VisitorThisWeek ({ currentWeekData }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey='person' fill='#8884d8' />
+          <Bar dataKey='person' fill='#636B2F' />
         </BarChart>
       </ResponsiveContainer>
     </section>

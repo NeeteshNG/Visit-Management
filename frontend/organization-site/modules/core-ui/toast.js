@@ -20,7 +20,7 @@ function toastify (message = 'Welcome to NGtry') {
       <div className='flex border-l border-gray-200'>
         <button
           onClick={() => toast.dismiss(t.id)}
-          className='w-full p-4 text-sm font-medium text-indigo-600 border border-transparent rounded-none rounded-r-lg hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+          className='w-full p-4 text-sm font-medium text-ngtrylime border border-transparent rounded-none rounded-r-lg hover:text-white focus:outline-none focus:ring-2 focus:ring-ngtrysage'
         >
           Close
         </button>

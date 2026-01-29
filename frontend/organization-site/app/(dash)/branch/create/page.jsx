@@ -41,7 +41,7 @@ const Page = () => {
           id='name'
           name='name'
           {...register('name', { required: 'Name is required' })}
-          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 ${
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage ${
             errors.name ? 'border-red-500' : ''
           }`}
         />
@@ -60,7 +60,7 @@ const Page = () => {
             id='country'
             name='country'
             {...register('country')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
         <div className='w-full mb-4'>
@@ -72,7 +72,7 @@ const Page = () => {
             id='state'
             name='state'
             {...register('state')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
         <div className='w-full mb-4'>
@@ -84,7 +84,7 @@ const Page = () => {
             id='district'
             name='district'
             {...register('district')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
       </section>
@@ -98,7 +98,7 @@ const Page = () => {
             id='municipality'
             name='municipality'
             {...register('municipality')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
         <div className='w-full mb-4'>
@@ -110,7 +110,7 @@ const Page = () => {
             id='city_village_area'
             name='city_village_area'
             {...register('city_village_area')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
         <div className='w-full mb-4'>
@@ -122,7 +122,7 @@ const Page = () => {
             id='ward_no'
             name='ward_no'
             {...register('ward_no')}
-            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+            className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
           />
         </div>
       </section>
@@ -135,13 +135,13 @@ const Page = () => {
           id='employee_size'
           name='employee_size'
           {...register('employee_size')}
-          className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300'
+          className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-ngtrysage'
         />
       </div>
       <div className='mb-4'>
         <button
           type='submit'
-          className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'
+          className='px-4 py-2 text-white bg-ngtryprimary rounded hover:bg-ngtryprimary'
         >
           Create Branch
         </button>

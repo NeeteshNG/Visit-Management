@@ -120,7 +120,7 @@ export default function Register() {
                     <input
                       type="text"
                       placeholder="Input your office full name"
-                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.organization_name ? "border-red-500" : ""
                       }`}
                       {...register("organization_name", {
@@ -144,7 +144,7 @@ export default function Register() {
                     </label>
                     <div className="mt-2.5 relative">
                       <select
-                        className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                        className="block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                         {...register("organization_type", {
                           required: "Please select office type",
                         })}
@@ -194,7 +194,7 @@ export default function Register() {
                     <input
                       type="text"
                       placeholder="Input contact person name"
-                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.full_name ? "border-red-500" : ""
                       }`}
                       {...register("full_name", {
@@ -224,7 +224,7 @@ export default function Register() {
                     <input
                       type="email"
                       placeholder="Enter E-mail"
-                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.email ? "border-red-500" : ""
                       }`}
                       {...register("email", { required: "Email is required" })}
@@ -252,7 +252,7 @@ export default function Register() {
                     <input
                       type="tel"
                       placeholder="Enter Mobile Number"
-                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.mobile_number ? "border-red-500" : ""
                       }`}
                       {...register("mobile_number", {
@@ -300,7 +300,7 @@ export default function Register() {
                     <input
                       type={isVisible ? "text" : "password"}
                       placeholder="Enter your password"
-                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.password ? "border-red-500" : ""
                       }`}
                       {...register("password", {

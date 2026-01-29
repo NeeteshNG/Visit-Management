@@ -87,7 +87,7 @@ export default function Profile() {
                     <input
                       type="text"
                       placeholder="Input full name"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.full_name ? "border-red-500" : ""
                       }`}
                       {...register("full_name", { required: true })}
@@ -110,7 +110,7 @@ export default function Profile() {
                     <input
                       type="text"
                       placeholder="Input mobile number"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.mobile_number ? "border-red-500" : ""
                       }`}
                       {...register("mobile_number", { required: true })}
@@ -133,7 +133,7 @@ export default function Profile() {
                     <input
                       type="text"
                       placeholder="Input email address"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.email ? "border-red-500" : ""
                       }`}
                       {...register("email", { required: true })}
@@ -154,7 +154,7 @@ export default function Profile() {
                     <input
                       type="text"
                       placeholder="Input address"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.address ? "border-red-500" : ""
                       }`}
                       {...register("address", { required: true })}
@@ -175,7 +175,7 @@ export default function Profile() {
                     <input
                       type="text"
                       placeholder="Input Organization Name"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.organization_name ? "border-red-500" : ""
                       }`}
                       {...register("organization_name", { required: true })}
@@ -196,7 +196,7 @@ export default function Profile() {
                   </label>
                   <div className="mt-[8px] relative">
                     <select
-                      className={`block w-full p-4 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.organization_type ? "border-red-500" : ""
                       }`}
                       {...register("organization_type", { required: true })}
@@ -228,7 +228,7 @@ export default function Profile() {
                     <input
                       type="password"
                       placeholder="Input password"
-                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                      className={`block w-full p-4 pl-8 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                         errors.password ? "border-red-500" : ""
                       }`}
                       {...register("password", { required: true })}

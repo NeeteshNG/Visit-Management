@@ -108,7 +108,7 @@ const Meetingappoinment = () => {
                 <input
                   type='text'
                   placeholder='Input full name'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.full_name ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.full_name ? 'border-red-500' : ''
                     }`}
                   {...register('full_name', { required: true })}
                 />
@@ -132,7 +132,7 @@ const Meetingappoinment = () => {
                 <input
                   type='text'
                   placeholder='Input your meeting title'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.meetingtitle ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.meetingtitle ? 'border-red-500' : ''
                     }`}
                   {...register('meetingtitle', { required: true })}
                 />
@@ -156,7 +156,7 @@ const Meetingappoinment = () => {
                 <input
                   type='text'
                   placeholder='Input Mobile Number'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.number ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.number ? 'border-red-500' : ''
                     }`}
                   {...register('number', { required: true, maxLength: 10, minLength: 10 })}
                 />
@@ -188,7 +188,7 @@ const Meetingappoinment = () => {
                 <input
                   type='agenda'
                   placeholder='Input Meeting Agenda'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.agenda ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.agenda ? 'border-red-500' : ''
                     }`}
                   {...register('agenda',)}
                 />
@@ -212,7 +212,7 @@ const Meetingappoinment = () => {
                 <input
                   type='text'
                   placeholder='Input your location'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.location ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.location ? 'border-red-500' : ''
                     }`}
                   {...register('location', { required: true })}
                 />
@@ -236,7 +236,7 @@ const Meetingappoinment = () => {
                 </label>
                 <div className='mt-[8px] relative'>
                   <select
-                    className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                    className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                     {...register('meetingtype', { required: true })}
                   >
                     <option value="" className='font-semibold text-[#333333] '>

@@ -76,7 +76,7 @@ const Page = () => {
             <h1 className="font-bold text-2xl leading-9 ">Notification</h1>
             <div className="mt-[8px] relative">
               <select
-                className="block w-[84px] h-[34px]  text-[#A3A3A3] font-inter font-semibold text-sm px-2 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none"
+                className="block w-[84px] h-[34px]  text-[#A3A3A3] font-inter font-semibold text-sm px-2 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                 onChange={(e) => {
                   console.log(e.target.value);
                   getnotifications({

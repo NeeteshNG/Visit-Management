@@ -47,7 +47,7 @@ const NotificationDetail = ({ params }) => {
       </div>
       <button
         onClick={() => router.back()}
-        className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'
+        className='px-4 py-2 text-white bg-ngtryprimary rounded hover:bg-ngtryprimary'
       >
         Go Back
       </button>

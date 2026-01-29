@@ -103,7 +103,7 @@ function InputField({
           placeholder={placeholder}
           className={`block w-full p-3 text-black placeholder-gray-500 transition-all duration-200 border ${
             error ? "border-red-500" : "border-gray-200"
-          } rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600`}
+          } rounded-md bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary`}
           aria-label={label}
         />
         {error && <span className="text-red-500">{error.message}</span>}

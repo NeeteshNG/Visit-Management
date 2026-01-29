@@ -286,7 +286,7 @@ const [alldocuments, setalldocuments] = useState([])
                         readOnly={true}
                         value={value.org_name}
                         placeholder='Input your organization full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-gray-200 ${errors.organization_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-gray-200 ${errors.organization_name ? 'border-red-500' : ''
                           }`}
                         {...register('organization_name', { required: true })}
                       />
@@ -313,7 +313,7 @@ const [alldocuments, setalldocuments] = useState([])
                           readOnly={true}
                           value={value.establishment_year}
                           placeholder='Input establishment year'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.establishment_year ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.establishment_year ? 'border-red-500' : ''
                             }`}
                           {...register('establishment_year', { required: true })}
                         />
@@ -339,7 +339,7 @@ const [alldocuments, setalldocuments] = useState([])
                           readOnly={true}
                           value={value.registration_number}
                           placeholder='Input registration number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.registration_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.registration_number ? 'border-red-500' : ''
                             }`}
                           {...register('registration_number', { required: true })}
                         />
@@ -367,7 +367,7 @@ const [alldocuments, setalldocuments] = useState([])
                           value={value.pan_vat_number}
                           readOnly={true}
                           placeholder='Input PAN / VAT number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.pan_vat_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.pan_vat_number ? 'border-red-500' : ''
                             }`}
                           {...register('pan_vat_number', { required: true })}
                         />
@@ -389,7 +389,7 @@ const [alldocuments, setalldocuments] = useState([])
                         <div className='mt-2.5 relative'>
                           <select
                           readOnly={true}
-                            className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                            className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                             {...register('organization_type', { required: true })}
                           >
                             <option value="" className='text-[#A3A3A3] '>
@@ -432,7 +432,7 @@ const [alldocuments, setalldocuments] = useState([])
                         <select
                         readOnly={true}
                         
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('country', { required: true })}
                           onChange={(e) => {
                            
@@ -469,7 +469,7 @@ const [alldocuments, setalldocuments] = useState([])
                       <div className='mt-2.5 relative'>
                         <select
                         readOnly={true}
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('province', { required: true })}
                           onChange={(e) => {
                            
@@ -507,7 +507,7 @@ const [alldocuments, setalldocuments] = useState([])
                       <div className='mt-2.5 relative'>
                         <select
                         readOnly={true}
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('district', { required: true })}
                           onChange={(e) => {
                            
@@ -546,7 +546,7 @@ const [alldocuments, setalldocuments] = useState([])
                       <div className='mt-2.5 relative'>
                         <select
                         readOnly={true}
-                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 appearance-none'
+                          className='block w-full p-4 text-[#A3A3A3] pl-12 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none'
                           {...register('municipality', { required: true })}
                         >
                           <option value="" className='text-[#A3A3A3] '>
@@ -583,7 +583,7 @@ const [alldocuments, setalldocuments] = useState([])
                         value={value.ward_no}
                           type='text'
                           placeholder='Input ward no.'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.ward ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.ward ? 'border-red-500' : ''
                             }`}
                           {...register('ward', { required: true })}
                         />
@@ -609,7 +609,7 @@ const [alldocuments, setalldocuments] = useState([])
                           value={value.city_village_area}
                           placeholder='Input City / Tole / Area'
                           readOnly={true}
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.city ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.city ? 'border-red-500' : ''
                             }`}
                           {...register('city', { required: true })}
                         />
@@ -639,7 +639,7 @@ const [alldocuments, setalldocuments] = useState([])
                         type='text'
                         value={value.contact_person_full_name}
                         placeholder='Input contact person full name'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.full_name ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.full_name ? 'border-red-500' : ''
                           }`}
                         {...register('full_name', { required: true })}
                       />
@@ -666,7 +666,7 @@ const [alldocuments, setalldocuments] = useState([])
                         value={value.telephone_number}
                           type='text'
                           placeholder='Input Telephone number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.telephone_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.telephone_number ? 'border-red-500' : ''
                             }`}
                           {...register('telephone_number', { required: true })}
                         />
@@ -692,7 +692,7 @@ const [alldocuments, setalldocuments] = useState([])
                         value={value.mobilenumber}
                           type='text'
                           placeholder='Input Mobile Number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.registration_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.registration_number ? 'border-red-500' : ''
                             }`}
                           {...register('registration_number', { required: true })}
                         />
@@ -720,7 +720,7 @@ const [alldocuments, setalldocuments] = useState([])
                           value={value.whatsapp_viber_number}
                           readOnly={true}
                           placeholder='Input Whatsapp / Viber Number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.whatsapp_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.whatsapp_number ? 'border-red-500' : ''
                             }`}
                           {...register('whatsapp_number', { required: true })}
                         />
@@ -746,7 +746,7 @@ const [alldocuments, setalldocuments] = useState([])
                           readOnly={true}
                           value={value.secondary_number}
                           placeholder='Input alternate number'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.contact_number ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.contact_number ? 'border-red-500' : ''
                             }`}
                           {...register('contact_number', { required: true })}
                         />
@@ -774,7 +774,7 @@ const [alldocuments, setalldocuments] = useState([])
                           readOnly={true}
                           value={value.email}
                           placeholder='Input email address'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.email ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.email ? 'border-red-500' : ''
                             }`}
                           {...register('email', { required: true })}
                         />
@@ -800,7 +800,7 @@ const [alldocuments, setalldocuments] = useState([])
                           readOnly={true}
                           value={value.website}
                           placeholder='Input website'
-                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.website ? 'border-red-500' : ''
+                          className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.website ? 'border-red-500' : ''
                             }`}
                           {...register('website', { required: true })}
                         />
@@ -828,7 +828,7 @@ const [alldocuments, setalldocuments] = useState([])
                         readOnly={true}
                         value={value.social_link}
                         placeholder='Input social media link'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.link ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.link ? 'border-red-500' : ''
                           }`}
                         {...register('link', { required: true })}
                       />
@@ -852,7 +852,7 @@ const [alldocuments, setalldocuments] = useState([])
            type='text'
            id={`link-${index}`}
            placeholder='Input social media link'
-           className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.link ? 'border-red-500' : ''}`}
+           className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.link ? 'border-red-500' : ''}`}
            value={value.anotherlink[index]}
           //  onChange={(e) => handleInputChange(index, e.target.value)}
          />
@@ -875,7 +875,7 @@ const [alldocuments, setalldocuments] = useState([])
                         readOnly={true}
                         value={value.anotherlink}
                         placeholder='Input social media link'
-                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${errors.link ? 'border-red-500' : ''
+                        className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-[#F4F4F4] focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.link ? 'border-red-500' : ''
                           }`}
                         {...register('anotherlink', { required: true })}
                       />

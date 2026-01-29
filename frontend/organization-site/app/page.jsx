@@ -196,7 +196,7 @@ const LandingPage = () => {
     //         in touch with us if you have any questions or need assistance.
     //       </p>
     //       <div className='grid grid-cols-1 gap-12 md:grid-cols-2'>
-    //         <div className='p-6 bg-blue-500 rounded-lg'>
+    //         <div className='p-6 bg-ngtryprimary rounded-lg'>
     //           <h3 className='mb-4 text-2xl font-semibold'>
     //             Contact Information
     //           </h3>
@@ -219,7 +219,7 @@ const LandingPage = () => {
     //             </a>
     //           </p>
     //         </div>
-    //         <div className='p-6 bg-blue-500 rounded-lg'>
+    //         <div className='p-6 bg-ngtryprimary rounded-lg'>
     //           <h3 className='mb-4 text-2xl font-semibold'>Send Us a Message</h3>
     //           <form>
     //             <div className='mb-4'>
@@ -245,7 +245,7 @@ const LandingPage = () => {
     //             </div>
     //             <button
     //               type='submit'
-    //               className='w-full px-6 py-3 text-white rounded-full bg-epassblue hover:bg-blue-500'
+    //               className='w-full px-6 py-3 text-white rounded-full bg-epassblue hover:bg-ngtryprimary'
     //             >
     //               Send Message
     //             </button>

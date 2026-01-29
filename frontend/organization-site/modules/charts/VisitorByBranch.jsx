@@ -11,10 +11,10 @@ const data = [
 ];
 
 const COLORS = [
-    '#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF3E3E', '#7D3C98',
-    '#FF6B6B', '#FFD700', '#32CD32', '#4B0082', '#8A2BE2', '#FF1493',
-    '#1E90FF', '#FF8C00', '#6A5ACD', '#00CED1', '#8B4513', '#2E8B57',
-    '#800000', '#008B8B'
+    '#636B2F', '#3D4127', '#BAC095', '#D4DE95', '#8B9A3E', '#4E5523',
+    '#A3AE6B', '#C8D4A0', '#7A8435', '#2C3018', '#9DAA5E', '#E0E8C4',
+    '#556028', '#6E7A32', '#B5C27A', '#485218', '#8F9C52', '#D0D9AC',
+    '#3A4020', '#A8B570'
 ];
 
 const RADIAN = Math.PI / 180;
@@ -33,7 +33,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 function VisitorByBranch() {
     return (
-        <section className="p-2 text-black h-[20rem] bg-sky-50 shadow">
+        <section className="p-2 text-black h-[20rem] bg-[#f5f6ee] shadow">
             <h1 className="py-3 font-semibold text-center text-gray-700">Visitor By Branch</h1>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart width={400} height={400}>

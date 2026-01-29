@@ -84,7 +84,7 @@ function ForgotPassword() {
                       required: "Username is required",
                     })}
                     placeholder="Input your mobile number or email"
-                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600 ${
+                    className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-gray-400 rounded-lg bg-gray-50 focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${
                       errors.mobile_number ? "border-red-500" : ""
                     }`}
                   />
