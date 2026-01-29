@@ -70,12 +70,12 @@ export default function DetailsDetails() {
   </>}
 
 <div className="flex gap-4 mt-5 ">
-<button className='bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[211px] h-[48px] text-primaryblue'
+<button className='bg-white gap-3  border flex items-center justify-center border-ngtrydeep rounded-xl mt-4 w-[211px] h-[48px] text-ngtrydeep'
          
           >
             Download Details <GoDownloadIcon className="text-2xl"/>
           </button>
-          <button className='bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[182px] h-[48px] text-primaryblue'
+          <button className='bg-white gap-3  border flex items-center justify-center border-ngtrydeep rounded-xl mt-4 w-[182px] h-[48px] text-ngtrydeep'
          
           >
             Share Details <CiShare2Icon className="text-2xl"/>

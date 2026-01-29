@@ -882,9 +882,9 @@ toast.error("Please Select the images");
                   <div className='flex gap-3 mt-6 items-center cursor-pointer' onClick={()=>{
                     setnumberoflink(numberoflink+1);
                   }}>
-                 <p className='text-primaryblue font-bold text-sm leading-5 '>
+                 <p className='text-ngtrydeep font-bold text-sm leading-5 '>
                       Add another link</p>
-                    <FaPlusIcon className="text-sm text-primaryblue" />
+                    <FaPlusIcon className="text-sm text-ngtrydeep" />
 
                   </div>
                 </div>
@@ -917,7 +917,7 @@ toast.error("Please Select the images");
                   </div>:<>
                   <div className='w-[619px] h-[140px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
                   <LuUploadIcon className="text-base text-[#A3A3A3]"/>
-                  <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-primaryblue cursor-pointer' onClick={()=>{
+                  <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-ngtrydeep cursor-pointer' onClick={()=>{
                     handleImagesClick(index)
                     console.log(selectedImages);
                   }}>Browse</span></p>
@@ -956,7 +956,7 @@ toast.error("Please Select the images");
         //     <div className='w-[150px] h-[150px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
         //       <p className='text-base font-normal leading-6 text-[#A3A3A3]'>
         //         Drag & drop file or{' '}
-        //         <span className='text-primaryblue cursor-pointer' onClick={() => handleImageClick(index)}>
+        //         <span className='text-ngtrydeep cursor-pointer' onClick={() => handleImageClick(index)}>
         //           Browse
         //         </span>
         //       </p>
@@ -967,8 +967,8 @@ toast.error("Please Select the images");
                     <div className='flex gap-3 mt-6 items-center cursor-pointer' onClick={()=>{
                       setnumberofdocument(numberofdocument+1);
                     }}>
-                    <FaPlusIcon className="text-sm text-primaryblue" />
-                <p className='text-primaryblue font-bold text-sm leading-5 '>
+                    <FaPlusIcon className="text-sm text-ngtrydeep" />
+                <p className='text-ngtrydeep font-bold text-sm leading-5 '>
                       Add file upload</p>
                     
 

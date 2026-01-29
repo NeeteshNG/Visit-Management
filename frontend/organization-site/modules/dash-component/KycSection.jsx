@@ -15,7 +15,7 @@ export default function KycSection() {
           within 24 hours.
         </p>
         <div
-          className="w-[124px] h-[36px] cursor-pointer rounded-xl bg-white text-primaryblue flex items-center justify-center mt-5"
+          className="w-[124px] h-[36px] cursor-pointer rounded-xl bg-white text-ngtrydeep flex items-center justify-center mt-5"
           onClick={() => {
             if (user.organization_status === null) {
               router.push("/verify-kyc");

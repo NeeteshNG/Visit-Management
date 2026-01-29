@@ -25,7 +25,7 @@ export default function NotificationDetails({ details }) {
       <div className="flex justify-between items-center">
         <div className="flex gap-3 items-center">
           <div className="h-[48px] w-[48px] rounded-xl my-2 relative bg-[#E5F3FE] flex items-center justify-center">
-            <MdOutlinePersonIcon className="text-primaryblue text-2xl" />
+            <MdOutlinePersonIcon className="text-ngtrydeep text-2xl" />
           </div>
           <p className="font-bold text-2xl font-inter">{details.title}</p>
         </div>

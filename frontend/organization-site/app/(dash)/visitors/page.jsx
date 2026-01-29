@@ -80,7 +80,7 @@ function Page () {
     <div>
       <section className='flex items-center justify-between'>
         <h1 className='py-3 font-semibold'>Visitors List</h1>
-        <button className='px-2 py-2 text-xs font-medium text-white rounded-sm shadow bg-epassblue'>
+        <button className='px-2 py-2 text-xs font-medium text-white rounded-sm shadow bg-ngtryprimary'>
           Export Visitors
         </button>
       </section>

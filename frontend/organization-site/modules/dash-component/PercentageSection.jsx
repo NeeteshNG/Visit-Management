@@ -16,7 +16,7 @@ export default function PercentageSection({ userId }) {
         <></>
       ) : (
         <>
-          <div className="w-[213px] h-[92px] rounded-xl shadow-3xl p-5 border border-primaryblue bg-white">
+          <div className="w-[213px] h-[92px] rounded-xl shadow-3xl p-5 border border-ngtrydeep bg-white">
             <div className="flex gap-5 items-center">
               <p className="text-2xl font-bold font-inter leading-8">
                 {count.results.length <= 0 ? "0" : count.results[2].count}
@@ -27,7 +27,7 @@ export default function PercentageSection({ userId }) {
             </p>
           </div>
 
-          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-primarysky">
+          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-ngtrysage">
             <div className="flex gap-5 items-center">
               <p className="text-2xl font-bold font-inter leading-8">
                 {count.results.length <= 0

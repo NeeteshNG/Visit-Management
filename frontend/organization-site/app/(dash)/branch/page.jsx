@@ -39,7 +39,7 @@ const BranchesPage = () => {
         <div style={{ height: 400, width: '100%' }}>
           <section className='flex items-center justify-end my-2'>
             <Link href='/branch/create'>
-              <button className='px-3 py-2 mt-4 font-bold text-white rounded-sm bg-epassblue hover:bg-green-700'>
+              <button className='px-3 py-2 mt-4 font-bold text-white rounded-sm bg-ngtryprimary hover:bg-green-700'>
                 Create Branch
               </button>
             </Link>

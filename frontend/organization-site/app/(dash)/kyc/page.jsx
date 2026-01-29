@@ -41,7 +41,7 @@ function KYCVerificationPage () {
 
   return (
     <div className='max-w-full py-6 mx-auto'>
-      <h1 className='mb-4 text-3xl font-semibold text-epassblue'>
+      <h1 className='mb-4 text-3xl font-semibold text-ngtryprimary'>
         KYC Verification Information
       </h1>
 
@@ -77,7 +77,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Establishment Year:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.establishment_year}
               </span>
             </p>
@@ -85,7 +85,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 VAT Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.vat_number}
               </span>
             </p>
@@ -93,7 +93,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 PAN Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.pan_number}
               </span>
             </p>
@@ -101,7 +101,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Registration Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.registration_number}
               </span>
             </p>
@@ -112,7 +112,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Country:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.country}
               </span>
             </p>
@@ -120,7 +120,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 State:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.state}
               </span>
             </p>
@@ -128,7 +128,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 District:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.district}
               </span>
             </p>
@@ -136,7 +136,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Municipality:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.municipality}
               </span>
             </p>
@@ -154,7 +154,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 City/Village/Area:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.city_village_area}
               </span>
             </p>
@@ -162,7 +162,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Ward No:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.ward_no}
               </span>
             </p>
@@ -170,7 +170,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 WhatsApp/Viber Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.whatsapp_viber_number}
               </span>
             </p>
@@ -183,7 +183,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Secondary Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.secondary_number}
               </span>
             </p>
@@ -191,7 +191,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Telephone Number:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.telephone_number}
               </span>
             </p>
@@ -199,7 +199,7 @@ function KYCVerificationPage () {
               <span className='my-1 text-xs font-normal text-gray-600'>
                 Website:
               </span>
-              <span className='px-2 text-sm italic font-medium text-epassblue'>
+              <span className='px-2 text-sm italic font-medium text-ngtryprimary'>
                 {kycData.website}
               </span>
             </p>

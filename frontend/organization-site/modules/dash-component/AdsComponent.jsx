@@ -18,7 +18,7 @@ export default function AdsComponent() {
   return (
     <Swiper
       style={{
-        "--swiper-pagination-color": "#25AAE1",
+        "--swiper-pagination-color": "#636B2F",
         "--swiper-pagination-bullet-inactive-color": "#FFFFFF",
         "--swiper-pagination-bullet-inactive-opacity": "1",
         "--swiper-pagination-bullet-size": "10px",

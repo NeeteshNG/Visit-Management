@@ -89,7 +89,7 @@ export default function Register() {
                   <Link
                     href="/login"
                     title="Login to your NGtry account"
-                    className="ml-1 font-medium text-[#636B2F] transition-all duration-200 hover:text-[#3D4127] hover:underline focus:text-ngtrydeep"
+                    className="ml-1 font-medium text-ngtryprimary transition-all duration-200 hover:text-ngtrydeep hover:underline focus:text-ngtrydeep"
                   >
                     Login
                   </Link>

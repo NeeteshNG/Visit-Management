@@ -53,9 +53,9 @@ const LandingPage = () => {
   // (
     
     // <div className='w-full'>
-    //   <div className='py-6 text-center text-white bg-epassblue'>
+    //   <div className='py-6 text-center text-white bg-ngtryprimary'>
     //     <nav className='container flex items-center justify-between mx-auto'>
-    //       <h1 className='text-4xl font-bold'>Epass</h1>
+    //       <h1 className='text-4xl font-bold'>NGtry</h1>
     //       <ul className='flex items-center justify-end space-x-6 font-semibold'>
     //         <li>
     //           <a href='#features' className='text-white'>
@@ -94,19 +94,19 @@ const LandingPage = () => {
     //     animate={{ opacity: 1, y: 0 }}
     //     exit={{ opacity: 0, y: 50 }}
     //     transition={{ duration: 1 }}
-    //     className='py-24 text-white hero bg-gradient-to-b from-epassblue to-blue-400'
+    //     className='py-24 text-white hero bg-gradient-to-b from-ngtryprimary to-blue-400'
     //   >
     //     <div className='container flex items-center justify-between mx-auto'>
     //       <div className='w-1/2'>
     //         <h2 className='mb-4 text-5xl font-extrabold'>
-    //           Welcome to Epass Entry Management System
+    //           Welcome to NGtry Entry Management System
     //         </h2>
     //         <p className='mb-8 text-lg text-gray-100'>
     //           Simplify entry management with the power of QR codes.
     //         </p>
     //         <Link
     //           href='/login'
-    //           className='px-8 py-4 text-lg font-semibold transition duration-300 ease-in-out bg-white rounded-full text-epassblue hover:bg-epassblue hover:text-white'
+    //           className='px-8 py-4 text-lg font-semibold transition duration-300 ease-in-out bg-white rounded-full text-ngtryprimary hover:bg-ngtryprimary hover:text-white'
     //         >
     //           Get Started
     //         </Link>
@@ -143,12 +143,12 @@ const LandingPage = () => {
     //   </section>
     //   <section id='how-it-works' className='py-48 bg-gray-100'>
     //     <div className='container mx-auto text-center'>
-    //       <h2 className='mb-8 text-4xl font-semibold text-epassblue'>
+    //       <h2 className='mb-8 text-4xl font-semibold text-ngtryprimary'>
     //         How It Works
     //       </h2>
     //       <div className='grid grid-cols-1 gap-12 sm:grid-cols-2'>
     //         <div className='p-8 bg-white rounded-lg shadow-md h-28'>
-    //           <h3 className='mb-4 text-2xl font-semibold text-epassblue'>
+    //           <h3 className='mb-4 text-2xl font-semibold text-ngtryprimary'>
     //             Step 1: Scan QR Code
     //           </h3>
     //           <p className='text-gray-600'>
@@ -157,7 +157,7 @@ const LandingPage = () => {
     //           </p>
     //         </div>
     //         <div className='p-8 bg-white rounded-lg shadow-md h-28'>
-    //           <h3 className='mb-4 text-2xl font-semibold text-epassblue'>
+    //           <h3 className='mb-4 text-2xl font-semibold text-ngtryprimary'>
     //             Step 2: Registration
     //           </h3>
     //           <p className='text-gray-600'>
@@ -165,7 +165,7 @@ const LandingPage = () => {
     //           </p>
     //         </div>
     //         <div className='p-8 bg-white rounded-lg shadow-md h-28'>
-    //           <h3 className='mb-4 text-2xl font-semibold text-epassblue'>
+    //           <h3 className='mb-4 text-2xl font-semibold text-ngtryprimary'>
     //             Step 3: Access Approval
     //           </h3>
     //           <p className='text-gray-600'>
@@ -174,7 +174,7 @@ const LandingPage = () => {
     //           </p>
     //         </div>
     //         <div className='p-8 bg-white rounded-lg shadow-md h-28'>
-    //           <h3 className='mb-4 text-2xl font-semibold text-epassblue'>
+    //           <h3 className='mb-4 text-2xl font-semibold text-ngtryprimary'>
     //             Step 4: Entry Confirmation
     //           </h3>
     //           <p className='text-gray-600'>
@@ -187,7 +187,7 @@ const LandingPage = () => {
     //   </section>
     //   <section
     //     id='contact'
-    //     className='py-48 text-white bg-gradient-to-b from-epassblue to-blue-400'
+    //     className='py-48 text-white bg-gradient-to-b from-ngtryprimary to-blue-400'
     //   >
     //     <div className='container mx-auto text-center'>
     //       <h2 className='mb-8 text-4xl font-semibold'>Contact Us</h2>
@@ -204,7 +204,7 @@ const LandingPage = () => {
     //             Email:
     //             <a
     //               href='mailto:contact@example.com'
-    //               className='underline hover:text-epassblue'
+    //               className='underline hover:text-ngtryprimary'
     //             >
     //               contact@example.com
     //             </a>
@@ -213,7 +213,7 @@ const LandingPage = () => {
     //             Phone:
     //             <a
     //               href='tel:+123456789'
-    //               className='underline hover:text-epassblue'
+    //               className='underline hover:text-ngtryprimary'
     //             >
     //               +1 (234) 567-89
     //             </a>
@@ -226,26 +226,26 @@ const LandingPage = () => {
     //               <input
     //                 type='text'
     //                 placeholder='Your Name'
-    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-epassblue focus:border-epassblue'
+    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-ngtryprimary focus:border-ngtryprimary'
     //               />
     //             </div>
     //             <div className='mb-4'>
     //               <input
     //                 type='email'
     //                 placeholder='Your Email'
-    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-epassblue focus:border-epassblue'
+    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-ngtryprimary focus:border-ngtryprimary'
     //               />
     //             </div>
     //             <div className='mb-6'>
     //               <textarea
     //                 placeholder='Your Message'
     //                 rows='4'
-    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-epassblue focus:border-epassblue'
+    //                 className='w-full px-4 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-ngtryprimary focus:border-ngtryprimary'
     //               ></textarea>
     //             </div>
     //             <button
     //               type='submit'
-    //               className='w-full px-6 py-3 text-white rounded-full bg-epassblue hover:bg-ngtryprimary'
+    //               className='w-full px-6 py-3 text-white rounded-full bg-ngtryprimary hover:bg-ngtryprimary'
     //             >
     //               Send Message
     //             </button>
@@ -269,11 +269,11 @@ const LandingPage = () => {
     //     </div>
     //   </section>
 
-    //   <section className='py-10 bg-epassblue sm:pt-16 lg:pt-24'>
+    //   <section className='py-10 bg-ngtryprimary sm:pt-16 lg:pt-24'>
     //     <div className='px-4 mx-auto sm:px-6 lg:px-8 max-w-[100rem]'>
     //       <div className='grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-12'>
     //         <div>
-    //           <span className='text-xl font-semibold text-white'>Epass</span>
+    //           <span className='text-xl font-semibold text-white'>NGtry</span>
     //           <ul className='mt-8 space-y-4'>
     //             <li>
     //               <a
@@ -439,7 +439,7 @@ const LandingPage = () => {
     //             </ul>
     //           </div>
     //           <p className='mt-6 text-sm text-blue-200 lg:mt-0'>
-    //             © Copyright 2023, All Rights Reserved by Epass
+    //             © Copyright 2023, All Rights Reserved by NGtry
     //           </p>
     //         </div>
     //       </div>

@@ -888,9 +888,9 @@ const [alldocuments, setalldocuments] = useState([])
                   </div>
                   </>} */}
                   {/* <div className='flex gap-3 mt-6 items-center'>
-                    <p className='text-primaryblue font-bold text-sm leading-5 '>
+                    <p className='text-ngtrydeep font-bold text-sm leading-5 '>
                       Add another link</p>
-                    <FaPlusIcon className="text-sm text-primaryblue" />
+                    <FaPlusIcon className="text-sm text-ngtrydeep" />
 
                   </div> */}
                 </div>
@@ -928,7 +928,7 @@ alt="Selected" className='object-contain h-[100px]' />
                   </div>:<>
                   {/* <div className='w-[619px] h-[140px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
                   <LuUploadIcon className="text-base text-[#A3A3A3]"/>
-                  <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-primaryblue cursor-pointer' onClick={()=>{
+                  <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-ngtrydeep cursor-pointer' onClick={()=>{
                   
                   }}>Browse</span></p>
                   </div> */}
@@ -942,8 +942,8 @@ alt="Selected" className='object-contain h-[100px]' />
 
 
                     {/* <div className='flex gap-3 mt-6 items-center'>
-                      <FaPlusIcon className="text-sm text-primaryblue" />
-                      <p className='text-primaryblue font-bold text-sm leading-5 '>
+                      <FaPlusIcon className="text-sm text-ngtrydeep" />
+                      <p className='text-ngtrydeep font-bold text-sm leading-5 '>
                         Add file upload</p>
 
 

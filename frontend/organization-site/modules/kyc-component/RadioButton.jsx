@@ -29,7 +29,7 @@ export default function RadioButton({title,onclickfunction}) {
       <span
         className={`w-[20px] h-[20px] flex items-center justify-center  rounded  bg-white mr-1 border border-grey `}
       > <div className={`${
-        selected===true ? 'w-[11px] h-[11px] bg-primaryblue rounded-[2px]' : ''
+        selected===true ? 'w-[11px] h-[11px] bg-ngtrydeep rounded-[2px]' : ''
       }`}>
         </div></span>
      {title}

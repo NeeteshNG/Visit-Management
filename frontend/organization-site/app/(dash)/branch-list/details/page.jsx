@@ -183,7 +183,7 @@ export default function BranchDetails() {
               </p>
               <div className="flex gap-2">
                 <button
-                  className="bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[182px] h-[48px] text-primaryblue"
+                  className="bg-white gap-3  border flex items-center justify-center border-ngtrydeep rounded-xl mt-4 w-[182px] h-[48px] text-ngtrydeep"
                   //   onClick={()=>{downloadImage({imageUrl:`https://api.epass.com.np${user?.qr}`})}}
                   onClick={() => {
                     // saveAs(`${baseurl}${getbranchdetail.qr_image}`)
@@ -193,7 +193,7 @@ export default function BranchDetails() {
                   Download QR <GoDownloadIcon className="text-2xl" />
                 </button>
                 <button
-                  className="bg-white gap-3  border flex items-center justify-center border-primaryblue rounded-xl mt-4 w-[148px] h-[48px] text-primaryblue"
+                  className="bg-white gap-3  border flex items-center justify-center border-ngtrydeep rounded-xl mt-4 w-[148px] h-[48px] text-ngtrydeep"
                   onClick={() => {
                     setopen(true);
                   }}

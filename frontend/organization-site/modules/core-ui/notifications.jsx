@@ -73,7 +73,7 @@ const Notifications = () => {
           <div className='relative flex'>
             <div
               className={`relative inline-flex w-3 h-3 ${
-                notificationClicked ? 'bg-epassblue' : 'bg-red-500'
+                notificationClicked ? 'bg-ngtryprimary' : 'bg-red-500'
               } border-2 border-white rounded-full -top-2 right-3 dark:border-gray-900`}
             ></div>
           </div>

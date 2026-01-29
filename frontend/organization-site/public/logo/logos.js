@@ -29,18 +29,3 @@ export function NGtryLogoWhite({ width = 120, height = 50, className = '' }) {
     />
   );
 }
-
-// EpassLogo - Legacy alias, used in sidebar (dark background)
-// Uses white/inverted version for dark sidebar background
-export function EpassLogo({ width = 120, height = 50, className = '', style = {} }) {
-  return (
-    <Image
-      src={ngtryLogoPng}
-      alt="NGtry Logo"
-      width={style.width ? parseInt(style.width) : width}
-      height={style.height ? parseInt(style.height) : height}
-      className={`brightness-0 invert ${className}`}
-      priority
-    />
-  );
-}

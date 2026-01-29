@@ -33,7 +33,7 @@ export default function MainNavbar () {
         <section className='flex items-center'>
           <AiOutlineAlignLeftIcon
             size='20'
-            className='cursor-pointer text-epassblue'
+            className='cursor-pointer text-ngtryprimary'
             onClick={handleLeftSidebarExpandBTN}
           />
           <Link href={'/dash'} className='pl-3 font-bold'>
@@ -61,7 +61,7 @@ export default function MainNavbar () {
             </div>
             <AiOutlineAlignRightIcon
               size='20'
-              className='cursor-pointer text-epassblue '
+              className='cursor-pointer text-ngtryprimary '
               onClick={handleRightSidebarExpandBTN}
             />
           </section>

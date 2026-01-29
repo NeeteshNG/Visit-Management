@@ -101,7 +101,7 @@ const Page = () => {
                 <Link
                   href="/register"
                   title="Create free account at NGtry"
-                  className="ml-1 font-medium text-[#636B2F] transition-all duration-200 hover:text-[#3D4127] hover:underline focus:text-ngtrydeep"
+                  className="ml-1 font-medium text-ngtryprimary transition-all duration-200 hover:text-ngtrydeep hover:underline focus:text-ngtrydeep"
                 >
                   Register
                 </Link>
@@ -222,7 +222,7 @@ const Page = () => {
                 <Link
                   href="/forgot"
                   title="forgot password"
-                  className="text-sm font-medium text-[#636B2F] hover:underline hover:text-[#3D4127] focus:text-[#3D4127]"
+                  className="text-sm font-medium text-ngtryprimary hover:underline hover:text-ngtrydeep focus:text-ngtrydeep"
                 >
                   Forgot password?
                 </Link>

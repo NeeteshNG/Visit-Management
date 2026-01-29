@@ -130,7 +130,7 @@ export default function Profile() {
                 </div>
                 <div className="flex flex-col justify-between mt-4">
                   <div
-                    className="flex  gap-1 cursor-pointer items-center rounded-xl text-white justify-center w-[159px] h-[48px] bg-primaryblue"
+                    className="flex  gap-1 cursor-pointer items-center rounded-xl text-white justify-center w-[159px] h-[48px] bg-ngtrydeep"
                     onClick={() => {
                       router.push("/edit-profile");
                     }}
@@ -146,7 +146,7 @@ export default function Profile() {
                     <>
                       {viewkyc === false ? (
                         <p
-                          className="text-sm font-normal font-inter text-end  text-primaryblue cursor-pointer"
+                          className="text-sm font-normal font-inter text-end  text-ngtrydeep cursor-pointer"
                           onClick={() => {
                             setviewkyc(true);
                           }}

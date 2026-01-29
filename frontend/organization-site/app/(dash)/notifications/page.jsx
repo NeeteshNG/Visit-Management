@@ -123,14 +123,14 @@ const Page = () => {
                 <h1
                   className={`${
                     isclicked === 0
-                      ? "font-bold text-primaryblue"
+                      ? "font-bold text-ngtrydeep"
                       : "font-normal"
                   }  font-inter text-base transition duration-1000 ease-in`}
                 >
                   All
                 </h1>
                 {isclicked === 0 ? (
-                  <div className=" bg-primaryblue h-[2px] mt-2 w-full"></div>
+                  <div className=" bg-ngtrydeep h-[2px] mt-2 w-full"></div>
                 ) : (
                   <></>
                 )}
@@ -138,20 +138,20 @@ const Page = () => {
               {/* <div className='w-[180px] flex flex-col items-center justify-center cursor-pointer transition duration-1000 ease-in' onClick={()=>{
         setisclicked(1)
       }}>
-      <h1 className={`${isclicked===1?"font-bold text-primaryblue":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Alerts</h1>
-    {isclicked===1?<div className=' bg-primaryblue h-[2px] mt-2 w-full'></div>:<></>}  
+      <h1 className={`${isclicked===1?"font-bold text-ngtrydeep":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Alerts</h1>
+    {isclicked===1?<div className=' bg-ngtrydeep h-[2px] mt-2 w-full'></div>:<></>}  
       </div>
       <div className='w-[180px] flex flex-col items-center justify-center cursor-pointer transition duration-1000 ease-in' onClick={()=>{
         setisclicked(2)
       }}>
-      <h1 className={`${isclicked===2?"font-bold text-primaryblue":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Events</h1>
-    {isclicked===2?<div className=' bg-primaryblue h-[2px] mt-2 w-full'></div>:<></>}  
+      <h1 className={`${isclicked===2?"font-bold text-ngtrydeep":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Events</h1>
+    {isclicked===2?<div className=' bg-ngtrydeep h-[2px] mt-2 w-full'></div>:<></>}  
       </div>
       <div className='w-[180px] flex flex-col items-center justify-center cursor-pointer transition duration-1000 ease-in' onClick={()=>{
         setisclicked(3)
       }}>
-      <h1 className={`${isclicked===3?"font-bold text-primaryblue":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Logs</h1>
-    {isclicked===3?<div className=' bg-primaryblue h-[2px] mt-2 w-full'></div>:<></>}  
+      <h1 className={`${isclicked===3?"font-bold text-ngtrydeep":"font-normal"}  font-inter text-base transition duration-1000 ease-in`}>Logs</h1>
+    {isclicked===3?<div className=' bg-ngtrydeep h-[2px] mt-2 w-full'></div>:<></>}  
       </div> */}
             </div>
             <p className="font-semibold text-base text-greyneutral">
@@ -182,7 +182,7 @@ const Page = () => {
                       }}
                     >
                       <div className="h-[48px] w-[48px] rounded-xl my-2 relative bg-[#E5F3FE] flex items-center justify-center">
-                        <MdOutlinePersonIcon className="text-primaryblue text-2xl" />
+                        <MdOutlinePersonIcon className="text-ngtrydeep text-2xl" />
                         {e.is_seen === false ? (
                           <div className="absolute -top-0 right-0 h-[8px] w-[8px] rounded-full bg-[#FFAB1E]"></div>
                         ) : (

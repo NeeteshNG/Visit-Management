@@ -134,7 +134,7 @@ export default function HistoryTable ({ data }) {
           data={exportData}
           filename={`visit_history-${Date.now()}.csv`}
           target='_blank'
-          className='px-2 py-2 text-xs font-medium text-white rounded-sm shadow bg-epassblue'
+          className='px-2 py-2 text-xs font-medium text-white rounded-sm shadow bg-ngtryprimary'
         >
           Export History
         </CSVLink>

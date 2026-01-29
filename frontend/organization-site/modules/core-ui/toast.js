@@ -5,7 +5,7 @@ function toastify (message = 'Welcome to NGtry') {
   return toast.custom(t => (
     <div
       key={t.id}
-      className='flex w-full max-w-md rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5 bg-epassblue'
+      className='flex w-full max-w-md rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5 bg-ngtryprimary'
     >
       <div className='flex-1 w-0 p-4'>
         <div className='flex items-start'>

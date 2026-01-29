@@ -386,7 +386,7 @@ export default function Visitorlist() {
                   key={page}
                   className={`w-[24px] h-[24px] flex items-center justify-center rounded-md text-xs font-inter font-normal ${
                     currentPage === page
-                      ? "bg-primaryblue text-white"
+                      ? "bg-ngtrydeep text-white"
                       : "text-[#A3A3A3] text-xs font-normal font-inter"
                   }`}
                   onClick={() => handlePageChange(page)}

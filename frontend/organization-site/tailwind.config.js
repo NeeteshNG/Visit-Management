@@ -26,10 +26,6 @@ module.exports = {
         ngtrydeep: "#3D4127",     // Deep Green - dark accents, gradients
         ngtrysage: "#BAC095",     // Sage - light accents, hover states
         ngtrylime: "#D4DE95",     // Lime - highlights, success states
-        // Legacy aliases (for gradual migration)
-        epassblue: "#636B2F",     // maps to ngtryprimary
-        primaryblue: "#3D4127",   // maps to ngtrydeep
-        primarysky: "#BAC095",    // maps to ngtrysage
         // Neutral colors
         neutralBlack: "#090A0A",
         lightneutra: "#FFFFFF",

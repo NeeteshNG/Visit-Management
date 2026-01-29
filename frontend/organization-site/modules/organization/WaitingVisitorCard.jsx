@@ -30,7 +30,7 @@ const WaitingVisitorCard = ({ data, setHistoryData }) => {
   };
   return (
     <div className="flex flex-col w-full bg-white border rounded-md shadow-lg">
-      <section className="grid items-center justify-between w-full grid-cols-4 bg-epassblue ">
+      <section className="grid items-center justify-between w-full grid-cols-4 bg-ngtryprimary">
         <div className="flex flex-col col-span-3 p-3 space-y-1 text-white rounded">
           <p className="text-sm">
             <span className="mr-1 font-medium text-gray-300">Name:</span>
@@ -84,13 +84,13 @@ const WaitingVisitorCard = ({ data, setHistoryData }) => {
             src="/user-avatar.png"
             height={300}
             width={300}
-            alt="visitor-image-epass"
+            alt="visitor-image"
           />
         </div>
       </section>
       <div className="flex justify-between p-2">
         <button
-          className="flex flex-col px-5 py-2 items-center bg-[#0f75bd] rounded shadow-md"
+          className="flex flex-col px-5 py-2 items-center bg-ngtrydeep rounded shadow-md"
           onClick={approveVisitorEntry}
         >
           <p className="py-1 font-semibold text-white">Approve</p>
