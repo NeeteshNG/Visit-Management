@@ -21,7 +21,7 @@ urlpatterns = [
         name="guest-delete",
     ),
     path(
-        "meetingcreate/", views.MeetingAppoinmentCreate.as_view(), name="meeting-create"
+        "meetingcreate/", views.MeetingAppointmentCreate.as_view(), name="meeting-create"
     ),
     path(
         "meeting-info/",

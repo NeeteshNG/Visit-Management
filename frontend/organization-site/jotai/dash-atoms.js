@@ -5,7 +5,7 @@ const kycdataAtom = atom({});
 const unverifykycdata = atom({});
 
 const mannualdataAtom = atom({});
-const meetingappoinmentdata = atom({});
+const meetingAppointmentData = atom({});
 const phonenumberdataAtom = atom({});
 const otpdataAtom = atom({});
 
@@ -15,5 +15,5 @@ export {
   mannualdataAtom,
   phonenumberdataAtom,
   unverifykycdata,
-  meetingappoinmentdata,
+  meetingAppointmentData,
 };

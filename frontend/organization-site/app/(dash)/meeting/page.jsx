@@ -21,14 +21,14 @@ import { useRouter } from 'next/navigation'
 import { useAtom } from 'jotai';
 import { idTypes, meetingtypes, organizationTypes, purpose } from '@/modules/data/organization_types_nature';
 import DefaultButton from '@/modules/core-ui/Button';
-import {  meetingappoinmentdata } from '@/jotai/dash-atoms';
+import {  meetingAppointmentData } from '@/jotai/dash-atoms';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { getpurposes } from '@/modules/data/branch_service';
 
-const Meetingappoinment = () => {
+const MeetingAppointment = () => {
   const [purposes, setpurpose] = useState(null)
-  const [value,setvalue]=useAtom(meetingappoinmentdata)
+  const [value,setvalue]=useAtom(meetingAppointmentData)
   const { register, handleSubmit, control, reset, formState: { errors } }
     = useForm();
   const router = useRouter();
@@ -292,4 +292,4 @@ const Meetingappoinment = () => {
   );
 };
 
-export default Meetingappoinment;
+export default MeetingAppointment;

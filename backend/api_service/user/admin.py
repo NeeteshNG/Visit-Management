@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from .models import CustomUser, Subscription
+from .models import CustomUser, Subscription, FCMDevices
 from common.admin import CustomModelAdmin
 
 
@@ -117,3 +117,10 @@ class SubscriptionAdmin(CustomModelAdmin):
 
 
 admin.site.register(Subscription, SubscriptionAdmin)
+
+
+@admin.register(FCMDevices)
+class FCMDevicesAdmin(CustomModelAdmin):
+    list_display = ("user", "registration_id", "created_at")
+    search_fields = ("user__full_name", "user__mobile_number", "registration_id")
+    list_per_page = 20

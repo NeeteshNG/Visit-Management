@@ -9,7 +9,7 @@ from .views import (
     RegisterUserDeviceView,
 )
 
-from .views import NotificationList, OrganizationNotificationList, UserNotificationList
+from .views import OrganizationNotificationList
 
 router = DefaultRouter()
 router.register(
@@ -17,9 +17,6 @@ router.register(
 )
 
 urlpatterns = [
-    # path("me", NotificationList.as_view(), name="notification-list"),
-    # path("user-notifications/",UserNotificationList.as_view(),name="user-notification-list",),
-    # path("organization-notifications/<int:organization_id>/",OrganizationNotificationList.as_view(),name="organization-notification-list",),
     path("", include(router.urls)),
     path(
         "<int:organization_id>/list",

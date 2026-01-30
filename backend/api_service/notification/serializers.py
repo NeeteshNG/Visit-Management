@@ -2,7 +2,7 @@ from urllib.parse import urlsplit
 
 from rest_framework import serializers
 
-from .models import Notification, NotificationData
+from .models import NotificationData
 
 
 class NotificationSerializer(serializers.ModelSerializer):

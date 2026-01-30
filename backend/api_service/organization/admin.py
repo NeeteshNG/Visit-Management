@@ -10,9 +10,10 @@ from .models import (
     OrganizationVisitHistory,
     AdsBanner,
     Guest,
-    Meetingappoiment,
+    MeetingAppointment,
     CustomerRegistration,
     Purpose,
+    Device,
 )
 from common.admin import CustomModelAdmin
 from .utils import send_notification
@@ -258,12 +259,12 @@ class GuestAdmin(admin.ModelAdmin):
 admin.site.register(Guest, GuestAdmin)
 
 
-class MeetingAppoiment(admin.ModelAdmin):
+class MeetingAppointmentAdmin(admin.ModelAdmin):
     list_display = ("full_name", "location", "meeting_type")
     search_fields = ("full_name", "location", "meeting_type")
 
 
-admin.site.register(Meetingappoiment, MeetingAppoiment)
+admin.site.register(MeetingAppointment, MeetingAppointmentAdmin)
 
 
 class CustomerRegistrationAdmin(admin.ModelAdmin):
@@ -290,3 +291,11 @@ class CustomerRegistrationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CustomerRegistration, CustomerRegistrationAdmin)
+
+
+@admin.register(Device)
+class DeviceAdmin(CustomModelAdmin):
+    list_display = ("name_of_device", "device_type", "organization", "ip_address", "create_at")
+    list_filter = ("device_type",)
+    search_fields = ("name_of_device", "ip_address", "organization__organization_name")
+    list_per_page = 20

@@ -39,7 +39,7 @@ export default function PercentageSection({ userId }) {
               Number of Visit
             </p>
           </div>
-          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-[#FFAB1E]">
+          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-ngtrylime">
             <div className="flex gap-5 items-center">
               <p className="text-2xl font-bold font-inter leading-8">
                 {count.results.length <= 0 ? "0" : count.results[0].count}
@@ -49,7 +49,7 @@ export default function PercentageSection({ userId }) {
               Manual Entry Visits
             </p>
           </div>
-          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-[#0FBC88]">
+          <div className="w-[213px] h-[92px] shadow-3xl rounded-xl p-5 border bg-white border-ngtryprimary">
             <div className="flex gap-5 items-center">
               <p className="text-2xl font-bold font-inter leading-8">
                 {count.results.length <= 0 ? "0" : count.results[1].count}

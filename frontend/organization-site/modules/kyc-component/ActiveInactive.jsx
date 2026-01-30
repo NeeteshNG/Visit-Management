@@ -7,7 +7,7 @@ export default function ActiveInactive({lock_branch,id}) {
     const [branchstatus, setbranchstatus] = useState(lock_branch)
   return (
     <div>
-       {branchstatus==="Active"?<div className={`rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center bg-[#0FBC88]`} onClick={()=>{
+       {branchstatus==="Active"?<div className={`rounded-lg my-2 h-[32px] w-[32px] flex flex-col justify-center items-center bg-ngtryprimary`} onClick={()=>{
                 branchupdate({toast:toast,id:id,request:"Inactive"});
                 setbranchstatus("Inactive")
               }}>

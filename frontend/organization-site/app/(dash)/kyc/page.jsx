@@ -6,6 +6,7 @@ import axiosInstance from '@/modules/axios'
 import Image from 'next/image'
 import { useUserData } from '@/modules/hooks/useUserData'
 import LoadingComponent from '@/modules/core-ui/LoadingComponent'
+import { baseurl } from '@/modules/apiurl'
 
 const fetchKYCData = async () => {
   const response = await axiosInstance.get('/organization/kyc/me', {
@@ -62,7 +63,7 @@ function KYCVerificationPage () {
               width={100}
               src={
                 !isUserLoading && user.is_kyc_verified && !isKycLoading
-                  ? `https://api.epass.com.np${kycData?.logo}`
+                  ? `${baseurl}${kycData?.logo}`
                   : '/user-avatar.png'
               }
               alt='Organization Logo'

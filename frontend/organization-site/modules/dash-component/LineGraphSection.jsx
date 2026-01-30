@@ -115,8 +115,8 @@ export default function LineGraphSection({ userId }) {
                   {
                     label: "Check Out",
                     data: linedata.map((data) => data.check_out),
-                    backgroundColor: "#FF3A3A",
-                    borderColor: "#FF3A3A",
+                    backgroundColor: "#3D4127",
+                    borderColor: "#3D4127",
                   },
                   {
                     label: "Total",

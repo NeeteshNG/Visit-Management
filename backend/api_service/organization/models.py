@@ -433,7 +433,7 @@ class Guest(models.Model):
         return self.full_name
 
 
-class Meetingappoiment(models.Model):
+class MeetingAppointment(models.Model):
     full_name = models.CharField(max_length=30)
     meeting_title = models.CharField(max_length=50)
     number = models.CharField(max_length=20)

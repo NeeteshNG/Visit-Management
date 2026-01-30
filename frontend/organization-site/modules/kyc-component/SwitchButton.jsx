@@ -12,7 +12,7 @@ export default function SwitchButton({isvalue,id}) {
   return (
     <div
     className={`w-10 h-5 rounded-2xl flex items-center relative  cursor-pointer  ${
-      isChecked ? 'bg-green-500' : 'bg-red-500'
+      isChecked ? 'bg-ngtryprimary' : 'bg-red-500'
     }`}
     onClick={handleToggle}
   >

@@ -24,7 +24,7 @@ from .models import (
     OrganizationKYCDocument,
     OrganizationKYCSocialMediaLink,
     Guest,
-    Meetingappoiment,
+    MeetingAppointment,
     CustomerRegistration,
 )
 
@@ -895,7 +895,7 @@ class GuestSerilizer(serializers.ModelSerializer):
 
 class MeetingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Meetingappoiment
+        model = MeetingAppointment
         fields = "__all__"
 
 

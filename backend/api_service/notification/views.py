@@ -10,7 +10,7 @@ from rest_framework import viewsets
 
 from . import usecases
 from .filterset import NotificationDataFilter
-from .models import Notification, NotificationData
+from .models import NotificationData
 from .serializers import (
     NotificationSerializer,
     RegisterUserDeviceSerializer,
@@ -22,41 +22,6 @@ from common.permissions import IsVisitingUser
 from organization.models import Device
 
 User = get_user_model()
-
-
-class NotificationList(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        try:
-            if request.user.is_authenticated:
-                user = request.user
-                notifications = Notification.objects.filter(user=user).order_by(
-                    "-timestamp"
-                )
-                serializer = NotificationSerializer(notifications, many=True)
-                return Response(serializer.data)
-            else:
-                return Response(
-                    {"message": "User is not authenticated."},
-                    status=status.HTTP_UNAUTHORIZED,
-                )
-        except User.DoesNotExist:
-            return Response(
-                {"message": "User does not exist."}, status=status.HTTP_NOT_FOUND
-            )
-
-
-class UserNotificationList(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-        notifications = Notification.objects.filter(organization=user)
-        serializer = NotificationSerializer(notifications, many=True)
-        return Response(serializer.data)
 
 
 class OrganizationNotificationList(generics.ListAPIView):

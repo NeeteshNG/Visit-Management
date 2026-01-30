@@ -135,7 +135,6 @@ export default function BranchDetails() {
                     {getbranchdetail.municipality.split(" ")[0]}
                   </p>
                 </div>
-                {/* <LineComponent Icon={MdLocationOn} subtext={getbranchdetail.municipality.split(' ')[0]} text="Municipality / Rural Municipality"/> */}
                 <LineComponent
                   Icon={TbArrowBigRight}
                   subtext={getbranchdetail.ward_no}
@@ -184,9 +183,7 @@ export default function BranchDetails() {
               <div className="flex gap-2">
                 <button
                   className="bg-white gap-3  border flex items-center justify-center border-ngtrydeep rounded-xl mt-4 w-[182px] h-[48px] text-ngtrydeep"
-                  //   onClick={()=>{downloadImage({imageUrl:`https://api.epass.com.np${user?.qr}`})}}
                   onClick={() => {
-                    // saveAs(`${baseurl}${getbranchdetail.qr_image}`)
                     downloadImage(`${baseurl}${getbranchdetail.qr_image}`);
                   }}
                 >
@@ -197,7 +194,6 @@ export default function BranchDetails() {
                   onClick={() => {
                     setopen(true);
                   }}
-                  //   onClick={()=>{downloadImage({imageUrl:`https://api.epass.com.np${user?.qr}`})}}
                 >
                   Share QR <CiShare2Icon className="text-2xl" />
                 </button>

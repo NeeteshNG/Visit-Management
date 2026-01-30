@@ -184,7 +184,7 @@ const Page = () => {
                       <div className="h-[48px] w-[48px] rounded-xl my-2 relative bg-[#E5F3FE] flex items-center justify-center">
                         <MdOutlinePersonIcon className="text-ngtrydeep text-2xl" />
                         {e.is_seen === false ? (
-                          <div className="absolute -top-0 right-0 h-[8px] w-[8px] rounded-full bg-[#FFAB1E]"></div>
+                          <div className="absolute -top-0 right-0 h-[8px] w-[8px] rounded-full bg-ngtrylime"></div>
                         ) : (
                           <></>
                         )}

@@ -5,7 +5,7 @@ from common.admin import CustomModelAdmin
 
 @admin.register(StaffUser)
 class StaffUserAdmin(CustomModelAdmin):
-    list_display = ("email", "full_name", "mobile_no", "address","active","mobile_number","organization","role")
+    list_display = ("email", "full_name", "mobile_number", "address", "active", "organization", "role")
     list_filter = (
         "active",
         "organization",
@@ -14,10 +14,8 @@ class StaffUserAdmin(CustomModelAdmin):
     search_fields = (
         "email",
         "full_name",
-        "mobile_no",
-        "address",
-        "active",
         "mobile_number",
+        "address",
         "organization__full_name",
         "role"
     )

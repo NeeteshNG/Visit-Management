@@ -8,17 +8,6 @@ from notification.choices import VISITOR_CHOICES, NOTIFICATION_TYPE_CHOICES
 User = get_user_model()
 
 
-class Notification(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    message = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return self.name
-
-
 class NotificationData(BaseModel):
     organization_id = models.ForeignKey(
         User,

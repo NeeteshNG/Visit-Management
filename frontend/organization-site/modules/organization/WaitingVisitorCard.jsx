@@ -26,7 +26,9 @@ const WaitingVisitorCard = ({ data, setHistoryData }) => {
         );
         router.push("/waiting-visitors");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Failed to approve visitor:", error);
+    }
   };
   return (
     <div className="flex flex-col w-full bg-white border rounded-md shadow-lg">

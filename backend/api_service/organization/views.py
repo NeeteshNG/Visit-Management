@@ -92,7 +92,7 @@ from .models import (
     AdsBanner,
     CustomerRegistration,
     Guest,
-    Meetingappoiment,
+    MeetingAppointment,
 )
 
 from .filters import OrganizationVisitHistoryFilter
@@ -1745,7 +1745,7 @@ class GuestDeleteView(APIView):
             )
 
 
-class MeetingAppoinmentCreate(APIView):
+class MeetingAppointmentCreate(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -1765,7 +1765,7 @@ class MeetingListView(APIView):
         search_query = request.query_params.get("search", "")
         organization_id = request.user.id
 
-        guests = Meetingappoiment.objects.filter(organization_id=organization_id)
+        guests = MeetingAppointment.objects.filter(organization_id=organization_id)
 
         if search_query:
             guests = guests.filter(
@@ -1791,10 +1791,10 @@ class MeetingDeleteView(APIView):
 
     def delete(self, request, pk):
         try:
-            guest = Meetingappoiment.objects.get(pk=pk, organization=request.user)
+            guest = MeetingAppointment.objects.get(pk=pk, organization=request.user)
             guest.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        except Meetingappoiment.DoesNotExist:
+        except MeetingAppointment.DoesNotExist:
             return Response(
                 {"error": "Meeting not found."}, status=status.HTTP_404_NOT_FOUND
             )

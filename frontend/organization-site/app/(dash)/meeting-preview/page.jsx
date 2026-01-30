@@ -20,12 +20,12 @@ import { toast } from "react-toastify"
 import { useRouter } from 'next/navigation'
 
 import { useAtom } from 'jotai';
-import {  meetingappoinmentdata } from '@/jotai/dash-atoms';
+import {  meetingAppointmentData } from '@/jotai/dash-atoms';
 import Image from 'next/image';
 import { useState } from 'react';
 
 const MeetingPreview = () => {
-    const [value,setvalue]=useAtom(meetingappoinmentdata)
+    const [value,setvalue]=useAtom(meetingAppointmentData)
     const {register, handleSubmit, control, reset, formState: { errors } }
      = useForm();
     const router = useRouter();

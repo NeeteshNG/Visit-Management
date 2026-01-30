@@ -239,18 +239,6 @@ toast.error("Please Select the images");
      
 
     } catch (error) {
-      
-      // if (error.response.status === 500 || error.response.status === 404) {
-      //   toast.error('KYC Verification failed, Try Again')
-      // } else {
-      //   if (error && Object.values(error?.response?.data || []).length >= 1) {
-      //     Object.values(error?.response?.data).map(e =>
-      //       toast.error(e[0].charAt(0).toUpperCase() + e[0].slice(1))
-      //     )
-      //   } else {
-      //     toast.error('KYC Verification failed, Try Again')
-      //   }
-      // }
       console.error('Error submitting KYC data:', error)
     }
   }
@@ -927,42 +915,6 @@ toast.error("Please Select the images");
                   
                   
                       </div>
-        // <div key={index} className='w-[619px] mt-4'>
-        //   <label htmlFor={`file-${index}`} className='text-sm font-semibold text-[#333333]'>
-        //     Upload Image {index + 1}
-        //   </label>
-        //   <div className='mt-2.5 relative'>
-        //     <FaFacebookIcon className={`absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 text-gray-400`} />
-
-        //     <input
-        //       type='file'
-        //       id={`file-${index}`}
-        //       accept='image/*'
-        //       onChange={(e) => handleImagesChange(index, e)}
-        //       style={{ display: 'none' }}
-        //       ref={fileInputRefs[index]}
-        //     />
-        //   </div>
-        //   {selectedImages[index] ? (
-        //     <div className='w-[619px] h-[150px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
-        //       <Image
-        //         src={URL.createObjectURL(selectedImages[index])}
-        //         alt={`Selected ${index + 1}`}
-        //         className='object-contain h-full w-full'
-        //         onClick={() => handleImageClick(index)}
-        //       />
-        //     </div>
-        //   ) : (
-        //     <div className='w-[150px] h-[150px] mt-2 flex gap-2 items-center justify-center border-dashed border-2 border-spacing-2 border-[#A3A3A3] rounded-xl'>
-        //       <p className='text-base font-normal leading-6 text-[#A3A3A3]'>
-        //         Drag & drop file or{' '}
-        //         <span className='text-ngtrydeep cursor-pointer' onClick={() => handleImageClick(index)}>
-        //           Browse
-        //         </span>
-        //       </p>
-        //     </div>
-        //   )}
-        // </div>
       ))}
                     <div className='flex gap-3 mt-6 items-center cursor-pointer' onClick={()=>{
                       setnumberofdocument(numberofdocument+1);
