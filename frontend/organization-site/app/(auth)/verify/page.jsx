@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -156,4 +156,10 @@ function VerifyOTP() {
   );
 }
 
-export default VerifyOTP;
+export default function VerifyOTPPage() {
+  return (
+    <Suspense>
+      <VerifyOTP />
+    </Suspense>
+  );
+}

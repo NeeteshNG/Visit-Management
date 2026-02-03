@@ -1,5 +1,8 @@
 import {
-  CiMailIcon,\n  FaFacebookIcon,\n  FaWhatsappIcon,\n  FaXTwitterIcon,
+  CiMailIcon,
+  FaFacebookIcon,
+  FaWhatsappIcon,
+  FaXTwitterIcon,
 } from "@/modules/icons/SvgIcons";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
 import {

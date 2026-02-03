@@ -20,6 +20,7 @@ import {
   TbArrowBigRightIcon,
   TbLayoutDashboardIcon,
   TiLocationArrowOutlineIcon,
+  PiBagLightIcon,
 } from "@/modules/icons/SvgIcons";
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -402,7 +403,7 @@ const [alldocuments, setalldocuments] = useState([])
                             <MdArrowDropDownIcon />
                           </div>
                           {/* Adjust the positioning of the dropdown button here */}
-                          <PiBagSimpleBold className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                          <PiBagLightIcon className={`absolute text-2xl left-4 ${errors.organization_type ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                           {errors.organization_type && (
                             <span className='text-red-500'>

@@ -12,7 +12,7 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.utils import timezone
 from notification.models import FCMPushNotification
-from notification.models import Notification
+
 from organization.models import OrganizationBranch
 from organization.models import OrganizationKYC
 from organization.models import OrganizationKYCDocument, OrganizationKYCSocialMediaLink
@@ -90,13 +90,13 @@ class CreateOrganizationBranchUseCase(BaseUseCase):
         super().__init__(serializer=serializer)
 
     def create_notification(self):
-        notification_config = {
-            "user": self.request.user,
-            "name": self.request.user.full_name,
+        notification_data = {
+            "notification_type": "other",
+            "audience": "organization",
+            "title": "Branch Created",
             "message": f"{self._data.get('name')} Branch was created Successfully",
         }
-
-        Notification.objects.create(**notification_config)
+        send_notification(user=self.request.user, notification_data=notification_data)
 
     def _factory(self):
         if OrganizationBranch.objects.filter(
