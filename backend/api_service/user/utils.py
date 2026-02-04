@@ -1,8 +1,8 @@
+import logging
 import re
 
 import requests
 import secrets
-import os
 import os
 
 from django.conf import settings
@@ -11,6 +11,8 @@ from django.core.mail import send_mail
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logger = logging.getLogger(__name__)
 
 
 def generate_otp():
@@ -31,7 +33,8 @@ def send_otp_to_user(to, text):
         response = r.text
         response_json = r.json()
         return status_code, response, response_json
-    except:
+    except Exception as e:
+        logger.error("SMS send failed: %s", e)
         return False
 
 

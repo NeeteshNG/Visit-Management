@@ -13,12 +13,13 @@ import {
 
 import { getVisitors } from "../data/dash_service";
 import { handleVisitorApproval } from "../data/branch_service";
+import { PAGINATION } from "../constants";
 
 export default function VisitorWaiting() {
   const [waitingVisitor, setWaitingVisitors] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const perPage = 5;
+  const perPage = PAGINATION.SMALL;
 
   const getWatingVisitorsFunction = (searchText = "", page = 1) => {
     getVisitors({

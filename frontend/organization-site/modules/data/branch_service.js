@@ -26,6 +26,7 @@ export const getorgbranchdetails = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getorgbranchdetails failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -51,6 +52,7 @@ export const branchupdate = async ({ toast, id, request }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("branchupdate failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -75,6 +77,7 @@ export const aciveanddiactivethesubadmin = async ({ toast, id, isactive }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("aciveanddiactivethesubadmin failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -97,6 +100,7 @@ export const getorgvisitordetails = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getorgvisitordetails failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -114,6 +118,7 @@ export const getsubadmindetails = async ({ toast, setsubadmin, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getsubadmindetails failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -134,6 +139,7 @@ export const getsubadminlist = async ({ toast, setsubadmin, searchtext }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getsubadminlist failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -152,6 +158,7 @@ export const getpurposes = async ({ setpurpose }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getpurposes failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -171,6 +178,7 @@ export const deletesubadmin = async ({ toast, id }) => {
       toast.error("Sub admin Delete Unsuccessfully");
     }
   } catch (error) {
+    console.error("deletesubadmin failed:", error);
     toast.error("Sub admin Delete Unsuccessfully");
   }
 };

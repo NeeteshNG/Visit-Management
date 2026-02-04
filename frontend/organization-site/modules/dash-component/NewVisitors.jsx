@@ -11,13 +11,14 @@ import {
 } from "@/public/icons/icons";
 
 import { handleDownloadVisitorsPdf, getVisitors } from "../data/dash_service";
+import { PAGINATION } from "../constants";
 
 export default function NewVisitors() {
   const showAdjacentPages = 2;
   const [currentPage, setCurrentPage] = useState(1);
   const [newVisitors, setNewVisitors] = useState(null);
 
-  const getNewVisitorsFunction = (searchText = "", pageNumber = currentPage, perPage = 5) => {
+  const getNewVisitorsFunction = (searchText = "", pageNumber = currentPage, perPage = PAGINATION.SMALL) => {
     getVisitors({
       toast: toast,
       setVisitors: setNewVisitors,

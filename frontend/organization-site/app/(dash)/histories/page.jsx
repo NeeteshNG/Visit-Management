@@ -5,6 +5,7 @@ import { useUserData } from '@/modules/hooks/useUserData'
 import axiosInstance from '@/modules/axios'
 import { toast } from 'react-toastify'
 import { CSVLink } from 'react-csv'
+import { PAGINATION } from '@/modules/constants'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -170,7 +171,7 @@ function Page () {
       <DataGrid
         rows={visitHistoryData}
         columns={columns}
-        pageSize={5}
+        pageSize={PAGINATION.SMALL}
         checkboxSelection
         isCellEditable={params => params.field === 'is_approved'}
         onEditCellChangeCommitted={params => {

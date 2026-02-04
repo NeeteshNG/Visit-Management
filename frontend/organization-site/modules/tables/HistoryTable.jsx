@@ -3,6 +3,7 @@ import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { CSVLink } from 'react-csv'
 import { useState } from 'react'
+import { PAGINATION } from '@/modules/constants'
 
 const columns = [
   { field: 'id', headerName: 'ID', minWidth: 100, flex: 1 },
@@ -143,7 +144,7 @@ export default function HistoryTable ({ data }) {
       getRowId={(row) => row.visitor}
         rows={data}
         columns={columns}
-        pageSize={5}
+        pageSize={PAGINATION.SMALL}
         autoHeight={true}
         disableExtendRowFullWidth={true}
         checkboxSelection

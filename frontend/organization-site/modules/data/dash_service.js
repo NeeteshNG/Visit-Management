@@ -11,6 +11,7 @@ import {
 } from "../apiurl";
 import axiosInstance from "../axios";
 import { saveAs } from "file-saver";
+import { PAGINATION } from "../constants";
 
 export const getOrgBranchList = async ({
   toast,
@@ -20,7 +21,7 @@ export const getOrgBranchList = async ({
   enddate,
   id,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -45,6 +46,7 @@ export const getOrgBranchList = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getOrgBranchList failed:", error);
     toast.error("Failed to fetch branches. Please try again later.");
   }
 };
@@ -64,6 +66,7 @@ export const deletebranch = async ({ toast, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("deletebranch failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -86,6 +89,7 @@ export const deletevisitor = async ({ toast, id }) => {
       toast.error("Branch Delete Unsuccessfully");
     }
   } catch (error) {
+    console.error("deletevisitor failed:", error);
     toast.error("Something went wrong");
     toast.error("Branch Delete Unsuccessfully");
   }
@@ -98,7 +102,7 @@ export const getNewVisitor = async ({
   startdate,
   enddate,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -125,6 +129,7 @@ export const getNewVisitor = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getNewVisitor failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -143,6 +148,7 @@ export const getvisitorreport = async ({ setvisitor }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getvisitorreport failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -164,6 +170,7 @@ export const getnextperviousvisitor = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getnextperviousvisitor failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -188,6 +195,7 @@ export const getwaitingvisitor = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getwaitingvisitor failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -206,6 +214,7 @@ export const getAdsBanner = async ({ setBanner }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getAdsBanner failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -234,6 +243,7 @@ export const filterreportgraph = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("filterreportgraph failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -251,6 +261,7 @@ export const getSubscriptionInfo = async ({ toast, setSub }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getSubscriptionInfo failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -272,6 +283,7 @@ export const handleDownloadVisitorsPdf = async ({ toast }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("handleDownloadVisitorsPdf failed:", error);
     toast.error("Something went wrong while downloading the PDF");
   }
 };
@@ -327,6 +339,7 @@ export const getVisitorsCount = async ({ toast, setcount, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getVisitorsCount failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -338,7 +351,7 @@ export const getCustomersList = async ({
   startdate,
   enddate,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -365,6 +378,7 @@ export const getCustomersList = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getCustomersList failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -387,6 +401,7 @@ export const deleteCustomer = async ({ toast, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("deleteCustomer failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -398,7 +413,7 @@ export const getGuestsList = async ({
   startdate,
   enddate,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -425,6 +440,7 @@ export const getGuestsList = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getGuestsList failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -444,6 +460,7 @@ export const deleteGuest = async ({ toast, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("deleteGuest failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -455,7 +472,7 @@ export const getMeetingList = async ({
   startdate,
   enddate,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -482,6 +499,7 @@ export const getMeetingList = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getMeetingList failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -501,6 +519,7 @@ export const deleteMeeting = async ({ toast, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("deleteMeeting failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -513,7 +532,7 @@ export const getVisitors = async ({
   startdate,
   enddate,
   page = 1,
-  perPage = 10,
+  perPage = PAGINATION.DEFAULT,
 }) => {
   try {
     const token = localStorage.getItem("access");
@@ -536,6 +555,7 @@ export const getVisitors = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getVisitors failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -583,6 +603,7 @@ export const getKycOrgProfile = async ({ toast, setKycOrg, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getKycOrgProfile failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -608,6 +629,7 @@ export const getNotificationsCount = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getNotificationsCount failed:", error);
     toast.error("Something went wrong");
   }
 };

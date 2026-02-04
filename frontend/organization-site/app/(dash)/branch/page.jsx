@@ -5,6 +5,7 @@ import axiosInstance from '@/modules/axios'
 import { useUserData } from '@/modules/hooks/useUserData'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
+import { PAGINATION } from '@/modules/constants'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -47,7 +48,7 @@ const BranchesPage = () => {
           <DataGrid
             rows={branches}
             columns={columns}
-            pageSize={5}
+            pageSize={PAGINATION.SMALL}
             disableSelectionOnClick
           />
         </div>

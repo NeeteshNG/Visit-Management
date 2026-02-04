@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 
+const apiHost = process.env.NEXT_PUBLIC_API_HOST || 'localhost';
+
 const nextConfig = {
   swcMinify: true,
   images: {
-    domains: ['localhost'],
+    domains: [apiHost],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'localhost',
+        hostname: apiHost,
         port: ''
       }
     ],

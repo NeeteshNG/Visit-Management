@@ -92,7 +92,7 @@ class LoginUseCase(BaseUseCase):
                             "message": "Your contract is expired please contact to admin.",
                         }
                     )
-            except:
+            except Exception:
                 pass
 
         self._register_device(user)  # Register the device with FCM token

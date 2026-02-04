@@ -3,6 +3,7 @@ import axiosInstance from '@/modules/axios'
 import { useUserData } from '@/modules/hooks/useUserData'
 import React, { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
+import { PAGINATION } from '@/modules/constants'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -87,7 +88,7 @@ function Page () {
       <DataGrid
         rows={uniqueVisitors}
         columns={columns}
-        pageSize={5}
+        pageSize={PAGINATION.SMALL}
         checkboxSelection
       />
     </div>

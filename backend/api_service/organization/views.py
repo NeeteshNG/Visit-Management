@@ -1,5 +1,6 @@
 import datetime
 import csv
+import logging
 import qrcode
 
 from xhtml2pdf import pisa
@@ -114,6 +115,7 @@ from common.permissions import IsVisitingUser
 import firebase_admin.messaging as messaging
 
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 
 class PageNumberPagination(PageNumberPagination):
@@ -785,7 +787,8 @@ class manualEntryVisitorsFirstStep(APIView):
                 },
                 status=200,
             )
-        except:
+        except Exception as e:
+            logger.error("Manual entry first step failed: %s", e)
             return Response(
                 {
                     "message": "You can login directly with logged in if you visited early"
@@ -829,18 +832,20 @@ class manualEntryVisitorsSecondStep(APIView):
             user.is_sms_verified = True
             user.is_active = True
             user.save()
-        except:
+        except Exception as e:
+            logger.error("OTP verification failed: %s", e)
             return Response(
-                {"error": "check you token"},
+                {"error": "check your token"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         """ check org """
         try:
             organization = User.objects.get(id=organization_id, is_organization=True)
-        except:
+        except Exception as e:
+            logger.error("Organization lookup failed: %s", e)
             return Response(
-                {"error": "ORG. does't exits"},
+                {"error": "Organization doesn't exist"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -850,10 +855,11 @@ class manualEntryVisitorsSecondStep(APIView):
 
         try:
             visitor = User.objects.get(id=visitor_id)
-        except:
+        except Exception as e:
+            logger.error("User lookup failed: %s", e)
             visitor = None
             return Response(
-                {"error": "User doesn't exits"},
+                {"error": "User doesn't exist"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -1017,64 +1023,6 @@ class OrganizationNameListView(APIView):
         return Response(serializer.data)
 
 
-# class OrganizationVisitStatisticsView(View):
-#     def get(self, request, organization_id):
-
-#         start_date=request.GET.get('start_date',None)
-#         end_date=request.GET.get('end_date',None)
-
-#         # If start_date or end_date is not provided, return all data without filtering by date
-#         if not start_date or not end_date:
-#             queryset = OrganizationVisitHistory.objects.filter(organization_id=organization_id)
-#             if request.GET.get('purpose',None):
-#                 queryset = OrganizationVisitHistory.objects.filter(organization_id=organization_id,purpose=request.GET.get('purpose',None))
-
-#         else:
-#             # Convert start_date and end_date from string to datetime objects
-#             start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
-#             end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
-
-#             # Filter the queryset based on the date range
-#             queryset = OrganizationVisitHistory.objects.filter(
-#                 organization_id=organization_id,
-#                 visited_at__date__range=[start_date, end_date]
-#             )
-
-#             if request.GET.get('purpose',None):
-#                 queryset = OrganizationVisitHistory.objects.filter(
-#                     organization_id=organization_id,
-#                     purpose=request.GET.get('purpose',None),
-#                     visited_at__date__range=[start_date, end_date]
-#                     )
-
-#         queryset = queryset.annotate(truncated_date=TruncDate('visited_at'))
-
-#         # Group by truncated date and count the visits
-#         visit_stats = queryset.values('truncated_date').annotate(total_visit=Count('id'))
-
-#         # Map day_of_week to human-readable day names
-#         day_mapping = {
-#             0: 'Sunday',
-#             1: 'Monday',
-#             2: 'Tuesday',
-#             3: 'Wednesday',
-#             4: 'Thursday',
-#             5: 'Friday',
-#             6: 'Saturday',
-#         }
-
-#         # Create the final response format
-#         response_data = [
-#             {
-#                 "label": day_mapping.get(stats['truncated_date'].weekday(), 'Unknown'),
-#                 "date": stats['truncated_date'].strftime('%Y-%m-%d'),
-#                 "totalvisit": stats['total_visit']
-#             }
-#             for stats in visit_stats
-#         ]
-
-#         return JsonResponse(response_data, safe=False)
-
 class OrganizationVisitStatisticsView(View):
     def get(self, request, organization_id):
         start_date_str = request.GET.get("start_date", None)
@@ -1178,15 +1126,13 @@ class OrganizationKYCViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        try:
-            if OrganizationKYC.objects.get(organization=request.user):
-                return Response({"message": "Already register KYC"}, status=400)
-        except:
-            request.data["organization"] = request.user.id
-            serializer = NewOrganizationKYCSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if OrganizationKYC.objects.filter(organization=request.user).exists():
+            return Response({"message": "Already register KYC"}, status=400)
+        request.data["organization"] = request.user.id
+        serializer = NewOrganizationKYCSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
         instance = OrganizationKYC.objects.get(pk=pk)
@@ -1204,7 +1150,8 @@ def device_list_view(request):
                 queryset = Device.objects.filter(organization=request.user)
                 serializer = DeviceSerializer(queryset, many=True)
                 return Response(serializer.data)
-        except:
+        except Exception as e:
+            logger.error("Device list fetch failed: %s", e)
             return Response({"message": "User not found"}, status=400)
 
     if request.method == "DELETE":
@@ -1213,9 +1160,10 @@ def device_list_view(request):
                 device = Device.objects.get(id=request.data["id"])
                 device.delete()
                 return Response({"message": "Device deleted successfully"}, status=200)
-            return Response({"message": "Data  not found"}, status=400)
-        except:
-            return Response({"message": "Data  not found"}, status=400)
+            return Response({"message": "Data not found"}, status=400)
+        except Exception as e:
+            logger.error("Device delete failed: %s", e)
+            return Response({"message": "Data not found"}, status=400)
 
     return Response(
         {"message": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED

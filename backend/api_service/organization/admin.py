@@ -196,30 +196,6 @@ class OrganizationBranchAdmin(CustomModelAdmin):
 admin.site.register(OrganizationBranch, OrganizationBranchAdmin)
 
 
-# @admin.register(OrganizationSocialMediaLink)
-# class OrganizationSocialMediaLinkAdmin(admin.ModelAdmin):
-#     list_display = (
-#         "organization",
-#         "platform",
-#         "link",
-#     )
-#     search_fields = ("organization__full_name","organization__organization_name", "platform")
-#     list_per_page = 20
-
-#     fieldsets = (
-#         (
-#             "Social Media Information",
-#             {
-#                 "fields": (
-#                     "organization",
-#                     "platform",
-#                     "link",
-#                 ),
-#             },
-#         ),
-#     )
-
-
 class OrganizationDocumentAdmin(CustomModelAdmin):
     list_display = ["organization", "name", "file"]
     list_filter = ["organization", "name", "file"]

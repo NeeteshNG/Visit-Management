@@ -259,90 +259,6 @@ class ReportOrgVisitorListView(APIView):
                 )
         return file_path
 
-    # def generate_pdf_file(self, data, org_name):
-    #     timestamp = int(time.time())
-    #     filename = f"{org_name}__{timestamp}.pdf"
-    #     file_path = os.path.join('media/files/pdf/', filename)
-
-    #     # Create PDF file
-    #     response = HttpResponse(content_type='application/pdf')
-    #     response['Content-Disposition'] = f'attachment; filename="{filename}"'
-
-    #     # Create PDF content
-    #     pdf = canvas.Canvas(response, pagesize=letter)
-    #     pdf.setTitle("Organization Visitor History")
-
-    #     # Set font
-    #     pdf.setFont("Helvetica-Bold", 12)
-
-    #     # Add title
-    #     pdf.drawCentredString(300, 750, "Organization Visitor History")
-
-    #     # Add table headers
-    #     headers = ["Organization", "Visitor", "Full Name", "Mobile Number", "Purpose",
-    #                "Have Vehicle", "Vehicle Number", "Is With Team", "Number of Team",
-    #                "Visiting From", "Is Approved", "Departed At", "Visited At"]
-    #     col_widths = [80, 80, 80, 80, 80, 40, 80, 50, 40, 80, 40, 100, 100]
-
-    #     pdf.setFont("Helvetica-Bold", 10)
-    #     y_start = 720
-    #     for i, header in enumerate(headers):
-    #         pdf.drawString(sum(col_widths[:i]) + 20, y_start, header)
-
-    #     # Add table data
-    #     pdf.setFont("Helvetica", 10)
-    #     y = y_start - 20  # Move cursor down for data
-
-    #     for item in data:
-    #         for i, (value, width) in enumerate(zip(
-    #             [item.organization.organization_name,
-    #              item.visitor.full_name,
-    #              item.full_name,
-    #              item.mobile_number,
-    #              item.purpose,
-    #              item.have_vehicle,
-    #              item.vehicle_number,
-    #              item.is_with_team,
-    #              item.number_of_team,
-    #              item.visiting_from,
-    #              item.is_approved,
-    #              item.departed_at.strftime('%Y-%m-%d %H:%M:%S'),
-    #              item.visited_at.strftime('%Y-%m-%d %H:%M:%S')],
-    #             col_widths
-    #         )):
-    #             pdf.drawRightString(sum(col_widths[:i]) + width - 5, y, str(value))
-    #         y -= 15
-
-    #     pdf.save()
-
-    #     # Save PDF file on the server
-    #     with open(file_path, 'wb') as pdf_file:
-    #         pdf_file.write(response.content)
-
-    #     return file_path
-
-
-# class VisitorHistoryListView(APIView):
-
-#     def get(self, request, pk, format=None):
-#         visitor = User.objects.filter(id=pk).first()
-#         histories = OrganizationVisitHistory.objects.filter(visitor=visitor).all()
-#         serializer = OrganizationVisitHistorySerializerGet(histories, many=True)
-#         return Response(serializer.data)
-
-# User = get_user_model()
-
-# class VisitorHistoryListView(APIView):
-#     permission_classes = [IsAuthenticated]
-#     def get(self, request, pk, format=None):
-#         # visitor = User.objects.filter(id=pk).first()
-#         # if not visitor:
-#         #     return Response({"detail": "User not found."}, status=404)
-#         histories = OrganizationVisitHistory.objects.filter(visitor=request.user.id).all()
-#         serializer = OrganizationVisitHistorySerializerGet(histories, many=True)
-#         return Response(serializer.data)
-
-
 class VisitorHistoryListView(APIView):
     permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination
@@ -499,9 +415,6 @@ class VisitorKYCUpdateView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class VisitorReportDownloadView(APIView):
 
 
 class CreateVisitorsMessageAPI(generics.CreateAPIView):

@@ -41,6 +41,7 @@ export const createNotification = async ({
 
     return response;
   } catch (error) {
+    console.error("createNotification failed:", error);
     toast.error("Something went wrong");
     throw error;
   }
@@ -69,6 +70,7 @@ export const getnotifications = async ({
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getnotifications failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -87,6 +89,7 @@ export const getdetailsnotifications = async ({ toast, setdetails, id }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getdetailsnotifications failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -111,6 +114,7 @@ export const updatenotification = async ({ toast, id }) => {
       // toast.error("Something went wrong")
     }
   } catch (error) {
+    console.error("updatenotification failed:", error);
     toast.error("Something went wrong");
   }
 };
@@ -129,6 +133,7 @@ export const getLogDevices = async ({ toast, setDevices }) => {
       toast.error("Something went wrong");
     }
   } catch (error) {
+    console.error("getLogDevices failed:", error);
     toast.error("Something went wrong");
   }
 };
