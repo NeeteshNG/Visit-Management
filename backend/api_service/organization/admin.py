@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import admin
 from django.utils.html import format_html
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from .models import (
     OrganizationBranch,
@@ -252,14 +253,14 @@ class AdsBannerAdmin(CustomModelAdmin):
     image_preview.short_description = "Image Preview"
 
 
-class GuestAdmin(admin.ModelAdmin):
+class GuestAdmin(UnfoldModelAdmin):
     list_display = ("full_name", "mobile_number", "email", "created_at")
 
 
 admin.site.register(Guest, GuestAdmin)
 
 
-class MeetingAppointmentAdmin(admin.ModelAdmin):
+class MeetingAppointmentAdmin(UnfoldModelAdmin):
     list_display = ("full_name", "location", "meeting_type")
     search_fields = ("full_name", "location", "meeting_type")
 
@@ -267,7 +268,7 @@ class MeetingAppointmentAdmin(admin.ModelAdmin):
 admin.site.register(MeetingAppointment, MeetingAppointmentAdmin)
 
 
-class CustomerRegistrationAdmin(admin.ModelAdmin):
+class CustomerRegistrationAdmin(UnfoldModelAdmin):
     list_display = ("full_name", "email", "mobile_number", "company_name", "created_at")
     search_fields = ("full_name", "email", "mobile_number")
     list_filter = ("company_name", "country", "created_at")

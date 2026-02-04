@@ -543,7 +543,8 @@ export const province = {
 };
 
 // For backward compatibility
-export const municipalites = cities;
+export const municipalities = cities;
+export const municipalites = cities; // deprecated alias
 
 // ============================================
 // HELPER FUNCTIONS

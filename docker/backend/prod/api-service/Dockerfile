@@ -19,14 +19,8 @@ COPY backend/api_service /app/backend/api_service
 # Expose the application port
 EXPOSE 8000
 
-# Make migrations
-CMD ["python", "manage.py", "makemigrations"]
-
-# Migrate the database
-CMD ["python", "manage.py", "migrate"]
-
-# Collect static files
-CMD ["python", "manage.py", "collectstatic"]
+# Collect static files at build time
+RUN python manage.py collectstatic --noinput
 
 # Run the command to start the Django application in production mode
 CMD ["gunicorn", "api_service.wsgi:application", "--bind", "0.0.0.0:8000"]

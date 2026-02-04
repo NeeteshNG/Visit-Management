@@ -4,6 +4,9 @@ from pathlib import Path
 import firebase_admin
 from firebase_admin import credentials
 import environ
+from django.templatetags.static import static
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 env = environ.Env(
     DEBUG=(bool, False),
@@ -36,12 +39,15 @@ SMS_API_TOKEN = env('SMS_API_TOKEN')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=["localhost"])
 
 INSTALLED_APPS = [
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    "unfold.contrib.inlines",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.staticfiles",
     "django.contrib.messages",
     "django.contrib.sessions",
-    "jazzmin",
     "django.contrib.admin",
     "rest_framework",
     "corsheaders",
@@ -54,13 +60,14 @@ INSTALLED_APPS = [
     "staff_of_org",
     "ckeditor",
     "ckeditor_uploader",
-    'fcm_django',
+    "fcm_django",
 ]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -171,88 +178,186 @@ STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-JAZZMIN_SETTINGS = {
-    "theme": "darkly",
-    "site_title": "NGtry Admin",
-    "site_header": "NGtry",
-    "site_brand": "NGtry",
-    "site_logo": "ngtrylogo.png",
-    "login_logo": "ngtrylogo.png",
-    "login_logo_dark": None,
-    "site_logo_classes": "p-0 shadow-none",
-    "site_icon": "ngtrylogo.png",
-    "welcome_sign": "Welcome to NGtry",
-    "copyright": "NGtry",
-    "user_avatar": None,
-    "topmenu_links": [
-        {"name": "Home", "url": "admin:index"}
+UNFOLD = {
+    "SITE_TITLE": "NGtry Admin",
+    "SITE_HEADER": "NGtry",
+    "SITE_URL": "/",
+    "SITE_LOGO": lambda request: static("ngtrylogo.png"),
+    "SITE_SYMBOL": "apartment",
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/png",
+            "href": lambda request: static("favicon.png"),
+        },
     ],
-    "show_sidebar": True,
-    "navigation_expanded": True,
-    "hide_apps": [],
-    "hide_models": [],
-    "order_with_respect_to": ["user", "organization", "visitor"],
-    "icons": {
-        "user.CustomUser": "fas fa-users",
-        "organization.OrganizationBranch": "fas fa-building",
-        "organization.OrganizationDocument": "fas fa-file",
-        "organization.OrganizationVisitHistory": "fas fa-users",
-        "organization.OrganizationKYC": "fas fa-solid fa-file",
-        "organization.OrganizationSocialMediaLink": "fas fa-hashtag",
-        "visitor.VisitorKYC": "fas fa-glasses",
-        "notification.Notification": "fas fa-flag",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": False,
+    "COLORS": {
+        "base": {
+            "50": "oklch(98% .003 100)",
+            "100": "oklch(96% .005 100)",
+            "200": "oklch(91% .008 100)",
+            "300": "oklch(85% .012 100)",
+            "400": "oklch(70% .018 100)",
+            "500": "oklch(56% .022 100)",
+            "600": "oklch(45% .025 100)",
+            "700": "oklch(38% .028 100)",
+            "800": "oklch(28% .025 100)",
+            "900": "oklch(21% .022 100)",
+            "950": "oklch(14% .018 100)",
+        },
+        "primary": {
+            "50": "oklch(96% .025 120)",
+            "100": "oklch(93% .045 120)",
+            "200": "oklch(88% .070 120)",
+            "300": "oklch(82% .090 118)",
+            "400": "oklch(72% .110 115)",
+            "500": "oklch(62% .100 112)",
+            "600": "oklch(50% .090 110)",
+            "700": "oklch(42% .080 108)",
+            "800": "oklch(35% .065 106)",
+            "900": "oklch(28% .050 104)",
+            "950": "oklch(20% .035 102)",
+        },
     },
-    "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fas fa-chevron-circle-right fa-xs ",
-    "related_modal_active": False,
-    "custom_css": None,
-    "custom_js": None,
-    "use_google_fonts_cdn": True,
-    "show_ui_builder": True,
-    "changeform_format": "horizontal_tabs",
-    "changeform_format_overrides": {
-        "user.CustomUserModel": "collapsible",
-        "organization.OrganizationKYC": "collapsible",
-        "organization.OrganizationVisitHistory": "collapsible",
-        "organization.OrganizationBranch": "collapsible",
-        "organization.OrganizationSocialMediaLink": "collapsible",
-        "organization.OrganizationDocument": "collapsible",
-        "visitor.VisitorKYC": "collapsible",
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": _("Dashboard"),
+                "items": [
+                    {
+                        "title": _("Dashboard"),
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                ],
+            },
+            {
+                "title": _("Users"),
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Users"),
+                        "icon": "group",
+                        "link": reverse_lazy("admin:user_customuser_changelist"),
+                    },
+                    {
+                        "title": _("Subscriptions"),
+                        "icon": "card_membership",
+                        "link": reverse_lazy("admin:user_subscription_changelist"),
+                    },
+                    {
+                        "title": _("FCM Devices"),
+                        "icon": "devices",
+                        "link": reverse_lazy("admin:user_fcmdevices_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Organization"),
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Organization KYC"),
+                        "icon": "description",
+                        "link": reverse_lazy("admin:organization_organizationkyc_changelist"),
+                    },
+                    {
+                        "title": _("Visit History"),
+                        "icon": "history",
+                        "link": reverse_lazy("admin:organization_organizationvisithistory_changelist"),
+                    },
+                    {
+                        "title": _("Branches"),
+                        "icon": "apartment",
+                        "link": reverse_lazy("admin:organization_organizationbranch_changelist"),
+                    },
+                    {
+                        "title": _("Documents"),
+                        "icon": "folder",
+                        "link": reverse_lazy("admin:organization_organizationdocument_changelist"),
+                    },
+                    {
+                        "title": _("Ads Banners"),
+                        "icon": "campaign",
+                        "link": reverse_lazy("admin:organization_adsbanner_changelist"),
+                    },
+                    {
+                        "title": _("Devices"),
+                        "icon": "tablet_mac",
+                        "link": reverse_lazy("admin:organization_device_changelist"),
+                    },
+                    {
+                        "title": _("Purposes"),
+                        "icon": "label",
+                        "link": reverse_lazy("admin:organization_purpose_changelist"),
+                    },
+                    {
+                        "title": _("Guests"),
+                        "icon": "person_add",
+                        "link": reverse_lazy("admin:organization_guest_changelist"),
+                    },
+                    {
+                        "title": _("Meeting Appointments"),
+                        "icon": "event",
+                        "link": reverse_lazy("admin:organization_meetingappointment_changelist"),
+                    },
+                    {
+                        "title": _("Customer Registrations"),
+                        "icon": "how_to_reg",
+                        "link": reverse_lazy("admin:organization_customerregistration_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Visitors"),
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Visitor KYC"),
+                        "icon": "badge",
+                        "link": reverse_lazy("admin:visitor_visitorkyc_changelist"),
+                    },
+                    {
+                        "title": _("Visitor Messages"),
+                        "icon": "chat",
+                        "link": reverse_lazy("admin:visitor_visitorsmessage_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Notifications"),
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Notifications"),
+                        "icon": "notifications",
+                        "link": reverse_lazy("admin:notification_notificationdata_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Staff"),
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Staff Users"),
+                        "icon": "badge",
+                        "link": reverse_lazy("admin:staff_of_org_staffuser_changelist"),
+                    },
+                ],
+            },
+        ],
     },
-    "language_chooser": False,
-}
-
-JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": True,
-    "brand_small_text": False,
-    "brand_colour": False,
-    "accent": "accent-primary",
-    "navbar": "navbar-purple navbar-dark",
-    "no_navbar_border": True,
-    "navbar_fixed": True,
-    "layout_boxed": False,
-    "footer_fixed": False,
-    "sidebar_fixed": True,
-    "sidebar": "sidebar-light-indigo",
-    "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": True,
-    "sidebar_nav_child_indent": True,
-    "sidebar_nav_compact_style": False,
-    "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": True,
-    "theme": "cosmo",
-    "dark_mode_theme": None,
-    "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
-        "info": "btn-outline-info",
-        "warning": "btn-warning",
-        "danger": "btn-danger",
-        "success": "btn-success",
-    },
-    "actions_sticky_top": False,
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

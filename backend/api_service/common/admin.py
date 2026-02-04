@@ -1,8 +1,9 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 
 # Register your models here.
-class CustomModelAdmin(admin.ModelAdmin):
+class CustomModelAdmin(UnfoldModelAdmin):
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=extra_context)
         try:

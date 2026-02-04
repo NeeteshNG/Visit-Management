@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from .models import VisitorKYC, VisitorsMessage
 from common.admin import CustomModelAdmin
@@ -121,7 +122,7 @@ from common.admin import CustomModelAdmin
 # identity_documents_back_link.short_description = "Identity Documents Back"
 
 
-class VisitorKYCAdmin(admin.ModelAdmin):
+class VisitorKYCAdmin(UnfoldModelAdmin):
     list_display = ['name', 'user', 'gender', 'marital_status', 'nationality', 'occupation', 'highest_education']
     list_filter = ['name', 'user__full_name', 'user__organization_name', 'email_address']
     search_fields = ['name', 'user__full_name', "nationality", 'user__organization_name', 'email_address']

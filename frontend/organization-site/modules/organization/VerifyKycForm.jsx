@@ -4,13 +4,16 @@ import { useForm } from 'react-hook-form'
 import axiosInstance from '../axios'
 import { useUserData } from '../hooks/useUserData'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 import { countries } from '../data/countries'
-import { getStatesForCountry, getAddressLabels, countryUsesWardNumber } from '../data/address'
+import { getStatesForCountry, getDistrictsForState, getCitiesForDistrict, getAddressLabels, countryUsesWardNumber } from '../data/address'
 
 function VerifyKycForm() {
   const router = useRouter()
   const [selectedCountry, setSelectedCountry] = useState('india')
   const [statesList, setStatesList] = useState(getStatesForCountry('india'))
+  const [districtsList, setDistrictsList] = useState([])
+  const [municipalitiesList, setMunicipalitiesList] = useState([])
   const [addressLabels, setAddressLabels] = useState(getAddressLabels('india'))
   const [showWardField, setShowWardField] = useState(true)
 
@@ -18,8 +21,21 @@ function VerifyKycForm() {
     const countryValue = e.target.value
     setSelectedCountry(countryValue)
     setStatesList(getStatesForCountry(countryValue))
+    setDistrictsList([])
+    setMunicipalitiesList([])
     setAddressLabels(getAddressLabels(countryValue))
     setShowWardField(countryUsesWardNumber(countryValue))
+  }
+
+  const handleStateChange = (e) => {
+    const stateValue = e.target.value
+    setDistrictsList(getDistrictsForState(stateValue))
+    setMunicipalitiesList([])
+  }
+
+  const handleDistrictChange = (e) => {
+    const districtValue = e.target.value
+    setMunicipalitiesList(getCitiesForDistrict(districtValue))
   }
 
   const {
@@ -197,6 +213,7 @@ function VerifyKycForm() {
               <select
                 id='state'
                 {...register('state', { required: true })}
+                onChange={handleStateChange}
                 className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
               >
                 <option value="">Select {addressLabels.state.toLowerCase()}</option>
@@ -227,13 +244,29 @@ function VerifyKycForm() {
             >
               {addressLabels.district}
             </label>
-            <input
-              type='text'
-              id='district'
-              {...register('district', { required: true })}
-              placeholder={`Enter ${addressLabels.district.toLowerCase()}`}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
-            />
+            {districtsList.length > 0 ? (
+              <select
+                id='district'
+                {...register('district', { required: true })}
+                onChange={handleDistrictChange}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              >
+                <option value="">Select {addressLabels.district.toLowerCase()}</option>
+                {districtsList.map((district, index) => (
+                  <option key={index} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type='text'
+                id='district'
+                {...register('district', { required: true })}
+                placeholder={`Enter ${addressLabels.district.toLowerCase()}`}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              />
+            )}
             {errors.district && (
               <span className='text-red-500'>{addressLabels.district} is required</span>
             )}
@@ -246,13 +279,28 @@ function VerifyKycForm() {
             >
               {addressLabels.municipality}
             </label>
-            <input
-              type='text'
-              id='municipality'
-              {...register('municipality', { required: false })}
-              placeholder={`Enter ${addressLabels.municipality.toLowerCase()}`}
-              className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
-            />
+            {municipalitiesList.length > 0 ? (
+              <select
+                id='municipality'
+                {...register('municipality', { required: false })}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              >
+                <option value="">Select {addressLabels.municipality.toLowerCase()}</option>
+                {municipalitiesList.map((mun, index) => (
+                  <option key={index} value={mun}>
+                    {mun}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type='text'
+                id='municipality'
+                {...register('municipality', { required: false })}
+                placeholder={`Enter ${addressLabels.municipality.toLowerCase()}`}
+                className='w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-ngtryprimary'
+              />
+            )}
             {errors.municipality && (
               <span className='text-red-500'>{addressLabels.municipality} is required</span>
             )}

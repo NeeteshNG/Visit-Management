@@ -20,6 +20,11 @@ db.sqlite3
 .env
 /backend/media
 /backend/static
+/backend/api_service/static/admin/
+/backend/api_service/static/ckeditor/
+/backend/api_service/static/drf-yasg/
+/backend/api_service/static/rest_framework/
+/backend/api_service/static/unfold/
 
 # Next.js
 .next

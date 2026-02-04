@@ -18,8 +18,8 @@ import {
 } from "@/modules/icons/SvgIcons";
 import axiosInstance from "@/modules/axios";
 import DefaultButton from "@/modules/core-ui/Button";
-import { districts, municipalites, province, getAddressLabels, countryUsesWardNumber } from "@/modules/data/address";
-import { countries } from "@/modules/data/countries";
+import { getStatesForCountry, getDistrictsForState, getCitiesForDistrict, getAddressLabels, countryUsesWardNumber } from "@/modules/data/address";
+import { countries, validatePhoneNumber, getPhonePlaceholder } from "@/modules/data/countries";
 import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -35,7 +35,13 @@ export default function CreateBranch() {
     const {register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
      try {
-      console.log(data.number);
+      if (selectedCountry && data.number) {
+        const phoneValidation = validatePhoneNumber(data.number, selectedCountry);
+        if (!phoneValidation.valid) {
+          toast.error(phoneValidation.message);
+          return;
+        }
+      }
       const res = await axiosInstance.post('/organization/branches/', 
             
       {
@@ -122,7 +128,7 @@ router.push("/success");
 
                       <input
                         type='text'
-                        placeholder='Input branch contact number'
+                        placeholder={selectedCountry ? getPhonePlaceholder(selectedCountry) : 'Input branch contact number'}
                         className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.number ? 'border-red-500' : ''
                           }`}
                         {...register('number', { required: true })}
@@ -277,8 +283,7 @@ router.push("/success");
                               setAddressLabels(getAddressLabels(selectedValue));
                               setShowWardField(countryUsesWardNumber(selectedValue));
                               if(selectedValue !== ""){
-                                console.log(province[selectedValue]);
-                                setallprovince(province[selectedValue] || []);
+                                  setallprovince(getStatesForCountry(selectedValue));
                                 setalldistrict([]);
                                 setallmunicipality([]);
                                 setValue('province', '');
@@ -327,7 +332,7 @@ router.push("/success");
             onChange: (e) => {
               const selectedValue = e.target.value;
               console.log("Selected Value:", selectedValue);
-              setalldistrict(districts[selectedValue] || []);
+              setalldistrict(getDistrictsForState(selectedValue));
               setallmunicipality([]);
               setValue('district', '');
               setValue('municipality', '');
@@ -375,7 +380,7 @@ router.push("/success");
                             onChange: (e) => {
                               const selectedValue = e.target.value;
                               console.log("Selected Value:", selectedValue);
-                              setallmunicipality(municipalites[selectedValue] || []);
+                              setallmunicipality(getCitiesForDistrict(selectedValue));
                               setValue('municipality', '');
                             }
                           })}
