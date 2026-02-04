@@ -330,7 +330,7 @@ export default function Register() {
                       <a
                         href="www.google.com"
                         target="_blank"
-                        className="text-[#7B61FF] cursor-pointer text-base font-inter font-normal"
+                        className="text-ngtryprimary hover:text-ngtrydeep underline cursor-pointer text-base font-inter font-normal"
                       >
                         Terms of Use
                       </a>{" "}
@@ -338,7 +338,7 @@ export default function Register() {
                       <a
                         href="www.google.com"
                         target="_blank"
-                        className="text-[#7B61FF] cursor-pointer text-base font-inter font-normal"
+                        className="text-ngtryprimary hover:text-ngtrydeep underline cursor-pointer text-base font-inter font-normal"
                       >
                         Privacy Policy
                       </a>
