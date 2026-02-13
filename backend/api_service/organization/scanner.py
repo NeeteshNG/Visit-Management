@@ -30,7 +30,7 @@ def scan_qr_code(image_path):
 
 
 if __name__ == "__main__":
-    data_to_encode = "Org Epass Module"
+    data_to_encode = "Org NGtry Module"
     generate_random_qr(data_to_encode)
 
     scanned_data = scan_qr_code("random_qr.png")

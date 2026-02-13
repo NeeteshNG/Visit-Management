@@ -103,7 +103,6 @@ class CustomUserAdmin(CustomModelAdmin):
 class SubscriptionAdmin(CustomModelAdmin):
     list_display = ["user_organization_name", "start_subscription", "end_subscription"]
     search_fields = ["user_organization_name", "start_subscription", "end_subscription"]
-    # list_filter = ["user_organization_name"]
     ordering = ['-id']
     list_per_page = 20
     change_list_template = 'admin/change_list.html'

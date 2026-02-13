@@ -174,10 +174,10 @@ class OrganizationCreate(APIView):
             organization_user = serializer.save()
             otp = generate_otp()
             sms_text = (
-                f"Welcome to Epass! Thank you for registering. "
+                f"Welcome to NGtry! Thank you for registering. "
                 f"Your verification code is: {otp}. "
                 f"This code is valid for the next 10 minutes. "
-                f"Enjoy using Epass!"
+                f"Enjoy using NGtry!"
             )
             res = send_otp_to_user(
                 serializer.validated_data.get("mobile_number"), sms_text
@@ -232,7 +232,7 @@ class OrganizationKYCVerify(APIView):
             notification_data = {
                 "user": request.user.id,
                 "name": request.user.full_name,
-                "message": f"Congratulations!! Kyc Verified Successfully, Welcome to Epass,",
+                "message": f"Congratulations!! KYC Verified Successfully, Welcome to NGtry!",
             }
             notification_serializer = NotificationSerializer(data=notification_data)
 

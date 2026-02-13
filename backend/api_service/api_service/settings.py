@@ -17,7 +17,8 @@ env = environ.Env(
     EMAIL_HOST_USER=(str, ''),
     EMAIL_HOST_PASSWORD=(str, ''),
     SMS_SEND_API_URL=(str, ''),
-    SMS_API_TOKEN=(str, '')
+    SMS_API_TOKEN=(str, ''),
+    BASE_API_URL=(str, 'http://localhost:8000'),
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +36,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 SMS_SEND_API_URL = env('SMS_SEND_API_URL')
 SMS_API_TOKEN = env('SMS_API_TOKEN')
+BASE_API_URL = env('BASE_API_URL')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=["localhost"])
 
