@@ -1,5 +1,9 @@
 from datetime import timedelta
-from xhtml2pdf import pisa
+
+try:
+    from xhtml2pdf import pisa
+except ImportError:
+    pisa = None  # PDF generation will be unavailable
 
 from django.conf import settings
 from django.contrib.auth.models import Permission

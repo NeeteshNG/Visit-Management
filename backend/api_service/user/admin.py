@@ -47,7 +47,6 @@ class CustomUserAdmin(CustomModelAdmin):
                     "organization_type",
                     "organization_name",
                     "organization_nature",
-                    "validation_token_of_organization",
                 ),
             },
         ),
@@ -65,7 +64,6 @@ class CustomUserAdmin(CustomModelAdmin):
                     "is_organization",
                     "is_admin",
                     "is_staff",
-                    "approve_visitor_before_access"
                 ),
             },
         ),
@@ -77,7 +75,7 @@ class CustomUserAdmin(CustomModelAdmin):
             },
         ),
     )
-    readonly_fields = ("qr", "qr_image", "profile_picture_image", "validation_token_of_organization")
+    readonly_fields = ("qr", "qr_image", "profile_picture_image")
 
     def profile_picture_image(self, obj):
         if obj.profile_picture:
@@ -121,6 +119,6 @@ admin.site.register(Subscription, SubscriptionAdmin)
 
 @admin.register(FCMDevices)
 class FCMDevicesAdmin(CustomModelAdmin):
-    list_display = ("user", "registration_id", "created_at")
+    list_display = ("user", "registration_id", "created")
     search_fields = ("user__full_name", "user__mobile_number", "registration_id")
     list_per_page = 20

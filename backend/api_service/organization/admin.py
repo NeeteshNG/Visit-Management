@@ -219,7 +219,7 @@ class PurposeAdmin(CustomModelAdmin):
 
 @admin.register(AdsBanner)
 class AdsBannerAdmin(CustomModelAdmin):
-    list_display = ("title", "image_preview", "link_url", "created_at")
+    list_display = ("title", "image_preview", "link_url", "created")
     search_fields = ("title",)
     readonly_fields = ("image_preview",)
 
@@ -230,7 +230,7 @@ class AdsBannerAdmin(CustomModelAdmin):
 
 
 class GuestAdmin(UnfoldModelAdmin):
-    list_display = ("full_name", "mobile_number", "email", "created_at")
+    list_display = ("full_name", "mobile_number", "email", "created")
 
 
 admin.site.register(Guest, GuestAdmin)
@@ -245,11 +245,11 @@ admin.site.register(MeetingAppointment, MeetingAppointmentAdmin)
 
 
 class CustomerRegistrationAdmin(UnfoldModelAdmin):
-    list_display = ("full_name", "email", "mobile_number", "company_name", "created_at")
+    list_display = ("full_name", "email", "mobile_number", "company_name", "created")
     search_fields = ("full_name", "email", "mobile_number")
-    list_filter = ("company_name", "country", "created_at")
-    ordering = ("-created_at",)
-    date_hierarchy = "created_at"
+    list_filter = ("company_name", "country", "created")
+    ordering = ("-created",)
+    date_hierarchy = "created"
     fields = (
         "full_name",
         "mobile_number",
@@ -261,10 +261,10 @@ class CustomerRegistrationAdmin(UnfoldModelAdmin):
         "state",
         "city",
         "additional_requirements",
-        "created_at",
-        "updated_at",
+        "created",
+        "modified",
     )
-    readonly_fields = ("created_at", "updated_at")
+    readonly_fields = ("created", "modified")
 
 
 admin.site.register(CustomerRegistration, CustomerRegistrationAdmin)
@@ -272,7 +272,7 @@ admin.site.register(CustomerRegistration, CustomerRegistrationAdmin)
 
 @admin.register(Device)
 class DeviceAdmin(CustomModelAdmin):
-    list_display = ("name_of_device", "device_type", "organization", "ip_address", "create_at")
+    list_display = ("name_of_device", "device_type", "organization", "ip_address", "created")
     list_filter = ("device_type",)
     search_fields = ("name_of_device", "ip_address", "organization__organization_name")
     list_per_page = 20

@@ -5,8 +5,8 @@ from .usecases import CreateNotificationUseCase
 
 @admin.register(NotificationData)
 class NotificationAdmin(CustomModelAdmin):
-    list_display = ("notification_type", "audience", "title", "message", "attach_file", "is_seen", "created_at", "updated_at")
-    list_filter = ("is_seen", "created_at", "updated_at")
+    list_display = ("notification_type", "audience", "title", "message", "attach_file", "is_seen", "created", "modified")
+    list_filter = ("is_seen", "created", "modified")
     search_fields = ("notification_type", "audience", "title", "message")
     list_per_page = 25
 

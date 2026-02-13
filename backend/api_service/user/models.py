@@ -17,6 +17,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from common.models import BaseModel
+from common.validators import validate_mobile_number
 
 ORGANIZATION_TYPES = [
     ("private", "Private"),
@@ -65,27 +66,6 @@ ORGANIZATION_NATURE_TYPES = [
     ("religious", "Religious"),
     ("other", "Other"),
 ]
-
-from rest_framework import serializers
-
-
-def validate_mobile_number(mobile_number):
-    """
-    Global phone number validation.
-    Accepts phone numbers from multiple countries.
-    Basic validation: 7-15 digits, allows common prefixes.
-    """
-    # Remove any spaces, dashes, or country code prefix
-    cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
-
-    # Remove common country code prefixes for validation
-    if cleaned_number.startswith('00'):
-        cleaned_number = cleaned_number[2:]
-
-    # Basic international phone validation (7-15 digits)
-    if not re.match(r'^\d{7,15}$', cleaned_number):
-        raise serializers.ValidationError("Invalid mobile number. Please enter 7-15 digits.")
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(
@@ -171,9 +151,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-import uuid
-
-
 class Subscription(models.Model):
     user = models.OneToOneField('CustomUser', unique=True, on_delete=models.CASCADE, related_name='org_subscription',
                                 null=True, blank=True)
@@ -185,16 +162,14 @@ class Subscription(models.Model):
     def __str__(self):
         return str(self.user.organization_name)
 
-    class meta:
+    class Meta:
         verbose_name = "Subscription"
         verbose_name_plural = "Subscriptions"
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    mobile_number = models.CharField(max_length=10, unique=True, validators=[validate_mobile_number])
+    mobile_number = models.CharField(max_length=15, unique=True, validators=[validate_mobile_number])
     full_name = models.CharField(max_length=300, blank=True, null=True)
-
-    subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL)
 
     email = models.EmailField(max_length=300, blank=True, null=True)
 
@@ -208,14 +183,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_organization = models.BooleanField(default=False)
 
     admin_of_organization = models.BooleanField(default=False)
-    validation_token_of_organization = models.UUIDField(default=uuid.uuid4, editable=False)
 
     address = models.TextField(max_length=200, blank=True, null=True)
 
     is_kyc_verified = models.BooleanField(default=False)
     organization_name = models.CharField(max_length=250, blank=True, null=True)
-    organization_type = models.CharField(max_length=20, choices=ORGANIZATION_TYPES, blank=True, null=True, )
-    organization_nature = models.CharField(max_length=20, choices=ORGANIZATION_NATURE_TYPES, blank=True, null=True, )
+    organization_type = models.CharField(max_length=20, choices=ORGANIZATION_TYPES, blank=True, null=True)
+    organization_nature = models.CharField(max_length=20, choices=ORGANIZATION_NATURE_TYPES, blank=True, null=True)
     profile_picture = models.ImageField(upload_to="qr/%Y/", blank=True, null=True)
     qr = models.ImageField(upload_to="qr/%Y/", blank=True, null=True)
     is_admin = models.BooleanField(default=False)
@@ -223,7 +197,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_branch = models.BooleanField(default=False)
     is_manual_user = models.BooleanField(default=False)
-    approve_visitor_before_access = models.BooleanField(default=False)
     check_in_check_out_feature = models.BooleanField(default=False)
     creator = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='created_users')
 
@@ -233,7 +206,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.mobile_number)
-        #  + " | " + str(self.organization_name) + " | " + str(self.email) 
 
     def get_absolute_url(self):
         return f"/user/{self.id}/"
@@ -264,8 +236,15 @@ def create_qr_code_for_organization(sender, instance, created, **kwargs):
 
 
 class FCMDevices(BaseModel):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="fcm_devices",
+        db_index=True
+    )
     registration_id = models.CharField(max_length=1000)
+
+    class Meta:
+        verbose_name = "FCM Device"
+        verbose_name_plural = "FCM Devices"
 
     def __str__(self):
         return str(self.user.mobile_number)
@@ -274,7 +253,7 @@ class FCMDevices(BaseModel):
         if not self.user.is_visitor:
             raise ValidationError(
                 {
-                    'error': 'Error users need to be  visitor'
+                    'error': 'User must be a visitor'
                 }
             )
 

@@ -32,3 +32,4 @@ packaging==23.1
 fcm-django>=2.0.1
 firebase-admin
 django-environ
+django-model-utils>=4.3.1

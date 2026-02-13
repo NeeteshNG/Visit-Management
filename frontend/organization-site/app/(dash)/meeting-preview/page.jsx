@@ -38,7 +38,7 @@ const MeetingPreview = () => {
 
 const [isLoading, setisLoading] = useState(false);
     const onSubmit = async (data) => {
-console.log(value.number)
+console.log(value.phone_number)
 setisLoading(true);
 // data.preventDefault();
         if (!isUserLoading) {
@@ -46,7 +46,7 @@ setisLoading(true);
           formData.append("organization",user.id);
           formData.append("full_name",value.full_name);
           formData.append("meeting_title",value.meetingtitle);
-          formData.append("number",value.number);
+          formData.append("phone_number",value.phone_number);
           formData.append("location",value.location);
           formData.append("meeting_type",value.meetingtype);
           formData.append('date',value.selectedDate)
@@ -144,26 +144,26 @@ router.push("/success");
                 Mobile Number
               </label>
               <div className='mt-2.5 relative'>
-                <FaMobileAltIcon className={`absolute text-2xl left-4 ${errors.number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
+                <FaMobileAltIcon className={`absolute text-2xl left-4 ${errors.phone_number ? "top-1/3" : "top-1/2"}  transform -translate-y-1/2 text-gray-400`} />
 
                 <input
                   type='text'
                   readOnly={true}
-                  value={value.number}
+                  value={value.phone_number}
                   placeholder='Input Mobile Number'
-                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.number ? 'border-red-500' : ''
+                  className={`block w-full p-4 pl-12 text-black placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px]  bg-textfromgray focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary ${errors.phone_number ? 'border-red-500' : ''
                     }`}
-                  {...register('number', { required: true, maxLength: 10, minLength: 10 })}
+                  {...register('phone_number', { required: true, maxLength: 10, minLength: 10 })}
                 />
-                {errors.number && (
+                {errors.phone_number && (
                   <span className='text-red-500'>
-                    {errors.number && errors.number.type === "required" && (
+                    {errors.phone_number && errors.phone_number.type === "required" && (
                       <span className='text-red-500'>
                         Mobile Number is required
                       </span>
                     )}
-                    {errors.number && errors.number.type === "minLength" && <span className='text-red-500'>Number should be at least 10 digits</span>}
-                    {errors.number && errors.number.type === "maxLength" && <span className='text-red-500'>Number shouldn&apos;t be more than 10 digits</span>}
+                    {errors.phone_number && errors.phone_number.type === "minLength" && <span className='text-red-500'>Number should be at least 10 digits</span>}
+                    {errors.phone_number && errors.phone_number.type === "maxLength" && <span className='text-red-500'>Number shouldn&apos;t be more than 10 digits</span>}
                   </span>
                 )}
               </div>

@@ -1,32 +1,29 @@
 from django.db import models
-from django.utils import timezone
+
+from model_utils.managers import SoftDeletableQuerySet
 
 
 class ArchiveMixin:
     """
-    Mixin for archive instance of model
+    Mixin for archive/soft-delete operations on querysets.
     """
 
     def archive(self):
-        kwargs = {
-            'is_archived': True,
-            'updated': timezone.now()
-        }
-        self.update(**kwargs)
+        """Soft delete all records in the queryset."""
+        self.update(is_archived=True, is_removed=True)
 
     def restore(self):
-        kwargs = {
-            'is_archived': False,
-            'updated': timezone.now()
-        }
-        self.update(**kwargs)
+        """Restore all soft-deleted records in the queryset."""
+        self.update(is_archived=False, is_removed=False)
 
     def unarchived(self):
+        """Return only non-archived records."""
         return self.filter(is_archived=False)
 
 
-class BaseModelQuerySet(models.QuerySet, ArchiveMixin):
+class BaseModelQuerySet(SoftDeletableQuerySet, ArchiveMixin):
     """
-    Base Queryset used in this project
+    Base Queryset used in this project.
+    Inherits from SoftDeletableQuerySet for proper soft-delete support.
     """
     pass

@@ -3,7 +3,10 @@ import csv
 import logging
 import qrcode
 
-from xhtml2pdf import pisa
+try:
+    from xhtml2pdf import pisa
+except ImportError:
+    pisa = None  # PDF generation will be unavailable
 from datetime import timedelta
 from . import serializers, usecases
 

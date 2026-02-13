@@ -5,7 +5,7 @@ from common.models import BaseModel
 from common.utils import validate_image_size
 
 
-class VisitorKYC(models.Model):
+class VisitorKYC(BaseModel):
     GENDER_CHOICES = [
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -19,16 +19,19 @@ class VisitorKYC(models.Model):
         ('Widowed', 'Widowed'),
     ]
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    father_name = models.CharField(max_length=100, blank=True, null=True)
-    mother_name = models.CharField(max_length=100, blank=True, null=True)
-    grandfather_name = models.CharField(max_length=100, blank=True, null=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name="visitor_kyc"
+    )
+    name = models.CharField(max_length=150, blank=True, null=True)
+    father_name = models.CharField(max_length=150, blank=True, null=True)
+    mother_name = models.CharField(max_length=150, blank=True, null=True)
+    grandfather_name = models.CharField(max_length=150, blank=True, null=True)
     marital_status = models.CharField(max_length=20, choices=MARITAL_STATUS_CHOICES, blank=True, null=True)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, blank=True, null=True)
     nationality = models.CharField(max_length=50, blank=True, null=True)
-    identity_type = models.CharField(max_length=20, blank=True, null=True)
-    identity_number = models.CharField(max_length=20, blank=True, null=True)
+    identity_type = models.CharField(max_length=50, blank=True, null=True)
+    identity_number = models.CharField(max_length=50, blank=True, null=True)
     identity_documents_front = models.FileField(upload_to="identity/%Y/%m/%d/front/", blank=True, null=True)
     identity_documents_back = models.FileField(upload_to="identity/%Y/%m/%d/back/", blank=True, null=True)
     secondary_mobile_number = models.CharField(max_length=20, blank=True, null=True)
@@ -55,16 +58,19 @@ class VisitorKYC(models.Model):
     accept = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.name or f"KYC for {self.user}"
 
     class Meta:
-        verbose_name = "KYC"
-        verbose_name_plural = "KYC"
+        verbose_name = "Visitor KYC"
+        verbose_name_plural = "Visitor KYC"
 
 
 class VisitorsMessage(BaseModel):
     message = models.TextField()
-    visitor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    visitor = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name="messages", db_index=True
+    )
     file = models.ImageField(
         upload_to='visitors/messages',
         validators=[validate_image_size],
@@ -73,4 +79,9 @@ class VisitorsMessage(BaseModel):
     )
 
     def __str__(self):
-        return str(self.id) + str(self.visitor)
+        return f"Message {self.id} from {self.visitor}"
+
+    class Meta:
+        verbose_name = "Visitor Message"
+        verbose_name_plural = "Visitor Messages"
+        ordering = ["-created"]

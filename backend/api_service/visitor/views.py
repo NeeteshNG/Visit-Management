@@ -33,7 +33,11 @@ from organization.views import PageNumberPagination
 from common.permissions import IsVisitingUser
 from .pagination import StandardResultsSetPagination
 from datetime import timedelta
-from xhtml2pdf import pisa
+
+try:
+    from xhtml2pdf import pisa
+except ImportError:
+    pisa = None  # PDF generation will be unavailable
 
 User = get_user_model()
 

@@ -5,9 +5,9 @@ from common.admin import CustomModelAdmin
 
 @admin.register(StaffUser)
 class StaffUserAdmin(CustomModelAdmin):
-    list_display = ("email", "full_name", "mobile_number", "address", "active", "organization", "role")
+    list_display = ("email", "full_name", "mobile_number", "address", "is_active", "organization", "role")
     list_filter = (
-        "active",
+        "is_active",
         "organization",
         "role"
     )

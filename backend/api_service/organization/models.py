@@ -1,4 +1,3 @@
-import re
 import uuid
 import qrcode
 from io import BytesIO
@@ -10,39 +9,28 @@ from django.contrib.auth.models import (
 )
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.hashers import make_password
+
+from ckeditor.fields import RichTextField
 
 from common.choices import StatusChoices
 from common.models import BaseModel
 from common.utils import validate_file_size
+from organization.choices import TYPE_OF_ID
 from user.models import CustomUser
 
 User = get_user_model()
 
 
-def validate_mobile_number(mobile_number):
-    """
-    Global phone number validation.
-    Accepts phone numbers from multiple countries.
-    Basic validation: 7-15 digits, allows common prefixes.
-    """
-    # Remove any spaces, dashes, or country code prefix
-    cleaned_number = re.sub(r'[\s\-\+]', '', str(mobile_number))
-    if cleaned_number.startswith('00'):
-        cleaned_number = cleaned_number[2:]
-
-    # Basic international phone validation (7-15 digits)
-    if not re.match(r'^\d{7,15}$', cleaned_number):
-        raise ValueError("Invalid mobile number. Please enter 7-15 digits.")
-
-
 class OrganizationKYCSocialMediaLink(BaseModel):
     name = models.CharField(max_length=100)
     link = models.URLField()
+
+    class Meta:
+        verbose_name = "Organization KYC Social Media Link"
+        verbose_name_plural = "Organization KYC Social Media Links"
 
     def __str__(self):
         return self.name
@@ -55,13 +43,18 @@ class OrganizationKYCDocument(BaseModel):
         validators=[validate_file_size],
     )
 
+    class Meta:
+        verbose_name = "Organization KYC Document"
+        verbose_name_plural = "Organization KYC Documents"
+
     def __str__(self):
         return self.name
 
 
 class OrganizationKYC(BaseModel):
     organization = models.OneToOneField(
-        User, unique=True, on_delete=models.SET_NULL, null=True, blank=True
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="organization_kyc"
     )
     establishment_year = models.PositiveIntegerField(blank=True, null=True)
     vat_number = models.CharField(max_length=50, blank=True, null=True)
@@ -79,21 +72,23 @@ class OrganizationKYC(BaseModel):
     secondary_number = models.CharField(max_length=200, blank=True, null=True)
     telephone_number = models.CharField(max_length=200, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-    logo = models.ImageField(upload_to="logo/%Y/%m/%d/", blank=True, null=True)
+    logo = models.ImageField(upload_to="organization_kyc/logo/%Y/%m/%d/", blank=True, null=True)
     registration_certificate = models.ImageField(
-        upload_to="logo/%Y/%m/%d/", blank=True, null=True
+        upload_to="organization_kyc/certificates/%Y/%m/%d/", blank=True, null=True
     )
     PAN_VAT_certificate = models.ImageField(
-        upload_to="logo/%Y/%m/%d/", blank=True, null=True
+        upload_to="organization_kyc/certificates/%Y/%m/%d/", blank=True, null=True
     )
-    licenses = models.ImageField(upload_to="logo/%Y/%m/%d/", blank=True, null=True)
-    citizenship = models.ImageField(upload_to="logo/%Y/%m/%d/", blank=True, null=True)
-    passport = models.ImageField(upload_to="logo/%Y/%m/%d/", blank=True, null=True)
+    licenses = models.ImageField(upload_to="organization_kyc/licenses/%Y/%m/%d/", blank=True, null=True)
+    citizenship = models.ImageField(upload_to="organization_kyc/identity/%Y/%m/%d/", blank=True, null=True)
+    passport = models.ImageField(upload_to="organization_kyc/identity/%Y/%m/%d/", blank=True, null=True)
     driving_license = models.ImageField(
-        upload_to="logo/%Y/%m/%d/", blank=True, null=True
+        upload_to="organization_kyc/identity/%Y/%m/%d/", blank=True, null=True
     )
-    social_media_links = models.ManyToManyField(to=OrganizationKYCSocialMediaLink)
-    documents = models.ManyToManyField(to=OrganizationKYCDocument)
+    social_media_links = models.ManyToManyField(
+        to=OrganizationKYCSocialMediaLink, blank=True
+    )
+    documents = models.ManyToManyField(to=OrganizationKYCDocument, blank=True)
 
     status = models.CharField(
         choices=StatusChoices.choices, max_length=200, default=StatusChoices.PENDING
@@ -110,22 +105,6 @@ class OrganizationKYC(BaseModel):
         verbose_name_plural = "Organization KYC"
 
 
-class CreatedAtMixin(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-
-    class Meta:
-        abstract = True
-
-
-TYPE_OF_ID = [
-    ("License", "License"),
-    ("Passport", "Passport"),
-    ("Citizenship", "Citizenship"),
-    ("Pan Card", "Pan Card"),
-    ("National ID Card", "National ID Card"),
-]
-
-
 class OrganizationVisitHistory(BaseModel):
     MANUAL = "Manual"
     SCAN = "Scan"
@@ -140,6 +119,7 @@ class OrganizationVisitHistory(BaseModel):
         null=True,
         blank=True,
         related_name="visiting_organization",
+        db_index=True,
     )
     visitor = models.ForeignKey(
         User,
@@ -147,17 +127,18 @@ class OrganizationVisitHistory(BaseModel):
         related_name="visited_by",
         null=True,
         blank=True,
+        db_index=True,
     )
-    full_name = models.CharField(max_length=50)
+    full_name = models.CharField(max_length=150)
     email = models.EmailField(max_length=300, blank=True, null=True)
-    mobile_number = models.CharField(max_length=50, blank=True, null=True)
+    mobile_number = models.CharField(max_length=20, blank=True, null=True)
     purpose = models.CharField(max_length=250)
     have_vehicle = models.BooleanField(blank=True, null=True, default=False)
     vehicle_number = models.CharField(max_length=50, blank=True, null=True)
     is_with_team = models.BooleanField(blank=True, null=True, default=False)
     number_of_team = models.IntegerField(blank=True, null=True, default=0)
     visiting_from = models.CharField(max_length=250, null=True, blank=True)
-    is_approved = models.BooleanField(default=False, blank=True, null=True)
+    is_approved = models.BooleanField(default=False, blank=True, null=True, db_index=True)
     visited_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     departed_at = models.DateTimeField(null=True, blank=True)
     photo = models.ImageField(upload_to="visitors/%Y/%m/%d/", blank=True, null=True)
@@ -183,15 +164,20 @@ class OrganizationVisitHistory(BaseModel):
     class Meta:
         verbose_name = "Visitor"
         verbose_name_plural = "Visitors"
+        ordering = ["-visited_at"]
+        indexes = [
+            models.Index(fields=["organization", "is_approved"]),
+            models.Index(fields=["visited_at"]),
+        ]
 
     def clean(self):
-        if not self.organization.is_organization:
+        if self.organization and not self.organization.is_organization:
             raise ValidationError(
                 {
                     "organization": "organization is not an organization i.e is_organization is not set to true."
                 }
             )
-        if not self.visitor.is_visitor:
+        if self.visitor and not self.visitor.is_visitor:
             raise ValidationError(
                 {"visitor": "visitor is not visitor i.e is_visitor is not set to true."}
             )
@@ -231,15 +217,15 @@ class BranchUserManager(BaseUserManager):
 
 
 class OrganizationBranch(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True, default="example@example.com")
-    password = models.CharField(max_length=128, default=None)
+    email = models.EmailField(unique=True)
     organization = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="org_roles", null=True
+        CustomUser, on_delete=models.CASCADE, related_name="org_branches", null=True,
+        db_index=True
     )
     name = models.CharField(max_length=200, null=True, blank=True)
     branch_no = models.CharField(max_length=10, null=True, blank=True)
     contact_person = models.CharField(max_length=200, null=True, blank=True)
-    mobile_no = models.CharField(max_length=200, null=True, blank=True)
+    mobile_no = models.CharField(max_length=20, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     district = models.CharField(max_length=100, null=True, blank=True)
@@ -262,7 +248,7 @@ class OrganizationBranch(AbstractBaseUser, PermissionsMixin):
     objects = BranchUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["organization", "password"]
+    REQUIRED_FIELDS = ["organization"]
 
     groups = models.ManyToManyField(
         "auth.Group",
@@ -303,8 +289,11 @@ def create_qr_code_for_organization_branch(sender, instance, created, **kwargs):
         instance.qr_image.save(f"{instance.mobile_no}-qrcode.png", img, save=True)
 
 
-class OrganizationSocialMediaLink(models.Model):
-    organization = models.ForeignKey(User, on_delete=models.CASCADE)
+class OrganizationSocialMediaLink(BaseModel):
+    organization = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="social_media_links",
+        db_index=True
+    )
     platform = models.CharField(max_length=50)
     link = models.URLField()
 
@@ -312,8 +301,8 @@ class OrganizationSocialMediaLink(models.Model):
         return f"{self.organization} - {self.platform}"
 
     class Meta:
-        verbose_name = "Social Link"
-        verbose_name_plural = "Social Links"
+        verbose_name = "Organization Social Media Link"
+        verbose_name_plural = "Organization Social Media Links"
 
 
 def upload_to_organization_document(instance, filename):
@@ -322,8 +311,11 @@ def upload_to_organization_document(instance, filename):
     return f"documents/{unique_filename}"
 
 
-class OrganizationDocument(models.Model):
-    organization = models.ForeignKey(User, on_delete=models.CASCADE)
+class OrganizationDocument(BaseModel):
+    organization = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="documents",
+        db_index=True
+    )
     name = models.CharField(max_length=200)
     file = models.FileField(upload_to=upload_to_organization_document)
 
@@ -331,11 +323,11 @@ class OrganizationDocument(models.Model):
         return f"{self.organization} - {self.name}"
 
     class Meta:
-        verbose_name = "Document"
-        verbose_name_plural = "Documents"
+        verbose_name = "Organization Document"
+        verbose_name_plural = "Organization Documents"
 
 
-class Device(models.Model):
+class Device(BaseModel):
     DEVICE_TYPES = (
         ("android", "Android"),
         ("computer", "Computer"),
@@ -347,140 +339,171 @@ class Device(models.Model):
         max_length=200, choices=DEVICE_TYPES, default="other", null=True, blank=True
     )
     organization = models.ForeignKey(
-        User, related_name="device_org", on_delete=models.CASCADE, null=True, blank=True
+        User, related_name="devices", on_delete=models.CASCADE, null=True, blank=True,
+        db_index=True
     )
     ip_address = models.CharField(max_length=200, null=True, blank=True)
-    create_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    update_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
-        return self.name_of_device
+        return self.name_of_device or "Unknown Device"
+
+    class Meta:
+        verbose_name = "Device"
+        verbose_name_plural = "Devices"
+        ordering = ["-created"]
 
 
-class Purpose(models.Model):
+class Purpose(BaseModel):
+    """
+    Stores predefined visit purposes that organizations can use.
+    Note: Consider replacing with CharField choices in OrganizationVisitHistory in future.
+    """
     text_field = models.TextField()
 
     def __str__(self):
         return self.text_field
 
+    class Meta:
+        verbose_name = "Purpose"
+        verbose_name_plural = "Purposes"
 
-from ckeditor.fields import RichTextField
-from user.models import CustomUser
 
-
-class OrganizationContent(models.Model):
-    organization = models.ForeignKey(CustomUser, unique=True, on_delete=models.CASCADE)
+class OrganizationContent(BaseModel):
+    organization = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name="content"
+    )
     about_us = RichTextField(blank=True, null=True)
     privacy_policy = RichTextField(blank=True, null=True)
     terms_and_conditions = RichTextField(blank=True, null=True)
     faqs = RichTextField(blank=True, null=True)
 
     class Meta:
-        verbose_name = "Org Content"
-        verbose_name_plural = "Org Contents"
+        verbose_name = "Organization Content"
+        verbose_name_plural = "Organization Contents"
 
 
-class AdsBanner(models.Model):
+class AdsBanner(BaseModel):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to="ads_banners/")
     link_url = models.URLField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Ads Banner"
+        verbose_name_plural = "Ads Banners"
+        ordering = ["-created"]
 
-class OrganizationFCMToken(models.Model):
+
+class OrganizationFCMToken(BaseModel):
     organization = models.ForeignKey(
         User,
-        related_name="org_fcm_token",
+        related_name="fcm_tokens",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        db_index=True,
     )
-    create_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    update_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     fcm_token = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.fcm_token
+        return self.fcm_token or "No Token"
+
+    class Meta:
+        verbose_name = "Organization FCM Token"
+        verbose_name_plural = "Organization FCM Tokens"
 
 
-class Guest(models.Model):
-    full_name = models.CharField(max_length=100)
-    mobile_number = models.CharField(max_length=10)
+class Guest(BaseModel):
+    full_name = models.CharField(max_length=150)
+    mobile_number = models.CharField(max_length=20)
     email = models.EmailField()
-    numAdultguest = models.IntegerField(blank=True, null=True)
-    numChildguest = models.IntegerField(blank=True, null=True)
-    numofroom = models.IntegerField(blank=True, null=True)
+    num_adult_guests = models.PositiveIntegerField(blank=True, null=True)
+    num_child_guests = models.PositiveIntegerField(blank=True, null=True)
+    num_of_rooms = models.PositiveIntegerField(blank=True, null=True)
     type_of_id = models.CharField(max_length=200, blank=True, null=True)
-    id_number = models.IntegerField(blank=True, null=True)
-    advancedPayment = models.IntegerField(blank=True, null=True)
-    remainingPayment = models.IntegerField(blank=True, null=True)
+    id_number = models.CharField(max_length=50, blank=True, null=True)
+    advanced_payment = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+    remaining_payment = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
     checkout_date = models.DateField(blank=True, null=True)
-    paymentmethod = models.CharField(max_length=100)
+    payment_method = models.CharField(max_length=100)
     organization = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
         related_name="guest_registrations",
-        default=None,
         null=True,
+        db_index=True,
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.full_name
 
+    class Meta:
+        verbose_name = "Guest"
+        verbose_name_plural = "Guests"
+        ordering = ["-created"]
 
-class MeetingAppointment(models.Model):
-    full_name = models.CharField(max_length=30)
-    meeting_title = models.CharField(max_length=50)
-    number = models.CharField(max_length=20)
-    location = models.CharField(max_length=30)
+
+class MeetingAppointment(BaseModel):
+    full_name = models.CharField(max_length=150)
+    meeting_title = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=20)
+    location = models.CharField(max_length=100)
     meeting_type = models.CharField(max_length=50)
     date = models.DateField()
     organization = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
         related_name="meeting_registrations",
-        default=None,
         null=True,
+        db_index=True,
     )
     org_meet_id = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
-        related_name="meeting_org",
+        related_name="meeting_host",
         null=True,
         blank=True,
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __self__(self):
-        return self.full_name
+    def __str__(self):
+        return f"{self.full_name} - {self.meeting_title}"
+
+    class Meta:
+        verbose_name = "Meeting Appointment"
+        verbose_name_plural = "Meeting Appointments"
+        ordering = ["-date", "-created"]
 
 
-class CustomerRegistration(models.Model):
+class CustomerRegistration(BaseModel):
     full_name = models.CharField(max_length=150)
-    mobile_number = models.CharField(max_length=15)
+    mobile_number = models.CharField(max_length=20)
     email = models.EmailField()
     type_of_id = models.CharField(max_length=200)
     id_number = models.CharField(max_length=50)
     company_name = models.CharField(max_length=100)
-    country = models.CharField(max_length=100, default=None)
-    state = models.CharField(max_length=100, default=None)
-    city = models.CharField(max_length=100, default=None)
-    additional_requirements = models.TextField(default=None, blank=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    additional_requirements = models.TextField(blank=True, null=True)
     organization = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
         related_name="customer_registrations",
-        default=None,
         null=True,
+        db_index=True,
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.full_name
+
+    class Meta:
+        verbose_name = "Customer Registration"
+        verbose_name_plural = "Customer Registrations"
+        ordering = ["-created"]

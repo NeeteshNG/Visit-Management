@@ -888,9 +888,23 @@ class VisitorCountsSerializer(serializers.Serializer):
 
 
 class GuestSerilizer(serializers.ModelSerializer):
+    # Backward compatibility: map camelCase API fields to snake_case model fields
+    numAdultguest = serializers.IntegerField(source='num_adult_guests', required=False, allow_null=True)
+    numChildguest = serializers.IntegerField(source='num_child_guests', required=False, allow_null=True)
+    numofroom = serializers.IntegerField(source='num_of_rooms', required=False, allow_null=True)
+    advancedPayment = serializers.IntegerField(source='advanced_payment', required=False, allow_null=True)
+    remainingPayment = serializers.IntegerField(source='remaining_payment', required=False, allow_null=True)
+    paymentmethod = serializers.CharField(source='payment_method')
+
     class Meta:
         model = Guest
-        fields = "__all__"
+        fields = [
+            'id', 'full_name', 'mobile_number', 'email',
+            'numAdultguest', 'numChildguest', 'numofroom',
+            'type_of_id', 'id_number',
+            'advancedPayment', 'remainingPayment', 'checkout_date',
+            'paymentmethod', 'organization', 'created_at', 'updated_at'
+        ]
 
 
 class MeetingSerializer(serializers.ModelSerializer):

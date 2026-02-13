@@ -1,19 +1,32 @@
 from django.db import models
-from django.core.exceptions import ValidationError as DjangoValidationError
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+from model_utils.models import TimeStampedModel, SoftDeletableModel
 
 from . import managers
 
 
-# Create your models here.
-class BaseModel(models.Model):
+class BaseModel(TimeStampedModel, SoftDeletableModel):
     """
-    Base Model that will be used in this project
+    Base Model that will be used in this project.
+
+    Inherits from:
+    - TimeStampedModel: Provides 'created' and 'modified' fields with auto timestamps
+    - SoftDeletableModel: Provides 'is_removed' field for soft deletion
+
+    Field Mappings:
+    - 'created' replaces 'created_at' (auto_now_add)
+    - 'modified' replaces 'updated_at' (auto_now)
+    - 'is_removed' replaces 'is_archived' (for soft delete)
+
+    TODO: Once all migrations are squashed and database is reset, remove:
+    - is_archived field (use is_removed from SoftDeletableModel)
+    - created_at property (use created directly)
+    - updated_at property (use modified directly)
     """
+    # DEPRECATED: Keep is_archived for backward compatibility with existing data
+    # Will be removed after migration cleanup - use is_removed instead
     is_archived = models.BooleanField(default=False)
-    created_at = models.DateTimeField(editable=False, auto_now_add=True,null=True)
-    updated_at = models.DateTimeField(editable=False, auto_now=True,null=True)
 
     class Meta:
         abstract = True
@@ -21,19 +34,23 @@ class BaseModel(models.Model):
     objects = managers.BaseModelManager()
 
     def archive(self):
-        if self.is_archived:
-            raise DjangoValidationError({
-                'non_field_errors': _('Failed - it is already archived.')
-            })
+        """Soft delete the instance."""
         self.is_archived = True
-        self.updated_at = timezone.now()
-        self.save(update_fields=['is_archived', 'updated_at'])
+        self.is_removed = True
+        self.save(update_fields=['is_archived', 'is_removed'])
 
     def restore(self):
-        if not self.is_archived:
-            raise DjangoValidationError({
-                'non_field_errors': _('Failed - it is already restored.')
-            })
+        """Restore a soft-deleted instance."""
         self.is_archived = False
-        self.updated = timezone.now()
-        self.save(update_fields=['is_archived', 'updated'])
+        self.is_removed = False
+        self.save(update_fields=['is_archived', 'is_removed'])
+
+    @property
+    def created_at(self):
+        """Backward compatibility alias for 'created'."""
+        return self.created
+
+    @property
+    def updated_at(self):
+        """Backward compatibility alias for 'modified'."""
+        return self.modified
