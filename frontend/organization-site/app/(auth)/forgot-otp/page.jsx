@@ -41,7 +41,7 @@ function VerifyOTP() {
         toast.error("Verification failed. Please try again.");
       }
     } catch (error) {
-      console.log(error.response);
+      console.error("OTP verification error:", error.response);
       toast.error("Verification failed. Please try again.");
     }
   };
@@ -50,12 +50,11 @@ function VerifyOTP() {
     try {
       router.push("/reset");
     } catch (error) {
-      console.log(error.response);
+      console.error("Resend OTP error:", error.response);
       toast.error("Cannot Send. Please try again.");
     }
   };
   const handleOTPChange = (newValue, index) => {
-    console.log(newValue);
     const newOTPValue = [...otpValue];
     newOTPValue[index] = newValue;
     setOTPValue(newOTPValue);

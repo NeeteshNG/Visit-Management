@@ -22,7 +22,6 @@ const Page = () => {
         }`
       }
     })
-    console.log(res)
     if (res.status == 200 || res.status == 201) {
       toast.success('Branch Crated')
       router.back()

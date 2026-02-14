@@ -31,7 +31,7 @@ import { NGtryLogo } from "@/public/logo/logos";
 
 export default function BranchDetails() {
   const data = useSearchParams();
-  console.log(data.get("id"));
+  const branchId = data.get("id");
   const [open, setopen] = useState(false);
   const handleClose = () => {
     setopen(false);

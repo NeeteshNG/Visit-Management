@@ -35,7 +35,6 @@ const VisitForm = () => {
     },
   });
   const router = useRouter();
-  console.log(value.have_vehicle);
 
   const {
     data: user,
@@ -44,9 +43,7 @@ const VisitForm = () => {
   } = useUserData();
 
   const [isLoading, setisLoading] = useState(false);
-  console.log(value, "this is a preview page");
   const onSubmit = async (data) => {
-    console.log(value.mobile_number);
     setisLoading(true);
     if (!isUserLoading) {
       const formData = new FormData();
@@ -77,7 +74,6 @@ const VisitForm = () => {
           },
         }
       );
-      console.log(res.data);
       if (res.status === 200 || res.status === 201) {
         toast.success(`Manual Entry For ${value.full_name} Successfull`);
         router.push("/success");

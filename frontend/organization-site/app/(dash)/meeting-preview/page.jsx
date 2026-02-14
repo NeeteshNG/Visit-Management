@@ -38,7 +38,6 @@ const MeetingPreview = () => {
 
 const [isLoading, setisLoading] = useState(false);
     const onSubmit = async (data) => {
-console.log(value.phone_number)
 setisLoading(true);
 // data.preventDefault();
         if (!isUserLoading) {
@@ -50,8 +49,6 @@ setisLoading(true);
           formData.append("location",value.location);
           formData.append("meeting_type",value.meetingtype);
           formData.append('date',value.selectedDate)
-          // formData.append("photo",fileimage, fileimage.name);
-          console.log(formData.photo);
             const res = await axiosInstance.post(`/organization/meetingcreate/`, 
           
             formData,
@@ -60,7 +57,6 @@ setisLoading(true);
                 Authorization: `Bearer ${
                   typeof window !== 'undefined' ? localStorage?.getItem('access') : ''
                 }`}});
-            console.log(res.data)
             if (res.status === 200 || res.status === 201) {
                 toast.success(`Manual Entry For ${value.full_name} Successfull`);
 router.push("/success");

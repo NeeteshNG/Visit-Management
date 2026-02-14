@@ -26,6 +26,10 @@ from .models import (
     Guest,
     MeetingAppointment,
     CustomerRegistration,
+    Device,
+    Purpose,
+    OrganizationContent,
+    AdsBanner,
 )
 
 
@@ -56,7 +60,7 @@ class OrganizationKYCSerializer(serializers.ModelSerializer):
             "accept",
         )
         read_only_fields = (
-            "" "qr",
+            "qr",
             "approve_visitor_before_access",
             "check_in_check_out_feature",
             "accept",
@@ -414,16 +418,10 @@ class NewOrganizationKYCSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-from .models import Device
-
-
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
         fields = "__all__"
-
-
-from .models import Purpose
 
 
 class PurposeSerializer(serializers.ModelSerializer):
@@ -432,16 +430,10 @@ class PurposeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-from .models import OrganizationContent
-
-
 class OrganizationContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrganizationContent
         fields = "__all__"
-
-
-from .models import AdsBanner
 
 
 class AdsBannerSerializer(serializers.ModelSerializer):

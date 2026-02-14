@@ -52,7 +52,6 @@ const MeetingAppointment = () => {
   };
   const [changevalue, setchangevalue] = useState("Yes")
   const onSubmit = async (data) => {
-    console.log(data.have_vehicle);
     const data1 = {
       "full_name": data.full_name,
       "meetingtitle": data.meetingtitle,

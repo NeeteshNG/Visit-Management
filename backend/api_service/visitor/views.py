@@ -3,6 +3,7 @@ import time
 
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
 from django.http import HttpResponse
 from organization.serializers import OrganizationVisitHistorySerializerGet
@@ -100,9 +101,7 @@ class SingleVisitorHistory(APIView):
     serializer_class = OrganizationVisitHistorySerializerSingle
 
     def get(self, request, pk=None):
-        # breakpoint()
-        # Start with the base queryset
-        visitors_details_history = OrganizationVisitHistory.objects.get(id=pk)
+        visitors_details_history = get_object_or_404(OrganizationVisitHistory, id=pk)
         serializer = self.serializer_class(visitors_details_history)
 
         return Response(serializer.data, status=200)
@@ -381,7 +380,6 @@ class VisitorKYCVerifyView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-        print(response.data, response)
         user = User.objects.filter(pk=response.data["user"]).first()
         user.is_kyc_verified = True
         user.save()

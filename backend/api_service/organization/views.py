@@ -52,6 +52,9 @@ from .models import (
     OrganizationSocialMediaLink,
     AdsBanner,
     OrganizationFCMToken,
+    CustomerRegistration,
+    Guest,
+    MeetingAppointment,
 )
 
 from .serializers import (
@@ -87,17 +90,6 @@ from .serializers import (
     MeetingSerializer,
     CustomerSerilizer,
 )
-from .models import (
-    OrganizationBranch,
-    OrganizationDocument,
-    OrganizationKYC,
-    OrganizationSocialMediaLink,
-    OrganizationVisitHistory,
-    AdsBanner,
-    CustomerRegistration,
-    Guest,
-    MeetingAppointment,
-)
 
 from .filters import OrganizationVisitHistoryFilter
 from .pagination import StandardResultsSetPagination
@@ -107,7 +99,6 @@ from organization.utils import send_notification
 from user.utils import generate_otp, send_otp_to_user
 from user.views import generate_sms_text
 from user.serializers import CustomUserSerializer
-from user.utils import generate_otp, send_otp_to_user
 from user.models import CustomUser
 
 from notification.serializers import NotificationSerializer
@@ -345,19 +336,15 @@ class BranchList(APIView):
         serializer = BranchSerializer(data=data, context={"request": request})
 
         mobile_number = data.get("mobile_no")
-        address = (
-            data.get("ward_no")
-            + ", "
-            + data.get("city_village_area")
-            + ", "
-            + data.get("municipality")
-            + ", "
-            + data.get("district")
-            + ", "
-            + data.get("state")
-            + ", "
-            + data.get("country")
-        )
+        address_parts = [
+            data.get("ward_no", ""),
+            data.get("city_village_area", ""),
+            data.get("municipality", ""),
+            data.get("district", ""),
+            data.get("state", ""),
+            data.get("country", ""),
+        ]
+        address = ", ".join(part for part in address_parts if part)
 
         try:
             organization = CustomUser.objects.get(id=request.user.id)

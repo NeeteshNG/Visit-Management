@@ -204,6 +204,6 @@ export const handleVisitorApproval = async ({ toast, id, isApproved }) => {
     }
   } catch (error) {
     toast.error("Something went wrong");
-    console.log(error);
+    console.error("Branch service error:", error);
   }
 };

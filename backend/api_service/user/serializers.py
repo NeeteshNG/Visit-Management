@@ -21,7 +21,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "organization_name",
             "organization_type",
             "organization_nature",
-            "approve_visitor_before_access",
             "check_in_check_out_feature",
             "qr",
             "profile_picture",
@@ -84,15 +83,13 @@ class CustomUserSerializerLoginDetails(serializers.ModelSerializer):
             "organization_name",
             "organization_type",
             "organization_nature",
-            "approve_visitor_before_access",
             "check_in_check_out_feature",
             "qr",
-            "validation_token_of_organization",
             "profile_picture",
             "approve_visitors"
         )
 
-        read_only_fields = ("is_admin", "is_staff", "validation_token_of_organization")
+        read_only_fields = ("is_admin", "is_staff")
         extra_kwargs = {"otp": {"write_only": True}, "password": {"write_only": True}}
 
 
@@ -152,7 +149,6 @@ class CustomUserPatchSerializer(serializers.Serializer):
                                                 allow_null=True)
     organization_nature = serializers.ChoiceField(choices=ORGANIZATION_NATURE_TYPES, required=False, allow_blank=True,
                                                   allow_null=True)
-    approve_visitor_before_access = serializers.BooleanField(required=False)
     check_in_check_out_feature = serializers.BooleanField(required=False)
 
     class Meta:
@@ -160,7 +156,7 @@ class CustomUserPatchSerializer(serializers.Serializer):
         fields = [
             'mobile_number', 'full_name', 'email', 'approve_visitors', 'address',
             'organization_name', 'organization_type', 'organization_nature',
-            'approve_visitor_before_access', 'check_in_check_out_feature'
+            'check_in_check_out_feature'
         ]
 
     def update(self, instance, validated_data):
@@ -233,9 +229,7 @@ class CustomUserDetailSerializer(serializers.ModelSerializer):
             "organization_name",
             "organization_type",
             "organization_nature",
-            "approve_visitor_before_access",
             "check_in_check_out_feature",
             "qr",
-            "validation_token_of_organization",
             "profile_picture",
         )

@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       boxShadow: {
         '3xl': '0px 4px 8px 2px rgba(0, 0, 0, 0.05)',

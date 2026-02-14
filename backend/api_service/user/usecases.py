@@ -71,29 +71,21 @@ class LoginUseCase(BaseUseCase):
             raise ValidationError({"error": "Incorrect  password please try again."})
 
         if user.is_organization:
-            try:
-                # TODO  Subscription need to be handled separately
-                user_subscription = Subscription.objects.filter(user=user).first()
-                # if not user_subscription:
-                #     raise ValidationError({
-                #         'error': 'Subscription does not exists for this user'
-                #     })
-                current_time = timezone.now()
-                end_subscription = user_subscription.end_subscription
+            user_subscription = Subscription.objects.filter(user=user).first()
+            if user_subscription:
                 if user_subscription.lock_org:
                     raise ValidationError(
                         {
                             "message": "Your Organization is locked please contact to admin."
                         }
                     )
-                if current_time > end_subscription:
+                current_time = timezone.now()
+                if user_subscription.end_subscription and current_time > user_subscription.end_subscription:
                     raise ValidationError(
                         {
                             "message": "Your contract is expired please contact to admin.",
                         }
                     )
-            except Exception:
-                pass
 
         self._register_device(user)  # Register the device with FCM token
 

@@ -2,17 +2,11 @@ import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import React from 'react'
-import { Poppins } from 'next/font/google'
 
 import { ToastContainer } from 'react-toastify'
 
 import ThemeRegistry from './ThemeRegistry'
 import Providers from './Providers'
-
-const poppins = Poppins({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin']
-})
 
 export const metadata = {
   title: 'NGtry | Visitor Check-In System',
@@ -25,7 +19,7 @@ export default function RootLayout ({ children }) {
     <head>
       <link rel="icon" href="/icon.png" type="image/png" />
     </head>
-      <body className={poppins.className}>
+      <body className="font-poppins">
         <Providers>
           <div className='flex justify-between w-full'>
             <ToastContainer

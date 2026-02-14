@@ -51,7 +51,7 @@ const Page = () => {
         fcmToken = await generateToken();
         localStorage.setItem("fcmToken", fcmToken);
       } catch (fcmError) {
-        console.log("FCM token generation failed, continuing without it");
+        // FCM token generation failed, continuing without it
       }
 
       const requestData = {

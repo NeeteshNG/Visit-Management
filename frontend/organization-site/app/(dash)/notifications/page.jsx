@@ -78,7 +78,6 @@ const Page = () => {
               <select
                 className="block w-[84px] h-[34px]  text-[#A3A3A3] font-inter font-semibold text-sm px-2 placeholder-[#A3A3A3] placeholder:font-normal transition-all duration-200 border border-greyneutral rounded-[10px] bg-white focus:outline-none focus:border-ngtryprimary focus:bg-white caret-ngtryprimary appearance-none"
                 onChange={(e) => {
-                  console.log(e.target.value);
                   getnotifications({
                     toast: toast,
                     setnotifications: setdata,
@@ -98,10 +97,7 @@ const Page = () => {
                     key={org.id}
                     value={org.value}
                     className="text-sm  font-normal text-[#A3A3A3]"
-                    onClick={() => {
-                      // }
-                      console.log(org.value);
-                    }}
+                    onClick={() => {}}
                   >
                     {org.title}
                   </option>

@@ -25,8 +25,6 @@ self.addEventListener("message", (event) => {
     messaging = firebase.messaging();
 
     messaging.onBackgroundMessage((payload) => {
-      console.log("Received background message: ", payload);
-
       const notificationTitle =
         payload.notification.title || "Background Message Title";
       const notificationOptions = {
@@ -45,8 +43,6 @@ if (typeof window !== "undefined" && "serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/firebase-messaging-sw.js")
     .then((registration) => {
-      console.log("Service Worker Registered", registration);
-
       if (registration.active) {
         registration.active.postMessage({
           type: "FIREBASE_CONFIG",

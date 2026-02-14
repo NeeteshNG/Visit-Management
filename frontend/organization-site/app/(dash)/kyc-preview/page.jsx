@@ -94,8 +94,7 @@ export default function KycPreview() {
 
     Promise.all(promises)
       .then((base64Results) => {
-        console.log(base64Results)
-        // Update the base64List state with the new base64 data
+                // Update the base64List state with the new base64 data
         setBase64List(base64Results);
       })
       .catch((error) => {
@@ -119,7 +118,6 @@ const handlelogo=()=>{
     const base64String = reader.result.split(',')[1];
     // Now 'base64String' contains the base64-encoded file content
     // You can save this in your component state or use it directly
-    console.log('Base64:', base64String);
     setlogo(base64String)
   };
 
@@ -134,7 +132,6 @@ const handledocument=()=>{
     const base64String = reader.result.split(',')[1];
     // Now 'base64String' contains the base64-encoded file content
     // You can save this in your component state or use it directly
-    console.log('Base64:', base64String);
     setdocuments(base64String)
     setalldocuments([{"name":"first",
     "file":base64String
@@ -150,7 +147,6 @@ const handleotherdocument=()=>{
   reader.onloadend = () => {
     const base64String = reader.result.split(',')[1];
     
-    console.log('Base64:', base64String);
     setotherdocuments(base64String)
     setalldocuments([...alldocuments,{
       "name":"first1",
@@ -184,7 +180,6 @@ const [alldocuments, setalldocuments] = useState([])
     try {
       
      
-        console.log(value.anotherlink);
     
 
      
@@ -214,7 +209,6 @@ const [alldocuments, setalldocuments] = useState([])
       "documents":base64List,
       "social_media_links":nameAndLinkList
     }
-     console.log(base64List);
       // console.log(orgnaization_data)
         const response = await axiosInstance.post(
           `/organization/${user.id}/organization-kyc/create`,
@@ -229,7 +223,6 @@ const [alldocuments, setalldocuments] = useState([])
             }
           }
         );
-        console.log(response.data)
         if (response.status === 201) {
           toast.success('KYC Verification Successfull')
           router.push('/dash')

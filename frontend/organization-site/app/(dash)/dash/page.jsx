@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 
 import { ArrowRightIcon } from "@/public/icons/icons";
@@ -26,7 +25,7 @@ export default function Dash() {
     isError: isError,
   } = useUserData();
 
-  const features = useMemo(() => dashboardFeatures);
+  const features = dashboardFeatures;
 
   const handleFeatureClick = (endpoint) => {
     router.push(endpoint);

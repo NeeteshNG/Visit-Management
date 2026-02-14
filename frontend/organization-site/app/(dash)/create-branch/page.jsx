@@ -65,7 +65,6 @@ export default function CreateBranch() {
                 Authorization: `Bearer ${
                   typeof window !== 'undefined' ? localStorage?.getItem('access') : ''
                 }`}});
-            console.log(res.data)
             if (res.status === 200 || res.status === 201) {
                 toast.success(`Branch created ${data.branch_name} Successfully`);
 // router.push("/dash");
@@ -77,7 +76,7 @@ router.push("/success");
               router.push("/error");
             }
      } catch (error) {
-      console.log(error);
+      console.error("Branch creation error:", error);
       toast.error("Something went wrong");
      }
     }
@@ -278,7 +277,6 @@ router.push("/success");
                             required: true,
                             onChange: (e) => {
                               const selectedValue = e.target.value;
-                              console.log("Selected Value:", selectedValue);
                               setSelectedCountry(selectedValue);
                               setAddressLabels(getAddressLabels(selectedValue));
                               setShowWardField(countryUsesWardNumber(selectedValue));
@@ -331,7 +329,6 @@ router.push("/success");
             required: true,
             onChange: (e) => {
               const selectedValue = e.target.value;
-              console.log("Selected Value:", selectedValue);
               setalldistrict(getDistrictsForState(selectedValue));
               setallmunicipality([]);
               setValue('district', '');
@@ -379,7 +376,6 @@ router.push("/success");
                             required: true,
                             onChange: (e) => {
                               const selectedValue = e.target.value;
-                              console.log("Selected Value:", selectedValue);
                               setallmunicipality(getCitiesForDistrict(selectedValue));
                               setValue('municipality', '');
                             }

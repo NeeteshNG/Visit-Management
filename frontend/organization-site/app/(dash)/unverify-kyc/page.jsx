@@ -84,7 +84,6 @@ export default function KycPreview() {
     isError: isUserError
   } = useUserData()
 
-console.log(value);
   const onSubmit = async data => {
    
   }

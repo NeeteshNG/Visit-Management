@@ -90,8 +90,6 @@ function VerifyKycForm() {
     });
   };
   const handleImagesClick = (index) => {
-    // Logic to trigger file input click
-    console.log(index);
     if(fileInputRefs[index].current){
       fileInputRefs[index].current.click();
 
@@ -202,7 +200,6 @@ const [isdocumentclick, setisdocumentclick] = useState(false);
   };
   const onSubmit = async data => {
     try {
-     console.log(selectedImages)
     if(regselectedImage===undefined || selectedImage===undefined){
 toast.error("Please Select the images");
     }else{
@@ -423,11 +420,9 @@ toast.error("Please Select the images");
                           {...register('country', { required: true })} 
                           onChange={(e) => {
                             const selectedValue = e.target.value;
-                            console.log("Selected Value:", selectedValue);
                            if(selectedValue===""){
 
                            }else{
-                            console.log(province[selectedValue]);
                             setallprovince(province[selectedValue])
                             setallprovince(province[selectedValue])
                            }
@@ -476,8 +471,6 @@ toast.error("Please Select the images");
           {...register('province', { required: true })}
           onChange={(e) => {
             const selectedValue = e.target.value;
-            console.log("Selected Value:", selectedValue);
-
             setalldistrict(districts[selectedValue]);
 
             // Set the selected value using react-hook-form's setValue
@@ -523,8 +516,6 @@ toast.error("Please Select the images");
                           {...register('district', { required: true })}
                           onChange={(e) => {
                             const selectedValue = e.target.value;
-                            console.log("Selected Value:", selectedValue);
-                          
                            setallmunicipality(municipalites[selectedValue])
                           }}
                         >
@@ -908,7 +899,6 @@ toast.error("Please Select the images");
                   <LuUploadIcon className="text-base text-[#A3A3A3]"/>
                   <p className='text-base font-normal leading-6 text-[#A3A3A3]'>Drag & drop file or <span className='text-ngtrydeep cursor-pointer' onClick={()=>{
                     handleImagesClick(index)
-                    console.log(selectedImages);
                   }}>Browse</span></p>
                   </div>
                   </>}

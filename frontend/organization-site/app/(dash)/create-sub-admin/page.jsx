@@ -28,13 +28,10 @@ export default function Subadmin() {
  const [allitems, setallitems] = useState([])
   const additem=(newItem)=>{
     if (allitems.includes(newItem)) {
-      
       const updatedList = allitems.filter((item) => item !== newItem);
       setallitems(updatedList);
-      console.log(allitems);
     } else {
       setallitems([...allitems, newItem]);
-      console.log(allitems);
     }
     
   }
@@ -64,7 +61,6 @@ toast.error("Please add some roles")
                   Authorization: `Bearer ${
                     typeof window !== 'undefined' ? localStorage?.getItem('access') : ''
                   }`}});
-              console.log(res.data)
               if (res.status === 200 || res.status === 201) {
                   toast.success(`Sub Admin created  Successfully`);
 
@@ -78,7 +74,7 @@ toast.error("Please add some roles")
       }
        
        } catch (error) {
-        console.log(error);
+        console.error("Sub-admin creation error:", error);
         toast.error("Something went wrong");
        }
 

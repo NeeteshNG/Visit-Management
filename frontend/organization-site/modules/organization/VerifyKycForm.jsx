@@ -71,7 +71,6 @@ function VerifyKycForm() {
       formData.append('logo', data.logo[0])
       formData.append('organization', user.id)
 
-      console.log(data.logo[0], formData)
       const response = await axiosInstance.post(
         '/organization/verify-kyc/',
         formData,
