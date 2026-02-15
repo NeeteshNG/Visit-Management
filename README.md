@@ -1,4 +1,4 @@
-# Epass - Visitor Management System
+# NGtry - Visitor Management System
 
 A comprehensive QR-based visitor management system for organizations, hotels, and apartments. Built with Django REST Framework backend and React frontend, fully containerized with Docker.
 
@@ -15,7 +15,7 @@ A comprehensive QR-based visitor management system for organizations, hotels, an
 
 ## Overview
 
-Epass is a QR-based entry management system that allows users to easily and securely enter and exit premises. It is a cloud-based system that can be accessed from anywhere with an internet connection.
+NGtry is a QR-based entry management system that allows users to easily and securely enter and exit premises. It is a cloud-based system that can be accessed from anywhere with an internet connection.
 
 The system issues digital passes containing QR codes that are scanned at entrances. The reader verifies the authenticity of the pass and allows the user to enter, providing complete audit trails and visitor management capabilities.
 
@@ -194,7 +194,7 @@ Access API documentation at:
 
 ## License
 
-Epass Private License
+NGtry Private License
 
 ---
 
