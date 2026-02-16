@@ -6,6 +6,8 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+from common.views import HealthCheckView, ReadinessCheckView
+
 schema_view = get_schema_view(
     openapi.Info(
         title="NGtry API",
@@ -20,6 +22,10 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    # Health check endpoints
+    path("health/", HealthCheckView.as_view(), name="health-check"),
+    path("ready/", ReadinessCheckView.as_view(), name="readiness-check"),
+    # API endpoints
     path("organization/", include("organization.urls")),
     path("user/", include("user.urls")),
     path("visitor/", include("visitor.urls")),

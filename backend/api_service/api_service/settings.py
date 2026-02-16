@@ -140,6 +140,18 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'common.throttling.BurstRateThrottle',
+        'common.throttling.SustainedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'otp': '5/min',
+        'login': '10/min',
+        'password_reset': '3/hour',
+        'registration': '5/hour',
+        'burst': '60/min',
+        'sustained': '1000/day',
+    },
 }
 
 SIMPLE_JWT = {

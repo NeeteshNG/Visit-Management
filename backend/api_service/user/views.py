@@ -24,6 +24,13 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 
+from common.throttling import (
+    OTPRateThrottle,
+    LoginRateThrottle,
+    PasswordResetRateThrottle,
+    RegistrationRateThrottle,
+)
+
 from .serializers import (
     ChangePasswordSerializer,
     CustomUserSerializerLoginDetails,
@@ -61,6 +68,7 @@ class MobileNumberTokenObtainPairView(TokenObtainPairView):
 
 class RegisterUserView(generics.CreateAPIView):
     serializer_class = CustomUserSerializer
+    throttle_classes = [RegistrationRateThrottle]
 
     def perform_create(self, serializer):
         user = serializer.save()
@@ -87,6 +95,7 @@ class RegisterUserView(generics.CreateAPIView):
 
 class VerifyOTPView(generics.CreateAPIView):
     serializer_class = VerifyOTPSerializer
+    throttle_classes = [OTPRateThrottle]
 
     def post(self, request, *args, **kwargs):
         mobile_number = request.data.get("mobile_number")
@@ -111,6 +120,7 @@ class VerifyOTPView(generics.CreateAPIView):
 
 class LoginView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [LoginRateThrottle]
     serializer_class = serializers.LoginSerializer
 
     def perform_create(self, serializer):
@@ -178,6 +188,7 @@ def AddStaffForORG(request):
 class ForgotPasswordView(generics.CreateAPIView):
     serializer_class = ForgotPasswordSerializer
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [PasswordResetRateThrottle]
     queryset = ""
 
     def perform_create(self, serializer):
@@ -195,6 +206,7 @@ class ForgotPasswordView(generics.CreateAPIView):
 class ResetPasswordView(generics.UpdateAPIView):
     serializer_class = ResetPasswordSerializer
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [PasswordResetRateThrottle]
 
     def put(self, request, *args, **kwargs):
         mobile_number = request.data.get("mobile_number")
@@ -314,6 +326,7 @@ class LoggedinUserDataView(APIView):
 class ResendOTPView(generics.CreateAPIView):
     serializer_class = ResendOTPSerializer
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [OTPRateThrottle]
 
     def post(self, request, *args, **kwargs):
         mobile_number = request.data.get("mobile_number")
