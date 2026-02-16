@@ -138,16 +138,13 @@ class UserFilter(filters.FilterSet):
 
 
 class OrganizationsList(generics.ListAPIView):
-    # permission_classes = [IsAuthenticated]
     serializer_class = OrganizationListSerializer
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = UserFilter
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
-        # organizations = CustomUser.objects.filter(id=self.request.user.id,is_organization=True).order_by('-id')
-        organizations = CustomUser.objects.filter(is_organization=True).order_by("-id")
-        return organizations
+        return CustomUser.objects.filter(is_organization=True).order_by("-id")
 
 
 class OrganizationGet(generics.ListAPIView):
@@ -330,11 +327,6 @@ class BranchList(APIView):
         serializer = BranchSerializerGet(paginated_branches, many=True)
         return paginator.get_paginated_response(serializer.data)
 
-        # branches = OrganizationBranch.objects.all()
-        # branches = OrganizationBranch.objects.filter(organization=request.user.id)
-        # serializer = BranchSerializer(branches, many=True)
-        # return Response(serializer.data)
-
     def post(self, request, format=None):
         data = request.data.copy()
         data["organization"] = request.user.id
@@ -424,7 +416,6 @@ class BranchDetail(APIView):
 
     def get_object(self, pk):
         try:
-            # return OrganizationBranch.objects.get(organization=self.request.user.id, id=pk, lock_branch="Active")
             return OrganizationBranch.objects.get(
                 organization=self.request.user.id, id=pk
             )
@@ -436,7 +427,6 @@ class BranchDetail(APIView):
             return OrganizationBranch.objects.get(
                 organization=self.request.user.id, id=pk
             )
-            # return OrganizationBranch.objects.get(organization=self.request.user.id, id=pk, lock_branch="Active")
         except OrganizationBranch.DoesNotExist:
             raise Http404("Organization branch not found")
 
@@ -575,7 +565,6 @@ class ScanOrg(APIView):
     ]
 
     def post(self, request, format=None):
-        # visitor_id = request.data.get("visitor")
         visitor_id = request.user.id
         mobile_number = request.data.get("mobile_number")
         organization_id = request.data.get("organization")
@@ -739,9 +728,7 @@ class ManualEntryVisitorView(generics.CreateAPIView):
 
 
 class manualEntryVisitorsFirstStep(APIView):
-    # permission_classes = [IsAuthenticated]
     def post(self, request, format=None):
-        # visitor_id = request.user.id
         mobile_number = request.data.get("mobile_number")
         email = request.data.get("email", None)
         organization_id = request.data.get("organization")

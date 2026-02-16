@@ -316,11 +316,6 @@ class BranchSerializer(serializers.ModelSerializer):
         model = OrganizationBranch
         fields = "__all__"
 
-    # def create(self, validated_data):
-    #     validated_data["organization"] = self.context["request"].user
-    #     branch = OrganizationBranch.objects.create(**validated_data)
-    #     return branch
-
 
 class BranchSerializerGet(serializers.ModelSerializer):
     organization = CustomUserSerializerOrgName()
@@ -354,21 +349,12 @@ class DocumentSerializer(serializers.ModelSerializer):
 
 class OrganizationSettingsSerializer(serializers.Serializer):
     approve_visitor_before_access = serializers.BooleanField(required=False)
-    # check_in_check_out_feature = serializers.BooleanField(required=False)
 
 
 class GetNewOrganizationKYCSerializer(serializers.ModelSerializer):
-    # UserOrg = serializers.SerializerMethodField()
-
     class Meta:
         model = OrganizationKYC
         fields = "__all__"
-
-    # def get_UserOrg(self, obj):
-    #     user_fields = User.objects.filter(id=obj.id).values("full_name","email","organization_name","organization_type","organization_nature","qr").first()
-    #     # serializer = InnerUser(user_fields)
-    #     return user_fields
-    #     # return serializer.data
 
 
 class NewOrganizationKYCSerializer(serializers.ModelSerializer):
