@@ -105,6 +105,8 @@ from notification.serializers import NotificationSerializer
 from notification.models import NotificationData
 
 from common.permissions import IsVisitingUser
+from common.cache import CacheKeys, get_cache_timeout
+from django.core.cache import cache
 
 import firebase_admin.messaging as messaging
 
@@ -311,7 +313,7 @@ class BranchList(APIView):
         # Filter branches based on the organization and search query
         branches = model.objects.filter(
             organization=request.user.id, lock_branch="Active"
-        )
+        ).select_related('organization')
 
         if search_query:
             search_filter = Q()
@@ -913,7 +915,7 @@ class OrganizationVisitHistoryListView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def get(self, request, pk):
-        visit_history = OrganizationVisitHistory.objects.filter(organization=pk).all()
+        visit_history = OrganizationVisitHistory.objects.filter(organization=pk).select_related('organization', 'visitor')
         serializer = OrganizationVisitHistorySerializer(visit_history, many=True)
         return Response(serializer.data)
 
@@ -1175,8 +1177,17 @@ class PurposeViewSet(viewsets.ModelViewSet):
         return Purpose.objects.all()
 
     def list(self, request, *args, **kwargs):
+        # Try cache first
+        cache_key = CacheKeys.purpose_list()
+        cached_data = cache.get(cache_key)
+        if cached_data is not None:
+            return Response(cached_data, status=status.HTTP_200_OK)
+
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
+
+        # Cache for 1 hour (purposes rarely change)
+        cache.set(cache_key, serializer.data, get_cache_timeout('purpose_list'))
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
@@ -1224,7 +1235,21 @@ class AdsBannerListAPIView(generics.ListAPIView):
     serializer_class = serializers.ListAdsBannerSerializer
 
     def get_queryset(self):
-        return AdsBanner.objects.all()
+        return AdsBanner.objects.filter(is_active=True)
+
+    def list(self, request, *args, **kwargs):
+        # Try cache first
+        cache_key = CacheKeys.ads_banner_list()
+        cached_data = cache.get(cache_key)
+        if cached_data is not None:
+            return Response(cached_data, status=status.HTTP_200_OK)
+
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+
+        # Cache for 10 minutes
+        cache.set(cache_key, serializer.data, get_cache_timeout('ads_banner_list'))
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class AdsBannerCreateAPIView(generics.CreateAPIView):
@@ -1233,6 +1258,8 @@ class AdsBannerCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         ads_banner = AdsBanner(**serializer.validated_data)
         ads_banner.save()
+        # Invalidate cache
+        cache.delete(CacheKeys.ads_banner_list())
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -1249,6 +1276,14 @@ class AdsBannerCreateAPIView(generics.CreateAPIView):
 class AdsBannerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AdsBanner.objects.all()
     serializer_class = AdsBannerSerializer
+
+    def perform_update(self, serializer):
+        serializer.save()
+        cache.delete(CacheKeys.ads_banner_list())
+
+    def perform_destroy(self, instance):
+        instance.delete()
+        cache.delete(CacheKeys.ads_banner_list())
 
 
 class ListKYCView(generics.ListAPIView):
@@ -1329,7 +1364,7 @@ class ListOrganizationBranchView(generics.ListAPIView):
         organization_id = self.kwargs.get("organization_id")
         search_term = self.request.query_params.get("search")
 
-        queryset = OrganizationBranch.objects.filter(organization_id=organization_id)
+        queryset = OrganizationBranch.objects.filter(organization_id=organization_id).select_related('organization')
 
         if search_term:
             queryset = queryset.filter(
@@ -1439,7 +1474,7 @@ class DownloadVisitHistoryCSV(APIView):
             )
         visit_histories = OrganizationVisitHistory.objects.filter(
             organization=self.kwargs.get("organization_id")
-        )
+        ).select_related('organization', 'visitor')
 
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = 'attachment; filename="visit_history.csv"'
@@ -1539,17 +1574,10 @@ class OrganizationHistoryVisitorCountView(generics.ListAPIView):
             .order_by("visit_type")
         )
 
-        manual_count = (
-            visitor_counts.filter(visit_type="Manual").first()["count"]
-            if visitor_counts.filter(visit_type="Manual").exists()
-            else 0
-        )
-        scan_count = (
-            visitor_counts.filter(visit_type="Scan").first()["count"]
-            if visitor_counts.filter(visit_type="Scan").exists()
-            else 0
-        )
-
+        # Convert to dict in single pass to avoid multiple queries
+        counts_dict = {item["visit_type"]: item["count"] for item in visitor_counts}
+        manual_count = counts_dict.get("Manual", 0)
+        scan_count = counts_dict.get("Scan", 0)
         total_count = manual_count + scan_count
 
         return [
@@ -1629,7 +1657,7 @@ class ListWaitingVisitorsView(generics.ListAPIView):
     def get_queryset(self):
         return OrganizationVisitHistory.objects.filter(
             organization=self.get_object(), is_approved=False
-        )
+        ).select_related('organization', 'visitor')
 
 
 class GuestInfo(APIView):

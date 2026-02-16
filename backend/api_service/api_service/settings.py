@@ -386,3 +386,23 @@ firebase_cred_path = BASE_DIR / "serviceAccountKey.json"
 if firebase_cred_path.exists():
     cred = credentials.Certificate(firebase_cred_path)
     firebase_admin.initialize_app(cred)
+
+# Cache Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,  # 5 minutes default
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
+# Cache timeouts for different data types (in seconds)
+CACHE_TIMEOUTS = {
+    'organization_list': 300,      # 5 minutes
+    'visitor_stats': 60,           # 1 minute
+    'purpose_list': 3600,          # 1 hour (rarely changes)
+    'ads_banner_list': 600,        # 10 minutes
+}

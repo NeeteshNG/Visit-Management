@@ -63,7 +63,7 @@ class OrgVisitorListView(APIView):
 
         visitors_details_history = OrganizationVisitHistory.objects.filter(
             organization=request.user.id
-        )
+        ).select_related('organization', 'visitor')
         if date_from and date_to:
             date_to = date_to + timedelta(days=1) - timedelta(microseconds=1)
             visitors_details_history = visitors_details_history.filter(
@@ -86,8 +86,6 @@ class OrgVisitorListView(APIView):
             visitors_details_history = visitors_details_history.filter(
                 is_approved=is_approved
             )
-
-        visitors_details_history = visitors_details_history.all()
 
         paginator = self.pagination_class()
         result_page = paginator.paginate_queryset(visitors_details_history, request)
@@ -128,7 +126,7 @@ class ReportOrgVisitorListView(APIView):
     def get(self, request, format=None):
         visitors_details_history = OrganizationVisitHistory.objects.filter(
             Q(organization=request.user.id)
-        ).all()
+        ).select_related('organization', 'visitor')
 
         export_csv = request.query_params.get("export_csv", False)
         export_pdf = request.query_params.get("export_pdf", False)
@@ -279,7 +277,7 @@ class VisitorHistoryListView(APIView):
     filter_backends = [filters.SearchFilter]
 
     def get(self, request, pk, format=None):
-        histories = OrganizationVisitHistory.objects.filter(visitor=request.user).all()
+        histories = OrganizationVisitHistory.objects.filter(visitor=request.user).select_related('organization', 'visitor')
         # Apply search
         search_query = request.query_params.get("search", "")
         histories = self.filter_queryset(histories, search_query)
@@ -309,7 +307,7 @@ class ReportVisitorHistoryListView(APIView):
         # Common logic to retrieve all data
         visitors_details_history = OrganizationVisitHistory.objects.filter(
             visitor=request.user.id
-        ).all()
+        ).select_related('organization', 'visitor')
         # Check if the endpoint is requesting a CSV file
         export_csv = request.query_params.get("export_csv", False)
         if export_csv:
@@ -457,7 +455,7 @@ class DownloadVisitorCSVView(APIView):
 
         visitors_details_history = OrganizationVisitHistory.objects.filter(
             organization=request.user.id
-        )
+        ).select_related('organization', 'visitor')
         if date_from and date_to:
             date_to = date_to + timedelta(days=1) - timedelta(microseconds=1)
             visitors_details_history = visitors_details_history.filter(
@@ -537,7 +535,7 @@ class DownloadVisitorPDFView(APIView):
 
         visitors_details_history = OrganizationVisitHistory.objects.filter(
             organization=request.user.id
-        )
+        ).select_related('organization', 'visitor')
         if date_from and date_to:
             date_to = date_to + timedelta(days=1) - timedelta(microseconds=1)
             visitors_details_history = visitors_details_history.filter(
@@ -561,7 +559,7 @@ class DownloadVisitorPDFView(APIView):
                 is_approved=is_approved
             )
 
-        visitors_data = visitors_details_history.all()
+        visitors_data = visitors_details_history
 
         # Generate HTML content
         html_content = f"""

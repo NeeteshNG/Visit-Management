@@ -131,8 +131,23 @@ class InnerUser(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class VisitorUserInfoSerializer(serializers.ModelSerializer):
+    """Nested serializer for visitor info - used with select_related."""
+    class Meta:
+        model = User
+        fields = (
+            "full_name",
+            "address",
+            "email",
+            "organization_name",
+            "organization_type",
+            "organization_nature",
+            "qr",
+        )
+
+
 class OrganizationVisitHistorySerializer(serializers.ModelSerializer):
-    UserOrg = serializers.SerializerMethodField()
+    UserOrg = VisitorUserInfoSerializer(source='visitor', read_only=True)
 
     class Meta:
         model = OrganizationVisitHistory
@@ -166,27 +181,10 @@ class OrganizationVisitHistorySerializer(serializers.ModelSerializer):
 
         read_only_fields = ["id", "visited_at", "created_at", "updated_at"]
 
-    def get_UserOrg(self, obj):
-        if obj.visitor:
-            user_fields = (
-                User.objects.filter(id=obj.visitor.id)
-                .values(
-                    "full_name",
-                    "address",
-                    "email",
-                    "organization_name",
-                    "organization_type",
-                    "organization_nature",
-                    "qr",
-                )
-                .first()
-            )
-            return user_fields
-        return None
-
 
 class OrganizationVisitHistorySerializerSingle(serializers.ModelSerializer):
-    UserOrg = serializers.SerializerMethodField()
+    # Use nested serializer instead of SerializerMethodField to avoid N+1
+    UserOrg = VisitorUserInfoSerializer(source='visitor', read_only=True)
 
     class Meta:
         model = OrganizationVisitHistory
@@ -216,35 +214,14 @@ class OrganizationVisitHistorySerializerSingle(serializers.ModelSerializer):
 
         read_only_fields = ["id", "visited_at"]
 
-    def get_UserOrg(self, obj):
-        if obj.visitor:
-            user_fields = (
-                User.objects.filter(id=obj.visitor.id)
-                .values(
-                    "full_name",
-                    "address",
-                    "email",
-                    "organization_name",
-                    "organization_type",
-                    "organization_nature",
-                    "qr",
-                )
-                .first()
-            )
-
-            # serializer = InnerUser(user_fields)
-            return user_fields
-        return None
-        # return serializer.data
-
 
 class OrganizationVisitHistorySerializerGet(serializers.ModelSerializer):
     organization_name = serializers.CharField(
         source="organization.organization_name", allow_null=True
     )
-    Organization = serializers.SerializerMethodField()
-
-    visitor = serializers.SerializerMethodField()
+    # Use nested serializer instead of SerializerMethodField to avoid N+1
+    Organization = VisitorUserInfoSerializer(source='visitor', read_only=True)
+    visitor = VisitorUserInfoSerializer(read_only=True)
 
     class Meta:
         model = OrganizationVisitHistory
@@ -255,8 +232,6 @@ class OrganizationVisitHistorySerializerGet(serializers.ModelSerializer):
             "organization",
             "visitor",
             "full_name",
-            # "email"
-            # "mobile_number",
             "purpose",
             "have_vehicle",
             "vehicle_number",
@@ -274,38 +249,6 @@ class OrganizationVisitHistorySerializerGet(serializers.ModelSerializer):
             "Organization",
         )
 
-    def get_Organization(self, obj):
-        user_fields = (
-            User.objects.filter(id=obj.visitor.id)
-            .values(
-                "full_name",
-                "address",
-                "email",
-                "organization_name",
-                "organization_type",
-                "organization_nature",
-                "qr",
-            )
-            .first()
-        )
-        return user_fields
-
-    def get_visitor(self, obj):
-        user_fields = (
-            User.objects.filter(id=obj.visitor.id)
-            .values(
-                "full_name",
-                "address",
-                "email",
-                "organization_name",
-                "organization_type",
-                "organization_nature",
-                "qr",
-            )
-            .first()
-        )
-        return user_fields
-
 
 class CustomUserSerializerOrgName(serializers.ModelSerializer):
     class Meta:
@@ -317,6 +260,22 @@ class CustomUserSerializerVisitorName(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ("full_name",)
+
+
+class VisitorUserSerializer(serializers.ModelSerializer):
+    """Optimized serializer for visitor user data - avoids N+1 queries."""
+    class Meta:
+        model = CustomUser
+        fields = (
+            "id",
+            "full_name",
+            "address",
+            "email",
+            "organization_name",
+            "organization_type",
+            "organization_nature",
+            "qr",
+        )
 
 
 class OrganizationVisitHistorySerializerReport(serializers.ModelSerializer):
