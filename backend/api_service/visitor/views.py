@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
+from django.utils.html import escape
 from django.http import HttpResponse
 from organization.serializers import OrganizationVisitHistorySerializerGet
 from rest_framework import status, generics
@@ -96,15 +97,24 @@ class OrgVisitorListView(APIView):
 
 
 class SingleVisitorHistory(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     serializer_class = OrganizationVisitHistorySerializerSingle
 
     def get(self, request, pk=None):
         visitors_details_history = get_object_or_404(OrganizationVisitHistory, id=pk)
-        serializer = self.serializer_class(visitors_details_history)
 
-        return Response(serializer.data, status=200)
+        # Check if user has access to this visit history
+        user = request.user
+        if (visitors_details_history.organization != user and
+            visitors_details_history.visitor != user and
+            not user.is_admin):
+            return Response(
+                {"detail": "Access denied"}, status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = self.serializer_class(visitors_details_history)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 import os
@@ -597,13 +607,13 @@ class DownloadVisitorPDFView(APIView):
         for visitor in visitors_data:
             html_content += f"""
             <tr>
-                <td>{visitor.full_name}</td>
-                <td>{visitor.email}</td>
-                <td>{visitor.mobile_number}</td>
-                <td>{visitor.purpose}</td>
-                <td>{visitor.vehicle_number}</td>
-                <td>{visitor.is_approved}</td>
-                <td>{visitor.visit_type}</td>
+                <td>{escape(visitor.full_name or '')}</td>
+                <td>{escape(visitor.email or '')}</td>
+                <td>{escape(visitor.mobile_number or '')}</td>
+                <td>{escape(visitor.purpose or '')}</td>
+                <td>{escape(visitor.vehicle_number or '')}</td>
+                <td>{escape(str(visitor.is_approved))}</td>
+                <td>{escape(visitor.visit_type or '')}</td>
             </tr>
             """
 
@@ -620,6 +630,6 @@ class DownloadVisitorPDFView(APIView):
         pisa_status = pisa.CreatePDF(html_content, dest=response)
 
         if pisa_status.err:
-            return HttpResponse(f"We had some errors <pre>{html_content}</pre>")
+            return HttpResponse("PDF generation failed. Please try again later.", status=500)
 
         return response

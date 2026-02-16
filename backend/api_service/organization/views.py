@@ -239,25 +239,33 @@ class OrganizationKYCVerify(APIView):
 
 
 class OrganizationKYCDetail(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
-    def get_object(self, pk):
+    def get_object(self, pk, user):
         try:
-            return OrganizationKYC.objects.get(pk=pk)
+            kyc = OrganizationKYC.objects.get(pk=pk)
+            # Check if user owns this organization or is admin
+            if kyc.organization != user and not user.is_admin:
+                return None
+            return kyc
         except OrganizationKYC.DoesNotExist:
             return None
 
     def get(self, request, pk):
-        organization_kyc = self.get_object(pk)
+        organization_kyc = self.get_object(pk, request.user)
         if organization_kyc is not None:
             serializer = OrganizationKYCSerializer(organization_kyc)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(
-            {"detail": "OrganizationKYC not found"}, status=status.HTTP_404_NOT_FOUND
+            {"detail": "OrganizationKYC not found or access denied"}, status=status.HTTP_404_NOT_FOUND
         )
 
     def put(self, request, pk):
-        organization_kyc = self.get_object(pk)
+        organization_kyc = self.get_object(pk, request.user)
+        if organization_kyc is None:
+            return Response(
+                {"detail": "OrganizationKYC not found or access denied"}, status=status.HTTP_404_NOT_FOUND
+            )
         serializer = OrganizationKYCSerializer(organization_kyc, data=request.data)
         if serializer.is_valid():
             serializer.save()
